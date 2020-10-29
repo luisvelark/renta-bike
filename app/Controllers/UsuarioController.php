@@ -8,7 +8,7 @@ class UsuarioController extends BaseController
     public function index()
     {
         
-        // $UsuarioModel = new UsuarioModel($db);
+        //$UsuarioModel = new UsuarioModel($db);
         return view('estructura/header').view('estructura/body');
     }
 }
