@@ -8,7 +8,7 @@ class UsuarioController extends BaseController
     private $usuario;
     public function __construct()
     {
-        $this->usuario= new UsuarioModel();
+        $this->usuario= new UsuarioModel($db);
     }
 
 
