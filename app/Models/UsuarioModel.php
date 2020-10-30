@@ -1,5 +1,5 @@
-<?php namespace App\Models;
-
+<?php 
+namespace App\Models;
 use CodeIgniter\Model;
 
 class UsuarioModel extends Model
@@ -8,9 +8,10 @@ class UsuarioModel extends Model
     protected $primaryKey = 'idUsuario';
 
     protected $returnType     = 'array';
-    protected $useSoftDeletes = true;
+    protected $useSoftDeletes = false;
 
     protected $allowedFields = ['dni', 'nombre','apellido','correo','telefono','domicilio','cuil-cuit','fechaNacimiento','contraseña'];
+
 
     protected $useTimestamps = false;
     protected $createdField  = 'created_at';

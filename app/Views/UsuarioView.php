@@ -6,6 +6,10 @@
     <title>Usuario</title>
 </head>
 <body>
-    <p>vista</p>
+    <?php 
+    
+    print_r($titulo); 
+    print_r($datos);
+    ?>
 </body>
 </html>

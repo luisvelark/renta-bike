@@ -1,14 +1,15 @@
-<?php namespace App\Controllers;
-
-use CodeIgniter\Controller;
+<?php 
+namespace App\Controllers;
+use App\Controllers\BaseController;
 use App\Models\UsuarioModel;
+
 
 class UsuarioController extends BaseController
 {
     private $usuario;
     public function __construct()
     {
-        $this->usuario= new UsuarioModel($default);
+        $this->usuario= new UsuarioModel();
     }
 
 
@@ -16,10 +17,10 @@ class UsuarioController extends BaseController
 
     public function index()
     {
-
-        $usuario= $this->usuario->findAll();
-        $datos= ['titulo'=>'Usuario','datos'=> $usuario];
-        echo view('UsuarioView');
+        $nombre= 'Esteban';
+        $usuario= $this->usuario->where('nombre',$nombre)->findAll();
+        $data= ['titulo'=>'El titulo de la vista va a ser esta wea','datos'=> $usuario];
+        echo view('UsuarioView',$data);
 
     }
 }
