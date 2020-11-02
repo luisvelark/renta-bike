@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-10-2020 a las 22:06:19
+-- Tiempo de generación: 02-11-2020 a las 21:44:01
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -77,9 +77,9 @@ CREATE TABLE `bicicleta` (
 CREATE TABLE `calificacion` (
   `fechaCalificacion` date NOT NULL,
   `idPuntoED` int(11) NOT NULL,
+  `idUsuarioCliente` int(11) NOT NULL,
   `puntos` int(11) NOT NULL,
-  `descripcion` varchar(100) NOT NULL,
-  `idUsuarioCliente` int(11) NOT NULL
+  `descripcion` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -92,7 +92,9 @@ CREATE TABLE `cliente` (
   `idUsuario` int(11) NOT NULL,
   `puntajeTotal` float NOT NULL,
   `credito` float NOT NULL,
-  `suspendido` tinyint(1) NOT NULL
+  `suspendido` tinyint(1) NOT NULL DEFAULT 0,
+  `fechaInicioSuspencion` date DEFAULT NULL,
+  `fechaFinSuspencion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -103,11 +105,11 @@ CREATE TABLE `cliente` (
 
 CREATE TABLE `multa` (
   `idMulta` int(11) NOT NULL,
+  `idUsuarioCliente` int(11) NOT NULL,
   `monto` int(11) NOT NULL,
   `fechaMulta` date NOT NULL,
   `detalleMulta` varchar(100) NOT NULL,
-  `pagado` tinyint(1) NOT NULL,
-  `idUsuarioCliente` int(11) NOT NULL
+  `pagado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -118,9 +120,9 @@ CREATE TABLE `multa` (
 
 CREATE TABLE `puntaje` (
   `idPuntaje` int(11) NOT NULL,
+  `idUsuarioCliente` int(11) NOT NULL,
   `detallePuntaje` varchar(100) NOT NULL,
-  `fechaPuntaje` date NOT NULL,
-  `idUsuarioCliente` int(11) NOT NULL
+  `fechaPuntaje` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -154,13 +156,6 @@ CREATE TABLE `usuario` (
   `fechaNacimiento` date NOT NULL,
   `contraseña` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `usuario`
---
-
-INSERT INTO `usuario` (`idUsuario`, `dni`, `nombre`, `apellido`, `correo`, `telefono`, `domicilio`, `cuil-cuit`, `fechaNacimiento`, `contraseña`) VALUES
-(1, 38802605, 'Esteban', 'Saavedra', 'esteban@gmail.com', 2147483647, 'Quirno Costa', 2147483647, '1995-12-31', 'eaeaae');
 
 --
 -- Índices para tablas volcadas
@@ -273,7 +268,7 @@ ALTER TABLE `puntoentregadevolucion`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
