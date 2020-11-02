@@ -2,15 +2,15 @@
 namespace App\Models;
 use CodeIgniter\Model;
 
-class BicicletaModel extends Model
+class CalificacionModel extends Model
 {
-    protected $table      = 'bicicleta';
-    protected $primaryKey = 'idBicicleta';
+    protected $table      = 'calificacion';
+    protected $primaryKey = 'fechaCalificacion';
 
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['numeroBicicleta', 'estado','daño','observaciones','idPuntoED'];
+    protected $allowedFields = ['idPuntoED', 'idUsuarioCliente','puntos','descripcion'];
 
 
     protected $useTimestamps = false;

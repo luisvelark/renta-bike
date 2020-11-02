@@ -1,16 +1,16 @@
 <?php 
 namespace App\Models;
-use CodeIgniter\Model;
+use App\Models\UsuarioModel;
 
-class BicicletaModel extends Model
+class AdministradorModel extends UsuarioModel
 {
-    protected $table      = 'bicicleta';
-    protected $primaryKey = 'idBicicleta';
+    protected $table      = 'administrador';
+    protected $primaryKey = 'idUsuario';
 
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['numeroBicicleta', 'estado','daño','observaciones','idPuntoED'];
+    protected $allowedFields = [];
 
 
     protected $useTimestamps = false;
