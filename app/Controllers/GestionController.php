@@ -10,7 +10,7 @@ class GestionController extends BaseController
     
     public function index()
     {
-        echo view('tables');
+        echo view('index-cliente');
     }
 
    
