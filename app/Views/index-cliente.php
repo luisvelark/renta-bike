@@ -12,14 +12,14 @@
   <title>Renta Bike - Home</title>
 
   <!-- Custom fonts for this template -->
-  <link href=" <?php echo base_url('vendor/fontawesome-free/css/all.min.css')?>" rel="stylesheet" type="text/css">
+  <link href=" <?php echo base_url('vendor/fontawesome-free/css/all.min.css') ?>" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="<?php echo base_url('css/sb-admin-2.min.css')?>" rel="stylesheet">
-  
+  <link href="<?php echo base_url('css/sb-admin-2.min.css') ?>" rel="stylesheet">
+
   <!-- Custom styles for this page -->
-  <link href="<?php echo base_url('vendor/datatables/dataTables.bootstrap4.min.css')?>" rel="stylesheet">
+  <link href="<?php echo base_url('vendor/datatables/dataTables.bootstrap4.min.css') ?>" rel="stylesheet">
 
 </head>
 
@@ -42,7 +42,7 @@
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
 
- 
+
 
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -52,16 +52,14 @@
         Acciones
       </div>
 
-     
-    <!-- Botones para las acciones -->
-    
+
+      <!-- Botones para las acciones -->
+
       <li class="nav-item active">
         <a class="nav-link" href="">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Nuevo alquiler</span></a>
       </li>
-
-     
       <li class="nav-item active">
         <a class="nav-link" href="">
           <i class="fas fa-list-ol"></i>
@@ -70,10 +68,20 @@
       <li class="nav-item active">
         <a class="nav-link" href="">
           <i class="fas fa-map-marker-alt"></i>
-          
+
           <span>Buscar puntos de entrega y devolución</span></a>
       </li>
-    <!-- Botones para las acciones -->
+      <li class="nav-item active">
+        <a class="nav-link" href="">
+          <i class="fas fa-coins"></i>
+          <span>Crédito y multas</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="">
+          <i class="far fa-file-alt"></i>
+          <span>Manual de usuario</span></a>
+      </li>
+      <!-- Botones para las acciones -->
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
@@ -337,22 +345,22 @@
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="<?php echo base_url('vendor/jquery/jquery.min.js')?>"></script>
-  <script src="<?php echo base_url('vendor/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
+  <script src="<?php echo base_url('vendor/jquery/jquery.min.js') ?>"></script>
+  <script src="<?php echo base_url('vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="<?php echo base_url('vendor/jquery-easing/jquery.easing.min.js')?>"></script>
+  <script src="<?php echo base_url('vendor/jquery-easing/jquery.easing.min.js') ?>"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="<?php echo base_url('js/sb-admin-2.min.js')?>"></script>
+  <script src="<?php echo base_url('js/sb-admin-2.min.js') ?>"></script>
 
   <!-- Page level plugins -->
-  <script src="<?php echo base_url('vendor/datatables/jquery.dataTables.min.js')?>"></script>
-  <script src="<?php echo base_url('vendor/datatables/dataTables.bootstrap4.min.js')?>"></script>
+  <script src="<?php echo base_url('vendor/datatables/jquery.dataTables.min.js') ?>"></script>
+  <script src="<?php echo base_url('vendor/datatables/dataTables.bootstrap4.min.js') ?>"></script>
 
   <!-- Page level custom scripts -->
-  <script src="<?php echo base_url('js/demo/datatables-demo.js')?>"></script>
-  <?php echo base_url('')?>
+  <script src="<?php echo base_url('js/demo/datatables-demo.js') ?>"></script>
+  <?php echo base_url('') ?>
 </body>
 
 </html>
