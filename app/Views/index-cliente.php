@@ -351,7 +351,7 @@
   <!-- Page level custom scripts -->
   <script src="<?php echo base_url('js/demo/datatables-demo.js') ?>"></script>
 
-  <script src="<?php echo base_url('ajax/nuevo-alqiuiler.js') ?>"></script>
+  <script src="<?php echo base_url('ajax/nuevo-alquiler.js') ?>"></script>
 
   <?php echo base_url('') ?>
 </body>
