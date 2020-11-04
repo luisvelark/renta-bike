@@ -56,7 +56,7 @@
       <!-- Botones para las acciones -->
 
       <li class="nav-item active">
-        <a id="idAlquiler" class="nav-link" href="">
+        <a id="idAlquiler" class="nav-link" href="#">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Nuevo alquiler</span></a>
       </li>
