@@ -17,7 +17,7 @@ class GestionController extends BaseController
     public function alquiler()
     {
         //echo view('index-cliente');
-        return view('layouts/alquiler');
+        echo view('layouts/alquiler');
     }
 
 }
