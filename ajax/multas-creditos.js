@@ -1,8 +1,8 @@
-console.log("hola");
-document.getElementById('idMultasCredito').addEventListener("click", mostrar, true);
+console.write("hola");
+document.getElementById('idMultasCredito').addEventListener("click", mostar, true);
 
 
-function mostrar(e) {
+function mostar(e) {
 
   let xhr = new XMLHttpRequest();
   xhr.addEventListener("readystatechange", estadoIdeal);
@@ -12,7 +12,7 @@ function mostrar(e) {
   xhr.send();
 
   function estadoIdeal() {
-
+    document.write(xhr.status)
     if (xhr.readyState === 4 && xhr.status === 200) {
 
       let respuesta = xhr.responseText;
