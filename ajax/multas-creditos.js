@@ -1,9 +1,9 @@
 console.write("hola");
-document.getElementById('idMultasCredito').addEventListener("click", mostar, true);
+document.getElementById('idMultasCredito').addEventListener("click", mostrar, true);
 
 
-function mostar(e) {
-
+function mostrar(e) {
+  document.write("Funcion mostrar")
   let xhr = new XMLHttpRequest();
   xhr.addEventListener("readystatechange", estadoIdeal);
 

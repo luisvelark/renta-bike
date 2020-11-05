@@ -349,6 +349,8 @@
 
   <!-- Page level custom scripts -->
   <script src="<?php echo base_url('js/demo/datatables-demo.js') ?>"></script>
+  <script src="<?php echo base_url('ajax/multas-creditos.js') ?>"></script>
+
 </body>
 
 </html>
