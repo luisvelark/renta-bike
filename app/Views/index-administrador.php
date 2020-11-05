@@ -71,7 +71,7 @@
           <span>Horario de mayor demanda</span></a>
       </li>
       <li class="nav-item active">
-        <a id="multasCredito" class="nav-link" href="#">
+        <a id="idMultasCredito" class="nav-link" href="#">
           <i class="fas fa-coins"></i>
           <span>Crédito y multas de cliente</span></a>
       </li>
