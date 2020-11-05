@@ -1,7 +1,7 @@
 document.getElementById('idCreditoMultas').addEventListener("click", mostrar, true);
 
 
-function mostar(e) {
+function mostrar(e) {
 
     let xhr = new XMLHttpRequest();
     xhr.addEventListener("readystatechange", estadoIdeal);

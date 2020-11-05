@@ -52,11 +52,11 @@
                         <label class="custom-control-label" for="customCheck">Recuerdame</label>
                       </div>
                     </div>
-                    <a href="<?php echo base_url('GestionController/indexCliente')?>" class="btn btn-primary btn-user btn-block">
+                    <a href="<?php echo base_url('GestionController')?>" class="btn btn-primary btn-user btn-block">
                       Loguearse
                     </a>
                     <hr>
-                    <a href="<?php echo base_url('GestionController')?>" class="btn btn-google btn-user btn-block">
+                    <a href="<?php echo base_url('GestionController/indexCliente')?>" class="btn btn-google btn-user btn-block">
                       <i class="fab fa-google fa-fw"></i> Loguearse con Google
                     </a>
                     <a href="index.html" class="btn btn-facebook btn-user btn-block">
