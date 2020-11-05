@@ -1,4 +1,4 @@
-document.getElementById('idCreditoMultas').addEventListener("click", mostar, true);
+document.getElementById('idCreditoMultas').addEventListener("click", mostrar, true);
 
 
 function mostar(e) {

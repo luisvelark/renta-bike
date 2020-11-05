@@ -23,7 +23,7 @@ class GestionController extends BaseController
 
     public function multascredito()
     {
-        echo view('layouts/multascredito');
+        echo view('layouts/multasCredito');
     }
     public function alquileresConcretados()
     {

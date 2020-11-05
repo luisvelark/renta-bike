@@ -1,8 +1,7 @@
-document.getElementById('idAlquileres').addEventListener("click", mostar, true);
+document.getElementById('idAlquileres').addEventListener("click", mostrar, true);
 
 
 function mostar(e) {
-
     let xhr = new XMLHttpRequest();
     xhr.addEventListener("readystatechange", estadoIdeal);
 
