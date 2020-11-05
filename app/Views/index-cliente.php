@@ -61,23 +61,23 @@
           <span>Nuevo alquiler</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="">
+        <a id="idAlquileres" class="nav-link" href="#">
           <i class="fas fa-list-ol"></i>
           <span>Alquileres concretados</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="#">
           <i class="fas fa-map-marker-alt"></i>
 
           <span>Buscar puntos de entrega y devolución</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="">
+        <a id="idCreditoMultas" class="nav-link" href="#">
           <i class="fas fa-coins"></i>
           <span>Crédito y multas</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="#">
           <i class="far fa-file-alt"></i>
           <span>Manual de usuario</span></a>
       </li>
@@ -353,6 +353,9 @@
 
   <script src="<?php echo base_url('ajax/nuevo-alquiler.js') ?>"></script>
 
+  <script src="<?php echo base_url('ajax/alquileres-concretados.js') ?>"></script>
+
+  <script src="<?php echo base_url('ajax/credito-multas-cliente.js') ?>"></script>
   <?php echo base_url('') ?>
 </body>
 

@@ -19,5 +19,17 @@ class GestionController extends BaseController
         //echo view('index-cliente');
         echo view('layouts/alquiler');
     }
+    
 
+    public function alquileresConcretados()
+    {
+        echo view ('layouts/alquileres-concretados');
+        
+    }
+    public function creditoYMultasCliente()
+    {
+        echo view ('layouts/credito-multas-cliente');
+        
+    }
+    
 }

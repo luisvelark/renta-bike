@@ -33,7 +33,8 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'LoginController::index');
 $routes->get('/', 'GestionController::index');
 $routes->get('alquiler', 'GestionController::alquiler');
-
+$routes->get('alquileres-concretados', 'GestionController::alquileresConcretados');
+$routes->get('credito-multas-cliente', 'GestionController::creditoYMultasCliente');
 
 
 
