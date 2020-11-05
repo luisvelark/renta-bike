@@ -10,8 +10,8 @@ class GestionController extends BaseController
     
     public function index()
     {
+        echo view('index-administrador');
         //echo view('index-cliente');
-        echo view('index-cliente');
     }
 
     public function alquiler()
@@ -21,6 +21,10 @@ class GestionController extends BaseController
     }
     
 
+    public function multascredito()
+    {
+        echo view('layouts/multascredito');
+    }
     public function alquileresConcretados()
     {
         echo view ('layouts/alquileres-concretados');
@@ -31,5 +35,4 @@ class GestionController extends BaseController
         echo view ('layouts/credito-multas-cliente');
         
     }
-    
 }
