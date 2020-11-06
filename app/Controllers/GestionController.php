@@ -19,10 +19,10 @@ class GestionController extends BaseController
         echo view('index-cliente');
     }
 
-    public function alquiler()
+    public function nuevoAlquiler()
     {
         //echo view('index-cliente');
-        echo view('layouts/alquiler');
+        echo view('layouts/nuevo-alquiler');
     }
     
 

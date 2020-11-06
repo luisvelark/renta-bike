@@ -32,7 +32,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'LoginController::index');
 $routes->get('/', 'GestionController::index');
-$routes->get('alquiler', 'GestionController::alquiler');
+$routes->get('nuevo-alquiler', 'GestionController::nuevoAlquiler');
 $routes->get('multas-credito', 'GestionController::multasCredito');
 $routes->get('alquileres-concretados', 'GestionController::alquileresConcretados');
 $routes->get('credito-multas-cliente', 'GestionController::creditoYMultasCliente');
