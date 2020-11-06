@@ -5,7 +5,7 @@ function mostrar(e) {
     let xhr = new XMLHttpRequest();
     xhr.addEventListener("readystatechange", estadoIdeal);
 
-    xhr.open('GET', 'http://localhost/renta-bike/GestionController/multascredito', true);
+    xhr.open('GET', 'http://localhost/renta-bike/GestionController/horarioMayorDemanda', true);
     // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.send();
 
