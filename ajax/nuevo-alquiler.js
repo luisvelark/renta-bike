@@ -1,13 +1,12 @@
-console.log("hola");
-document.getElementById('idAlquiler').addEventListener("click", mostar, true);
+document.getElementById('idAlquiler').addEventListener("click", mostrar, true);
 
 
-function mostar(e) {
+function mostrar(e) {
 
     let xhr = new XMLHttpRequest();
     xhr.addEventListener("readystatechange", estadoIdeal);
 
-    xhr.open('GET', 'http://localhost/renta-bike/GestionController/alquiler', true);
+    xhr.open('GET', 'http://localhost/renta-bike/GestionController/nuevoAlquiler', true);
     // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.send();
 
