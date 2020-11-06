@@ -4,6 +4,7 @@ use CodeIgniter\Model;
 
 class PuntoEntregaDevolucionModel extends Model
 {
+
     protected $table      = 'puntoentregadevolucion';
     protected $primaryKey = 'idPuntoED';
 
@@ -21,4 +22,11 @@ class PuntoEntregaDevolucionModel extends Model
     protected $validationRules    = [];
     protected $validationMessages = [];
     protected $skipValidation     = false;
+
+
+    public function obtenerPuntosEntregaDevolucion(){
+       $puntos = $this->findAll();
+       return $puntos;
+    }
+
 }

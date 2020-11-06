@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-
+use App\Controllers\PuntoEDController;
 
 class GestionController extends BaseController
 {
@@ -21,7 +21,7 @@ class GestionController extends BaseController
 
     public function nuevoAlquiler()
     {
-        //echo view('index-cliente');
+        $controlador= new PuntoEDController();
         echo view('layouts/nuevo-alquiler');
     }
     
