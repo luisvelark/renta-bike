@@ -36,7 +36,9 @@ $routes->get('alquiler', 'GestionController::alquiler');
 $routes->get('multas-credito', 'GestionController::multasCredito');
 $routes->get('alquileres-concretados', 'GestionController::alquileresConcretados');
 $routes->get('credito-multas-cliente', 'GestionController::creditoYMultasCliente');
-
+$routes->get('puntos-retorno', 'GestionController::puntosRetorno');
+$routes->get('horarios-mayor-demanda', 'GestionController::horarioMayorDemanda');
+$routes->get('tiempo-alquiler', 'GestionController::tiempoAlquiler');
 
 
 

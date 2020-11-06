@@ -40,4 +40,16 @@ class GestionController extends BaseController
         echo view ('layouts/credito-multas-cliente');
         
     }
+    public function horarioMayorDemanda()
+    {
+        echo view('layouts/horarios-mayor-demanda');
+    }
+    public function puntosRetorno()
+    {
+        echo view('layouts/puntos-retorno');
+    }
+    public function tiempoAlquiler()
+    {
+        echo view('layouts/tiempo-alquiler');
+    }
 }

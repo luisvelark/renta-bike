@@ -56,17 +56,17 @@
       <!-- Botones para las acciones -->
 
       <li class="nav-item active">
-        <a class="nav-link" href="">
+        <a id="idPuntoRetorno" class="nav-link" href="#">
           <i class="fas fa-map-marker-alt"></i>
           <span>Puntos de retorno mas utilizados</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="">
+        <a id="idTiempoAlquiler" class="nav-link" href="#">
           <i class="fas fa-hourglass-end"></i>
           <span>Tiempo de alquiler mas utilizados</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="">
+        <a id="idHorarioMayor" class="nav-link" href="#">
           <i class="far fa-clock"></i>
           <span>Horario de mayor demanda</span></a>
       </li>
