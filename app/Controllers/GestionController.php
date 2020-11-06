@@ -26,9 +26,9 @@ class GestionController extends BaseController
     }
     
 
-    public function multascredito()
+    public function multasCredito()
     {
-        echo view('layouts/multasCredito');
+        echo view('layouts/multas-credito');
     }
     public function alquileresConcretados()
     {
