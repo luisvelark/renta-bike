@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-11-2020 a las 21:44:01
+-- Tiempo de generación: 07-11-2020 a las 03:12:06
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -61,12 +61,24 @@ CREATE TABLE `alquiler` (
 
 CREATE TABLE `bicicleta` (
   `idBicicleta` int(11) NOT NULL,
-  `numeroBicicleta` int(11) NOT NULL,
+  `numeroBicicleta` varchar(3) NOT NULL,
   `estado` enum('EnAlquiler','EnReparacion','Disponible') NOT NULL,
   `daño` enum('SinDaño','Recuperable','Irrecuperable') NOT NULL,
   `observaciones` varchar(100) NOT NULL,
   `idPuntoED` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `bicicleta`
+--
+
+INSERT INTO `bicicleta` (`idBicicleta`, `numeroBicicleta`, `estado`, `daño`, `observaciones`, `idPuntoED`) VALUES
+(1, '001', 'Disponible', 'SinDaño', '', 1),
+(2, '002', 'Disponible', 'SinDaño', '', 1),
+(3, '003', 'Disponible', 'SinDaño', '', 1),
+(4, '004', 'Disponible', 'SinDaño', '', 2),
+(5, '005', 'Disponible', 'SinDaño', '', 2),
+(6, '006', 'Disponible', 'SinDaño', '', 2);
 
 -- --------------------------------------------------------
 
@@ -96,6 +108,13 @@ CREATE TABLE `cliente` (
   `fechaInicioSuspencion` date DEFAULT NULL,
   `fechaFinSuspencion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`idUsuario`, `puntajeTotal`, `credito`, `suspendido`, `fechaInicioSuspencion`, `fechaFinSuspencion`) VALUES
+(1, 0, 0, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -138,6 +157,14 @@ CREATE TABLE `puntoentregadevolucion` (
   `calificacionTotal` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `puntoentregadevolucion`
+--
+
+INSERT INTO `puntoentregadevolucion` (`idPuntoED`, `direccion`, `telefono`, `calificacionTotal`) VALUES
+(1, 'Av. San Martín 500', 446123456, 0),
+(2, 'Av. Kennedy 9001', 446123456, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -152,10 +179,17 @@ CREATE TABLE `usuario` (
   `correo` varchar(40) NOT NULL,
   `telefono` int(11) NOT NULL,
   `domicilio` varchar(50) NOT NULL,
-  `cuil-cuit` int(11) NOT NULL,
+  `cuil-cuit` varchar(11) NOT NULL,
   `fechaNacimiento` date NOT NULL,
   `contraseña` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`idUsuario`, `dni`, `nombre`, `apellido`, `correo`, `telefono`, `domicilio`, `cuil-cuit`, `fechaNacimiento`, `contraseña`) VALUES
+(1, 38802605, 'Esteban', 'Saavedra', 'esteban@esteban.com', 2147483647, 'Barrio Quirno Costa', '20388026058', '1995-12-12', 'contraseña');
 
 --
 -- Índices para tablas volcadas
@@ -238,7 +272,7 @@ ALTER TABLE `alquiler`
 -- AUTO_INCREMENT de la tabla `bicicleta`
 --
 ALTER TABLE `bicicleta`
-  MODIFY `idBicicleta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idBicicleta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `calificacion`
@@ -262,13 +296,13 @@ ALTER TABLE `puntaje`
 -- AUTO_INCREMENT de la tabla `puntoentregadevolucion`
 --
 ALTER TABLE `puntoentregadevolucion`
-  MODIFY `idPuntoED` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPuntoED` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
