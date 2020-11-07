@@ -3,7 +3,8 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Controllers\PuntoEDController;
+use App\Models\PuntoEntregaDevolucionModel; //Tendiramos que invocar al controlador, pero como no me acuerdo un choto,
+                                            //invoco al modelo.(y funcionó)
 
 class GestionController extends BaseController
 {
@@ -21,8 +22,10 @@ class GestionController extends BaseController
 
     public function nuevoAlquiler()
     {
-        $controlador= new PuntoEDController();
-        echo view('layouts/nuevo-alquiler');
+        $puntos= new PuntoEntregaDevolucionModel();
+        $datos= ['datos'=> $puntos->obtenerPuntosEntregaDevolucion()];
+        echo view('layouts/nuevo-alquiler',$datos);
+
     }
     
 
