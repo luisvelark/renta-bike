@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\PuntoEntregaDevolucionModel; //Tendiramos que invocar al controlador, pero como no me acuerdo un choto,
+use App\Models\PuntoEntregaDevolucionModel;    //Tendiramos que invocar al controlador, pero como no me acuerdo un choto,
                                             //invoco al modelo.(y funcionó)
 
 class GestionController extends BaseController
@@ -31,7 +31,7 @@ class GestionController extends BaseController
 
     public function multasCredito()
     {
-        echo view('layouts/multas-credito');
+       echo view('layouts/multas-credito');
     }
     public function alquileresConcretados()
     {

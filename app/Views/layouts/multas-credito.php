@@ -1,23 +1,29 @@
 <div>
-
-<p>hola</p>
-
-
 <form>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  <div>
+    <label for="exampleInputPassword1">Ingrese dni del cliente</label>
+    <input type="text" class="form-control" id="dniCliente">
+    <span>Ej: 12345678</span>
   </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
-  </div>
-  <div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">Buscar</button>
 </form>
+</div>
+<div>
+<label for="exampleInputPassword1">Nombre y apellido</label>
+<?php
+$table = new \CodeIgniter\View\Table();
 
+$data = [
+        ['Name', 'Color', 'Size'],
+        ['Fred', 'Blue',  'Small'],
+        ['Mary', 'Red',   'Large'],
+        ['John', 'Green', 'Medium'],
+];
+$template = [
+  'table_open' => '<table border="1" cellpadding="2" cellspacing="1" class="mytable">'
+];
+
+$table->setTemplate($template);
+
+echo $table->generate($data);?>
 </div>
