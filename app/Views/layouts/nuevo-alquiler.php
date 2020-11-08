@@ -1,47 +1,48 @@
-<div>
+<div class="container my-5">
 
-  <form class="container">
-    <div class="form-group">
+  <form id="form-alquiler" >
 
-      <div>
-        <label for="exampleInputEmail1">Seleccionar punto de entrega</label>
-        <select class="custom-select">
-          <option selected>---</option>
-          <?php
-            for ($i = 0; $i < count($datos); $i++) {
-              echo '<option value="' . $datos[$i]['idPuntoED']. '">' . $datos[$i]['direccion'] . '</option>';
-          }
-          ?>
-
-        </select>
+      <div class="form-group">
+        <label class="font-weight-bold" >Seleccionar punto de entrega:
+          <select class="custom-select my-2" name="punto-entrega">
+            <option selected>---</option>
+            <?php for ($i = 0; $i < count($datos); $i++) {
+    echo '<option value="' . $datos[$i]['idPuntoED'] . '">' . $datos[$i]['direccion'] . '</option>';
+}
+?>
+          </select>
+        </label>
       </div>
 
-      <div>
-        <label for="exampleInputPassword1">Seleccionar hora de inicio</label>
-        <input type="text" class="form-control" id="exampleInputPassword1">
-        <span>Ejemplo: 20hs - 22hs</span>
+      <div class="form-group">
+        <label class="font-weight-bold">Seleccionar hora de inicio:
+          <input type="text" class="form-control my-1" name="hora-inicio">
+          <span class="small m-2" >Ejemplo: 20hs - 22hs</span>
+        </label>
       </div>
 
-      <div>
-        <label for="exampleInputEmail1">Seleccionar cantidad de horas</label>
-        <select class="custom-select">
-          <option selected>---</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-        </select>
+      <div class="form-group">
+        <label class="font-weight-bold">Seleccionar cantidad de horas:
+          <select class="custom-select my-2" name="cant-hora">
+            <option selected>---</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+          </select>
+        </label>
       </div>
 
-      <div>
-        <label for="exampleInputPassword1">Dni optativo para devolucion</label>
-        <input type="text" class="form-control" id="exampleInputPassword1">
-        <span>Ej: 12345678</span>
+      <div >
+        <label class="font-weight-bold">Dni optativo para devolucion:
+          <input type="text" class="form-control my-1" name="dni-optativo">
+          <span class="small m-2">Ej: 12345678</span>
+        </label>
       </div>
 
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
+      <button type="submit" class="btn btn-primary m-2">Enviar</button>
+
   </form>
 
 </div>
