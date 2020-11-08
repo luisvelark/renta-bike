@@ -1,6 +1,9 @@
 <div>
 <h2>Crédito y multas</h2>
-<div class="table-responsive">
+<?php 
+print_r($datos);
+?>
+<!-- <div class="table-responsive">
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
       <thead>
         <tr>
@@ -24,5 +27,5 @@
       </tbody>
     </table>
   </div>
-</div>
+</div> -->
 </div>
