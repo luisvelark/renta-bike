@@ -3,8 +3,8 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\PuntoEntregaDevolucionModel;    //Tendiramos que invocar al controlador, pero como no me acuerdo un choto,
-                                            //invoco al modelo.(y funcionó)
+use App\Controllers\ClienteController;
+use App\Models\PuntoEntregaDevolucionModel;
 
 class GestionController extends BaseController
 {
@@ -40,7 +40,9 @@ class GestionController extends BaseController
     }
     public function creditoYMultasCliente()
     {
-        echo view ('layouts/credito-multas-cliente');
+        $cCliente= new ClienteController();
+        $datos= ['datos'=> $cCliente->creditoMultasCliente(1)];
+        echo view ('layouts/credito-multas-cliente',$datos);
         
     }
     public function horarioMayorDemanda()
