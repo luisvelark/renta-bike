@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-11-2020 a las 03:16:37
+-- Tiempo de generación: 08-11-2020 a las 02:56:21
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -30,6 +30,13 @@ SET time_zone = "+00:00";
 CREATE TABLE `administrador` (
   `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `administrador`
+--
+
+INSERT INTO `administrador` (`idUsuario`) VALUES
+(2);
 
 -- --------------------------------------------------------
 
@@ -102,8 +109,8 @@ CREATE TABLE `calificacion` (
 
 CREATE TABLE `cliente` (
   `idUsuario` int(11) NOT NULL,
-  `puntajeTotal` float NOT NULL,
-  `credito` float NOT NULL,
+  `puntajeTotal` float NOT NULL DEFAULT 0,
+  `credito` float NOT NULL DEFAULT 0,
   `suspendido` tinyint(1) NOT NULL DEFAULT 0,
   `fechaInicioSuspencion` date DEFAULT NULL,
   `fechaFinSuspencion` date DEFAULT NULL
@@ -114,7 +121,10 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`idUsuario`, `puntajeTotal`, `credito`, `suspendido`, `fechaInicioSuspencion`, `fechaFinSuspencion`) VALUES
-(1, 0, 0, 0, NULL, NULL);
+(1, 0, 0, 0, NULL, NULL),
+(3, 0, 0, 0, NULL, NULL),
+(4, 0, 0, 0, NULL, NULL),
+(5, 0, 0, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -177,7 +187,7 @@ CREATE TABLE `usuario` (
   `nombre` varchar(40) NOT NULL,
   `apellido` varchar(40) NOT NULL,
   `correo` varchar(40) NOT NULL,
-  `telefono` int(11) NOT NULL,
+  `telefono` varchar(13) NOT NULL,
   `domicilio` varchar(50) NOT NULL,
   `cuil-cuit` varchar(11) NOT NULL,
   `fechaNacimiento` date NOT NULL,
@@ -189,7 +199,11 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idUsuario`, `dni`, `nombre`, `apellido`, `correo`, `telefono`, `domicilio`, `cuil-cuit`, `fechaNacimiento`, `contraseña`) VALUES
-(1, 38802605, 'Esteban', 'Saavedra', 'esteban@esteban.com', 2147483647, 'Barrio Quirno Costa', '20388026058', '1995-12-12', 'contraseña');
+(1, 38802605, 'Esteban', 'Saavedra', 'esteban@esteban.com', '2974787869', 'Barrio Quirno Costa', '20388026058', '1995-12-12', 'contraseña'),
+(2, 40872123, 'Cristian', 'Cañupan', 'caupancristian13@gmail.com', '297483647', 'Av Rivadavia 3504', '20408721238', '1998-01-29', 'asdasd'),
+(3, 42578123, 'Carlitos', 'Perez', 'carlitosK@yahoo.com.ar', '2974836475', 'Roca 1221', '2142751236', '1978-10-15', 'lerolero123'),
+(4, 42123456, 'Carla', 'Torrez', 'carlapocha@hotmail.com', '2975123321', 'Los claveles 123', '21421234568', '1990-06-25', 'qpwoei123'),
+(5, 23312456, 'Miguel', 'Bernoli', 'miguelbernoli@yahoo.com.ar', '2974321123', 'Estados Unidos 404', '2033124566', '1974-07-14', 'hardlock');
 
 --
 -- Índices para tablas volcadas
@@ -302,7 +316,7 @@ ALTER TABLE `puntoentregadevolucion`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas
