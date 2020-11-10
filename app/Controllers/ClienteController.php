@@ -14,7 +14,7 @@ class ClienteController extends BaseController
 
     public function creditoMultasCliente($id)
     {
-        $datos = ['multas' => $this->cliente->obtenerMultas($id),'credito'=> $this->cliente->obtenerCredito()];
+        $datos = ['multas'=> $this->cliente->obtenerMultas($id),'credito'=>$this->cliente->obtenerCredito($id)];
         return $datos;
     }
 }

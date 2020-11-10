@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-11-2020 a las 02:56:21
+-- Tiempo de generación: 10-11-2020 a las 19:18:48
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -121,10 +121,10 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`idUsuario`, `puntajeTotal`, `credito`, `suspendido`, `fechaInicioSuspencion`, `fechaFinSuspencion`) VALUES
-(1, 0, 0, 0, NULL, NULL),
-(3, 0, 0, 0, NULL, NULL),
-(4, 0, 0, 0, NULL, NULL),
-(5, 0, 0, 0, NULL, NULL);
+(1, 0, 350, 0, '2020-11-09', '2020-11-09'),
+(3, 0, 0, 0, '2020-11-09', '2020-11-09'),
+(4, 0, 0, 0, '2020-11-09', '2020-11-09'),
+(5, 0, 0, 0, '2020-11-09', '2020-11-09');
 
 -- --------------------------------------------------------
 
@@ -140,6 +140,13 @@ CREATE TABLE `multa` (
   `detalleMulta` varchar(100) NOT NULL,
   `pagado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `multa`
+--
+
+INSERT INTO `multa` (`idMulta`, `idUsuarioCliente`, `monto`, `fechaMulta`, `detalleMulta`, `pagado`) VALUES
+(1, 1, 500, '2020-12-12', 'Por llegar tarde', 1);
 
 -- --------------------------------------------------------
 
@@ -298,7 +305,7 @@ ALTER TABLE `calificacion`
 -- AUTO_INCREMENT de la tabla `multa`
 --
 ALTER TABLE `multa`
-  MODIFY `idMulta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idMulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `puntaje`
