@@ -32,6 +32,8 @@ function envioAlquiler() {
   let formAlquiler = document.getElementById("form-alquiler");
   formAlquiler.addEventListener("submit", enviarAlquiler, true);
 
+  let msj = document.getElementById("respuesta");
+
   function enviarAlquiler(e) {
     e.preventDefault();
     console.log("envie");
@@ -52,6 +54,17 @@ function envioAlquiler() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        if (data.msg === "error") {
+          msj.innerHTML = `
+          <div class="alert alert-danger" role="alert">
+             llena todos los campos obligatorios!
+          </div>`;
+        } else {
+          msj.innerHTML = `
+          <div class="alert alert-primary" role="alert">
+            ${data.msg}
+          </div>`;
+        }
       });
     // .catch((err) => console.log(err));
   }

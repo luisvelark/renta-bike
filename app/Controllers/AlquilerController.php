@@ -12,13 +12,13 @@ class AlquilerController extends BaseController
         $puntoE = $request->getPost('punto-entrega');
         $horaInicio = $request->getPost('hora-inicio');
         $cantHoras = $request->getPost('cant-hora');
-        
+        $dniAlternativo = $request->getPost('dni-optativo');
 
-        if ($puntoE === '---' || empty($horaInicio) || $cantHoras === '---'||empty($puntoE)||empty($cantHoras)) {
-            $arr = ["msg" => "llena todos los campos"];
+        if ($puntoE === '---' || empty($horaInicio) || $cantHoras === '---' || empty($puntoE) || empty($cantHoras)) {
+            $arr = ["msg" => "error"];
 
         } else {
-            $arr = ["msg" => 'ok:<br>PUNTO DE ENTREGA:' . $puntoE . '<br>HORA DE INICIO:' . $horaInicio . '<br>CANTIDAD DE HORAS:' . $cantHoras];
+            $arr = ["msg" => 'ok:<br>PUNTO DE ENTREGA:' . $puntoE . '<br>HORA DE INICIO:' . $horaInicio . '<br>CANTIDAD DE HORAS:' . $cantHoras . '<br>CLIENTE OPTATIVO:' . $dniAlternativo];
 
         }
 
