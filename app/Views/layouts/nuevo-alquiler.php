@@ -1,30 +1,29 @@
-<?php
-$hora = new DateTime("now", new DateTimeZone('America/Argentina/Ushuaia'));
-?>
-<h2>Nuevo alquiler</h2>
-<div>
-  <form class="container">
+<div class="container my-5">
+
+  <form id="form-alquiler">
+
     <div class="form-group">
-
-      <div>
-        <label for="exampleInputEmail1">Seleccionar punto de entrega</label>
-        <select class="custom-select">
+      <label class="font-weight-bold">*Seleccionar punto de entrega:
+        <select class="custom-select my-2" name="punto-entrega">
           <option selected>---</option>
-          <?php
-          for ($i = 0; $i < count($datos); $i++) {
-            echo '<option value="' . $datos[$i]['idPuntoED'] . '">' . $datos[$i]['direccion'] . '</option>';
-          }
-          ?>
+          <?php for ($i = 0; $i < count($datos); $i++) {
+    echo '<option value="' . $datos[$i]['idPuntoED'] . '">' . $datos[$i]['direccion'] . '</option>';
+}
+?>
         </select>
-      </div>
-      <div>
-        <label for="exampleInputPassword1">Seleccionar hora de inicio</label>
-        <input class="form-control" type="time" value=<?php echo '"' . $hora->format('G:i') . '"'?> min=<?php echo '"' . $hora->format('G:i') . '"' ?> max="21:00" step="1">
-      </div>
+      </label>
+    </div>
 
-      <div>
-        <label for="exampleInputEmail1">Seleccionar cantidad de horas</label>
-        <select class="custom-select">
+    <div class="form-group">
+      <label class="font-weight-bold">*Seleccionar hora de inicio:
+        <input type="text" class="form-control my-1" name="hora-inicio">
+        <span class="small m-2">Ejemplo: 20hs - 22hs</span>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label class="font-weight-bold">*Seleccionar cantidad de horas:
+        <select class="custom-select my-2" name="cant-hora">
           <option selected>---</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -32,15 +31,26 @@ $hora = new DateTime("now", new DateTimeZone('America/Argentina/Ushuaia'));
           <option value="5">5</option>
           <option value="6">6</option>
         </select>
-      </div>
-      <div>
-        <label for="exampleInputPassword1">Dni optativo para devolucion</label>
-        <input type="text" class="form-control" id="exampleInputPassword1">
-        <span>Ej: 12345678</span>
-      </div>
-          <br>
-      <button type="submit" class="btn btn-primary">¡Alquilar!</button>
+      </label>
     </div>
+
+    <div>
+      <label class="font-weight-bold">Dni optativo para devolucion:
+        <input type="text" class="form-control my-1" name="dni-optativo">
+        <span class="small m-2">Ej: 12345678</span>
+      </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary m-2">Enviar</button>
+
   </form>
+
+  <div>
+    <span class="small my-2">*campos obligatorios</span>
+  </div>
+
+  <div id="respuesta" class="mt-3">
+
+  </div>
 
 </div>
