@@ -1,9 +1,17 @@
 <?php namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\AlquilerModel;
 
 class AlquilerController extends BaseController
 {
+
+    protected $alquilerModel;
+
+    public function __construct()
+    {
+        $this->alquilerModel = new AlquilerModel();
+    }
 
     public function recibirNuevoAlquiler()
     {
@@ -13,6 +21,8 @@ class AlquilerController extends BaseController
         $horaInicio = $request->getPost('hora-inicio');
         $cantHoras = $request->getPost('cant-hora');
         $dniAlternativo = $request->getPost('dni-optativo');
+
+        // ['idUsuarioCliente', 'idBicicleta', 'idPuntoE', 'idPuntoD', 'idPuntoED', 'fechaAlquiler', 'horaInicioAlquiler', 'HoraFinAlquiler', 'HoraEntregaAlquiler', 'clienteAlternativo', 'estadoAlquiler', 'daño', 'ruta'];
 
         if ($puntoE === '---' || empty($horaInicio) || $cantHoras === '---' || empty($puntoE) || empty($cantHoras)) {
             $arr = ["msg" => "error"];
