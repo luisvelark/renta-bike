@@ -32,8 +32,8 @@ class ClienteModel extends Model
 
     public function obtenerCredito($id)
     {
-        $credito = $this->where('idUsuario', $id)->findAll();
-        return $credito[0]['credito'];
+        $credito = $this->where('idUsuario', $id)->first();
+        return $credito['credito'];
     }
 
     public function obtenerCliente($dni)
