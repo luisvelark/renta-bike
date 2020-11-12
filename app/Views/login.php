@@ -40,17 +40,17 @@
                     <h1 class="h4 text-gray-900 mb-4">Bienvenido!</h1>
                   </div>
                   <?php if(isset($validation)) { ?>
-                  <div class="alert alert-danger"> <!-- alerta arriba -->
+                  <div class="alert alert-danger"> 
                   <?php echo $validation->listErrors(); ?>
                   </div>
                   <?php } ?>
-                  <form class="user" method="POST" action="<?php echo base_url();?>/UsuarioModel/validar">
-                  <?php csrf_field(); ?>
+                  <form class="user" method="POST" action="<?php echo base_url();?>/UsuarioController/validar">
+                  
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user" value="<?php echo set_value('email')?>" id="email" name="email" aria-describedby="emailHelp" autofocus placeholder="Ingrese un correo...">
+                      <input type="email" class="form-control form-control-user"  id="email" name="email"  aria-describedby="emailHelp" autofocus placeholder="Ingrese un correo...">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" value="<?php echo set_value('password')?>" id="password" name="password" placeholder="Contraseña">
+                      <input type="password" class="form-control form-control-user"  id="password" name="password"  placeholder="Contraseña">
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
