@@ -1,26 +1,17 @@
-<?php 
-namespace App\Controllers;
-use App\Controllers\BaseController;
-use App\Models\UsuarioModel;
+<?php
 
+namespace App\Controllers;
+
+use App\Controllers\BaseController;
 
 class UsuarioController extends BaseController
 {
-    private $usuario;
-    public function __construct()
-    {
-        $this->usuario= new UsuarioModel();
+    public function __construct (){
+        
     }
 
-
-
-
-    public function index()
-    {
-        $nombre= 'Esteban';
-        $usuario= $this->usuario->where('nombre',$nombre)->findAll();
-        $data= ['titulo'=>'El titulo de la vista va a ser esta wea','datos'=> $usuario];
-        echo view('UsuarioView',$data);
-
+    public function validar(){
+        if ($this->request->getMethod()=="post" && $this->validate(['email'=>'required','password'=>'required'])){
+        }
     }
 }
