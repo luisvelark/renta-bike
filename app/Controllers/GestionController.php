@@ -43,7 +43,6 @@ class GestionController extends BaseController
         $cCliente= new ClienteController();
         $datos= ['datos'=> $cCliente->creditoMultasCliente(1)];
         echo view ('layouts/credito-multas-cliente',$datos);
-        
     }
     public function horarioMayorDemanda()
     {
