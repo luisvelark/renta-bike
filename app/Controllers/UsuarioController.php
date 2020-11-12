@@ -6,12 +6,31 @@ use App\Controllers\BaseController;
 
 class UsuarioController extends BaseController
 {
-    public function __construct (){
-        
+protected $reglas;
+    
+    public function __construct()
+    {
+        helper(['form']);
+
+        $this->reglas = [
+            'email' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio'
+                ]
+            ],
+            'password' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio'
+                ]
+            ]
+        ];
     }
 
-    public function validar(){
-        if ($this->request->getMethod()=="post" && $this->validate(['email'=>'required','password'=>'required'])){
+    public function validar()
+    {
+        if ($this->request->getMethod() == "post" && $this->validate($this->reglas)) {
         }
     }
 }
