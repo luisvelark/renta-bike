@@ -32,21 +32,16 @@ protected $reglasLogin;
 
     public function ingresarAlSistema()
     {
-        /* $email= $this->request->getPost('email');
-        $password= $this->request->getPost('password');
-        $datos= ['datos'=> $email];
-        echo view('prueba',$datos); */
-
         if ($this->request->getMethod() == "post" && $this->validate($this->reglasLogin)) {
             $email= $this->request->getPost('email');
             $password= $this->request->getPost('password');
             $user=$this->usuario->buscarUsuario($email);
             if ($user != null) {
                 if ($user['contraseña'] == $password){
-                    /* $datos= ['datos'=> 'correcto'];
-                    echo view('prueba',$datos); */
                     $datosSesion = [
                         'idUsuario'=>$user['idUsuario'],
+                        'nombre'=>$user['nombre'],
+                        'apellido'=>$user['apellido'],
                     ];
 
                     $sesion= session();
@@ -66,4 +61,10 @@ protected $reglasLogin;
             echo view('login',$data);
         }
     }
+    public function salirDelSistema(){
+        $user_session= session();
+        $user_session->destroy();
+        return redirect()->to(base_url());
+    }
 }
+
