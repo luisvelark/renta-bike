@@ -16,7 +16,7 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin-2.css" rel="stylesheet">
+  <link href="<?php echo base_url('css/sb-admin-2.css')?>" rel="stylesheet">
 
 </head>
 
@@ -39,12 +39,8 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Bienvenido!</h1>
                   </div>
-                  <?php if(isset($validation)) { ?>
-                  <div class="alert alert-danger"> 
-                  <?php echo $validation->listErrors(); ?>
-                  </div>
-                  <?php } ?>
-                  <form class="user" method="POST" action="<?php echo base_url();?>/UsuarioController/validar">
+                  
+                  <form class="user" method="POST" action="<?php echo base_url();?>/UsuarioController/ingresarAlSistema">
                   
                     <div class="form-group">
                       <input type="email" class="form-control form-control-user"  id="email" name="email"  aria-describedby="emailHelp" autofocus placeholder="Ingrese un correo...">
@@ -63,6 +59,16 @@
                     </a>
                     <button class="btn btm-primary" type="submit">Login</button> 
                     </a>
+                    <?php if(isset($validation)) { ?>
+                  <div class="alert alert-danger"> 
+                  <?php echo $validation->listErrors(); ?>
+                  </div>
+                  <?php } ?>
+                  <?php if(isset($error)) { ?>
+                  <div class="alert alert-danger"> 
+                  <?php echo $error; ?>
+                  </div>
+                  <?php } ?>
                     <hr>
                     <a href="<?php echo base_url('GestionController/indexCliente')?>" class="btn btn-google btn-user btn-block">
                       <i class="fab fa-google fa-fw"></i> Loguearse con Google
