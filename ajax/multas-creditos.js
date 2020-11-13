@@ -16,6 +16,16 @@ function mostrar(e) {
 
             let contenedor = document.getElementById('contenido');
             contenedor.innerHTML = respuesta;
+            console.log("Esta por ejecutarse buscarCliente");
+            buscarCliente();
         }
     }
+}
+function buscarCliente() {
+    var formulario = document.getElementById('formulario');
+
+    formulario.addEventListener('submit',function(e){
+        e.preventDefault();
+        console.log("Me diste un click");
+    },true)
 }

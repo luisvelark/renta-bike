@@ -353,6 +353,7 @@
   <script src="<?php echo base_url('ajax/puntos-retorno.js') ?>"></script>
   <script src="<?php echo base_url('ajax/horario-mayor-demanda.js') ?>"></script>
   <script src="<?php echo base_url('ajax/tiempo-alquiler.js') ?>"></script>
+ 
 </body>
 
 </html>

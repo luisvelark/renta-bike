@@ -1,4 +1,3 @@
-<script src="<?php echo base_url('ajax/listarMultasCreditos.js') ?>"></script>
 <div>
 <form id="formulario">
   <div>
