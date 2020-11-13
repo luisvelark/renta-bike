@@ -6,12 +6,12 @@ use App\Models\AlquilerModel;
 class AlquilerController extends BaseController
 {
 
-    protected $alquilerModel;
+    // protected $alquilerModel;
 
-    public function __construct()
-    {
-        $this->alquilerModel = new AlquilerModel();
-    }
+    // public function __construct()
+    // {
+    //     $this->alquilerModel = new AlquilerModel();
+    // }
 
     public function recibirNuevoAlquiler()
     {
@@ -25,28 +25,36 @@ class AlquilerController extends BaseController
         // ['idUsuarioCliente', 'idBicicleta', 'idPuntoE', 'idPuntoD', 'idPuntoED', 'fechaAlquiler', 'horaInicioAlquiler', 'HoraFinAlquiler', 'HoraEntregaAlquiler', 'clienteAlternativo', 'estadoAlquiler', 'daño', 'ruta'];
 
         if ($puntoE === '---' || empty($horaInicio) || $cantHoras === '---' || empty($puntoE) || empty($cantHoras)) {
+
             $arr = ["msg" => "error"];
 
         } else {
-            $arr = ["msg" => 'ok:<br>PUNTO DE ENTREGA:' . $puntoE . '<br>HORA DE INICIO:' . $horaInicio . '<br>CANTIDAD DE HORAS:' . $cantHoras . '<br>CLIENTE OPTATIVO:' . $dniAlternativo];
+            // $arr = ["msg" => 'ok:<br>PUNTO DE ENTREGA:' . $puntoE . '<br>HORA DE INICIO:' . $horaInicio . '<br>CANTIDAD DE HORAS:' . $cantHoras . '<br>CLIENTE OPTATIVO:' . $dniAlternativo];
+            $alquilerModel = new AlquilerModel();
+            $alquiler = [
+                'idUsuarioCliente' => 1,
+                'idBicicleta' => 1,
+                'idPuntoE' => 1,
+                'idPuntoD' => 2,
+                'fechaAlquiler' => date("Y-m-d"),
+                'horaInicioAlquiler' => date("H:i:s"),
+                'HoraFinAlquiler' => date("H:i:s"),
+                'HoraEntregaAlquiler' => date("H:i:s"),
+                'clienteAlternativo' => 100,
+                'estadoAlquiler' => 'EnProceso',
+                'daño' => 'SinDaño',
+                'ruta' => 'la ruta',
+
+            ];
+
+            $alquilerModel->insert($alquiler);
+
+            $arr = ["msg" => 'ok:datos guardados en la DB'];
 
         }
 
         echo json_encode($arr);
-
-        // $n1=$request->getPost('n1');
-        // $n2=$request->getPost('n2');
-
-        // if (is_numeric($n1) && is_numeric($n2)) {
-        //     $suma = intval($n1) + intval($n2);
-        //     $arr = ["msg" => $suma];
-        //     echo json_encode($arr);
-
-        // } else {
-        //     $arr = ["msg" => "hubo un problema"];
-        //     echo json_encode($arr);
-
-        // }
+        die();
 
     }
 
