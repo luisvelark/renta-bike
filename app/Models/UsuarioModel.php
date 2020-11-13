@@ -21,4 +21,9 @@ class UsuarioModel extends Model
     protected $validationRules    = [];
     protected $validationMessages = [];
     protected $skipValidation     = false;
+
+    public function buscarUsuario($correo) {
+        $datosUsuario = $this->where('correo',$correo)->first();
+        return $datosUsuario;
+    }
 }

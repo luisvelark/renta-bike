@@ -1,26 +1,69 @@
-<?php 
-namespace App\Controllers;
-use App\Controllers\BaseController;
-use App\Models\UsuarioModel;
+<?php
 
+namespace App\Controllers;
+
+use App\Controllers\BaseController;
+use CodeIgniter\HTTP\Request;
+use App\Models\UsuarioModel;
 
 class UsuarioController extends BaseController
 {
-    private $usuario;
+protected $reglasLogin;
+    
     public function __construct()
     {
-        $this->usuario= new UsuarioModel();
+        $this->usuario = new UsuarioModel();
+        helper(['form']);
+        $this->reglasLogin = [
+            'email' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio'
+                ]
+            ],
+            'password' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio'
+                ]
+            ]
+        ];
     }
 
-
-
-
-    public function index()
+    public function ingresarAlSistema()
     {
-        $nombre= 'Esteban';
-        $usuario= $this->usuario->where('nombre',$nombre)->findAll();
-        $data= ['titulo'=>'El titulo de la vista va a ser esta wea','datos'=> $usuario];
-        echo view('UsuarioView',$data);
+        /* $email= $this->request->getPost('email');
+        $password= $this->request->getPost('password');
+        $datos= ['datos'=> $email];
+        echo view('prueba',$datos); */
 
+        if ($this->request->getMethod() == "post" && $this->validate($this->reglasLogin)) {
+            $email= $this->request->getPost('email');
+            $password= $this->request->getPost('password');
+            $user=$this->usuario->buscarUsuario($email);
+            if ($user != null) {
+                if ($user['contraseña'] == $password){
+                    /* $datos= ['datos'=> 'correcto'];
+                    echo view('prueba',$datos); */
+                    $datosSesion = [
+                        'idUsuario'=>$user['idUsuario'],
+                    ];
+
+                    $sesion= session();
+                    $sesion->set($datosSesion);
+                    return redirect()->to(base_url().'/GestionController/indexCliente');
+                } else {
+                    $data['error'] = 'La contraseña no coincide';
+                    echo view('login',$data);
+                }
+
+            } else {
+                $data['error'] = 'El usuario no exite pinche wey';
+                echo view('login',$data);
+            }
+        } else {
+            $data = ['validation'=>$this->validator];
+            echo view('login',$data);
+        }
     }
 }

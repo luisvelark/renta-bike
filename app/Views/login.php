@@ -16,7 +16,7 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin-2.css" rel="stylesheet">
+  <link href="<?php echo base_url('css/sb-admin-2.css')?>" rel="stylesheet">
 
 </head>
 
@@ -39,12 +39,14 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Bienvenido!</h1>
                   </div>
-                  <form class="user">
+                  
+                  <form class="user" method="POST" action="<?php echo base_url();?>/UsuarioController/ingresarAlSistema">
+                  
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Ingrese un correo...">
+                      <input type="email" class="form-control form-control-user"  id="email" name="email"  aria-describedby="emailHelp" autofocus placeholder="Ingrese un correo...">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Contraseña">
+                      <input type="password" class="form-control form-control-user"  id="password" name="password"  placeholder="Contraseña">
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
@@ -55,6 +57,18 @@
                     <a href="<?php echo base_url('GestionController')?>" class="btn btn-primary btn-user btn-block">
                       Loguearse
                     </a>
+                    <button class="btn btm-primary" type="submit">Login</button> 
+                    </a>
+                    <?php if(isset($validation)) { ?>
+                  <div class="alert alert-danger"> 
+                  <?php echo $validation->listErrors(); ?>
+                  </div>
+                  <?php } ?>
+                  <?php if(isset($error)) { ?>
+                  <div class="alert alert-danger"> 
+                  <?php echo $error; ?>
+                  </div>
+                  <?php } ?>
                     <hr>
                     <a href="<?php echo base_url('GestionController/indexCliente')?>" class="btn btn-google btn-user btn-block">
                       <i class="fab fa-google fa-fw"></i> Loguearse con Google
