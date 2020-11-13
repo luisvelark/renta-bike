@@ -1,4 +1,11 @@
+<?php
+$hora = new DateTime("now", new DateTimeZone('America/Argentina/Ushuaia'));
+?>
+
+
 <div class="container my-5">
+
+  <h2 class="my-4">Nuevo Alquiler:</h2>
 
   <form id="form-alquiler">
 
@@ -16,8 +23,10 @@
 
     <div class="form-group">
       <label class="font-weight-bold">*Seleccionar hora de inicio:
-        <input type="text" class="form-control my-1" name="hora-inicio">
-        <span class="small m-2">Ejemplo: 20hs - 22hs</span>
+        <input type="time" class="form-control my-1" name="hora-inicio"
+          value=<?php echo '"' . $hora->format('G:i') . '"' ?> min=<?php echo '"' . $hora->format('G:i') . '"' ?>
+          max="21:00" step="1">
+        <span class="small m-2">*Ingresa una hora mayor a la actual</span>
       </label>
     </div>
 

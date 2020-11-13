@@ -40,7 +40,7 @@ $routes->get('horarios-mayor-demanda', 'GestionController::horarioMayorDemanda')
 $routes->get('tiempo-alquiler', 'GestionController::tiempoAlquiler');
 
 //*************RUTA DE ALQUILER CONTROLLER******************
-$routes->post('alquiler-nuevo', 'AlquilerController::recibirNuevoAlquiler');
+$routes->post('alquiler-nuevo', 'AlquilerController::solicitarAlquiler');
 
 /**
  * --------------------------------------------------------------------

@@ -40,11 +40,6 @@ function envioAlquiler() {
 
     var datos = new FormData(this);
 
-    console.log(datos);
-    console.log(datos.get("punto-entrega"));
-    console.log(datos.get("hora-inicio"));
-    console.log(datos.get("cant-hora"));
-
     let url = "http://localhost/renta-bike/alquiler-nuevo";
 
     fetch(url, {

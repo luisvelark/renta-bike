@@ -6,14 +6,14 @@ use App\Models\AlquilerModel;
 class AlquilerController extends BaseController
 {
 
-    // protected $alquilerModel;
+    protected $alquilerModel;
 
-    // public function __construct()
-    // {
-    //     $this->alquilerModel = new AlquilerModel();
-    // }
+    public function __construct()
+    {
+        $this->alquilerModel = new AlquilerModel();
+    }
 
-    public function recibirNuevoAlquiler()
+    public function solicitarAlquiler()
     {
         $request = \Config\Services::request();
 
@@ -30,7 +30,7 @@ class AlquilerController extends BaseController
 
         } else {
             // $arr = ["msg" => 'ok:<br>PUNTO DE ENTREGA:' . $puntoE . '<br>HORA DE INICIO:' . $horaInicio . '<br>CANTIDAD DE HORAS:' . $cantHoras . '<br>CLIENTE OPTATIVO:' . $dniAlternativo];
-            $alquilerModel = new AlquilerModel();
+
             $alquiler = [
                 'idUsuarioCliente' => 1,
                 'idBicicleta' => 1,
@@ -47,7 +47,7 @@ class AlquilerController extends BaseController
 
             ];
 
-            $alquilerModel->insert($alquiler);
+            $this->alquilerModel->crearAlquiler($alquiler);
 
             $arr = ["msg" => 'ok:datos guardados en la DB'];
 

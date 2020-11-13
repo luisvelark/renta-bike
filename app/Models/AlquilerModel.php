@@ -21,4 +21,10 @@ class AlquilerModel extends Model
     protected $validationRules = [];
     protected $validationMessages = [];
     protected $skipValidation = false;
+
+    public function crearAlquiler($alquiler)
+    {
+        $this->insert($alquiler);
+    }
+
 }
