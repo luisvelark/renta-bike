@@ -1,8 +1,9 @@
+<script src="<?php echo base_url('ajax/listarMultasCreditos.js') ?>"></script>
 <div>
-<form>
+<form id="formulario">
   <div>
     <label for="exampleInputPassword1">Ingrese dni del cliente</label>
-    <input type="text" class="form-control" id="dniCliente">
+    <input type="text" class="form-control" name="dniCliente">
     <span>Ej: 12345678</span>
   </div>
   <button type="submit" class="btn btn-primary">Buscar</button>
