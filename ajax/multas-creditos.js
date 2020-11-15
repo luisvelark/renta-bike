@@ -38,7 +38,7 @@ function buscarCliente() {
                     respuesta.innerHTML=data;
                 }
                 else{
-                    var tabla='<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">';
+                    var tabla='<br><table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">';
                     tabla +='<thead>';
                     tabla +='<tr>';
                     tabla +='<th>Monto</th>';
@@ -48,7 +48,7 @@ function buscarCliente() {
                     tabla +='</tr>';
                     tabla +='</thead>';
                     tabla +='<tbody>';
-                    for ($i = 0; $i < count(data.multas); $i++){
+                    for ($i = 0; $i < data.multas.length; $i++){
                         tabla +='<tr>';
                         tabla +='<td>'+data.multas[$i].monto+'</td>';
                         tabla +='<td>'+data.multas[$i].fechaMulta+'</td>';
