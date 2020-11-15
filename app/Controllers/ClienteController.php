@@ -17,4 +17,11 @@ class ClienteController extends BaseController
         $datos = ['multas'=> $this->cliente->obtenerMultas($id),'credito'=>$this->cliente->obtenerCredito($id)];
         return $datos;
     }
+    public function buscarCliente()
+    {
+        //$dni=$_POST['dniCliente'];
+        $dni=1;
+        $datos = ['multas'=> $this->cliente->obtenerMultas($dni),'credito'=>$this->cliente->obtenerCredito($dni)];        
+        echo json_encode($datos);
+    }
 }
