@@ -39,7 +39,8 @@ function buscarCliente() {
                 }
                 else{
                     console.log(data)
-                    var tabla='<br><table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">';
+                    var tabla='<br><h3>'+data.usuario.nombre+' '+data.usuario.apellido+' crédito actual es: '+data.multaCredito.credito+'<br> <br>';
+                    tabla +='<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">';
                     tabla +='<thead>';
                     tabla +='<tr>';
                     tabla +='<th>Monto</th>';
@@ -59,8 +60,6 @@ function buscarCliente() {
                     tabla +='</tbody>';
                     tabla +='</tabla>';
                     respuesta.innerHTML=tabla;
-                    //console.log(data.multas[0].monto)
-                    //console.log(data.credito)
             }
             })
     },true)
