@@ -22,25 +22,36 @@ class AlquilerController extends BaseController
         $cantHoras = $request->getPost('cant-hora');
         $dniAlternativo = $request->getPost('dni-optativo');
 
-        // ['idUsuarioCliente', 'idBicicleta', 'idPuntoE', 'idPuntoD', 'idPuntoED', 'fechaAlquiler', 'horaInicioAlquiler', 'HoraFinAlquiler', 'HoraEntregaAlquiler', 'clienteAlternativo', 'estadoAlquiler', 'daño', 'ruta'];
-
         if ($puntoE === '---' || empty($horaInicio) || $cantHoras === '---' || empty($puntoE) || empty($cantHoras)) {
 
             $arr = ["msg" => "error"];
 
         } else {
-            // $arr = ["msg" => 'ok:<br>PUNTO DE ENTREGA:' . $puntoE . '<br>HORA DE INICIO:' . $horaInicio . '<br>CANTIDAD DE HORAS:' . $cantHoras . '<br>CLIENTE OPTATIVO:' . $dniAlternativo];
+
+            // $horaInicioDate = DateTime::createFromFormat('H:i', $horaInicio);
+            // $horaInicioDate->modify('+' . $cantHoras . 'hours');
+            // $horaFinAlquiler = $horaInicioDate->format('H:i');
+
+            // $date = new DateTime($horaInicio);
+            // $date->modify('+' . $cantHoras . 'hours');
+            // // $date->modify('+10 minute');
+            // // $date->modify('-30 second');
+            // $horaFinAlquiler = $date->format('H:i:s');
+
+            // $horaFinAlquiler = $horaInicio->;
+            // $horaFinAlquiler = new DateTime();
+            // $horaFinAlquiler = $horaInicio->date_modify('+' . $cantHoras.);
 
             $alquiler = [
                 'idUsuarioCliente' => 1,
                 'idBicicleta' => 1,
-                'idPuntoE' => 1,
+                'idPuntoE' => intval($puntoE),
                 'idPuntoD' => 2,
                 'fechaAlquiler' => date("Y-m-d"),
-                'horaInicioAlquiler' => date("H:i:s"),
+                'horaInicioAlquiler' => $horaInicio,
                 'HoraFinAlquiler' => date("H:i:s"),
                 'HoraEntregaAlquiler' => date("H:i:s"),
-                'clienteAlternativo' => 100,
+                'clienteAlternativo' => intval($dniAlternativo),
                 'estadoAlquiler' => 'EnProceso',
                 'daño' => 'SinDaño',
                 'ruta' => 'la ruta',
@@ -49,7 +60,9 @@ class AlquilerController extends BaseController
 
             $this->alquilerModel->crearAlquiler($alquiler);
 
-            $arr = ["msg" => 'ok:datos guardados en la DB'];
+            $arr = ["msg" => 'Su reserva se realizo con éxito!',
+                "detalle" => $alquiler,
+            ];
 
         }
 
