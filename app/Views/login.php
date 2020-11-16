@@ -45,7 +45,7 @@
                   <form class="user" method="POST" action="<?php echo base_url(); ?>/UsuarioController/ingresarAlSistema">
 
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="email" name="email" aria-describedby="emailHelp" autofocus placeholder="Ingrese un correo...">
+                      <input type="text" class="form-control form-control-user" id="email" name="email" aria-describedby="emailHelp" autofocus placeholder="Ingrese un correo...">
                     </div>
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Contraseña">

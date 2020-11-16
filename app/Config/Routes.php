@@ -38,6 +38,8 @@ $routes->get('credito-multas-cliente', 'GestionController::creditoYMultasCliente
 $routes->get('puntos-retorno', 'GestionController::puntosRetorno');
 $routes->get('horarios-mayor-demanda', 'GestionController::horarioMayorDemanda');
 $routes->get('tiempo-alquiler', 'GestionController::tiempoAlquiler');
+$routes->get('calificar-punto-ed', 'GestionController::calificarPuntoED');
+$routes->get('buscar-punto-ed', 'GestionController::buscarPuntoED');
 
 //*************RUTA DE ALQUILER CONTROLLER******************
 $routes->post('alquiler-nuevo', 'AlquilerController::recibirNuevoAlquiler');

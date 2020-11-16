@@ -70,9 +70,8 @@ $user_session = session();
           <span>Alquileres concretados</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#">
+        <a id="idBuscar" class="nav-link" href="#">
           <i class="fas fa-map-marker-alt"></i>
-
           <span>Buscar puntos de entrega y devolución</span></a>
       </li>
       <li class="nav-item active">
@@ -84,6 +83,11 @@ $user_session = session();
         <a class="nav-link" href="#">
           <i class="far fa-file-alt"></i>
           <span>Manual de usuario</span></a>
+      </li>
+      <li class="nav-item active">
+        <a id="idCalificacion" class="nav-link" href="#">
+          <i class="fas fa-star"></i>
+          <span>Calificar puntos ED</span></a>
       </li>
       <!-- Botones para las acciones -->
       <!-- Divider -->
@@ -248,7 +252,9 @@ $user_session = session();
   <script src="<?php echo base_url('ajax/alquileres-concretados.js') ?>"></script>
 
   <script src="<?php echo base_url('ajax/credito-multas-cliente.js') ?>"></script>
-  <?php echo base_url('') ?>
+  <script src="<?php echo base_url('ajax/calificar-punto-ed.js') ?>"></script>
+  <script src="<?php echo base_url('ajax/buscar-punto-ed.js') ?>"></script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap"></script> -->
 </body>
 
 </html>

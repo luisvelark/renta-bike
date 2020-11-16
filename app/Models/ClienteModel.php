@@ -36,7 +36,7 @@ class ClienteModel extends Model
         return $credito['credito'];
     }
 
-    public function obtenerCliente($dni)
+    public function obtenerCliente($dni) 
     {
         /*$builder = $bd->table('usuario');
         $builder->select('idUsuario','nombre','apellido')->getCompiledSelect();
