@@ -38,9 +38,14 @@ class ClienteModel extends Model
 
     public function obtenerCliente($dni) 
     {
-        $query = 'SELECT us.nombre,us.apellido,us.dni,cl.credito FROM cliente as cl INNER JOIN usuario as us 
-        WHERE cl.idUsuario=us.idUsuario AND us.dni' . $dni;
-        $resultados = $this->db->query($query);
-        return $resultados->result();
+        /*$builder = $bd->table('usuario');
+        $builder->select('idUsuario','nombre','apellido')->getCompiledSelect();
+        $builder->getWhere(['dni'=>$dni])->getCompiledSelect();
+        return $builder->get();*/
+        //$query = 'SELECT idUsuario, nombre,apellido FROM usuario WHERE us.dni='+$dni;
+        //$resultados = $this->db->query($query);
+        //return $resultados->result();
+        $cliente = $this->where('idUsuario', $dni)->first();
+        return $cliente;
     }
 }

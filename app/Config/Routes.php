@@ -43,6 +43,7 @@ $routes->get('buscar-punto-ed', 'GestionController::buscarPuntoED');
 
 //*************RUTA DE ALQUILER CONTROLLER******************
 $routes->post('alquiler-nuevo', 'AlquilerController::recibirNuevoAlquiler');
+//$routes->post('multas-credito', 'ClienteController::mostrarCliente');
 
 /**
  * --------------------------------------------------------------------

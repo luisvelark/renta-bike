@@ -26,4 +26,8 @@ class UsuarioModel extends Model
         $datosUsuario = $this->where('correo',$correo)->first();
         return $datosUsuario;
     }
+    public function buscarUsuarioDNI($dni) {
+        $datosUsuario = $this->where('dni',$dni)->first();
+        return $datosUsuario;
+    }
 }
