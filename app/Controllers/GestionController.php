@@ -40,10 +40,10 @@ class GestionController extends BaseController
     }
     public function creditoYMultasCliente()
     {
+        $user_session= session();
         $cCliente= new ClienteController();
-        $datos= ['datos'=> $cCliente->creditoMultasCliente(1)];
+        $datos= ['datos'=> $cCliente->creditoMultasCliente($user_session->idUsuario)];
         echo view ('layouts/credito-multas-cliente',$datos);
-        
     }
     public function horarioMayorDemanda()
     {

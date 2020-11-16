@@ -11179,6 +11179,11 @@ a:focus {
     }
 }
 
+.login-image {
+    width: 110%;
+    height: 100%;
+}
+
 .bg-login-image {
     background-image: url();
     background-position: center;
