@@ -28,7 +28,7 @@ function buscarCliente() {
         console.log("Me diste un click");
         var datos =new FormData(formulario);
         console.log(datos.get('dniCliente'))
-        fetch("http://localhost/renta-bike/ClienteController/buscarCliente",{
+        fetch("http://localhost/renta-bike/ClienteController/mostrarCliente",{
             method: 'POST',
             body: datos
         })
@@ -38,6 +38,7 @@ function buscarCliente() {
                     respuesta.innerHTML=data;
                 }
                 else{
+                    console.log(data)
                     var tabla='<br><table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">';
                     tabla +='<thead>';
                     tabla +='<tr>';
@@ -48,18 +49,18 @@ function buscarCliente() {
                     tabla +='</tr>';
                     tabla +='</thead>';
                     tabla +='<tbody>';
-                    for ($i = 0; $i < data.multas.length; $i++){
+                    for ($i = 0; $i < data.multaCredito.multas.length; $i++){
                         tabla +='<tr>';
-                        tabla +='<td>'+data.multas[$i].monto+'</td>';
-                        tabla +='<td>'+data.multas[$i].fechaMulta+'</td>';
-                        tabla +='<td>'+data.multas[$i].detalleMulta+'</td>';
-                        tabla +='<td>'+data.multas[$i].pagado+'</td></tr>';
+                        tabla +='<td>'+data.multaCredito.multas[$i].monto+'</td>';
+                        tabla +='<td>'+data.multaCredito.multas[$i].fechaMulta+'</td>';
+                        tabla +='<td>'+data.multaCredito.multas[$i].detalleMulta+'</td>';
+                        tabla +='<td>'+data.multaCredito.multas[$i].pagado+'</td></tr>';
                     }
                     tabla +='</tbody>';
                     tabla +='</tabla>';
                     respuesta.innerHTML=tabla;
-                    console.log(data.multas[0].monto)
-                    console.log(data.credito)
+                    //console.log(data.multas[0].monto)
+                    //console.log(data.credito)
             }
             })
     },true)

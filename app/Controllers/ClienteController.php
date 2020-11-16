@@ -4,12 +4,15 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\ClienteModel;
+use App\Controllers\UsuarioController;
+
 
 class ClienteController extends BaseController
 {
     public function __construct()
     {
         $this->cliente = new ClienteModel();
+        $this->CUsuario = new UsuarioController();
     }
 
     public function creditoMultasCliente($id)
@@ -17,12 +20,20 @@ class ClienteController extends BaseController
         $datos = ['multas'=> $this->cliente->obtenerMultas($id),'credito'=>$this->cliente->obtenerCredito($id)];
         return $datos;
     }
-    public function buscarCliente()
+    public function mostrarCliente()
     {
+        
         $dni=$_POST['dniCliente'];
-        $datos = ['cliente'=>$this->cliente->obtenerCliente($dni)];        
-        $id=$datos->idUsuario;
-        $datos = ['multas'=> $this->cliente->obtenerMultas($id),'credito'=>$this->cliente->obtenerCredito($id),'cliente'=>$this->cliente->obtenerCliente($dni)];
+        $datos=['usuario'=> $this->CUsuario->usuario->buscarUsuarioDNI($dni)];
+        if(isset($datos['usuario'])){
+        $id=$datos['usuario']['idUsuario'];
+        $datos = ['multaCredito'=>$this->creditoMultasCliente($id),'usuario'=> $this->CUsuario->usuario->buscarUsuarioDNI($dni)];
         echo json_encode($datos);
+        die();}
+        else{
+            $datos='error';
+            echo json_encode($datos);
+            die();
+        }
     }
 }

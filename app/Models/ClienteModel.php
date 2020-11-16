@@ -38,11 +38,14 @@ class ClienteModel extends Model
 
     public function obtenerCliente($dni)
     {
-        $builder = $bd->table('usuario');
+        /*$builder = $bd->table('usuario');
         $builder->select('idUsuario','nombre','apellido')->getCompiledSelect();
-        $builder->getWhere(['dni'=>$dni]);
-        $query = $builder->get();
-        $resultados = $this->db->query($query);
-        return $resultados->result();
+        $builder->getWhere(['dni'=>$dni])->getCompiledSelect();
+        return $builder->get();*/
+        //$query = 'SELECT idUsuario, nombre,apellido FROM usuario WHERE us.dni='+$dni;
+        //$resultados = $this->db->query($query);
+        //return $resultados->result();
+        $cliente = $this->where('idUsuario', $dni)->first();
+        return $cliente;
     }
 }
