@@ -4,9 +4,7 @@ document.getElementById('idMultasCredito').addEventListener("click", mostrar, tr
 function mostrar(e) {
     let xhr = new XMLHttpRequest();
     xhr.addEventListener("readystatechange", estadoIdeal);
-
     xhr.open('GET', 'http://localhost/renta-bike/GestionController/multascredito', true);
-    // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.send();
 
     function estadoIdeal() {
