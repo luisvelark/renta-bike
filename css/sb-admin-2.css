@@ -56,6 +56,33 @@ html {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+
+/* ------------------------------------- */
+
+
+/* input[type="radio"] {
+    display: none;
+}
+
+label {
+    color: grey;
+    font-size: 100px;
+}
+
+.clasificacion {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+}
+
+label:hover,
+label:hover~label {
+    color: orange;
+}
+
+input[type="radio"]:checked~label {
+    color: orange;
+} */
+
 article,
 aside,
 figcaption,

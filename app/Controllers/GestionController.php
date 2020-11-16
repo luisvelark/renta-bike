@@ -8,15 +8,25 @@ use App\Models\PuntoEntregaDevolucionModel;
 
 class GestionController extends BaseController
 {
+    private $session;
+    public function __construct()
+    {
+        $this->session= session();
+    }
     
     public function index()
     {
+        if(!isset($this->session->idUsuario)){
+            return redirect()->to(base_url());
+        }
         echo view('index-administrador');
         
     }
     public function indexCliente()
     {
-        
+        if(!isset($this->session->idUsuario)){
+            return redirect()->to(base_url());
+        }
         echo view('index-cliente');
     }
 
@@ -56,5 +66,13 @@ class GestionController extends BaseController
     public function tiempoAlquiler()
     {
         echo view('layouts/tiempo-alquiler');
+    }
+    public function calificarPuntoED()
+    {
+        echo view('layouts/calificar-punto-ed');
+    }
+    public function buscarPuntoED()
+    {
+        echo view('layouts/buscar-punto-ed');
     }
 }

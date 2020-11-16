@@ -36,7 +36,7 @@ class ClienteModel extends Model
         return $credito['credito'];
     }
 
-    public function obtenerCliente($dni)
+    public function obtenerCliente($dni) 
     {
         $query = 'SELECT us.nombre,us.apellido,us.dni,cl.credito FROM cliente as cl INNER JOIN usuario as us 
         WHERE cl.idUsuario=us.idUsuario AND us.dni' . $dni;
