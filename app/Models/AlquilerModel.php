@@ -21,4 +21,15 @@ class AlquilerModel extends Model
     protected $validationRules    = [];
     protected $validationMessages = [];
     protected $skipValidation     = false;
+    
+    public function obtenerHoraInicio($fechaInicio,$fechaFinal)
+    {
+        $builder = $bd->table('alquiler');
+        $builder->select('horaInicioAlquiler')->getCompiledSelect();
+        $builder->selectCount('horaInicioAlquiler')->getCompiledSelect();
+        $builder->getWhere(['fechaAlquiler >'=>$fechaInicio])->getCompiledSelect();
+        $builder->getWhere(['fechaAlquiler <'=>$fechaFinal])->getCompiledSelect();
+        $builder->groupBy('horaInicioAlquiler')->getCompiledSelect();
+        return $builder->get();
+    }
 }

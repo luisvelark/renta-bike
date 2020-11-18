@@ -49,5 +49,16 @@ class AlquilerController extends BaseController
         // }
 
     }
+    public function obtenerFecha(){
+        //$fechaInicio=date("d/m/Y", strtotime($_POST['fechaInicio']));
+        $fechaInicio=$_POST['fechaInicio'];
+        //$fechaFinal=date("d/m/Y", strtotime($_POST['fechaFinal']));
+        $fechaFinal=$_POST['fechaFinal'];
+        $datos= ['horasRecurrentes'=>$this->alquilerModel->obtenerHoraInicio($fechaInicio,$fechaFinal)];
+        //$datos= ['fechaInicio'=>$fechaInicio,'fechaFinal'=>$fechaFinal];
+        
+        echo json_encode($datos);
+        die();
+    }
 
 }
