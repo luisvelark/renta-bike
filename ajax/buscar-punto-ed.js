@@ -13,22 +13,7 @@ function mostrar() {
             let respuesta = xhr.responseText;
             let contenedor = document.getElementById('contenido');
             contenedor.innerHTML = respuesta;
-            iniciarMap();
         }
 
     }
-}
-
-function iniciarMap() {
-    var coso = document.getElementById('map');
-    var coord = { lat: -34.5956145, lng: -58.4431949 };
-    var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 10,
-        center: coord
-    });
-    var marker = new google.maps.Marker({
-        position: coord,
-        map: map
-    });
-
 }

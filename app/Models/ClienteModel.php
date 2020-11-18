@@ -48,4 +48,16 @@ class ClienteModel extends Model
         //$cliente = $this->where('idUsuario', $dni)->first();
         //return $cliente;
     }
+
+  /*   public function altaCliente($id){
+        $this->save([
+            'idUsuario'=> $id,
+            'puntajeTotal' => 0,
+            'credito' => 0, 
+            'suspendido' => 0,
+            'fechaInicioSuspencion' => '2020-08-13', 
+            'fechaFinSuspencion' => '2020-09-02'
+        ]); 
+
+    } */
 }

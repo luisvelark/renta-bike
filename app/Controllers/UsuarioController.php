@@ -5,26 +5,48 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\Request;
 use App\Models\UsuarioModel;
+use App\Models\ClienteModel;
 
 class UsuarioController extends BaseController
 {
-    private $reglasLogin;
+    private $reglasRegistro;
 
     public function __construct()
     {
         $this->usuario = new UsuarioModel();
+        $this->controladorCliente = new ClienteModel();
+
         helper(['form']);
-        $this->reglasLogin = [
-            'email' => [
-                'rules' => 'required',
+
+        $this->reglasRegistro = [
+            'dni' => [
+                'rules' => 'exact_length[8]|is_unique[usuario.dni]',
                 'errors' => [
-                    'required' => 'El campo {field} es obligatorio'
+                    'is_unique' => 'El dni ya se encuentra registrado',
+                    'exact_leght' => 'El dni tiene que tener 8 numeros'
                 ]
             ],
-            'password' => [
-                'rules' => 'required',
+            'rcontraseña' => [
+                'rules' => 'matches[contraseña]',
                 'errors' => [
-                    'required' => 'El campo {field} es obligatorio'
+                    'matches' => 'Las contraseñas no coinciden'
+                ]
+            ],
+            'correo' => [
+                'rules' => 'is_unique[usuario.correo]',
+                'errors' => [
+                    'is_unique' => 'El correo electronico ya existe'
+                ]
+            ],
+            'contraseña' => [
+                'rules' => 'min_length[8]',
+                'errors' => [
+                    'min_length' => 'La contraseña tiene que tener como minimo 8 caracteres'
+                ]
+            ], 'cuil' => [
+                'rules' => 'exact_length[11]',
+                'errors' => [
+                    'exact_length' => 'El cuil tiene que tener 11 numeros'
                 ]
             ]
         ];
@@ -32,7 +54,7 @@ class UsuarioController extends BaseController
 
     public function ingresarAlSistema()
     {
-        if ($this->request->getMethod() == "post" && $this->validate($this->reglasLogin)) {
+        if ($this->request->getMethod() == "post") {
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
             $user = $this->usuario->buscarUsuario($email);
@@ -56,7 +78,7 @@ class UsuarioController extends BaseController
                     echo view('login', $data);
                 }
             } else {
-                $data['error'] = 'El usuario no exite pinche wey';
+                $data['error'] = 'El cliente no existe';
                 echo view('login', $data);
             }
         } else {
@@ -69,5 +91,49 @@ class UsuarioController extends BaseController
         $user_session = session();
         $user_session->destroy();
         return redirect()->to(base_url());
+    }
+
+    public function registrarUsuario()
+    {
+        if ($this->request->getMethod() == "post" && $this->validate($this->reglasRegistro)) {
+            /* $hash = password_hash($this->request->getPost('contraseña'), PASSWORD_DEFAULT); */
+            $this->usuario->save([
+                'dni' => $this->request->getPost('dni'), 'nombre' => $this->request->getPost('nombre'),
+                'apellido' => $this->request->getPost('apellido'), 'correo' => $this->request->getPost('correo'),
+                'telefono' => $this->request->getPost('telefono'), 'domicilio' => $this->request->getPost('domicilio'),
+                'cuil-cuit' => $this->request->getPost('cuil'), 'fechaNacimiento' => $this->request->getPost('fecha'),
+                'contraseña' => $this->request->getPost('contraseña'), 'tipo' => 'cliente'
+            ]);
+
+            $user = $this->usuario->buscarUsuario($this->request->getPost('correo'));
+
+            $this->controladorCliente->save([
+                'idUsuario'=>19,
+                'puntajeTotal' => 0.0,
+                'credito' => 0.0, 
+                'suspendido' => 1,
+                'fechaInicioSuspencion' => '2020-08-13', 
+                'fechaFinSuspencion' => '2020-09-02'
+            ]);
+            
+            $datosSesion = [
+                'idUsuario' => $user['idUsuario'],
+                'nombre' => $user['nombre'],
+                'apellido' => $user['apellido'],
+            ];
+
+            $sesion = session();
+            $sesion->set($datosSesion);
+            return redirect()->to(base_url() . '/GestionController/indexCliente');
+
+        } else {
+            $data = ['validation' => $this->validator, 'dni'=> $this->request->getPost('dni'),
+            'nombre' => $this->request->getPost('nombre'),
+            'apellido' => $this->request->getPost('apellido'), 'correo' => $this->request->getPost('correo'),
+            'telefono' => $this->request->getPost('telefono'), 'domicilio' => $this->request->getPost('domicilio'),
+            'cuil' => $this->request->getPost('cuil'), 'fecha' => $this->request->getPost('fecha'),
+            'contraseña' => $this->request->getPost('contraseña')];
+            echo view('registrar', $data);
+        }
     }
 }
