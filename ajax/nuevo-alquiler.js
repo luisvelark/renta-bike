@@ -33,17 +33,13 @@ function envioAlquiler() {
   formAlquiler.addEventListener("submit", enviarAlquiler, true);
 
   let msj = document.getElementById("respuesta");
+  let detalle = document.getElementById("detalles");
 
   function enviarAlquiler(e) {
     e.preventDefault();
     console.log("envie");
 
     var datos = new FormData(this);
-
-    console.log(datos);
-    console.log(datos.get("punto-entrega"));
-    console.log(datos.get("hora-inicio"));
-    console.log(datos.get("cant-hora"));
 
     let url = "http://localhost/renta-bike/alquiler-nuevo";
 
@@ -56,14 +52,27 @@ function envioAlquiler() {
         console.log(data);
         if (data.msg === "error") {
           msj.innerHTML = `
-          <div class="alert alert-danger" role="alert">
+          <div class="alert alert-danger w-50" role="alert">
              llena todos los campos obligatorios!
           </div>`;
+          detalle.innerHTML = `<p class="p-2 small text-white text-center">NO HAY DETALLES</p>`;
         } else {
           msj.innerHTML = `
-          <div class="alert alert-primary" role="alert">
-            ${data.msg}
+          <div class="alert alert-primary w-50" role="alert">
+            ${data.msg}  
           </div>`;
+          detalle.innerHTML = `
+          <ul class="p-2 text-white text-left">
+            <li>Cliente:  ${data.detalle.idUsuarioCliente}</li>
+            <li>Punto de entrega:  ${data.detalle.idPuntoE}</li>
+            <li>N° de bicicleta:  ${data.detalle.idBicicleta}</li>
+            <li>Fecha de alquiler:  ${data.detalle.fechaAlquiler}</li>
+            <li>Hora de entrega:  ${data.detalle.HoraEntregaAlquiler}</li>
+            <li>Hora de inicio alquiler:  ${data.detalle.horaInicioAlquiler}</li>
+            <li>Hora de fin alquiler:  ${data.detalle.HoraFinAlquiler}</li>
+            <li>Cliente Alternativo:  ${data.detalle.clienteAlternativo}</li>
+          </ul>
+          `;
         }
       });
     // .catch((err) => console.log(err));
