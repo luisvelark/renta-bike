@@ -182,7 +182,7 @@ $user_session = session();
 
         <!-- Begin Page Content Body -->
         <div id="contenido" class="container-fluid">
-
+        <div id="map"></div>
 
         </div>
         <!-- /.container-fluid -->
@@ -254,7 +254,9 @@ $user_session = session();
   <script src="<?php echo base_url('ajax/credito-multas-cliente.js') ?>"></script>
   <script src="<?php echo base_url('ajax/calificar-punto-ed.js') ?>"></script>
   <script src="<?php echo base_url('ajax/buscar-punto-ed.js') ?>"></script>
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&callback=iniciarMap"></script> -->
+  <script src="<?php echo base_url('ajax/api-map.js') ?>"></script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xHqik&callback=initMap" async defer></script> -->
+  
 </body>
 
 </html>

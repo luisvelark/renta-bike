@@ -8,31 +8,39 @@ use App\Models\UsuarioModel;
 
 class UsuarioController extends BaseController
 {
-    private $reglasLogin;
+    private $reglasRegistro;
 
     public function __construct()
     {
         $this->usuario = new UsuarioModel();
         helper(['form']);
-        $this->reglasLogin = [
-            'email' => [
-                'rules' => 'required',
+       
+        $this->reglasRegistro = [
+            'dni' => [
+                'rules' => 'required|is_unique[usuario.dni]',
                 'errors' => [
-                    'required' => 'El campo {field} es obligatorio'
+                    'is_unique' => 'El dni ya se encuentra registrado'
                 ]
             ],
-            'password' => [
-                'rules' => 'required',
+            'rcontraseña' => [
+                'rules' => 'required|matches[contraseña]',
                 'errors' => [
-                    'required' => 'El campo {field} es obligatorio'
+                    'required' => 'Las contraseñas no coinciden'
                 ]
+        ],
+        'correo' => [
+            'rules' => 'required|is_unique[usuario.correo]',
+            'errors' => [
+                'is_unique' => 'El correo electronico ya existe'
             ]
-        ];
+    ]
+    ];
+
     }
 
     public function ingresarAlSistema()
     {
-        if ($this->request->getMethod() == "post" && $this->validate($this->reglasLogin)) {
+        if ($this->request->getMethod() == "post") {
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
             $user = $this->usuario->buscarUsuario($email);
@@ -56,7 +64,7 @@ class UsuarioController extends BaseController
                     echo view('login', $data);
                 }
             } else {
-                $data['error'] = 'El usuario no exite pinche wey';
+                $data['error'] = 'El cliente no exite';
                 echo view('login', $data);
             }
         } else {
@@ -70,4 +78,19 @@ class UsuarioController extends BaseController
         $user_session->destroy();
         return redirect()->to(base_url());
     }
+    
+    public function registrarUsuario(){
+        if($this->request->getMethod()=="post" && $this->validate($this->reglasRegistro)){
+
+        $this->usuario->save(['dni'=>$this->request->getPost('dni'), 'nombre'=>$this->request->getPost('nombre'),
+        'apellido'=>$this->request->getPost('apellido'),'correo'=>$this->request->getPost('correo'),
+        'telefono'=>$this->request->getPost('telefono'),'domicilio'=>$this->request->getPost('domicilio'),
+        'cuil-cuit'=>$this->request->getPost('cuil'),'fechaNacimiento'=>$this->request->getPost('fecha'),
+        'contraseña'=>$this->request->getPost('contraseña'),'tipo'=>'cliente']);
+    }
+    else {
+        $data = ['validation' => $this->validator];
+        echo view('registrar', $data);
+    }
+}
 }

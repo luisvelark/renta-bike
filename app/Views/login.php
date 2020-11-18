@@ -45,17 +45,13 @@
                   <form class="user" method="POST" action="<?php echo base_url(); ?>/UsuarioController/ingresarAlSistema">
 
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="email" name="email" aria-describedby="emailHelp" autofocus placeholder="Ingrese un correo...">
+                      <input type="text" class="form-control form-control-user" id="email" name="email" aria-describedby="emailHelp" autofocus placeholder="Ingrese un correo..." required>
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Contraseña">
+                      <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Contraseña" required>
                     </div>
 
-                    <button class="btn btn-primary btn-user btn-block" type="submit">Ingresar con cliente y contraseña</button>
-                    <a href="<?php echo base_url('GestionController') ?>" class="btn btn-primary btn-user btn-block">
-                      Ingresar a administración
-                    </a>
-
+                    <button class="btn btn-primary btn-user btn-block" type="submit">Ingresar</button>
                     <hr>
                     <?php if (isset($validation)) { ?>
                       <div class="alert alert-danger">
@@ -73,7 +69,7 @@
                   <hr>
 
                   <div class="text-center">
-                    <a class="small" href="#">Create una cuenta!</a>
+                    <a class="small" href="<?php echo base_url('GestionController/mostrarRegistroUsuario') ?>">Create una cuenta!</a>
                   </div>
                 </div>
               </div>

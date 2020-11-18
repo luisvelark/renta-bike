@@ -29,6 +29,10 @@ class GestionController extends BaseController
         }
         echo view('index-cliente');
     }
+    public function mostrarRegistroUsuario()
+    {
+        echo view('registrar');
+    }
 
     public function nuevoAlquiler()
     {

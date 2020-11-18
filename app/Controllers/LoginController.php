@@ -11,6 +11,5 @@ class LoginController extends BaseController
     {
         echo view('login');
     }
-
    
 }
