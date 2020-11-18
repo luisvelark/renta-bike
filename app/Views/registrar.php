@@ -37,46 +37,47 @@
               <form class="user" method="POST" action="<?php echo base_url(); ?>/UsuarioController/registrarUsuario">
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" class="form-control form-control-user" id="nombre" name="nombre" placeholder="Nombre">
+                    <input type="text" class="form-control form-control-user" id="nombre" name="nombre" placeholder="Nombre" autofocus value ="<?php if(isset($nombre)){ echo $nombre; } ?>" required>
                   </div>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-user" id="apellido" name="apellido" placeholder="Apellido">
+                    <input type="text" class="form-control form-control-user" id="apellido" name="apellido" placeholder="Apellido" value ="<?php if(isset($apellido)){ echo $apellido; } ?>" required>
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="number" class="form-control form-control-user" id="dni" name="dni" placeholder="Dni">
+                    <input type="number" class="form-control form-control-user" id="dni" name="dni" placeholder="Dni" value ="<?php if(isset($dni)){ echo $dni; } ?>" required>
                   </div>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-user" id="cuil" name="cuil" placeholder="Cuil">
+                    <input type="number" class="form-control form-control-user" id="cuil" name="cuil" placeholder="Cuil" value ="<?php if(isset($cuil)){ echo $cuil; } ?>" required>
                   </div>
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-user" id="domicilio" name="domicilio" placeholder="Domicilio">
+                  <input type="text" class="form-control form-control-user" id="domicilio" name="domicilio" placeholder="Domicilio" value ="<?php if(isset($domicilio)){ echo $domicilio; } ?>" required>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="date" class="form-control form-control-user" id="fecha" name="fecha" placeholder="Fecha de nacimiento">
+                    <input type="date" class="form-control form-control-user" id="fecha" name="fecha" placeholder="Fecha de nacimiento" value ="<?php if(isset($fecha)){ echo $fecha; } ?>" required>
                   </div>
                   <div class="col-sm-6">
-                    <input type="number" class="form-control form-control-user" id="telefono" name="telefono" placeholder="Teléfono">
+                    <input type="number" class="form-control form-control-user" id="telefono" name="telefono" placeholder="Teléfono" value ="<?php if(isset($telefono)){ echo $telefono; } ?>" required>
                   </div>
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-user" id="correo" name="correo"placeholder="Correo electrónico">
+                  <input type="email" class="form-control form-control-user" id="correo" name="correo"placeholder="Correo electrónico" value ="<?php if(isset($correo)){ echo $correo; } ?>" required>
                 </div>
                 
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="password" class="form-control form-control-user" id="contraseña" name="contraseña" placeholder="Contraseña">
+                    <input type="password" class="form-control form-control-user" id="contraseña" name="contraseña" placeholder="Contraseña" value ="<?php if(isset($contraseña)){ echo $contraseña; } ?>" required>
                   </div>
                   <div class="col-sm-6">
-                    <input type="password" class="form-control form-control-user" id="rcontraseña" name="rcontraseña" placeholder="Repetir contraseña">
+                    <input type="password" class="form-control form-control-user" id="rcontraseña" name="rcontraseña" placeholder="Repetir contraseña" required>
                   </div>
                 </div>
                 <button class="btn btn-primary btn-user btn-block" type="submit">Registrarse</button>
                 </a>
                 <hr>
+
               </form>
               <?php if (isset($validation)) { ?>
                       <div class="alert alert-danger">
@@ -99,6 +100,8 @@
 
   </div>
 
+  
+
   <!-- Bootstrap core JavaScript-->
   <script src="<?php echo base_url('vendor/jquery/jquery.min.js') ?>"></script>
   <script src="<?php echo base_url('vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
@@ -108,6 +111,7 @@
 
   <!-- Custom scripts for all pages-->
   <script src="<?php echo base_url('js/sb-admin-2.js') ?>"></script>
+
 
 </body>
 
