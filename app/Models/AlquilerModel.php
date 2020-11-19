@@ -28,12 +28,17 @@ class AlquilerModel extends Model
     }
     public function obtenerHoraInicio($fechaInicio,$fechaFinal)
     {
-        $builder = $bd->table('alquiler');
-        $builder->select('horaInicioAlquiler')->getCompiledSelect();
-        $builder->selectCount('horaInicioAlquiler')->getCompiledSelect();
-        $builder->getWhere(['fechaAlquiler >'=>$fechaInicio])->getCompiledSelect();
-        $builder->getWhere(['fechaAlquiler <'=>$fechaFinal])->getCompiledSelect();
-        $builder->groupBy('horaInicioAlquiler')->getCompiledSelect();
+        $array=['fechaAlquiler >'=>$fechaInicio,'fechaAlquiler <'=>$fechaFinal];
+        $bd      = \Config\Database::connect();
+        $builder = $bd->table('alquiler')
+            ->select('horaInicioAlquiler')
+            ->selectCount('horaInicioAlquiler')
+            ->where($array)
+            ->groupBy('horaInicioAlquiler');
+        
+        //$builder = $bd->table('alquiler');
+        //$consulta='SELECT horaInicioAlquiler,COUNT(horaInicioAlquiler) FROM `alquiler` WHERE fechaAlquiler>'+$fechaInicio+' AND fechaAlquiler<'+$fechaInicio+' GROUP BY(horaInicioAlquiler)';
+        //$builder->select($consulta, FALSE)->getCompiledSelect();
         return $builder->get();
     }
 }

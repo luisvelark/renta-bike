@@ -77,9 +77,13 @@ class AlquilerController extends BaseController
         $fechaFinal=$_POST['fechaFinal'];
         $datos= ['horasRecurrentes'=>$this->alquilerModel->obtenerHoraInicio($fechaInicio,$fechaFinal)];
         //$datos= ['fechaInicio'=>$fechaInicio,'fechaFinal'=>$fechaFinal];
-        
-        echo json_encode($datos);
-        die();
+        if (isset($datos['horasRecurrentes'])) {
+            echo json_encode($datos);
+            die();} else {
+            $datos = 'error';
+            echo json_encode($datos);
+            die();
+        }
     }
 
 }
