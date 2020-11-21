@@ -26,5 +26,19 @@ class AlquilerModel extends Model
     {
         $this->insert($alquiler);
     }
-
+    public function obtenerHoraInicio($fechaInicio,$fechaFinal)
+    {
+        //$array=['fechaAlquiler >'=>$fechaInicio,'fechaAlquiler <'=>$fechaFinal];
+        $bd      = \Config\Database::connect();
+        /*$builder = $bd->table('alquiler')
+            ->select('horaInicioAlquiler')
+            ->selectCount('horaInicioAlquiler','conteo')
+            ->where($array)
+            ->groupBy('horaInicioAlquiler');*/
+        
+        $builder = $bd->table('alquiler');
+        $consulta='SELECT horaInicioAlquiler,COUNT(horaInicioAlquiler) as conteo FROM alquiler WHERE fechaAlquiler >'.$fechaInicio.' AND fechaAlquiler <'.$fechaInicio.' GROUP BY(horaInicioAlquiler)';
+        $builder->select($consulta);
+        return $builder->get();
+    }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2020 a las 23:19:14
+-- Tiempo de generación: 19-11-2020 a las 22:42:32
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -60,6 +60,19 @@ CREATE TABLE `alquiler` (
   `daño` enum('SinDaño','Recuperable','Irrecuperable') NOT NULL,
   `ruta` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `alquiler`
+--
+
+INSERT INTO `alquiler` (`idAlquiler`, `idUsuarioCliente`, `idBicicleta`, `idPuntoE`, `idPuntoD`, `fechaAlquiler`, `horaInicioAlquiler`, `HoraFinAlquiler`, `HoraEntregaAlquiler`, `clienteAlternativo`, `estadoAlquiler`, `daño`, `ruta`) VALUES
+(1, 1, 1, 2, 1, '2019-11-18', '14:30:00', '16:30:00', '16:25:00', NULL, 'Finalizado', 'SinDaño', NULL),
+(2, 1, 2, 2, 1, '2019-11-20', '14:30:00', '16:30:00', '16:26:00', NULL, 'Finalizado', 'SinDaño', NULL),
+(3, 1, 1, 2, 1, '2019-12-20', '14:00:00', '16:00:00', '15:55:00', NULL, 'Finalizado', 'SinDaño', NULL),
+(4, 1, 1, 2, 1, '2020-01-25', '16:00:00', '18:00:00', '17:55:00', NULL, 'Finalizado', 'SinDaño', NULL),
+(5, 1, 1, 2, 1, '2020-01-28', '16:00:00', '18:00:00', '17:56:00', NULL, 'Finalizado', 'SinDaño', NULL),
+(6, 1, 1, 2, 1, '2020-02-05', '14:30:00', '16:30:00', '16:25:00', NULL, 'Finalizado', 'SinDaño', NULL),
+(7, 1, 3, 2, 1, '2020-02-10', '14:30:00', '16:30:00', '16:29:00', NULL, 'Finalizado', 'SinDaño', NULL);
 
 -- --------------------------------------------------------
 
@@ -297,7 +310,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `alquiler`
 --
 ALTER TABLE `alquiler`
-  MODIFY `idAlquiler` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idAlquiler` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `bicicleta`
