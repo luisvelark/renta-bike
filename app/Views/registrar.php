@@ -74,7 +74,7 @@
                     <input type="password" class="form-control form-control-user" id="rcontraseña" name="rcontraseña" placeholder="Repetir contraseña" required>
                   </div>
                 </div>
-                <button class="btn btn-primary btn-user btn-block" type="submit">Registrarse</button>
+                <button class="btn btn-primary btn-user btn-block" data-toggle="modal" data-target="#ventanaModal" type="submit">Registrarse</button>
                 </a>
                 <hr>
 
@@ -99,8 +99,30 @@
     </div>
 
   </div>
+<!-- ------------------------------------------------------------------------------------------- -->
+<!-- <button class="btn btn-success" data-toggle="modal" data-target="#ventanaModal"></button> -->
 
-  
+  <!-- <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="tituloVentana" aria-hidden="true" id="ventanaModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="tituloVentana">Bienvenido!</h5>
+        <button class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-success">
+        <p><strong>Te registraste con ÉXITO!</strong></p>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-success" onclick="<?php echo base_url('GestionController/indexCliente')?>">Aceptar</button>
+      </div>
+    </div> 
+  </div>
+</div> -->
 
   <!-- Bootstrap core JavaScript-->
   <script src="<?php echo base_url('vendor/jquery/jquery.min.js') ?>"></script>

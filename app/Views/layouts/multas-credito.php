@@ -1,7 +1,7 @@
 <div>
 <form id="formulario">
   <div>
-    <label for="exampleInputPassword1">Ingrese dni del cliente</label>
+    <label style="color:black" for="exampleInputPassword1">Ingrese dni del cliente</label>
     <input type="text" class="form-control" name="dniCliente">
     <span>Ej: 12345678</span>
   </div>
