@@ -40,7 +40,7 @@ class ClienteModel extends Model
     public function obtenerCliente($dni) 
     {
         //$bd      = \Config\Database::connect();
-       /*  $builder = $bd->table('usuario');
+        /* $builder = $bd->table('usuario');
         $builder->select('idUsuario','nombre','apellido')->getCompiledSelect();
         $builder->getWhere(['dni'=>$dni])->getCompiledSelect();
         return $builder->get(); */
