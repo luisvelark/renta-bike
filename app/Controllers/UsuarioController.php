@@ -13,8 +13,9 @@ class UsuarioController extends BaseController
 
     public function __construct()
     {
+        $this->cliente= new ClienteModel();
         $this->usuario = new UsuarioModel();
-        $this->controladorCliente = new ClienteModel();
+        /* $this->controladorCliente = new ClienteModel(); */
 
         helper(['form']);
 
@@ -59,6 +60,7 @@ class UsuarioController extends BaseController
             $password = $this->request->getPost('password');
             $user = $this->usuario->buscarUsuario($email);
             if ($user != null) {
+                //if (password_verify($password),$user['contraseña']){}
                 if ($user['contraseña'] == $password) {
                     $datosSesion = [
                         'idUsuario' => $user['idUsuario'],
@@ -102,20 +104,21 @@ class UsuarioController extends BaseController
                 'apellido' => $this->request->getPost('apellido'), 'correo' => $this->request->getPost('correo'),
                 'telefono' => $this->request->getPost('telefono'), 'domicilio' => $this->request->getPost('domicilio'),
                 'cuil-cuit' => $this->request->getPost('cuil'), 'fechaNacimiento' => $this->request->getPost('fecha'),
-                'contraseña' => $this->request->getPost('contraseña'), 'tipo' => 'cliente'
-            ]);
+                'contraseña' => $this->request->getPost('contraseña'), 'tipo' => 'cliente']); //'contraseña' => $hash
 
             $user = $this->usuario->buscarUsuario($this->request->getPost('correo'));
 
-            $this->controladorCliente->save([
-                'idUsuario'=>19,
-                'puntajeTotal' => 0.0,
-                'credito' => 0.0, 
-                'suspendido' => 1,
-                'fechaInicioSuspencion' => '2020-08-13', 
-                'fechaFinSuspencion' => '2020-09-02'
-            ]);
+            /* $datosCliente = [
+                'idUsuario' => $user['idUsuario'],
+                'puntajeTotal'=> 0,
+                'credito'=> 0,
+                'suspendido'=> 1,
+                'fechaInicioSuspencion'=> '2020-11-20',
+                'fechaFinSuspencion'=> '2020-11-20'
+                
+            ]; */
             
+            $this->cliente->altaCliente($user['idUsuario']); 
             $datosSesion = [
                 'idUsuario' => $user['idUsuario'],
                 'nombre' => $user['nombre'],
@@ -125,14 +128,15 @@ class UsuarioController extends BaseController
             $sesion = session();
             $sesion->set($datosSesion);
             return redirect()->to(base_url() . '/GestionController/indexCliente');
-
         } else {
-            $data = ['validation' => $this->validator, 'dni'=> $this->request->getPost('dni'),
-            'nombre' => $this->request->getPost('nombre'),
-            'apellido' => $this->request->getPost('apellido'), 'correo' => $this->request->getPost('correo'),
-            'telefono' => $this->request->getPost('telefono'), 'domicilio' => $this->request->getPost('domicilio'),
-            'cuil' => $this->request->getPost('cuil'), 'fecha' => $this->request->getPost('fecha'),
-            'contraseña' => $this->request->getPost('contraseña')];
+            $data = [
+                'validation' => $this->validator, 'dni' => $this->request->getPost('dni'),
+                'nombre' => $this->request->getPost('nombre'),
+                'apellido' => $this->request->getPost('apellido'), 'correo' => $this->request->getPost('correo'),
+                'telefono' => $this->request->getPost('telefono'), 'domicilio' => $this->request->getPost('domicilio'),
+                'cuil' => $this->request->getPost('cuil'), 'fecha' => $this->request->getPost('fecha'),
+                'contraseña' => $this->request->getPost('contraseña')
+            ];
             echo view('registrar', $data);
         }
     }

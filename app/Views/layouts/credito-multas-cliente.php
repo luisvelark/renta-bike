@@ -1,5 +1,5 @@
 <div>
-  <h1>Crédito y multas</h1>
+  <h1>Multa/s y crédito </h1>
 
   <?php
   $multas = $datos['multas'];

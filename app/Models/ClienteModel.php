@@ -27,7 +27,8 @@ class ClienteModel extends Model
     public function obtenerMultas($id)
     {
         $this->multas = new MultaModel();
-        return $this->multas->buscarMultasCliente($id);
+        $multas= $this->multas->buscarMultasCliente($id);
+        return $multas;
     }
 
     public function obtenerCredito($id)
@@ -49,15 +50,8 @@ class ClienteModel extends Model
         return $cliente;
     }
 
-  /*   public function altaCliente($id){
-        $this->save([
-            'idUsuario'=> $id,
-            'puntajeTotal' => 0,
-            'credito' => 0, 
-            'suspendido' => 0,
-            'fechaInicioSuspencion' => '2020-08-13', 
-            'fechaFinSuspencion' => '2020-09-02'
-        ]); 
-
-    } */
+    public function altaCliente($id){
+        $this->usuario->save([
+            'idUsuario' => $id,  'puntajeTotal' => 0, 'credito' => 0, 'suspendido' => 0, 'fechaInicioSuspencion' => '2020-12-12', 'fechaFinSuspencion' => '2020-12-12' ]);
+    }
 }

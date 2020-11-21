@@ -1,18 +1,32 @@
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop"></button>
 <div>
-    <h1>Calificar puntos de entrega y devolución</h1>
-
-    <form>
-    <p class="clasificacion">
-    <input id="radio1" type="radio" name="estrellas" value="5"><!--
-    --><label for="radio1">★</label><!--
-    --><input id="radio2" type="radio" name="estrellas" value="4"><!--
-    --><label for="radio2">★</label><!--
-    --><input id="radio3" type="radio" name="estrellas" value="3"><!--
-    --><label for="radio3">★</label><!--
-    --><input id="radio4" type="radio" name="estrellas" value="2"><!--
-    --><label for="radio4">★</label><!--
-    --><input id="radio5" type="radio" name="estrellas" value="1"><!--
-    --><label for="radio5">★</label>
-  </p>
-    </form>
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Calificar punto</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form id="form-calificar">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Calificación</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Comentarios</label>
+              <input type="input" class="form-control">
+            </div>
+          </div>
+          <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Enviar calificación</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

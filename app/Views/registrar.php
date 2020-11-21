@@ -90,7 +90,7 @@
                       </div>
                     <?php } ?>
               <div class="text-center">
-                <a class="small" href="<?php echo base_url('LoginController/index') ?>">Ya tienes una cuenta? Login!</a>
+                <a class="small" href="<?php echo base_url('LoginController/index') ?>">Ya tienes una cuenta? Ingresa!</a>
               </div>
             </div>
           </div>

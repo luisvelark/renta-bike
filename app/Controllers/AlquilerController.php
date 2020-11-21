@@ -6,7 +6,7 @@ use App\Models\AlquilerModel;
 class AlquilerController extends BaseController
 {
 
-    protected $alquilerModel;
+    /* protected $alquilerModel; */  //cambiar a protected
 
     public function __construct()
     {
