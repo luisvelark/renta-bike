@@ -40,10 +40,10 @@ class ClienteModel extends Model
     public function obtenerCliente($dni) 
     {
         //$bd      = \Config\Database::connect();
-        $builder = $bd->table('usuario');
+        /* $builder = $bd->table('usuario');
         $builder->select('idUsuario','nombre','apellido')->getCompiledSelect();
         $builder->getWhere(['dni'=>$dni])->getCompiledSelect();
-        return $builder->get();
+        return $builder->get(); */
         //$query = 'SELECT idUsuario, nombre,apellido FROM usuario WHERE us.dni='+$dni;
         //$resultados = $this->db->query($query);
         //return $resultados->result();
@@ -52,7 +52,7 @@ class ClienteModel extends Model
     }
 
     public function altaCliente($id){
-        $this->usuario->save([
+        $this->save([
             'idUsuario' => $id,  'puntajeTotal' => 0, 'credito' => 0, 'suspendido' => 0, 'fechaInicioSuspencion' => '2020-12-12', 'fechaFinSuspencion' => '2020-12-12' ]);
     }
 }
