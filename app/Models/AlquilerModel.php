@@ -36,8 +36,8 @@ class AlquilerModel extends Model
         $this->insert($alquiler);
     }
 
-
-    public function obtenerHoraInicio($fechaInicio,$fechaFinal)
+    
+ public function obtenerHoraInicio($fechaInicio,$fechaFinal)
     {
         //$array=['fechaAlquiler >'=>$fechaInicio,'fechaAlquiler <'=>$fechaFinal];
         $bd      = \Config\Database::connect();
