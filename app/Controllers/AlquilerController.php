@@ -32,7 +32,14 @@ class AlquilerController extends BaseController
             // $horaInicioDate->modify('+' . $cantHoras . 'hours');
             // $horaFinAlquiler = $horaInicioDate->format('H:i');
 
-            // $date = new DateTime($horaInicio);
+            $hora = strtotime('20:13:00');
+            $miHora = date('H:i:s', $hora);
+
+            $newHora = strtotime('-1 hour', strtotime($miHora));
+            $newHora = strtotime('+30 minute', $newHora);
+            $newHora = strtotime('-30 second', $newHora);
+            $newHora = date('H:i:s', $newHora);
+
             // $date->modify('+' . $cantHoras . 'hours');
             // // $date->modify('+10 minute');
             // // $date->modify('-30 second');
@@ -47,8 +54,8 @@ class AlquilerController extends BaseController
                 'idBicicleta' => 1,
                 'idPuntoE' => intval($puntoE),
                 'idPuntoD' => 2,
-                'fechaAlquiler' => date("Y-m-d"),
-                'horaInicioAlquiler' => $horaInicio,
+                'fechaAlquiler' => date("Y-m-d H:i:s"),
+                'horaInicioAlquiler' => $newHora,
                 'HoraFinAlquiler' => date("H:i:s"),
                 'HoraEntregaAlquiler' => date("H:i:s"),
                 'clienteAlternativo' => intval($dniAlternativo),
@@ -70,14 +77,15 @@ class AlquilerController extends BaseController
         die();
 
     }
-    public function obtenerFecha(){
+    public function obtenerFecha()
+    {
         //$fechaInicio=date("d/m/Y", strtotime($_POST['fechaInicio']));
-        $fechaInicio=$_POST['fechaInicio'];
+        $fechaInicio = $_POST['fechaInicio'];
         //$fechaFinal=date("d/m/Y", strtotime($_POST['fechaFinal']));
-        $fechaFinal=$_POST['fechaFinal'];
-        $datos= ['horasRecurrentes'=>$this->alquilerModel->obtenerHoraInicio($fechaInicio,$fechaFinal)];
+        $fechaFinal = $_POST['fechaFinal'];
+        $datos = ['horasRecurrentes' => $this->alquilerModel->obtenerHoraInicio($fechaInicio, $fechaFinal)];
         //$datos= ['fechaInicio'=>$fechaInicio,'fechaFinal'=>$fechaFinal];
-        
+
         echo json_encode($datos);
         die();
     }

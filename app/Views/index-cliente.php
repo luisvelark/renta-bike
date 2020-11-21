@@ -65,11 +65,6 @@ $user_session = session();
           <span>Nuevo alquiler</span></a>
       </li>
 
-      <li class="nav-item active">
-        <a id="idConfirmarAlquiler" class="nav-link" href="#">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Confirmar alquiler</span></a>
-      </li>
 
       <!-- Botones para las acciones -->
 
