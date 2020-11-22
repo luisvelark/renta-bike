@@ -27,7 +27,7 @@ function buscarHorarioMayorDemanda() {
         e.preventDefault();
         //console.log("Me diste un click");
         var datos =new FormData(formulario);
-        //console.log(datos.get('fechaInicio'),datos.get('fechaFinal'))
+        console.log(datos.get('fechaInicio'),datos.get('fechaFinal'))
         fetch("http://localhost/renta-bike/AlquilerController/obtenerFecha",{
             method: 'POST',
             body: datos
@@ -38,9 +38,9 @@ function buscarHorarioMayorDemanda() {
                     respuesta.innerHTML=data;
                 }
                 else{
-                    //console.log(data);
-                    console.log(typeof data.fechaInicio);
-                    console.log(typeof data.fechaFinal);
+                    console.log(data);
+                    console.log(data.conteo);
+                    console.log(data.horaInicioAlquiler);
             }
             })
     },true)
