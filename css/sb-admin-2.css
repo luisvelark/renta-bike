@@ -11213,6 +11213,12 @@ a:focus {
     height: 100%;
 }
 
+.registrar-image{
+    width: 110%;
+    height: 104%;
+
+}
+
 .bg-login-image {
     background-image: url();
     background-position: center;
@@ -11220,7 +11226,7 @@ a:focus {
 }
 
 .bg-register-image {
-    background: url("https://source.unsplash.com/Mv9hjnEUHR4/600x800");
+    background: url();
     background-position: center;
     background-size: cover;
 }

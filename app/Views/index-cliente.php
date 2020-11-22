@@ -56,13 +56,17 @@ $user_session = session();
       </div>
 
 
-      <!-- Botones para las acciones -->
+      <!-- Botones opciones alquiler-->
 
       <li class="nav-item active">
         <a id="idAlquiler" class="nav-link" href="#">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Nuevo alquiler</span></a>
       </li>
+
+
+      <!-- Botones para las acciones -->
+
       <li class="nav-item active">
         <a id="idAlquileres" class="nav-link" href="#">
           <i class="fas fa-list-ol"></i>
