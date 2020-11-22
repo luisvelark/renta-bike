@@ -57,13 +57,17 @@ $user_session = session();
       </div>
 
 
-      <!-- Botones para las acciones -->
+      <!-- Botones opciones alquiler-->
 
       <li class="nav-item active">
         <a id="idAlquiler" class="nav-link" href="#">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Nuevo alquiler</span></a>
       </li>
+
+
+      <!-- Botones para las acciones -->
+
       <li class="nav-item active">
         <a id="idAlquileres" class="nav-link" href="#">
           <i class="fas fa-list-ol"></i>
@@ -188,7 +192,7 @@ $user_session = session();
 
         <!-- Begin Page Content Body -->
         <div id="contenido" class="container-fluid">
-        <div id="map"></div>
+          <div id="map"></div>
 
         </div>
         <!-- /.container-fluid -->
@@ -263,7 +267,7 @@ $user_session = session();
   <script src="<?php echo base_url('ajax/buscar-punto-ed.js') ?>"></script>
   <script src="<?php echo base_url('ajax/api-map.js') ?>"></script>
   <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xHqik&callback=initMap" async defer></script> -->
-  
+
 </body>
 
 </html>
