@@ -28,8 +28,13 @@ class AlquilerController extends BaseController
 
         } else {
 
+            $sesion = session();
+            $idUsuario = $sesion->get('idUsuario');
+            $nombreUser = $sesion->get('nombre');
+            $apellidoUser = $sesion->get('apellido');
+
             $alquiler = [
-                'idUsuarioCliente' => 1,
+                'idUsuarioCliente' => $idUsuario,
                 'idBicicleta' => 1,
                 'idPuntoE' => intval($puntoE),
                 'idPuntoD' => 2,
@@ -48,6 +53,9 @@ class AlquilerController extends BaseController
 
             $arr = ["msg" => 'Su reserva se realizo con éxito!',
                 "detalle" => $alquiler,
+                "usuario" => ["nombre" => $nombreUser,
+                    "apellido" => $apellidoUser,
+                ],
             ];
 
         }
