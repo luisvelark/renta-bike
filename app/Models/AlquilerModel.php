@@ -38,4 +38,15 @@ class AlquilerModel extends Model
                 ->findAll();
         return $fecha;
     }
+    public function obtenerTiempoAlquiler($fechaInicio,$fechaFinal)
+    {
+        $array=['fechaAlquiler >'=>$fechaInicio,'fechaAlquiler <'=>$fechaFinal];
+        $builder = $this->builder();
+        $fecha=$this->select('horaFinAlquiler - horaInicioAlquiler','resta')//calcular la hora restante
+                ->where($array)
+                ->orderBy('resta', 'ASC')
+                ->findAll();
+        return $fecha;
+        //SELECT horaFinAlquiler - horaInicioAlquiler AS resta FROM `alquiler` WHERE fechaAlquiler>'2013-05-13' AND fechaAlquiler < '2020-11-18' ORDER BY(resta)
+    }
 }

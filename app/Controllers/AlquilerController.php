@@ -71,7 +71,7 @@ class AlquilerController extends BaseController
         die();
 
     }
-    public function obtenerFecha(){
+    public function mostrarFecha(){
         //$dt = new DateTime($_POST['fechaInicio']);
         //$fechaInicio=$dt->format('Y-m-d');
         //$fechaInicio=date_create_from_format("Y-m-d", $_POST['fechaInicio']);
@@ -82,9 +82,9 @@ class AlquilerController extends BaseController
         $fechaFinal=$_POST['fechaFinal'];
         //$fechaInicio = date("Y-m-d", strtotime($_POST['fechaInicio']));
         //$fechaFinal = date("Y-m-d", strtotime($_POST['fechaFinal']));
-        $datos= ['horasRecurrentes'=>$this->alquilerModel->obtenerHoraInicio($fechaInicio,$fechaFinal)];
+        $datos= ['horasMayorDemanda'=>$this->alquilerModel->obtenerHoraInicio($fechaInicio,$fechaFinal)];
         //$datos= ['fechaInicio'=>$fechaInicio,'fechaFinal'=>$fechaFinal];
-        if (isset($datos['horasRecurrentes'])) {
+        if (isset($datos['horasMayorDemanda'])) {
             echo json_encode($datos);
             die();} 
         else {
@@ -93,5 +93,17 @@ class AlquilerController extends BaseController
             die();
         }
     }
-
+    public function mostrarTiempoAlquiler(){
+        $fechaInicio=$_POST['fechaInicio'];
+        $fechaFinal=$_POST['fechaFinal'];
+        $datos= ['tiempoAlquiler'=>$this->alquilerModel->obtenerTiempoAlquiler($fechaInicio,$fechaFinal)];
+        if (isset($datos['tiempoAlquiler'])) {
+            echo json_encode($datos);
+            die();} 
+        else {
+            $datos = 'error';
+            echo json_encode($datos);
+            die();
+        }
+    }
 }
