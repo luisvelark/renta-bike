@@ -51,8 +51,7 @@ class ClienteModel extends Model
         //return $cliente;
     }
 
-    public function altaCliente($id){
-        $this->save([
-            'idUsuario' => $id,  'puntajeTotal' => 0, 'credito' => 0, 'suspendido' => 0, 'fechaInicioSuspencion' => '2020-12-12', 'fechaFinSuspencion' => '2020-12-12' ]);
-    }
+    /* public function altaCliente($id){
+        $this->insert(['idUsuario'=>$id,'puntajeTotal' => 0, 'credito' => 0, 'suspendido' => 0, 'fechaInicioSuspencion' => '2020-12-12', 'fechaFinSuspencion' => '2020-12-12' ]);
+    } */
 }

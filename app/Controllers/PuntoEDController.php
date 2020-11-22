@@ -12,4 +12,7 @@ class PuntoEDController extends BaseController
         $this->puntoED= new PuntoEntregaDevolucionModel();
     }
 
+
+
+   
 }

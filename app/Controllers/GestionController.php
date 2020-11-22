@@ -81,6 +81,9 @@ class GestionController extends BaseController
     }
     public function buscarPuntoED()
     {
-        echo view('layouts/buscar-punto-ed');
+        
+        $coor=['coordenadas'=>$this->Cpuntos->puntoED->obtenerCoordenadas()];
+        echo view('layouts/buscar-punto-ed',$coor);
     }
+    
 }

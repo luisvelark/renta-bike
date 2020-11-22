@@ -1,4 +1,4 @@
-/* document.getElementById('idCalificacion').addEventListener("click", mostrar, true);
+document.getElementById('idCalificacion').addEventListener("click", mostrar, true);
 
 
 function mostrar(e) {
@@ -19,9 +19,9 @@ function mostrar(e) {
         }
     }
 }
- */
+
 //VENTANA DE NUEVO ALQUILER!
-let btnCalificar = document.getElementById("idCalificacion");
+/* let btnCalificar = document.getElementById("idCalificacion");
 btnCalificar.addEventListener("click", mostrar, true);
 
 function mostrar(e) {
@@ -98,4 +98,4 @@ function envioCalificacion() {
             });
         // .catch((err) => console.log(err));
     }
-}
+} */

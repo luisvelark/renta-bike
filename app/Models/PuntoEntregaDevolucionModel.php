@@ -12,7 +12,7 @@ class PuntoEntregaDevolucionModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['direccion', 'telefono', 'calificacionTotal'];
+    protected $allowedFields = ['direccion', 'telefono', 'calificacionTotal','lat','lng'];
 
     protected $useTimestamps = false;
     protected $createdField = 'created_at';
@@ -27,6 +27,11 @@ class PuntoEntregaDevolucionModel extends Model
     {
         $puntos = $this->findAll();
         return $puntos;
+    }
+    public function obtenerCoordenadas()
+    {
+        $coordenadas = $this->select('lat, lng')->findAll();
+        return $coordenadas;
     }
 
 }

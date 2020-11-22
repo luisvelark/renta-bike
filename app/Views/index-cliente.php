@@ -1,6 +1,5 @@
 <?php
 $user_session = session();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +69,7 @@ $user_session = session();
           <span>Alquileres concretados</span></a>
       </li>
       <li class="nav-item active">
-        <a id="idBuscar" class="nav-link" href="#">
+        <a  class="nav-link" target="_blank" href="<?php echo base_url(); ?>/GestionController/buscarPuntoED">
           <i class="fas fa-map-marker-alt"></i>
           <span>Buscar puntos de entrega y devolución</span></a>
       </li>
@@ -188,7 +187,15 @@ $user_session = session();
 
         <!-- Begin Page Content Body -->
         <div id="contenido" class="container-fluid">
-        <div id="map"></div>
+        <?php 
+        if(isset($puntuacion)){
+          echo '<div class="container-fluid>"'. 'Se ha calificado con éxito. Puntuación= ' . $puntuacion .'<br>'.
+          'Comentario= ' . $comentario .'</div>';
+        }
+        if(isset($exito)){
+          echo '<div class="container-fluid">'. $exito . '</div>';
+        }
+        ?>
 
         </div>
         <!-- /.container-fluid -->
@@ -262,7 +269,6 @@ $user_session = session();
   <script src="<?php echo base_url('ajax/calificar-punto-ed.js') ?>"></script>
   <script src="<?php echo base_url('ajax/buscar-punto-ed.js') ?>"></script>
   <script src="<?php echo base_url('ajax/api-map.js') ?>"></script>
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xHqik&callback=initMap" async defer></script> -->
   
 </body>
 

@@ -10,6 +10,7 @@ use App\Models\ClienteModel;
 class UsuarioController extends BaseController
 {
     private $reglasRegistro;
+    private $cliente;
 
     public function __construct()
     {
@@ -99,7 +100,7 @@ class UsuarioController extends BaseController
     {
         if ($this->request->getMethod() == "post" && $this->validate($this->reglasRegistro)) {
             /* $hash = password_hash($this->request->getPost('contraseña'), PASSWORD_DEFAULT); */
-            $this->usuario->save([
+            $this->usuario->insert([
                 'dni' => $this->request->getPost('dni'), 'nombre' => $this->request->getPost('nombre'),
                 'apellido' => $this->request->getPost('apellido'), 'correo' => $this->request->getPost('correo'),
                 'telefono' => $this->request->getPost('telefono'), 'domicilio' => $this->request->getPost('domicilio'),
@@ -107,27 +108,21 @@ class UsuarioController extends BaseController
                 'contraseña' => $this->request->getPost('contraseña'), 'tipo' => 'cliente']); //'contraseña' => $hash
 
             $user = $this->usuario->buscarUsuario($this->request->getPost('correo'));
-
-            /* $datosCliente = [
-                'idUsuario' => $user['idUsuario'],
-                'puntajeTotal'=> 0,
-                'credito'=> 0,
-                'suspendido'=> 1,
-                'fechaInicioSuspencion'=> '2020-11-20',
-                'fechaFinSuspencion'=> '2020-11-20'
-                
-            ]; */
+            $idUsuario= $user['idUsuario'];
+/* 
+         $this->cliente->insert(['idUsuario'=>$idUsuario,'puntajeTotal' => 0, 'credito' => 0, 'suspendido' => 0, 'fechaInicioSuspencion' => '2020-12-12', 'fechaFinSuspencion' => '2020-12-12' ]); */
             
-            $this->cliente->altaCliente($user['idUsuario']); 
             $datosSesion = [
-                'idUsuario' => $user['idUsuario'],
+                'idUsuario' => $idUsuario,
                 'nombre' => $user['nombre'],
                 'apellido' => $user['apellido'],
             ];
 
             $sesion = session();
             $sesion->set($datosSesion);
+            $mensaje= ['¡Te has registrado de manera exitosa!'];
             return redirect()->to(base_url() . '/GestionController/indexCliente');
+        
         } else {
             $data = [
                 'validation' => $this->validator, 'dni' => $this->request->getPost('dni'),

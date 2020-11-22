@@ -99,7 +99,7 @@
     </div>
 
   </div>
-<!-- ------------------------------------------------------------------------------------------- -->
+<!-- ---------------------------------------------------------------------------------------------->
 <!-- <button class="btn btn-success" data-toggle="modal" data-target="#ventanaModal"></button> -->
 
   <!-- <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="tituloVentana" aria-hidden="true" id="ventanaModal">

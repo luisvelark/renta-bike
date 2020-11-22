@@ -1,19 +1,30 @@
-document.getElementById('idBuscar').addEventListener("click", mostrar, true);
+var map;
 
-function mostrar() {
-    let xhr = new XMLHttpRequest();
-    xhr.addEventListener("readystatechange", estadoIdeal);
-
-    xhr.open('GET', 'http://localhost/renta-bike/GestionController/buscarPuntoED', true);
-
-    xhr.send();
-
-    function estadoIdeal() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            let respuesta = xhr.responseText;
-            let contenedor = document.getElementById('contenido');
-            contenedor.innerHTML = respuesta;
-        }
-
+function iniciarMap() {
+    var listaC = lista();
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 13,
+        center: listaC[0]
+    });
+    for (let index = 0; index < listaC.length; index++) {
+        var marker = new google.maps.Marker({
+            position: listaC[index],
+            map: map
+        });
     }
+}
+
+function lista() {
+
+    var objetos_coor = new Array();
+    var lista = document.getElementsByClassName('coor');
+    for (let index = 0; index < lista.length; index++) {
+        var cadena = lista[index].value.split('/');
+        var objeto = {
+            lat: parseFloat(cadena[0]),
+            lng: parseFloat(cadena[1])
+        };
+        objetos_coor.push(objeto);
+    }
+    return objetos_coor;
 }
