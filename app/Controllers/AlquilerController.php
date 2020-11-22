@@ -28,35 +28,14 @@ class AlquilerController extends BaseController
 
         } else {
 
-            // $horaInicioDate = DateTime::createFromFormat('H:i', $horaInicio);
-            // $horaInicioDate->modify('+' . $cantHoras . 'hours');
-            // $horaFinAlquiler = $horaInicioDate->format('H:i');
-
-            $hora = strtotime('20:13:00');
-            $miHora = date('H:i:s', $hora);
-
-            $newHora = strtotime('-1 hour', strtotime($miHora));
-            $newHora = strtotime('+30 minute', $newHora);
-            $newHora = strtotime('-30 second', $newHora);
-            $newHora = date('H:i:s', $newHora);
-
-            // $date->modify('+' . $cantHoras . 'hours');
-            // // $date->modify('+10 minute');
-            // // $date->modify('-30 second');
-            // $horaFinAlquiler = $date->format('H:i:s');
-
-            // $horaFinAlquiler = $horaInicio->;
-            // $horaFinAlquiler = new DateTime();
-            // $horaFinAlquiler = $horaInicio->date_modify('+' . $cantHoras.);
-
             $alquiler = [
                 'idUsuarioCliente' => 1,
                 'idBicicleta' => 1,
                 'idPuntoE' => intval($puntoE),
                 'idPuntoD' => 2,
-                'fechaAlquiler' => date("Y-m-d H:i:s"),
-                'horaInicioAlquiler' => $newHora,
-                'HoraFinAlquiler' => date("H:i:s"),
+                'fechaAlquiler' => date("d-m-Y"),
+                'horaInicioAlquiler' => date("H:i:s", strtotime($horaInicio)),
+                'HoraFinAlquiler' => calcularSumaHoras($horaInicio, $cantHoras),
                 'HoraEntregaAlquiler' => date("H:i:s"),
                 'clienteAlternativo' => intval($dniAlternativo),
                 'estadoAlquiler' => 'EnProceso',

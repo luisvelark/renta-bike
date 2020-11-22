@@ -53,7 +53,7 @@ $user_session = session();
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        Alquiler
+        Acciones
       </div>
 
 
@@ -67,13 +67,6 @@ $user_session = session();
 
 
       <!-- Botones para las acciones -->
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Acciones
-      </div>
-
-      <hr class="sidebar-divider d-none d-md-block">
 
       <li class="nav-item active">
         <a id="idAlquileres" class="nav-link" href="#">
