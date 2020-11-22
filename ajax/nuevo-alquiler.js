@@ -63,7 +63,7 @@ function envioAlquiler() {
           </div>`;
           detalle.innerHTML = `
           <ul class="p-2 text-white text-left">
-            <li><span class="font-weight-bold">Cliente:</span>  ${data.detalle.idUsuarioCliente}</li>
+            <li><span class="font-weight-bold">Cliente:</span>  ${data.usuario.nombre} ${data.usuario.apellido}</li>
             <li><span class="font-weight-bold">Punto de entrega:</span>  ${data.detalle.idPuntoE}</li>
             <li><span class="font-weight-bold">N° de bicicleta:</span>  ${data.detalle.idBicicleta}</li>
             <li><span class="font-weight-bold">Fecha de alquiler:</span>  ${data.detalle.fechaAlquiler}</li>
