@@ -83,10 +83,6 @@ $hora = new DateTime("now", new DateTimeZone('America/Argentina/Ushuaia'));
 
       </div>
 
-      <div id="confirmarAlquiler" class="w-75">
-
-      </div>
-
     </div>
 
   </div>

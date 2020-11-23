@@ -34,7 +34,6 @@ function envioAlquiler() {
 
   let msj = document.getElementById("respuesta");
   let detalle = document.getElementById("detalles");
-  const confirmar = document.getElementById("confirmarAlquiler");
 
   function enviarAlquiler(e) {
     e.preventDefault();
@@ -86,10 +85,6 @@ function envioAlquiler() {
               data.detalle.clienteAlternativo
             }</li>
           </ul>
-          `;
-          confirmar.innerHTML = `
-          <button type="button" class="btn btn-success btn-block my-4"><span class="font-weight-bold">Confirmar Alquiler</span></button>
-          
           `;
         }
       });
