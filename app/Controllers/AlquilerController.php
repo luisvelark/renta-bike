@@ -106,4 +106,17 @@ class AlquilerController extends BaseController
             die();
         }
     }
+    public function mostrarPuntoRetorno(){
+        $fechaInicio=$_POST['fechaInicio'];
+        $fechaFinal=$_POST['fechaFinal'];
+        $datos= ['puntosRetorno'=>$this->alquilerModel->obtenerPuntosRetorno($fechaInicio,$fechaFinal)];
+        if (isset($datos['puntosRetorno'])) {
+            echo json_encode($datos);
+            die();} 
+        else {
+            $datos = 'error';
+            echo json_encode($datos);
+            die();
+        }
+    }
 }

@@ -53,7 +53,12 @@ function buscarCliente() {
                         tabla +='<td>'+data.multaCredito.multas[$i].monto+'</td>';
                         tabla +='<td>'+data.multaCredito.multas[$i].fechaMulta+'</td>';
                         tabla +='<td>'+data.multaCredito.multas[$i].detalleMulta+'</td>';
-                        tabla +='<td>'+data.multaCredito.multas[$i].pagado+'</td></tr>';
+                        if (data.multaCredito.multas[$i].pagado=='1'){
+                            tabla +='<td>Pagado</td></tr>';
+                        }else{
+                            tabla +='<td>No pagado</td></tr>';
+                        }
+                        
                     }
                     tabla +='</tbody>';
                     tabla +='</tabla>';
