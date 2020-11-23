@@ -34,6 +34,7 @@ function envioAlquiler() {
 
   let msj = document.getElementById("respuesta");
   let detalle = document.getElementById("detalles");
+  const confirmar = document.getElementById("confirmarAlquiler");
 
   function enviarAlquiler(e) {
     e.preventDefault();
@@ -63,17 +64,39 @@ function envioAlquiler() {
           </div>`;
           detalle.innerHTML = `
           <ul class="p-2 text-white text-left">
-            <li><span class="font-weight-bold">Cliente:</span>  ${data.detalle.idUsuarioCliente}</li>
-            <li><span class="font-weight-bold">Punto de entrega:</span>  ${data.detalle.idPuntoE}</li>
-            <li><span class="font-weight-bold">N° de bicicleta:</span>  ${data.detalle.idBicicleta}</li>
-            <li><span class="font-weight-bold">Fecha de alquiler:</span>  ${data.detalle.fechaAlquiler}</li>
-            <li><span class="font-weight-bold">Hora de inicio alquiler:</span>  ${data.detalle.horaInicioAlquiler}</li>
-            <li><span class="font-weight-bold">Hora de fin alquiler:</span>  ${data.detalle.HoraFinAlquiler}</li>
-            <li><span class="font-weight-bold">Cliente Alternativo:</span>  ${data.detalle.clienteAlternativo}</li>
+            <li><span class="font-weight-bold">Cliente:</span>  ${
+              data.usuario.nombre
+            } ${data.usuario.apellido}</li>
+            <li><span class="font-weight-bold">Punto de entrega:</span>  ${
+              data.puntoYBici.dirPunto
+            }</li>
+            <li><span class="font-weight-bold">N° de bicicleta:</span>  ${
+              data.puntoYBici.numBici
+            }</li>
+            <li><span class="font-weight-bold">Fecha de alquiler:</span>  ${formato(
+              data.detalle.fechaAlquiler
+            )}</li>
+            <li><span class="font-weight-bold">Hora de inicio alquiler:</span>  ${
+              data.detalle.horaInicioAlquiler
+            }</li>
+            <li><span class="font-weight-bold">Hora de fin alquiler:</span>  ${
+              data.detalle.HoraFinAlquiler
+            }</li>
+            <li><span class="font-weight-bold">Cliente Alternativo:</span>  ${
+              data.detalle.clienteAlternativo
+            }</li>
           </ul>
+          `;
+          confirmar.innerHTML = `
+          <button type="button" class="btn btn-success btn-block my-4"><span class="font-weight-bold">Confirmar Alquiler</span></button>
+          
           `;
         }
       });
     // .catch((err) => console.log(err));
   }
+}
+
+function formato(texto) {
+  return texto.replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$3/$2/$1");
 }
