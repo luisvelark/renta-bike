@@ -31,7 +31,7 @@ $hora = new DateTime("now", new DateTimeZone('America/Argentina/Ushuaia'));
 
             <input type="time" class="form-control form-control-user font-weight-bold py-3 pl-3 my-1 w-75 h-50 "
               name="hora-inicio" value=<?php echo '"' . $hora->format('G:i') . '"' ?>
-              min=<?php echo '"' . $hora->format('G:i') . '"' ?> max="21:00" step="1">
+              min=<?php echo '"' . $hora->format('G:i') . '"' ?> max="23:00" step="1">
             <span class="small m-2">*Ingresa una hora mayor a la actual</span>
           </label>
         </div>
@@ -80,6 +80,10 @@ $hora = new DateTime("now", new DateTimeZone('America/Argentina/Ushuaia'));
         <h2 class="p-1 my-2 font-weight-bold text-white text-center">Detalles del alquiler:</h2>
         <hr>
         <div id="detalles"></div>
+
+      </div>
+
+      <div id="confirmarAlquiler" class="w-75">
 
       </div>
 
