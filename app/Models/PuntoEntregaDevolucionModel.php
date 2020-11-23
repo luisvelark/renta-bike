@@ -34,4 +34,19 @@ class PuntoEntregaDevolucionModel extends Model
         return $coordenadas;
     }
 
+    public function actualizarCalificacion($idPunto,$calificacion){
+
+        $data= ['calificacionTotal' => $calificacion];
+        $this->update($idPunto,$data);
+
+    }
+   
+    public function promediarCalificacion($calificaciones){
+    $total= count($calificaciones);
+    $suma=0;
+    for ($i=0; $i <$total; $i++) { 
+        $suma= $suma + ($calificaciones[$i]['puntos']);
+    }
+    return intval($suma/$total);
+    }
 }

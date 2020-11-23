@@ -82,11 +82,11 @@ $user_session = session();
           <i class="fas fa-coins"></i>
           <span>Crédito y multas</span></a>
       </li>
-      <li class="nav-item active">
+      <!-- <li class="nav-item active">
         <a class="nav-link" href="#">
           <i class="far fa-file-alt"></i>
           <span>Manual de usuario</span></a>
-      </li>
+      </li> -->
       <li class="nav-item active">
         <a id="idCalificacion" class="nav-link" href="#">
           <i class="fas fa-star"></i>
@@ -193,12 +193,9 @@ $user_session = session();
         <div id="contenido" class="container-fluid">
         <?php 
         if(isset($puntuacion)){
-          echo '<div class="container-fluid>"'. 'Se ha calificado con éxito. Puntuación= ' . $puntuacion .'<br>'.
-          'Comentario= ' . $comentario .'</div>';
+        echo '<h3> ¡La calificación se ha realizado con éxito! </h3>';
         }
-        if(isset($exito)){
-          echo '<div class="container-fluid">'. $exito . '</div>';
-        }
+      
         ?>
 
         </div>

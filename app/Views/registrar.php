@@ -33,7 +33,7 @@
           <div class="col-lg-7">
             <div class="p-5">
               <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Crear una cuenta!</h1>
+                <h1 class="h4 text-gray-900 mb-4">¡Crear una cuenta!</h1>
               </div>
               <form class="user" method="POST" action="<?php echo base_url(); ?>/UsuarioController/registrarUsuario">
                 <div class="form-group row">
@@ -91,7 +91,7 @@
                       </div>
                     <?php } ?>
               <div class="text-center">
-                <a class="small" href="<?php echo base_url('LoginController/index') ?>">Ya tienes una cuenta? Ingresa!</a>
+                <a class="medium" href="<?php echo base_url('LoginController/index') ?>">¿Ya tienes una cuenta? ¡Ingresa!</a>
               </div>
             </div>
           </div>

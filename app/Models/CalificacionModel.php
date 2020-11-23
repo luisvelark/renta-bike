@@ -1,15 +1,17 @@
-<?php 
+<?php
+
 namespace App\Models;
+
 use CodeIgniter\Model;
 
 class CalificacionModel extends Model
 {
     protected $table      = 'calificacion';
-   /*  protected $primaryKey = 'fechaCalificacion'; */
+    /*  protected $primaryKey = 'fechaCalificacion'; */
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['fechaCalificacion','idPuntoED', 'idUsuarioCliente','puntos','descripcion'];
+    protected $allowedFields = ['fechaCalificacion', 'idPuntoED', 'idUsuarioCliente', 'puntos', 'descripcion'];
 
 
     protected $useTimestamps = false;
@@ -21,12 +23,18 @@ class CalificacionModel extends Model
     protected $validationMessages = [];
     protected $skipValidation     = false;
 
-   /*  public function altaCalificacion($idPunto,$idCliente, $puntos, $descripcion){
-        
-        $this->save(['fechaCalificacion'=>'2020/11/22','idPuntoED'=>$idPunto,'idUsuarioCliente'=> $idCliente,
-         'puntos' =>$puntos, 'descripcion'=> $descripcion]); 
-    } */
+    public function altaCalificacion($idPunto, $idCliente, $puntos, $descripcion)
+    {
+        $this->save([
+            'fechaCalificacion' => date("Y-m-d"), 'idPuntoED' => $idPunto, 'idUsuarioCliente' => $idCliente,
+            'puntos' => $puntos, 'descripcion' => $descripcion
+        ]);
+    }
+    public function buscarCalificacionTotal($idPunto){
+        $lista =$this->select('puntos')->where('idPuntoED',$idPunto)->findAll();
+        return $lista;
+    }
+    }
+    
+    
 
-
-
-}
