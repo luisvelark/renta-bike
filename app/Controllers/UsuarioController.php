@@ -142,8 +142,7 @@ $this->cliente->insert(['idUsuario'=>$idUsuario,'puntajeTotal' => 0, 'credito' =
         if ($this->request->getMethod() == "post" && $this->validate($this->reglasRegistro)) {
             
         } else {
-            $data = [
-                'validation' => $this->validator, 'dni' => $this->request->getPost('dni')];
+            $data = ['validation' => $this->validator];
                 echo view('layouts/modificar-usuario',$data);
         }
     }
