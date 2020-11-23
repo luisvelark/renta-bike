@@ -56,38 +56,33 @@ $user_session = session();
       </div>
 
 
-      <!-- Botones opciones alquiler-->
-
+      <!--  componentes -->
       <li class="nav-item active">
-        <a id="idAlquiler" class="nav-link" href="#">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Nuevo alquiler</span></a>
-      </li>
-
-     <!--  componentes -->
-      <li class="nav-item active">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-bicycle"></i>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+          aria-controls="collapseTwo">
+          <i class="fas fa-bicycle"></i>
           <span>Alquiler</span>
         </a>
+        <!-- Botones opciones alquiler-->
+
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Nuevo alquiler </a>
+            <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Nuevo alquiler </a>
             <a class="collapse-item" href="#"> <i class="fas fa-arrow-circle-up"></i> Realizar devolución </a>
             <a class="collapse-item" href="#"> <i class="fas fa-check-circle"></i> Confirmar alquiler</a>
             <a class="collapse-item" href="#"> <i class="fas fa-redo-alt"></i> Modificar alquiler</a>
             <a class="collapse-item" href="#"> <i class="fas fa-ban"></i> Anular alquiler</a>
           </div>
         </div>
-      </li>      
-        <!--  componentes -->
+      </li>
+      <!--  componentes -->
       <li class="nav-item active">
         <a id="idAlquileres" class="nav-link" href="#">
           <i class="fas fa-list-ol"></i>
-          <span >Alquileres concretados</span></a>
+          <span>Alquileres concretados</span></a>
       </li>
       <li class="nav-item active">
-        <a  class="nav-link" target="_blank" href="<?php echo base_url(); ?>/GestionController/buscarPuntoED">
+        <a class="nav-link" target="_blank" href="<?php echo base_url(); ?>/GestionController/buscarPuntoED">
           <i class="fas fa-map-marker-alt"></i>
           <span>Buscar puntos de entrega y devolución</span></a>
       </li>
@@ -205,12 +200,12 @@ $user_session = session();
 
         <!-- Begin Page Content Body -->
         <div id="contenido" class="container-fluid">
-        <?php 
-        if(isset($puntuacion)){
-        echo '<h3> ¡La calificación se ha realizado con éxito! </h3>';
-        }
-      
-        ?>
+          <?php
+if (isset($puntuacion)) {
+    echo '<h3> ¡La calificación se ha realizado con éxito! </h3>';
+}
+
+?>
 
         </div>
         <!-- /.container-fluid -->
@@ -285,7 +280,7 @@ $user_session = session();
   <script src="<?php echo base_url('ajax/buscar-punto-ed.js') ?>"></script>
   <script src="<?php echo base_url('ajax/api-map.js') ?>"></script>
   <script src="<?php echo base_url('ajax/modificar-usuario.js') ?>"></script>
-  
+
 </body>
 
 </html>
