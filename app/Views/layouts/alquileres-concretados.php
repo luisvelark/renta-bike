@@ -27,7 +27,7 @@
                 '<td>' . $alquileres[$i]['numB'] . '</td>' .
                 '<td>' . $alquileres[$i]['inicio'] . '</td>' .
                 '<td>' . $alquileres[$i]['fin'] . '</td>' .
-                '<td>' . $alquileres[$i]['fechaAlquiler'] . '</td>' .
+                '<td>' .  date("d/m/Y", strtotime($alquileres[$i]['fechaAlquiler'])). '</td>' .
                 '<td>' . $alquileres[$i]['horaInicioAlquiler'] . '</td>' .
                 '<td>' . $alquileres[$i]['HoraFinAlquiler'] . '</td>' .
                 '<td>' . $alquileres[$i]['HoraEntregaAlquiler'] . '</td></tr>';

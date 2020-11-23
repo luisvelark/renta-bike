@@ -27,10 +27,11 @@
             <?php
             for ($i = 0; $i < count($multas); $i++) {
               echo '<tr>
-       <td>' . $multas[$i]['monto'] . '</td>' .
-                '<td>' . $multas[$i]['fechaMulta'] . '</td>' .
+                <td>' . '$' . $multas[$i]['monto'] . '</td>' .
+                '<td>' . date("d/m/Y", strtotime($multas[$i]['fechaMulta'])). '</td>' .
                 '<td>' . $multas[$i]['detalleMulta'] . '</td>' .
                 '<td>' . $multas[$i]['pagado'] . '</td></tr>';
+                
             } ?>
           </tbody>
         </table>

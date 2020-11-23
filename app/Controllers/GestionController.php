@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Controllers\ClienteController;
 use App\Controllers\PuntoEDController;
 use App\Controllers\AlquilerController;
+use App\Controllers\UsuarioController;
 
 class GestionController extends BaseController
 {
@@ -16,6 +17,7 @@ class GestionController extends BaseController
         $this->Cpuntos = new PuntoEDController();
         $this->cCliente = new ClienteController();
         $this->cAlquiler = new AlquilerController();
+        $this->cUsuario= new UsuarioController();
     }
 
     public function index()
@@ -86,4 +88,10 @@ class GestionController extends BaseController
         echo view('layouts/buscar-punto-ed',$coor);
     }
     
+    public function modificarUsuario()
+    {
+        $user_session = session();
+        $datos=['usuario'=> $this->cUsuario->usuario->buscarUsuario($user_session->correo)];
+        echo view('layouts/modificar-usuario',$datos);
+    }
 }

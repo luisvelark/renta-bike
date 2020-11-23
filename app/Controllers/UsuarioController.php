@@ -67,6 +67,7 @@ class UsuarioController extends BaseController
                         'idUsuario' => $user['idUsuario'],
                         'nombre' => $user['nombre'],
                         'apellido' => $user['apellido'],
+                        'correo'=> $user['correo']
                     ];
 
                     $sesion = session();
@@ -116,6 +117,7 @@ $this->cliente->insert(['idUsuario'=>$idUsuario,'puntajeTotal' => 0, 'credito' =
                 'idUsuario' => $idUsuario,
                 'nombre' => $user['nombre'],
                 'apellido' => $user['apellido'],
+                'correo'=> $user['correo']
             ];
 
             $sesion = session();
@@ -133,6 +135,16 @@ $this->cliente->insert(['idUsuario'=>$idUsuario,'puntajeTotal' => 0, 'credito' =
                 'contraseña' => $this->request->getPost('contraseña'),
             ];
             echo view('registrar', $data);
+        }
+    }
+    public function modificarUsuario()
+    {
+        if ($this->request->getMethod() == "post" && $this->validate($this->reglasRegistro)) {
+            
+        } else {
+            $data = [
+                'validation' => $this->validator, 'dni' => $this->request->getPost('dni')];
+                echo view('layouts/modificar-usuario',$data);
         }
     }
 }

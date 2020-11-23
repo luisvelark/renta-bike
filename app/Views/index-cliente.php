@@ -64,13 +64,27 @@ $user_session = session();
           <span>Nuevo alquiler</span></a>
       </li>
 
-
-      <!-- Botones para las acciones -->
-
+     <!--  componentes -->
+      <li class="nav-item active">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-bicycle"></i>
+          <span>Alquiler</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Nuevo alquiler </a>
+            <a class="collapse-item" href="#"> <i class="fas fa-arrow-circle-up"></i> Realizar devolución </a>
+            <a class="collapse-item" href="#"> <i class="fas fa-check-circle"></i> Confirmar alquiler</a>
+            <a class="collapse-item" href="#"> <i class="fas fa-redo-alt"></i> Modificar alquiler</a>
+            <a class="collapse-item" href="#"> <i class="fas fa-ban"></i> Anular alquiler</a>
+          </div>
+        </div>
+      </li>      
+        <!--  componentes -->
       <li class="nav-item active">
         <a id="idAlquileres" class="nav-link" href="#">
           <i class="fas fa-list-ol"></i>
-          <span>Alquileres concretados</span></a>
+          <span >Alquileres concretados</span></a>
       </li>
       <li class="nav-item active">
         <a  class="nav-link" target="_blank" href="<?php echo base_url(); ?>/GestionController/buscarPuntoED">
@@ -171,9 +185,9 @@ $user_session = session();
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a id="idModificarPerfil" class="dropdown-item" href="#">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Mi perfil
+                  Modificar perfil
                 </a>
 
                 <div class="dropdown-divider"></div>
@@ -270,6 +284,7 @@ $user_session = session();
   <script src="<?php echo base_url('ajax/calificar-punto-ed.js') ?>"></script>
   <script src="<?php echo base_url('ajax/buscar-punto-ed.js') ?>"></script>
   <script src="<?php echo base_url('ajax/api-map.js') ?>"></script>
+  <script src="<?php echo base_url('ajax/modificar-usuario.js') ?>"></script>
   
 </body>
 
