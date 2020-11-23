@@ -5,7 +5,6 @@ use CodeIgniter\Model;
 
 class PuntoEntregaDevolucionModel extends Model
 {
-
     protected $table = 'puntoentregadevolucion';
     protected $primaryKey = 'idPuntoED';
 
@@ -32,6 +31,18 @@ class PuntoEntregaDevolucionModel extends Model
     {
         $coordenadas = $this->select('lat, lng')->findAll();
         return $coordenadas;
+    }
+
+    public function obtenerBicicletaDisponible($id, $estado)
+    {
+        //direccion,idbicicleta,numero de la bici
+        $this->select('puntoentregadevolucion.direccion AS dirPunto,b.idBicicleta AS idBici,b.numeroBicicleta AS numBici,b.daño AS dañoBici');
+        $this->join('bicicleta b', 'puntoentregadevolucion.idPuntoED=b.idPuntoED');
+        $this->where('puntoentregadevolucion.idPuntoED', $id);
+        $this->where('b.estado', $estado);
+        $consulta = $this->first();
+        // var_dump($consulta);
+        return $consulta;
     }
 
 }
