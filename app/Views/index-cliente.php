@@ -69,12 +69,58 @@ $user_session = session();
           <div class="bg-white py-2 collapse-inner rounded">
             <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Nuevo alquiler </a>
             <a class="collapse-item" href="#"> <i class="fas fa-arrow-circle-up"></i> Realizar devolución </a>
-            <a class="collapse-item" href="#"> <i class="fas fa-check-circle"></i> Confirmar alquiler</a>
+            <a id="idConfirmar" class="collapse-item" href="#"> <i class="fas fa-check-circle"></i> Confirmar
+              alquiler</a>
             <a class="collapse-item" href="#"> <i class="fas fa-redo-alt"></i> Modificar alquiler</a>
-            <a class="collapse-item" href="#"> <i class="fas fa-ban"></i> Anular alquiler</a>
+            <a id="idAnular" class="collapse-item" href="#"> <i class="fas fa-ban"></i> Anular alquiler</a>
           </div>
         </div>
       </li>
+
+      <!-- Modal Confirmar-->
+      <div class="modal fade" id="idModalConfirmar" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Confirmar Alquiler</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Anular-->
+      <div class="modal fade" id="idModalAnular" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Anular Alquiler</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
       <!--  componentes -->
       <li class="nav-item active">
         <a id="idAlquileres" class="nav-link" href="#">
@@ -98,7 +144,7 @@ $user_session = session();
       </li> -->
       <li class="nav-item active">
         <a id="idCalificacion" class="nav-link" href="#">
-          <i class="fas fa-star"></i>
+          <i class=" fas fa-star"></i>
           <span>Calificar puntos ED</span></a>
       </li>
       <!-- Botones para las acciones -->
@@ -280,6 +326,7 @@ if (isset($puntuacion)) {
   <script src="<?php echo base_url('ajax/buscar-punto-ed.js') ?>"></script>
   <script src="<?php echo base_url('ajax/api-map.js') ?>"></script>
   <script src="<?php echo base_url('ajax/modificar-usuario.js') ?>"></script>
+  <script src="<?php echo base_url('ajax/modales.js') ?>"></script>
 
 </body>
 
