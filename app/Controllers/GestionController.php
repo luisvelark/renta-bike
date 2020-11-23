@@ -4,27 +4,32 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Controllers\ClienteController;
-use App\Models\PuntoEntregaDevolucionModel;
+use App\Controllers\PuntoEDController;
+use App\Controllers\AlquilerController;
+use App\Controllers\UsuarioController;
 
 class GestionController extends BaseController
 {
-    private $session;
+    /* private $session; */
     public function __construct()
     {
-        $this->session= session();
+        $this->session = session();
+        $this->Cpuntos = new PuntoEDController();
+        $this->cCliente = new ClienteController();
+        $this->cAlquiler = new AlquilerController();
+        $this->cUsuario= new UsuarioController();
     }
-    
+
     public function index()
     {
-        if(!isset($this->session->idUsuario)){
+        if (!isset($this->session->idUsuario)) {
             return redirect()->to(base_url());
         }
         echo view('index-administrador');
-        
     }
     public function indexCliente()
     {
-        if(!isset($this->session->idUsuario)){
+        if (!isset($this->session->idUsuario)) {
             return redirect()->to(base_url());
         }
         echo view('index-cliente');
@@ -36,28 +41,29 @@ class GestionController extends BaseController
 
     public function nuevoAlquiler()
     {
-        $puntos= new PuntoEntregaDevolucionModel();
-        $datos= ['datos'=> $puntos->obtenerPuntosEntregaDevolucion()];
-        echo view('layouts/nuevo-alquiler',$datos);
 
+        $datos = ['datos' => $this->Cpuntos->puntoED->obtenerPuntosEntregaDevolucion()];
+        echo view('layouts/nuevo-alquiler', $datos);
     }
-    
+
 
     public function multasCredito()
     {
-       echo view('layouts/multas-credito');
+
+        echo view('layouts/multas-credito');
     }
     public function alquileresConcretados()
     {
-        echo view ('layouts/alquileres-concretados');
-        
+        $user_session = session();
+        $datos = ['alquileres' => $this->cAlquiler->alquilerModel->verAlquileresConcretados($user_session->idUsuario)];
+        echo view('layouts/alquileres-concretados', $datos);
     }
     public function creditoYMultasCliente()
     {
-        $user_session= session();
-        $cCliente= new ClienteController();
-        $datos= ['datos'=> $cCliente->creditoMultasCliente($user_session->idUsuario)];
-        echo view ('layouts/credito-multas-cliente',$datos);
+        $user_session = session();
+
+        $datos = ['datos' => $this->cCliente->creditoMultasCliente($user_session->idUsuario)];
+        echo view('layouts/credito-multas-cliente', $datos);
     }
     public function horarioMayorDemanda()
     {
@@ -77,6 +83,15 @@ class GestionController extends BaseController
     }
     public function buscarPuntoED()
     {
-        echo view('layouts/buscar-punto-ed');
+        
+        $coor=['coordenadas'=>$this->Cpuntos->puntoED->obtenerCoordenadas()];
+        echo view('layouts/buscar-punto-ed',$coor);
+    }
+    
+    public function modificarUsuario()
+    {
+        $user_session = session();
+        $datos=['usuario'=> $this->cUsuario->usuario->buscarUsuario($user_session->correo)];
+        echo view('layouts/modificar-usuario',$datos);
     }
 }

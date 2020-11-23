@@ -11,7 +11,7 @@ class ClienteController extends BaseController
     public function __construct()
     {
         $this->cliente = new ClienteModel();
-        $this->CUsuario = new UsuarioController();
+        $this->cUsuario = new UsuarioController();
     }
 
     public function creditoMultasCliente($id)
@@ -23,10 +23,10 @@ class ClienteController extends BaseController
     {
 
         $dni = $_POST['dniCliente'];
-        $datos = ['usuario' => $this->CUsuario->usuario->buscarUsuarioDNI($dni)];
+        $datos = ['usuario' => $this->cUsuario->usuario->buscarUsuarioDNI($dni)];
         if (isset($datos['usuario'])) {
             $id = $datos['usuario']['idUsuario'];
-            $datos = ['multaCredito' => $this->creditoMultasCliente($id), 'usuario' => $this->CUsuario->usuario->buscarUsuarioDNI($dni)];
+            $datos = ['multaCredito' => $this->creditoMultasCliente($id), 'usuario' => $this->cUsuario->usuario->buscarUsuarioDNI($dni)];
             echo json_encode($datos);
             die();} else {
             $datos = 'error';

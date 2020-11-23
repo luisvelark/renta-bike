@@ -1,27 +1,40 @@
 <div>
-  <h2>Alquileres concretados</h2>
-  <div class="table-responsive">
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Fecha</th>
-          <th>Office</th>
-          <th>Age</th>
-          <th>Start date</th>
-          <th>Salary</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Tiger Nixon</td>
-          <td>System Architect</td>
-          <td>Edinburgh</td>
-          <td>61</td>
-          <td>2011/04/25</td>
-          <td>$320,800</td>
-        </tr>
-      </tbody>
-    </table>
+  <h1>Alquileres concretados</h1>
+
+
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">Información de alquileres</h6>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Numero de bicicleta</th>
+              <th>Punto de entrega</th>
+              <th>Punto de devolución</th>
+              <th>Fecha de alquiler</th>
+              <th>Hora de inicio</th>
+              <th>Hora de fin</th>
+              <th>Hora de entrega</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+            for ($i = 0; $i < count($alquileres); $i++) {
+              echo '<tr>'.
+                '<td>' . $alquileres[$i]['numB'] . '</td>' .
+                '<td>' . $alquileres[$i]['inicio'] . '</td>' .
+                '<td>' . $alquileres[$i]['fin'] . '</td>' .
+                '<td>' .  date("d/m/Y", strtotime($alquileres[$i]['fechaAlquiler'])). '</td>' .
+                '<td>' . $alquileres[$i]['horaInicioAlquiler'] . '</td>' .
+                '<td>' . $alquileres[$i]['HoraFinAlquiler'] . '</td>' .
+                '<td>' . $alquileres[$i]['HoraEntregaAlquiler'] . '</td></tr>';
+            } ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>

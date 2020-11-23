@@ -63,18 +63,35 @@ function envioAlquiler() {
           </div>`;
           detalle.innerHTML = `
           <ul class="p-2 text-white text-left">
-            <li>Cliente:  ${data.detalle.idUsuarioCliente}</li>
-            <li>Punto de entrega:  ${data.detalle.idPuntoE}</li>
-            <li>N° de bicicleta:  ${data.detalle.idBicicleta}</li>
-            <li>Fecha de alquiler:  ${data.detalle.fechaAlquiler}</li>
-            <li>Hora de entrega:  ${data.detalle.HoraEntregaAlquiler}</li>
-            <li>Hora de inicio alquiler:  ${data.detalle.horaInicioAlquiler}</li>
-            <li>Hora de fin alquiler:  ${data.detalle.HoraFinAlquiler}</li>
-            <li>Cliente Alternativo:  ${data.detalle.clienteAlternativo}</li>
+            <li><span class="font-weight-bold">Cliente:</span>  ${
+              data.usuario.nombre
+            } ${data.usuario.apellido}</li>
+            <li><span class="font-weight-bold">Punto de entrega:</span>  ${
+              data.puntoYBici.dirPunto
+            }</li>
+            <li><span class="font-weight-bold">N° de bicicleta:</span>  ${
+              data.puntoYBici.numBici
+            }</li>
+            <li><span class="font-weight-bold">Fecha de alquiler:</span>  ${formato(
+              data.detalle.fechaAlquiler
+            )}</li>
+            <li><span class="font-weight-bold">Hora de inicio alquiler:</span>  ${
+              data.detalle.horaInicioAlquiler
+            }</li>
+            <li><span class="font-weight-bold">Hora de fin alquiler:</span>  ${
+              data.detalle.HoraFinAlquiler
+            }</li>
+            <li><span class="font-weight-bold">Cliente Alternativo:</span>  ${
+              data.detalle.clienteAlternativo
+            }</li>
           </ul>
           `;
         }
       });
     // .catch((err) => console.log(err));
   }
+}
+
+function formato(texto) {
+  return texto.replace(/^(\d{4})-(\d{2})-(\d{2})$/g, "$3/$2/$1");
 }

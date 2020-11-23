@@ -1,6 +1,5 @@
 <?php
 $user_session = session();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,20 +56,79 @@ $user_session = session();
       </div>
 
 
-      <!-- Botones para las acciones -->
-
+      <!--  componentes -->
       <li class="nav-item active">
-        <a id="idAlquiler" class="nav-link" href="#">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Nuevo alquiler</span></a>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+          aria-controls="collapseTwo">
+          <i class="fas fa-bicycle"></i>
+          <span>Alquiler</span>
+        </a>
+        <!-- Botones opciones alquiler-->
+
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Nuevo alquiler </a>
+            <a class="collapse-item" href="#"> <i class="fas fa-arrow-circle-up"></i> Realizar devolución </a>
+            <a id="idConfirmar" class="collapse-item" href="#"> <i class="fas fa-check-circle"></i> Confirmar
+              alquiler</a>
+            <a class="collapse-item" href="#"> <i class="fas fa-redo-alt"></i> Modificar alquiler</a>
+            <a id="idAnular" class="collapse-item" href="#"> <i class="fas fa-ban"></i> Anular alquiler</a>
+          </div>
+        </div>
       </li>
+
+      <!-- Modal Confirmar-->
+      <div class="modal fade" id="idModalConfirmar" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Confirmar Alquiler</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Reportar Daños</button>
+              <button type="button" class="btn btn-primary">Confirmar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Anular-->
+      <div class="modal fade" id="idModalAnular" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Anular Alquiler</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!--  componentes -->
       <li class="nav-item active">
         <a id="idAlquileres" class="nav-link" href="#">
           <i class="fas fa-list-ol"></i>
           <span>Alquileres concretados</span></a>
       </li>
       <li class="nav-item active">
-        <a id="idBuscar" class="nav-link" href="#">
+        <a class="nav-link" target="_blank" href="<?php echo base_url(); ?>/GestionController/buscarPuntoED">
           <i class="fas fa-map-marker-alt"></i>
           <span>Buscar puntos de entrega y devolución</span></a>
       </li>
@@ -79,14 +137,14 @@ $user_session = session();
           <i class="fas fa-coins"></i>
           <span>Crédito y multas</span></a>
       </li>
-      <li class="nav-item active">
+      <!-- <li class="nav-item active">
         <a class="nav-link" href="#">
           <i class="far fa-file-alt"></i>
           <span>Manual de usuario</span></a>
-      </li>
+      </li> -->
       <li class="nav-item active">
         <a id="idCalificacion" class="nav-link" href="#">
-          <i class="fas fa-star"></i>
+          <i class=" fas fa-star"></i>
           <span>Calificar puntos ED</span></a>
       </li>
       <!-- Botones para las acciones -->
@@ -168,9 +226,9 @@ $user_session = session();
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a id="idModificarPerfil" class="dropdown-item" href="#">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Mi perfil
+                  Modificar perfil
                 </a>
 
                 <div class="dropdown-divider"></div>
@@ -188,7 +246,12 @@ $user_session = session();
 
         <!-- Begin Page Content Body -->
         <div id="contenido" class="container-fluid">
-        <div id="map"></div>
+          <?php
+if (isset($puntuacion)) {
+    echo '<h3> ¡La calificación se ha realizado con éxito! </h3>';
+}
+
+?>
 
         </div>
         <!-- /.container-fluid -->
@@ -262,8 +325,9 @@ $user_session = session();
   <script src="<?php echo base_url('ajax/calificar-punto-ed.js') ?>"></script>
   <script src="<?php echo base_url('ajax/buscar-punto-ed.js') ?>"></script>
   <script src="<?php echo base_url('ajax/api-map.js') ?>"></script>
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xHqik&callback=initMap" async defer></script> -->
-  
+  <script src="<?php echo base_url('ajax/modificar-usuario.js') ?>"></script>
+  <script src="<?php echo base_url('ajax/modales.js') ?>"></script>
+
 </body>
 
 </html>

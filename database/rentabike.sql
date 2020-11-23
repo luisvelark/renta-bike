@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-11-2020 a las 22:42:32
+-- Tiempo de generación: 22-11-2020 a las 23:28:50
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -233,7 +233,10 @@ INSERT INTO `usuario` (`idUsuario`, `dni`, `nombre`, `apellido`, `correo`, `tele
 (5, 23312456, 'Miguel', 'Bernoli', 'miguelbernoli@yahoo.com.ar', '2974321123', 'Estados Unidos 404', '2033124566', '1974-07-14', 'hardlock', 'cliente'),
 (6, 36123456, 'Brenda', 'Uribe', 'brenda@brenda.com', '2974123456', 'Barrio ceferino', '20361234567', '1991-08-02', 'estebancrack', 'administrador'),
 (7, 12345678, 'admin', 'admin', 'admin', 'admin', '123456789', 'a', '0000-00-00', 'admin', 'administrador'),
-(8, 12345678, 'cliente', 'cliente', 'cliente', 'cliente', '123456789', 'c', '0000-00-00', 'cliente', 'cliente');
+(8, 12345678, 'cliente', 'cliente', 'cliente', 'cliente', '123456789', 'c', '0000-00-00', 'cliente', 'cliente'),
+(9, 45123456, 'tu mami', 'si ella', 'lamamadella@nose.com', '123456789', 'Ceferino', '12345123456', '1982-12-12', '12345678', 'cliente'),
+(10, 37123456, 'tu', 'prima', 'laprima@hotmail.com', '1231231231', 'Ceferino', '12337123456', '1994-12-12', '12345678', 'cliente'),
+(11, 37802605, 'luca', 'hammond', 'luca@hamon.com', '2983123132', 'walmart', '12337802605', '1993-12-12', '12345678', 'cliente');
 
 --
 -- Índices para tablas volcadas
@@ -346,7 +349,7 @@ ALTER TABLE `puntoentregadevolucion`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Restricciones para tablas volcadas

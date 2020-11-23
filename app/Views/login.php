@@ -39,13 +39,14 @@
               <div class="col-lg-6">
                 <div class="p-5">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Bienvenido!</h1>
+                    <h1 class="h4 text-gray-900 mb-4">¡Inicia sesion para empezar!</h1>
                   </div>
 
                   <form class="user" method="POST" action="<?php echo base_url(); ?>/UsuarioController/ingresarAlSistema">
 
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="email" name="email" aria-describedby="emailHelp" autofocus placeholder="Ingrese un correo..." required>
+                      <input type="text" class="form-control form-control-user" id="email" name="email" aria-describedby="emailHelp"  autofocus placeholder="Ingrese un correo..." required>
+                    
                     </div>
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Contraseña" required>
@@ -69,7 +70,16 @@
                   <hr>
 
                   <div class="text-center">
-                    <a class="small" href="<?php echo base_url('GestionController/mostrarRegistroUsuario') ?>">Create una cuenta!</a>
+                    <a class="medium" href="<?php echo base_url('GestionController/mostrarRegistroUsuario') ?>">
+                    <i class="fas fa-user-plus"></i>
+                    <span>¡Create una cuenta!</span></a>
+                  </div>
+                  <hr>
+                  <div class="text-center">
+
+                    <a class="medium" download="Acme Documentation (ver. 2.0.1).txt" href="<?php echo base_url('/download/Acme Documentation (ver. 2.0.1).txt') ?>">
+                    <i class="far fa-file-alt"></i>
+                    <span>Descargar manual de usuario</span></a>
                   </div>
                 </div>
               </div>

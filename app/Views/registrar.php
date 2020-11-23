@@ -28,11 +28,12 @@
       <div class="card-body p-0">
         <!-- Nested Row within Card Body -->
         <div class="row">
-          <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+          <div class="col-lg-5 d-none d-lg-block bg-registrar-image">
+          <img class="registrar-image" src="<?php echo base_url('/img/bici2.jpg') ?>" alt=""></div>
           <div class="col-lg-7">
             <div class="p-5">
               <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Crear una cuenta!</h1>
+                <h1 class="h4 text-gray-900 mb-4">¡Crear una cuenta!</h1>
               </div>
               <form class="user" method="POST" action="<?php echo base_url(); ?>/UsuarioController/registrarUsuario">
                 <div class="form-group row">
@@ -74,7 +75,7 @@
                     <input type="password" class="form-control form-control-user" id="rcontraseña" name="rcontraseña" placeholder="Repetir contraseña" required>
                   </div>
                 </div>
-                <button class="btn btn-primary btn-user btn-block" type="submit">Registrarse</button>
+                <button class="btn btn-primary btn-user btn-block" data-toggle="modal" data-target="#ventanaModal" type="submit">Registrarse</button>
                 </a>
                 <hr>
 
@@ -90,7 +91,7 @@
                       </div>
                     <?php } ?>
               <div class="text-center">
-                <a class="small" href="<?php echo base_url('LoginController/index') ?>">Ya tienes una cuenta? Login!</a>
+                <a class="medium" href="<?php echo base_url('LoginController/index') ?>">¿Ya tienes una cuenta? ¡Ingresa!</a>
               </div>
             </div>
           </div>
@@ -99,8 +100,30 @@
     </div>
 
   </div>
+<!-- ---------------------------------------------------------------------------------------------->
+<!-- <button class="btn btn-success" data-toggle="modal" data-target="#ventanaModal"></button> -->
 
-  
+  <!-- <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="tituloVentana" aria-hidden="true" id="ventanaModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 id="tituloVentana">Bienvenido!</h5>
+        <button class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-success">
+        <p><strong>Te registraste con ÉXITO!</strong></p>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-success" onclick="<?php echo base_url('GestionController/indexCliente')?>">Aceptar</button>
+      </div>
+    </div> 
+  </div>
+</div> -->
 
   <!-- Bootstrap core JavaScript-->
   <script src="<?php echo base_url('vendor/jquery/jquery.min.js') ?>"></script>

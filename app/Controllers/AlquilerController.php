@@ -2,26 +2,30 @@
 
 use App\Controllers\BaseController;
 use App\Models\AlquilerModel;
+use CodeIgniter\HTTP\Request;
 
 
 class AlquilerController extends BaseController
 {
 
-    protected $alquilerModel;
+    /* protected $alquilerModel; *///cambiar a protected
+    protected $request;
+    protected $controlPED;
 
     public function __construct()
     {
+        $this->request = \Config\Services::request();
         $this->alquilerModel = new AlquilerModel();
+        $this->controlPED = new PuntoEDController();
     }
 
     public function solicitarAlquiler()
     {
-        $request = \Config\Services::request();
 
-        $puntoE = $request->getPost('punto-entrega');
-        $horaInicio = $request->getPost('hora-inicio');
-        $cantHoras = $request->getPost('cant-hora');
-        $dniAlternativo = $request->getPost('dni-optativo');
+        $puntoE = $this->request->getPost('punto-entrega');
+        $horaInicio = $this->request->getPost('hora-inicio');
+        $cantHoras = $this->request->getPost('cant-hora');
+        $dniAlternativo = $this->request->getPost('dni-optativo');
 
         if ($puntoE === '---' || empty($horaInicio) || $cantHoras === '---' || empty($puntoE) || empty($cantHoras)) {
 
@@ -29,32 +33,25 @@ class AlquilerController extends BaseController
 
         } else {
 
-            // $horaInicioDate = DateTime::createFromFormat('H:i', $horaInicio);
-            // $horaInicioDate->modify('+' . $cantHoras . 'hours');
-            // $horaFinAlquiler = $horaInicioDate->format('H:i');
+            $puntoYBici = $this->controlPED->biciDisponibles(intval($puntoE));
 
-            // $date = new DateTime($horaInicio);
-            // $date->modify('+' . $cantHoras . 'hours');
-            // // $date->modify('+10 minute');
-            // // $date->modify('-30 second');
-            // $horaFinAlquiler = $date->format('H:i:s');
-
-            // $horaFinAlquiler = $horaInicio->;
-            // $horaFinAlquiler = new DateTime();
-            // $horaFinAlquiler = $horaInicio->date_modify('+' . $cantHoras.);
+            $sesion = session();
+            $idUsuario = $sesion->get('idUsuario');
+            $nombreUser = $sesion->get('nombre');
+            $apellidoUser = $sesion->get('apellido');
 
             $alquiler = [
-                'idUsuarioCliente' => 1,
-                'idBicicleta' => 1,
+                'idUsuarioCliente' => $idUsuario,
+                'idBicicleta' => $puntoYBici['idBici'],
                 'idPuntoE' => intval($puntoE),
                 'idPuntoD' => 2,
                 'fechaAlquiler' => date("Y-m-d"),
-                'horaInicioAlquiler' => $horaInicio,
-                'HoraFinAlquiler' => date("H:i:s"),
-                'HoraEntregaAlquiler' => date("H:i:s"),
+                'horaInicioAlquiler' => date("H:i:s", strtotime($horaInicio)),
+                'HoraFinAlquiler' => calcularSumaHoras($horaInicio, $cantHoras),
+                'HoraEntregaAlquiler' => " ",
                 'clienteAlternativo' => intval($dniAlternativo),
-                'estadoAlquiler' => 'EnProceso',
-                'daño' => 'SinDaño',
+                'estadoAlquiler' => 'Activo',
+                'daño' => $puntoYBici['dañoBici'],
                 'ruta' => 'la ruta',
 
             ];
@@ -63,6 +60,10 @@ class AlquilerController extends BaseController
 
             $arr = ["msg" => 'Su reserva se realizo con éxito!',
                 "detalle" => $alquiler,
+                "usuario" => ["nombre" => $nombreUser,
+                    "apellido" => $apellidoUser,
+                ],
+                "puntoYBici" => $puntoYBici,
             ];
 
         }
@@ -112,8 +113,7 @@ class AlquilerController extends BaseController
         $datos= ['puntosRetorno'=>$this->alquilerModel->obtenerPuntosRetorno($fechaInicio,$fechaFinal)];
         if (isset($datos['puntosRetorno'])) {
             echo json_encode($datos);
-            die();} 
-        else {
+            die();} else {
             $datos = 'error';
             echo json_encode($datos);
             die();

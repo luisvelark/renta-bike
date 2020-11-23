@@ -21,12 +21,23 @@ class AlquilerModel extends Model
     protected $validationRules = [];
     protected $validationMessages = [];
     protected $skipValidation = false;
-
+    
+    public function verAlquileresConcretados ($id){
+        $this->select('alquiler.*, b.numeroBicicleta AS numB, pe.direccion AS inicio, pd.direccion AS fin');
+        $this->join('bicicleta AS b', 'alquiler.idBicicleta=b.idBicicleta');
+        $this->join('puntoentregadevolucion AS pe', 'alquiler.idPuntoE=pe.idPuntoED');
+        $this->join('puntoentregadevolucion AS pd', 'alquiler.idPuntoD=pd.idPuntoED');
+        $this->where('alquiler.idUsuarioCliente',$id)->where('alquiler.estadoAlquiler','Finalizado');
+        $datos= $this->findAll();
+        return $datos;
+    }
     public function crearAlquiler($alquiler)
     {
         $this->insert($alquiler);
     }
-    public function obtenerHoraInicio($fechaInicio,$fechaFinal)
+
+    
+ public function obtenerHoraInicio($fechaInicio,$fechaFinal)
     {
         $array=['fechaAlquiler >'=>$fechaInicio,'fechaAlquiler <'=>$fechaFinal];
         $builder = $this->builder();
