@@ -25,4 +25,17 @@ class MultaModel extends Model
         return $multa;
     }
 
+    public function crearMulta($id,$daño,$precio){
+        if($daño=='Recuperable'){
+            $monto= $precio*0.25;
+            $this->insert(['idUsuarioCliente'=>$id ,'monto'=>$monto, 'fechaMulta'=> date("Y-m-d"),'detalleMulta'=> 'No declarar daños minimos',
+            'pagado'=>0]);
+        } else{
+            
+            $this->insert(['idUsuarioCliente'=>$id ,'monto'=>$precio, 'fechaMulta'=> date("Y-m-d"),'detalleMulta'=> 'No declarar daños considerables',
+            'pagado'=>0]);
+        }
+    }
+
 }
+ 

@@ -10,7 +10,7 @@ class BicicletaModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['numeroBicicleta', 'estado','daño','observaciones','idPuntoED'];
+    protected $allowedFields = ['numeroBicicleta', 'estado','daño','observaciones','idPuntoED','precio'];
 
 
     protected $useTimestamps = false;
@@ -21,4 +21,15 @@ class BicicletaModel extends Model
     protected $validationRules    = [];
     protected $validationMessages = [];
     protected $skipValidation     = false;
+    
+
+    public function cambiarEstado($id,$estado){
+        $data= ['estado' => $estado];
+        $this->update($id,$data);
+    }
+    public function aplicarDaño($id,$daño){
+        $data= ['daño' => $daño];
+        $this->update($id,$data);
+    }
+
 }

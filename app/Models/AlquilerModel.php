@@ -74,4 +74,16 @@ class AlquilerModel extends Model
         return $puntoD;
         //SELECT pd.direccion,pd.telefono,pd.calificacionTotal,COUNT(a.idPuntoD) FROM alquiler as a INNER JOIN puntoentregadevolucion as pd WHERE a.idPuntoD=pd.idPuntoED AND fechaAlquiler>'2013-05-13' AND fechaAlquiler < '2020-11-18' GROUP BY(a.idPuntoD)
     }
+
+    public function buscarAlquilerActivo($id){
+        $alquiler =$this->where('idUsuarioCliente', $id)->where('estadoAlquiler','Activo')->first();
+        return $alquiler;
+    }
+    public function buscarUltimoAlquilerPorBicicleta($idBicicleta){
+        $this->where('idBicicleta', $idBicicleta)->where('estadoAlquiler','Finalizado');
+        $this->orderBy('idAlquiler','DESC');
+        $alquiler= $this->first();
+        return $alquiler;
+    }
 }
+
