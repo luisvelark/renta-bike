@@ -83,16 +83,20 @@ $user_session = session();
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Confirmar Alquiler</h5>
+              <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Confirmar Alquiler</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              ...
+              #TODO:
+              <p><span class="font-weight-bold">Estado del Alquiler: </span>Activo</p>
+              <p><span class="font-weight-bold">Punto de entrega: </span>Av.Hipólito Yrioyen 2351</p>
+              <p><span class="font-weight-bold">Hora de inicio:</span>16:32:00</p>
+              <p><span class="font-weight-bold">Hora de fin:</span>19:32:00</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Reportar Daños</button>
+              <button type="button" class="btn btn-danger">Reportar Daños</button>
               <button type="button" class="btn btn-primary">Confirmar</button>
             </div>
           </div>
