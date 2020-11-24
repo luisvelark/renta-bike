@@ -51,4 +51,16 @@ class AlquilerModel extends Model
         $consulta='SELECT horaInicioAlquiler,COUNT(horaInicioAlquiler) as conteo FROM alquiler WHERE fechaAlquiler >'.$fechaInicio.' AND fechaAlquiler <'.$fechaInicio.' GROUP BY(horaInicioAlquiler)';
         $builder->select($consulta);
         return $builder->get();
-    }}
+    }
+
+    public function buscarAlquilerActivo($id){
+        $alquiler =$this->where('idUsuarioCliente', $id)->where('estadoAlquiler','Activo')->first();
+        return $alquiler;
+    }
+    public function buscarUltimoAlquilerPorBicicleta($idBicicleta){
+        $this->where('idBicicleta', $idBicicleta)->where('estadoAlquiler','Finalizado');
+        $this->orderBy('idAlquiler','DESC');
+        $alquiler= $this->first();
+        return $alquiler;
+    }
+}

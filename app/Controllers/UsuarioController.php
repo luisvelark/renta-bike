@@ -60,9 +60,15 @@ class UsuarioController extends BaseController
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
             $user = $this->usuario->buscarUsuario($email);
+            
             if ($user != null) {
                 //if (password_verify($password),$user['contraseña']){}
                 if ($user['contraseña'] == $password) {
+
+                    if($this->cliente->obtenerClienteID($user['idUsuario'])==null){
+                    $this->cliente->insert(['idUsuario'=>$user['idUsuario'],'puntajeTotal' => 0, 'credito' => 0, 'suspendido' => 0, 'fechaInicioSuspencion' => '2020-12-12', 'fechaFinSuspencion' => '2020-12-12' ]);
+
+                    }
                     $datosSesion = [
                         'idUsuario' => $user['idUsuario'],
                         'nombre' => $user['nombre'],
@@ -110,8 +116,7 @@ class UsuarioController extends BaseController
 
             $user = $this->usuario->buscarUsuario($this->request->getPost('correo'));
             $idUsuario = $user['idUsuario'];
-/*
-$this->cliente->insert(['idUsuario'=>$idUsuario,'puntajeTotal' => 0, 'credito' => 0, 'suspendido' => 0, 'fechaInicioSuspencion' => '2020-12-12', 'fechaFinSuspencion' => '2020-12-12' ]); */
+
 
             $datosSesion = [
                 'idUsuario' => $idUsuario,
@@ -122,8 +127,9 @@ $this->cliente->insert(['idUsuario'=>$idUsuario,'puntajeTotal' => 0, 'credito' =
 
             $sesion = session();
             $sesion->set($datosSesion);
-            $mensaje = ['¡Te has registrado de manera exitosa!'];
-            return redirect()->to(base_url() . '/GestionController/indexCliente');
+            $mensaje = ['msj'=>'¡Te has registrado de manera exitosa!'];
+            /* return redirect()->to(base_url() . '/GestionController/indexCliente'); */
+            echo view('login',$mensaje);
 
         } else {
             $data = [

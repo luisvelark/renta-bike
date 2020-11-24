@@ -3,7 +3,8 @@
 use App\Controllers\BaseController;
 use App\Models\AlquilerModel;
 use CodeIgniter\HTTP\Request;
-
+use App\Controllers\MultaController;
+use App\Controllers\BicicletaController;
 class AlquilerController extends BaseController
 {
 
@@ -16,6 +17,8 @@ class AlquilerController extends BaseController
         $this->request = \Config\Services::request();
         $this->alquilerModel = new AlquilerModel();
         $this->controlPED = new PuntoEDController();
+        $this->cMulta= new MultaController();
+        $this->cBicicleta = new BicicletaController();
     }
 
     public function solicitarAlquiler()
@@ -54,6 +57,7 @@ class AlquilerController extends BaseController
                 'ruta' => 'la ruta',
 
             ];
+            //cambiar el estado de la bicicleta a EnAlquiler
 
             $this->alquilerModel->crearAlquiler($alquiler);
 
@@ -83,6 +87,25 @@ class AlquilerController extends BaseController
             $datos = 'error';
             echo json_encode($datos);
             die();
+        }
+    }
+
+    public function soliticaReportarDaños(){
+        if ($this->request->getMethod() == "post") {
+            $idUsuarioActual= $this->request->getPost('idUsuarioOculto');
+            $alquilerActual= $this->alquilerModel->buscarAlquilerActivo($idUsuarioActual);
+            $idBicicleta= $alquilerActual['idBicicleta'];
+            $alquilerUltimo= $this->alquilerModel->buscarUltimoAlquilerPorBicicleta($idBicicleta);
+            $idUsuarioUltimo= $alquilerUltimo['idUsuarioCliente'];
+            $precio= 25000;
+            $this->cMulta->multa->crearMulta($idUsuarioUltimo,$this->request->getPost('comboDaño'),$precio);
+            $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta,'EnReparacion');
+            $this->cBicicleta->bicicleta->aplicarDaño($idBicicleta,$this->request->getPost('comboDaño'));
+
+            $puntoYBici = $this->controlPED->biciDisponibles($alquilerActual['idPuntoE']);
+            $idBicicletaNueva= $puntoYBici['idBici'];
+            //asignarle bicicleta a el cliente q reportó
+            echo $idBicicletaNueva;
         }
     }
 
