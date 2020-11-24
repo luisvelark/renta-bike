@@ -93,11 +93,6 @@ $user_session = session();
           <i class="fas fa-coins"></i>
           <span>Crédito y multas de cliente</span></a>
       </li>-->
-      <li class="nav-item active">
-        <a class="nav-link" href="#">
-          <i class="far fa-file-alt"></i>
-          <span>Manual de usuario</span></a>
-      </li>
       <div class="sidebar-heading">
         GESTIÓN
       </div>
