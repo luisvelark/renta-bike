@@ -39,18 +39,40 @@ class AlquilerModel extends Model
     
  public function obtenerHoraInicio($fechaInicio,$fechaFinal)
     {
-        //$array=['fechaAlquiler >'=>$fechaInicio,'fechaAlquiler <'=>$fechaFinal];
-        $bd      = \Config\Database::connect();
-        /*$builder = $bd->table('alquiler')
-            ->select('horaInicioAlquiler')
-            ->selectCount('horaInicioAlquiler','conteo')
-            ->where($array)
-            ->groupBy('horaInicioAlquiler');*/
-        
-        $builder = $bd->table('alquiler');
-        $consulta='SELECT horaInicioAlquiler,COUNT(horaInicioAlquiler) as conteo FROM alquiler WHERE fechaAlquiler >'.$fechaInicio.' AND fechaAlquiler <'.$fechaInicio.' GROUP BY(horaInicioAlquiler)';
-        $builder->select($consulta);
-        return $builder->get();
+        $array=['fechaAlquiler >'=>$fechaInicio,'fechaAlquiler <'=>$fechaFinal];
+        $builder = $this->builder();
+        $fecha=$this->select('horaInicioAlquiler')
+                ->selectCount('horaInicioAlquiler','conteo')
+                ->where($array)
+                ->groupBy('horaInicioAlquiler')
+                ->orderBy('conteo', 'DESC')
+                ->findAll();
+        return $fecha;
+    }
+    public function obtenerTiempoAlquiler($fechaInicio,$fechaFinal)
+    {
+        $array=['fechaAlquiler >'=>$fechaInicio,'fechaAlquiler <'=>$fechaFinal];
+        $builder = $this->builder();
+        $fecha=$this->select('(horaFinAlquiler - horaInicioAlquiler) AS resta')//calcular la hora restante
+                ->where($array)
+                ->orderBy('resta', 'ASC')
+                ->findAll();
+        return $fecha;
+        //SELECT horaFinAlquiler - horaInicioAlquiler AS resta FROM `alquiler` WHERE fechaAlquiler>'2013-05-13' AND fechaAlquiler < '2020-11-18' ORDER BY(resta)
+    }
+    public function obtenerPuntosRetorno($fechaInicio,$fechaFinal)
+    {
+        $array=['fechaAlquiler >'=>$fechaInicio,'fechaAlquiler <'=>$fechaFinal];
+        $builder = $this->builder();
+        $puntoD=$this->select('pd.direccion,pd.telefono,pd.calificacionTotal')//calcular la hora restante
+                ->selectCount('idPuntoD','conteo')
+                ->join('puntoentregadevolucion as pd', 'idPuntoD = pd.idPuntoED','inner')
+                ->where($array)
+                ->groupBy('idPuntoD')
+                ->orderBy('conteo', 'DESC')
+                ->findAll();
+        return $puntoD;
+        //SELECT pd.direccion,pd.telefono,pd.calificacionTotal,COUNT(a.idPuntoD) FROM alquiler as a INNER JOIN puntoentregadevolucion as pd WHERE a.idPuntoD=pd.idPuntoED AND fechaAlquiler>'2013-05-13' AND fechaAlquiler < '2020-11-18' GROUP BY(a.idPuntoD)
     }
 
     public function buscarAlquilerActivo($id){
@@ -64,3 +86,4 @@ class AlquilerModel extends Model
         return $alquiler;
     }
 }
+

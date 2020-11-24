@@ -25,10 +25,10 @@ function buscarHorarioMayorDemanda() {
     var respuesta = document.getElementById('respuesta');
     formulario.addEventListener('submit',function(e){
         e.preventDefault();
-        console.log("Me diste un click");
+        //console.log("Me diste un click");
         var datos =new FormData(formulario);
         console.log(datos.get('fechaInicio'),datos.get('fechaFinal'))
-        fetch("http://localhost/renta-bike/AlquilerController/obtenerFecha",{
+        fetch("http://localhost/renta-bike/AlquilerController/mostrarFecha",{
             method: 'POST',
             body: datos
         })
@@ -38,7 +38,24 @@ function buscarHorarioMayorDemanda() {
                     respuesta.innerHTML=data;
                 }
                 else{
-                    console.log(data);
+                    console.log(data.horasMayorDemanda[0]);
+                    var tabla='<br><h3>Los horarios de mayor demanda son:<br> <br>';
+                    tabla +='<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">';
+                    tabla +='<thead>';
+                    tabla +='<tr>';
+                    tabla +='<th>Hora</th>';
+                    tabla +='<th>Nro de repeticiones</th>';
+                    tabla +='</tr>';
+                    tabla +='</thead>';
+                    tabla +='<tbody>';
+                    for ($i = 0; $i < data.horasMayorDemanda.length; $i++){
+                        tabla +='<tr>';
+                        tabla +='<td>'+data.horasMayorDemanda[$i].horaInicioAlquiler+'</td>';
+                        tabla +='<td>'+data.horasMayorDemanda[$i].conteo+'</td>';
+                    }
+                    tabla +='</tbody>';
+                    tabla +='</tabla>';
+                    respuesta.innerHTML=tabla;
             }
             })
     },true)
