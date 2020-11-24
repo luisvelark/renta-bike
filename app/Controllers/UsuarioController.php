@@ -65,10 +65,10 @@ class UsuarioController extends BaseController
                 //if (password_verify($password),$user['contraseña']){}
                 if ($user['contraseña'] == $password) {
 
-                    if($this->cliente->obtenerClienteID($user['idUsuario'])==null){
+                    /* if($this->cliente->obtenerClienteID($user['idUsuario'])==null){
                     $this->cliente->insert(['idUsuario'=>$user['idUsuario'],'puntajeTotal' => 0, 'credito' => 0, 'suspendido' => 0, 'fechaInicioSuspencion' => '2020-12-12', 'fechaFinSuspencion' => '2020-12-12' ]);
 
-                    }
+                    } */
                     $datosSesion = [
                         'idUsuario' => $user['idUsuario'],
                         'nombre' => $user['nombre'],
