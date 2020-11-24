@@ -88,8 +88,8 @@ $user_session = session();
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
+            <!-- TODO: -->
             <div class="modal-body">
-              #TODO:
               <p><span class="font-weight-bold">Estado del Alquiler: </span>Activo</p>
               <p><span class="font-weight-bold">Punto de entrega: </span>Av.Hipólito Yrioyen 2351</p>
               <p><span class="font-weight-bold">Hora de inicio:</span>16:32:00</p>
@@ -167,10 +167,12 @@ $user_session = session();
     <div id="content-wrapper" class="d-flex flex-column">
 
       <!-- Main Content -->
-      <div id="content">
+      <div id="content"
+        style="background-image: url(<?php echo base_url('img/Bicis_test.jpg'); ?>);background-size:cover; "
+        class="mt-0">
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-0 static-top shadow">
 
           <!-- Sidebar Toggle (Topbar) -->
           <form class="form-inline">
@@ -248,6 +250,7 @@ $user_session = session();
         </nav>
         <!-- End of Topbar -->
 
+
         <!-- Begin Page Content Body -->
         <div id="contenido" class="container-fluid">
           <?php
@@ -260,8 +263,9 @@ if (isset($puntuacion)) {
         </div>
         <!-- /.container-fluid -->
 
+
+        <!-- End of Main Content -->
       </div>
-      <!-- End of Main Content -->
 
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
