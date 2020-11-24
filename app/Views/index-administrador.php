@@ -62,12 +62,12 @@ $user_session = session();
       <li class="nav-item active">
         <a id="idPuntoRetorno" class="nav-link" href="#">
           <i class="fas fa-map-marker-alt"></i>
-          <span>Puntos de retorno mas utilizados</span></a>
+          <span>Puntos de retorno más utilizados</span></a>
       </li>
       <li class="nav-item active">
         <a id="idTiempoAlquiler" class="nav-link" href="#">
           <i class="fas fa-hourglass-end"></i>
-          <span>Tiempo de alquiler mas utilizados</span></a>
+          <span>Tiempo de alquiler más utilizados</span></a>
       </li>
       <li class="nav-item active">
         <a id="idHorarioMayor" class="nav-link" href="#">
@@ -148,14 +148,14 @@ $user_session = session();
             </li>
 
             <!-- Nav Item - Alerts -->
-            <li class="nav-item dropdown no-arrow mx-1">
+            <!--<li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
                 <!-- Counter - Alerts -->
-                <span class="badge badge-danger badge-counter">3+</span>
+              <!--  <span class="badge badge-danger badge-counter">3+</span>
               </a>
               <!-- Dropdown - Alerts -->
-              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+             <!-- <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                 <h6 class="dropdown-header">
                   Alerts Center
                 </h6>
@@ -197,14 +197,14 @@ $user_session = session();
             </li>
 
             <!-- Nav Item - Messages -->
-            <li class="nav-item dropdown no-arrow mx-1">
+            <!--<li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-envelope fa-fw"></i>
                 <!-- Counter - Messages -->
-                <span class="badge badge-danger badge-counter">7</span>
+               <!-- <span class="badge badge-danger badge-counter">7</span>
               </a>
               <!-- Dropdown - Messages -->
-              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+              <!--<div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                 <h6 class="dropdown-header">
                   Message Center
                 </h6>
@@ -250,7 +250,7 @@ $user_session = session();
                 </a>
                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
               </div>
-            </li>
+            </li>-->
 
             <div class="topbar-divider d-none d-sm-block"></div>
 
