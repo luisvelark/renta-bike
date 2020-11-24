@@ -175,7 +175,7 @@ $user_session = session();
             </button>
           </form>
 
-          <!-- Topbar Search -->
+          <!-- Topbar Search
           <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
               <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
@@ -186,7 +186,7 @@ $user_session = session();
                 </button>
               </div>
             </div>
-          </form>
+          </form> -->
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
