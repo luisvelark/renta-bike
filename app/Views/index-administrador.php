@@ -53,13 +53,27 @@ $user_session = session();
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        Reportes
+        ADMINISTRACIÓN
       </div>
 
 
       <!-- Botones para las acciones -->
-
       <li class="nav-item active">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="far fa-file-alt"></i>
+          <span>Reportes</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a id="idPuntoRetorno" class="collapse-item" href="#"><i class="fas fa-map-marker-alt"></i>Puntos de retorno</a>
+            <a id="idTiempoAlquiler" class="collapse-item" href="#"><i class="fas fa-hourglass-end"></i>Tiempo de alquiler</a>
+            <a id="idHorarioMayor" class="collapse-item" href="#"><i class="far fa-clock"></i>Horario de alquiler</a>
+            <a id="idMultasCredito" class="collapse-item" href="#"><i class="fas fa-coins"></i>Crédito y multas</a>
+          </div>
+        </div>
+      </li>
+
+      <!--<li class="nav-item active">
         <a id="idPuntoRetorno" class="nav-link" href="#">
           <i class="fas fa-map-marker-alt"></i>
           <span>Puntos de retorno más utilizados</span></a>
@@ -78,11 +92,27 @@ $user_session = session();
         <a id="idMultasCredito" class="nav-link" href="#">
           <i class="fas fa-coins"></i>
           <span>Crédito y multas de cliente</span></a>
-      </li>
+      </li>-->
       <li class="nav-item active">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="#">
           <i class="far fa-file-alt"></i>
           <span>Manual de usuario</span></a>
+      </li>
+      <div class="sidebar-heading">
+        GESTIÓN
+      </div>
+      <li class="nav-item active">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse" aria-expanded="true" aria-controls="collapse">
+          <i class="fas fa-bicycle"></i>
+          <span>Bicicleta</span>
+        </a>
+        <div id="collapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a id="idAlta" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Alta Bicicleta </a>
+            <a id="idModificar" class="collapse-item" href="#"> <i class="fas fa-redo-alt"></i> Modificar Bicicleta </a>
+            <a id="idBaja" class="collapse-item" href="#"> <i class="fas fa-ban"></i> Baja Bicicleta</a>
+          </div>
+        </div>
       </li>
       <!-- Botones para las acciones -->
       <!-- Divider -->
@@ -351,7 +381,8 @@ $user_session = session();
   <script src="<?php echo base_url('ajax/puntos-retorno.js') ?>"></script>
   <script src="<?php echo base_url('ajax/horario-mayor-demanda.js') ?>"></script>
   <script src="<?php echo base_url('ajax/tiempo-alquiler.js') ?>"></script>
- 
+  <script src="<?php echo base_url('ajax/bicicleta.js') ?>"></script>
+
 </body>
 
 </html>
