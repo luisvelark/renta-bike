@@ -28,7 +28,7 @@
           </label>
         </div>
         <button type="submit" class="btn btn-primary btn-lg m-2">Enviar</button>
-      </form>
+    </form>
 </div>
 <div id="respuesta">
 </div>

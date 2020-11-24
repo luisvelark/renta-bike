@@ -203,7 +203,7 @@ $user_session = session();
 
       <!-- Main Content -->
       <div id="content"
-        style="background-image: url(<?php echo base_url('img/Bicis_test.jpg'); ?>);background-size:cover; "
+        style="background-image: url(<?php echo base_url('img/Bicis.jpg'); ?>);background-size:cover; "
         class="mt-0">
 
         <!-- Topbar -->
