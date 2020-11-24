@@ -1,14 +1,14 @@
-<div>
+<div class="container py-4" style="  background: white;">
   <h1>Multa/s y crédito </h1>
 
   <?php
-  $multas = $datos['multas'];
-  ?>
+$multas = $datos['multas'];
+?>
 
   <br>
   <h4> Tu crédito actual es: <?php echo $datos['credito'] ?> </h4> <br>
 
-  <div class="card shadow mb-4">
+  <div class=" card shadow mb-4">
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary">Información de multas</h6>
     </div>
@@ -25,19 +25,19 @@
           </thead>
           <tbody>
             <?php
-            for ($i = 0; $i < count($multas); $i++) {
-              echo '<tr>
+for ($i = 0; $i < count($multas); $i++) {
+    echo '<tr>
                 <td>' . '$' . $multas[$i]['monto'] . '</td>' .
-                '<td>' . date("d/m/Y", strtotime($multas[$i]['fechaMulta'])). '</td>' .
-                '<td>' . $multas[$i]['detalleMulta'] . '</td>';
-                if($multas[$i]['pagado']==1){
-                  echo 
-                  '<td> Si </td></tr>';
-                } else{
-                  echo 
-                  '<td> No </td></tr>';
-                }
-            } ?>
+    '<td>' . date("d/m/Y", strtotime($multas[$i]['fechaMulta'])) . '</td>' .
+        '<td>' . $multas[$i]['detalleMulta'] . '</td>';
+    if ($multas[$i]['pagado'] == 1) {
+        echo
+            '<td> Si </td></tr>';
+    } else {
+        echo
+            '<td> No </td></tr>';
+    }
+}?>
           </tbody>
         </table>
       </div>

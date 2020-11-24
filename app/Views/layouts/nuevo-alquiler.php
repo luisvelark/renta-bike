@@ -3,7 +3,7 @@ $hora = new DateTime("now", new DateTimeZone('America/Argentina/Ushuaia'));
 ?>
 
 
-<div class="container m-5">
+<div class="container py-4" style="  background: white;">
   <div class="row">
     <!-- seccion del formulario! -->
     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
