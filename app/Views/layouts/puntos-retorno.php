@@ -1,4 +1,5 @@
 <div>
+<h3 style="color:blue">REPORTE DE PUNTOS DE RETORNO MÁS UTILIZADOS</h3>
 <form id="formulario">
   <div>
     <label style="color:black" for="exampleInputPassword1">Ingrese fecha inicio</label>
