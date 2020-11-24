@@ -76,7 +76,7 @@ $user_session = session();
           </div>
         </div>
       </li>
-
+      <!-- ------------------------------------------------------------------------------------------------------------------------------------------------ -->
       <!-- Modal Confirmar-->
       <div class="modal fade" id="idModalConfirmar" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -96,13 +96,49 @@ $user_session = session();
               <p><span class="font-weight-bold">Hora de fin:</span>19:32:00</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-danger">Reportar Daños</button>
+              <button id="idReportarDaños" type="button" class="btn btn-danger" data-dismiss="modal">Reportar
+                Daños</button>
               <button type="button" class="btn btn-primary">Confirmar</button>
             </div>
           </div>
         </div>
       </div>
-
+      <!----- ------------------------------------------------------------------------------------------------------------------------------------------------ -->
+      <!-- Modal Reportar-->
+      <div class="modal fade" id="idModalReportar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Reportar daños</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form method="POST" class="user"
+              action="<?php echo base_url(); ?>/AlquilerController/soliticaReportarDaños">
+              <div class="modal-body">
+                <div class="form-group">
+                  <label class="font-weight-bold">Informe el tipo de daño</label><br>
+                  <select
+                    class="form-control form-control-user font-weight-bold custom-select py-3 my-2 h-50 w-75 text-center"
+                    name="comboDaño" id="">
+                    <option selected value="Recuperable">Recuperable (daños menores)</option>
+                    <option value="Irrecuperable">Irrecuperable (daños funcionales)</option>
+                  </select>
+                  <input type="hidden" name="idUsuarioOculto" value=" <?php echo $user_session->idUsuario ?>">
+                </div>
+                <div class="form-group">
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Enviar daños</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- ------------------------------------------------------------------------------------------------------------------------------------------------ -->
       <!-- Modal Anular-->
       <div class="modal fade" id="idModalAnular" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -123,8 +159,7 @@ $user_session = session();
           </div>
         </div>
       </div>
-
-
+      <!-- ------------------------------------------------------------------------------------------------------------------------------------------------ -->
       <!--  componentes -->
       <li class="nav-item active">
         <a id="idAlquileres" class="nav-link" href="#">
@@ -184,8 +219,7 @@ $user_session = session();
           <!-- Topbar Search
           <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                aria-label="Search" aria-describedby="basic-addon2">
+              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
                 <button class="btn btn-primary" type="button">
                   <i class="fas fa-search fa-sm"></i>

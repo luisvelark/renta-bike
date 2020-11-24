@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-11-2020 a las 23:28:50
+-- Tiempo de generación: 24-11-2020 a las 21:00:00
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -72,7 +72,9 @@ INSERT INTO `alquiler` (`idAlquiler`, `idUsuarioCliente`, `idBicicleta`, `idPunt
 (4, 1, 1, 2, 1, '2020-01-25', '16:00:00', '18:00:00', '17:55:00', NULL, 'Finalizado', 'SinDaño', NULL),
 (5, 1, 1, 2, 1, '2020-01-28', '16:00:00', '18:00:00', '17:56:00', NULL, 'Finalizado', 'SinDaño', NULL),
 (6, 1, 1, 2, 1, '2020-02-05', '14:30:00', '16:30:00', '16:25:00', NULL, 'Finalizado', 'SinDaño', NULL),
-(7, 1, 3, 2, 1, '2020-02-10', '14:30:00', '16:30:00', '16:29:00', NULL, 'Finalizado', 'SinDaño', NULL);
+(7, 1, 3, 2, 1, '2020-02-10', '14:30:00', '16:30:00', '16:29:00', NULL, 'Finalizado', 'SinDaño', NULL),
+(8, 3, 4, 2, 2, '2020-11-23', '12:12:12', '14:12:12', '00:00:00', NULL, 'Finalizado', 'SinDaño', 'la ruta'),
+(9, 1, 4, 2, 2, '2020-11-23', '16:09:09', '20:09:09', '00:00:00', NULL, 'Activo', 'SinDaño', 'la ruta');
 
 -- --------------------------------------------------------
 
@@ -84,22 +86,23 @@ CREATE TABLE `bicicleta` (
   `idBicicleta` int(11) NOT NULL,
   `numeroBicicleta` varchar(3) NOT NULL,
   `estado` enum('EnAlquiler','EnReparacion','Disponible') NOT NULL,
-  `daño` enum('SinDaño','Recuperable','Irrecuperable') NOT NULL,
+  `daño` enum('SinDanio','Recuperable','Irrecuperable') NOT NULL,
   `observaciones` varchar(100) NOT NULL,
-  `idPuntoED` int(11) NOT NULL
+  `idPuntoED` int(11) NOT NULL,
+  `precio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `bicicleta`
 --
 
-INSERT INTO `bicicleta` (`idBicicleta`, `numeroBicicleta`, `estado`, `daño`, `observaciones`, `idPuntoED`) VALUES
-(1, '001', 'Disponible', 'SinDaño', '', 1),
-(2, '002', 'Disponible', 'SinDaño', '', 1),
-(3, '003', 'Disponible', 'SinDaño', '', 1),
-(4, '004', 'Disponible', 'SinDaño', '', 2),
-(5, '005', 'Disponible', 'SinDaño', '', 2),
-(6, '006', 'Disponible', 'SinDaño', '', 2);
+INSERT INTO `bicicleta` (`idBicicleta`, `numeroBicicleta`, `estado`, `daño`, `observaciones`, `idPuntoED`, `precio`) VALUES
+(1, '001', 'Disponible', 'SinDanio', '', 1, 25000),
+(2, '002', 'Disponible', 'SinDanio', '', 1, 25000),
+(3, '003', 'Disponible', 'SinDanio', '', 1, 25000),
+(4, '004', 'Disponible', 'SinDanio', '', 2, 25000),
+(5, '005', 'Disponible', 'SinDanio', '', 2, 25000),
+(6, '006', 'Disponible', 'SinDanio', '', 2, 25000);
 
 -- --------------------------------------------------------
 
@@ -114,6 +117,31 @@ CREATE TABLE `calificacion` (
   `puntos` int(11) NOT NULL,
   `descripcion` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `calificacion`
+--
+
+INSERT INTO `calificacion` (`fechaCalificacion`, `idPuntoED`, `idUsuarioCliente`, `puntos`, `descripcion`) VALUES
+('2020-11-22', 2, 3, 5, 'brenda lesa'),
+('2020-11-22', 2, 3, 5, 'brenda mala onda'),
+('2020-11-22', 2, 3, 1, 'brenda toma fernet'),
+('2020-11-22', 2, 3, 3, 'brenda mala onda'),
+('2020-11-22', 1, 1, 3, 'esteban genio. soy brenda! uwu'),
+('2020-11-22', 1, 1, 3, 'brenda mala onda'),
+('2020-11-22', 1, 1, 1, ''),
+('2020-11-23', 1, 1, 4, 'brenda ortiva'),
+('2020-11-23', 1, 1, 4, 'brenda genia'),
+('2020-11-23', 1, 1, 4, 'brenda buena onda '),
+('2020-11-23', 1, 1, 5, 'brenda lalala'),
+('2020-11-23', 1, 1, 4, 'brenda tarada'),
+('2020-11-23', 1, 1, 4, 'eaea'),
+('2020-11-23', 1, 1, 5, ''),
+('2020-11-23', 1, 1, 3, 'brenda tarada'),
+('2020-11-23', 1, 1, 5, 'brenda mala onda'),
+('2020-11-23', 1, 1, 5, 'brenda mala onda'),
+('2020-11-23', 1, 1, 5, 'brenda mala onda'),
+('2020-11-23', 1, 1, 5, '');
 
 -- --------------------------------------------------------
 
@@ -163,7 +191,10 @@ CREATE TABLE `multa` (
 INSERT INTO `multa` (`idMulta`, `idUsuarioCliente`, `monto`, `fechaMulta`, `detalleMulta`, `pagado`) VALUES
 (1, 1, 500, '2020-12-12', 'Por llegar tarde', 1),
 (2, 1, 534, '2020-11-10', 'Por no confirmar alquiler', 1),
-(3, 4, 5000, '2020-11-13', 'Por el email', 0);
+(3, 4, 5000, '2020-11-13', 'Por el email', 0),
+(4, 3, 6250, '2020-11-24', 'No declarar daños minimos', 0),
+(5, 3, 6250, '2020-11-24', 'No declarar daños minimos', 0),
+(6, 3, 6250, '2020-11-24', 'No declarar daños minimos', 0);
 
 -- --------------------------------------------------------
 
@@ -198,7 +229,7 @@ CREATE TABLE `puntoentregadevolucion` (
 --
 
 INSERT INTO `puntoentregadevolucion` (`idPuntoED`, `direccion`, `telefono`, `calificacionTotal`, `lat`, `lng`) VALUES
-(1, 'Av. San Martín 500', 446123456, 0, '-45.8609651', '-67.4884351'),
+(1, 'Av. San Martín 500', 446123456, 4, '-45.8609651', '-67.4884351'),
 (2, 'Av. Hipólito Yrigoyen 2351', 446123456, 0, '-45.8791456', '-67.5141204');
 
 -- --------------------------------------------------------
@@ -236,7 +267,12 @@ INSERT INTO `usuario` (`idUsuario`, `dni`, `nombre`, `apellido`, `correo`, `tele
 (8, 12345678, 'cliente', 'cliente', 'cliente', 'cliente', '123456789', 'c', '0000-00-00', 'cliente', 'cliente'),
 (9, 45123456, 'tu mami', 'si ella', 'lamamadella@nose.com', '123456789', 'Ceferino', '12345123456', '1982-12-12', '12345678', 'cliente'),
 (10, 37123456, 'tu', 'prima', 'laprima@hotmail.com', '1231231231', 'Ceferino', '12337123456', '1994-12-12', '12345678', 'cliente'),
-(11, 37802605, 'luca', 'hammond', 'luca@hamon.com', '2983123132', 'walmart', '12337802605', '1993-12-12', '12345678', 'cliente');
+(11, 37802605, 'luca', 'hammond', 'luca@hamon.com', '2983123132', 'walmart', '12337802605', '1993-12-12', '12345678', 'cliente'),
+(12, 38802605, '', '', '', '', '', '', '0000-00-00', '', 'administrador'),
+(13, 62626262, 'dasda', 'dada', 'esteban@brendabloqueadora.com', '123456789', 'dadasdsa', '12362626262', '1919-12-12', '12345678', 'cliente'),
+(14, 12366666, 'brenda', 'la panadera', 'brenda@panadera.com', '123456789', 'kenedy por la prove', '12312366666', '1991-08-12', '12345678', 'cliente'),
+(15, 11112222, '3123123123', '2312312321', 'da@gmail.c32312312om', '12356789', 'lalala', '12311112222', '1885-12-12', '12345678', 'cliente'),
+(16, 11334455, '34', 'urive', 'angela@sistemas.com.lala', '123456789', 'calle 510', '12311334455', '1995-12-12', '12345678', 'cliente');
 
 --
 -- Índices para tablas volcadas
@@ -269,7 +305,6 @@ ALTER TABLE `bicicleta`
 -- Indices de la tabla `calificacion`
 --
 ALTER TABLE `calificacion`
-  ADD PRIMARY KEY (`fechaCalificacion`),
   ADD KEY `idPuntoED` (`idPuntoED`),
   ADD KEY `idUsuario` (`idUsuarioCliente`);
 
@@ -313,7 +348,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `alquiler`
 --
 ALTER TABLE `alquiler`
-  MODIFY `idAlquiler` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idAlquiler` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `bicicleta`
@@ -325,13 +360,13 @@ ALTER TABLE `bicicleta`
 -- AUTO_INCREMENT de la tabla `calificacion`
 --
 ALTER TABLE `calificacion`
-  MODIFY `idPuntoED` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPuntoED` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `multa`
 --
 ALTER TABLE `multa`
-  MODIFY `idMulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idMulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `puntaje`
@@ -349,7 +384,7 @@ ALTER TABLE `puntoentregadevolucion`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Restricciones para tablas volcadas
@@ -387,7 +422,7 @@ ALTER TABLE `calificacion`
 -- Filtros para la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  ADD CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`);
+  ADD CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `multa`

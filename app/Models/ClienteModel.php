@@ -54,4 +54,9 @@ class ClienteModel extends Model
     /* public function altaCliente($id){
         $this->insert(['idUsuario'=>$id,'puntajeTotal' => 0, 'credito' => 0, 'suspendido' => 0, 'fechaInicioSuspencion' => '2020-12-12', 'fechaFinSuspencion' => '2020-12-12' ]);
     } */
+    public function obtenerClienteID($id)
+    {
+        return $this->where('idUsuario', $id)->first();
+        
+    }
 }

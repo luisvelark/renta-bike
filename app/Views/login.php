@@ -40,6 +40,12 @@
                 <div class="p-5">
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">¡Inicia sesion para empezar!</h1>
+                    <div class="text-center">
+                    <span><?php if (isset($msj)){
+                      echo $msj;
+                    } ?></span>
+                    <br><br>
+                  </div>
                   </div>
 
                   <form class="user" method="POST" action="<?php echo base_url(); ?>/UsuarioController/ingresarAlSistema">
@@ -80,7 +86,10 @@
                     <a class="medium" download="Acme Documentation (ver. 2.0.1).txt" href="<?php echo base_url('/download/Acme Documentation (ver. 2.0.1).txt') ?>">
                     <i class="far fa-file-alt"></i>
                     <span>Descargar manual de usuario</span></a>
+                    
                   </div>
+                 
+                 
                 </div>
               </div>
             </div>
