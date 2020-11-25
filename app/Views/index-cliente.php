@@ -181,11 +181,11 @@ $user_session = session();
           <i class="far fa-file-alt"></i>
           <span>Manual de usuario</span></a>
       </li> -->
-      <li class="nav-item active">
+     <!--  <li class="nav-item active">
         <a id="idCalificacion" class="nav-link" href="#">
           <i class=" fas fa-star"></i>
           <span>Calificar puntos ED</span></a>
-      </li>
+      </li> -->
       <!-- Botones para las acciones -->
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">

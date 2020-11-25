@@ -1,4 +1,4 @@
-<div class="container py-4" style="  background: white;>
+<div class="container py-4" style="background: white">
   <h1>Alquileres concretados</h1>
 
 
