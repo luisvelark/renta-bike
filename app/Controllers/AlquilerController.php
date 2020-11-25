@@ -5,6 +5,8 @@ use App\Models\AlquilerModel;
 use CodeIgniter\HTTP\Request;
 use App\Controllers\MultaController;
 use App\Controllers\BicicletaController;
+use App\Controllers\PuntajeController;;
+
 class AlquilerController extends BaseController
 {
 
@@ -19,6 +21,7 @@ class AlquilerController extends BaseController
         $this->controlPED = new PuntoEDController();
         $this->cMulta= new MultaController();
         $this->cBicicleta = new BicicletaController();
+        $this->cPuntaje= new PuntajeController();
     }
 
     public function solicitarAlquiler()
@@ -134,11 +137,21 @@ class AlquilerController extends BaseController
             $this->cMulta->multa->crearMulta($idUsuarioUltimo,$this->request->getPost('comboDaño'),$precio);
             $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta,'EnReparacion');
             $this->cBicicleta->bicicleta->aplicarDaño($idBicicleta,$this->request->getPost('comboDaño'));
-
+            if($this->controlPED->biciDisponibles($alquilerActual['idPuntoE'])!=null){
             $puntoYBici = $this->controlPED->biciDisponibles($alquilerActual['idPuntoE']);
             $idBicicletaNueva= $puntoYBici['idBici'];
+            $this->alquilerModel->reemplazarBicicleta($alquilerActual['idAlquiler'],$idBicicletaNueva);
+            $this->cBicicleta->bicicleta->cambiarEstado($idBicicletaNueva,'EnAlquiler');
+            $mensaje = ['msjReportar'=>'¡Has reportado con éxito, se te asignó una nueva bicicleta!'];
+            echo view('index-cliente',$mensaje);
+            } else{
+            $mensaje = ['msjReportar'=>'¡No hay otra bicicleta disponible, se dará por finalizado el alquiler!'];
+            $this->cPuntaje->puntaje->crearPuntaje($idUsuarioActual, 50,'No hay otra bicicleta disponible');
+            echo view('index-cliente',$mensaje);
+            }
+            
             //asignarle bicicleta a el cliente q reportó
-            echo $idBicicletaNueva;
+            
         }
     }
 

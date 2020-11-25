@@ -10,7 +10,7 @@ class PuntajeModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['idUsuarioPuntaje', 'detallePuntaje','fechaPuntaje'];
+    protected $allowedFields = ['idUsuarioCliente','puntos', 'detallePuntaje','fechaPuntaje'];
 
 
     protected $useTimestamps = false;
@@ -21,4 +21,9 @@ class PuntajeModel extends Model
     protected $validationRules    = [];
     protected $validationMessages = [];
     protected $skipValidation     = false;
+
+    public function crearPuntaje($id, $puntos,$detalle){
+        $this->insert(['idUsuarioCliente'=>$id ,'puntos'=>$puntos, 'detallePuntaje'=>$detalle,
+         'fechaPuntaje'=> date("Y-m-d")]);
+    }
 }

@@ -85,5 +85,9 @@ class AlquilerModel extends Model
         $alquiler= $this->first();
         return $alquiler;
     }
+    public function reemplazarBicicleta($idAlquiler,$idBicicleta){
+        $data= ['idBicicleta' => $idBicicleta];
+        $this->update($idAlquiler,$data);
+    }
 }
 

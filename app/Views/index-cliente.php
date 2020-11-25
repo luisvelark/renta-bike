@@ -35,7 +35,7 @@ $user_session = session();
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url(); ?>/GestionController/indexCliente">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-bicycle"></i>
         </div>
@@ -58,8 +58,7 @@ $user_session = session();
 
       <!--  componentes -->
       <li class="nav-item active">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-          aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-bicycle"></i>
           <span>Alquiler</span>
         </a>
@@ -68,18 +67,18 @@ $user_session = session();
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Nuevo alquiler </a>
-            <a class="collapse-item" href="#"> <i class="fas fa-arrow-circle-up"></i> Realizar devolución </a>
+            <a id="idRealizarDevolucion" class="collapse-item" href="#"> <i class="fas fa-arrow-circle-up"></i> Realizar
+              devolución </a>
             <a id="idConfirmar" class="collapse-item" href="#"> <i class="fas fa-check-circle"></i> Confirmar
               alquiler</a>
-            <a class="collapse-item" href="#"> <i class="fas fa-redo-alt"></i> Modificar alquiler</a>
+            <!-- <a class="collapse-item" href="#"> <i class="fas fa-redo-alt"></i> Modificar alquiler</a> -->
             <a id="idAnular" class="collapse-item" href="#"> <i class="fas fa-ban"></i> Anular alquiler</a>
           </div>
         </div>
       </li>
       <!-- ------------------------------------------------------------------------------------------------------------------------------------------------ -->
       <!-- Modal Confirmar-->
-      <div class="modal fade" id="idModalConfirmar" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+      <div class="modal fade" id="idModalConfirmar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -114,14 +113,11 @@ $user_session = session();
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form method="POST" class="user"
-              action="<?php echo base_url(); ?>/AlquilerController/soliticaReportarDaños">
+            <form method="POST" class="user" action="<?php echo base_url(); ?>/AlquilerController/soliticaReportarDaños">
               <div class="modal-body">
                 <div class="form-group">
                   <label class="font-weight-bold">Informe el tipo de daño</label><br>
-                  <select
-                    class="form-control form-control-user font-weight-bold custom-select py-3 my-2 h-50 w-75 text-center"
-                    name="comboDaño" id="">
+                  <select class="form-control form-control-user font-weight-bold custom-select py-3 my-2 h-50 w-75 text-center" name="comboDaño" id="">
                     <option selected value="Recuperable">Recuperable (daños menores)</option>
                     <option value="Irrecuperable">Irrecuperable (daños funcionales)</option>
                   </select>
@@ -131,7 +127,7 @@ $user_session = session();
                 </div>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary">Enviar daños</button>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button> -->
                 </div>
               </div>
             </form>
@@ -150,11 +146,14 @@ $user_session = session();
               </button>
             </div>
             <div class="modal-body">
-              ...
+              <p><span class="font-weight-bold">Estado del Alquiler: </span>Activo</p>
+              <p><span class="font-weight-bold">Punto de entrega: </span>Av.Hipólito Yrioyen 2351</p>
+              <p><span class="font-weight-bold">Hora de inicio: </span>16:32:00</p>
+              <p><span class="font-weight-bold">Hora de fin: </span>19:32:00</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+              <button type="button" class="btn btn-primary">Anular</button>
             </div>
           </div>
         </div>
@@ -181,11 +180,11 @@ $user_session = session();
           <i class="far fa-file-alt"></i>
           <span>Manual de usuario</span></a>
       </li> -->
-      <li class="nav-item active">
+      <!--  <li class="nav-item active">
         <a id="idCalificacion" class="nav-link" href="#">
           <i class=" fas fa-star"></i>
           <span>Calificar puntos ED</span></a>
-      </li>
+      </li> -->
       <!-- Botones para las acciones -->
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -202,9 +201,7 @@ $user_session = session();
     <div id="content-wrapper" class="d-flex flex-column">
 
       <!-- Main Content -->
-      <div id="content"
-        style="background-image: url(<?php echo base_url('img/Biciseditado.jpg'); ?>);background-size:cover; "
-        class="mt-0">
+      <div id="content" style="background-image: url(<?php echo base_url('img/Biciseditado.jpg'); ?>);background-size:cover; " class="mt-0">
 
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-0 static-top shadow">
@@ -233,17 +230,14 @@ $user_session = session();
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
             <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-search fa-fw"></i>
               </a>
               <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                aria-labelledby="searchDropdown">
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
                 <form class="form-inline mr-auto w-100 navbar-search">
                   <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                      aria-label="Search" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                       <button class="btn btn-primary" type="button">
                         <i class="fas fa-search fa-sm"></i>
@@ -257,8 +251,7 @@ $user_session = session();
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                   <?php echo $user_session->nombre . ' ' . $user_session->apellido; ?></span>
                 <i class="fas fa-user"></i>
@@ -288,11 +281,13 @@ $user_session = session();
         <!-- Begin Page Content Body -->
         <div id="contenido" class="container-fluid">
           <?php
-if (isset($puntuacion)) {
-    echo '<h3> ¡La calificación se ha realizado con éxito! </h3>';
-}
+          if (isset($msjReportar)) {
+            echo '<div class="container py-4" style="background: white">';
+            echo '<h3>' . $msjReportar . '</h3>';
+            echo '</div>';
+          }
 
-?>
+          ?>
 
         </div>
         <!-- /.container-fluid -->
@@ -323,8 +318,7 @@ if (isset($puntuacion)) {
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -360,6 +354,8 @@ if (isset($puntuacion)) {
   <script src="<?php echo base_url('js/demo/datatables-demo.js') ?>"></script>
 
   <script src="<?php echo base_url('ajax/nuevo-alquiler.js') ?>"></script>
+  <script src="<?php echo base_url('ajax/realizar-devolucion.js') ?>"></script>
+
 
   <script src="<?php echo base_url('ajax/alquileres-concretados.js') ?>"></script>
 

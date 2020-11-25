@@ -32,8 +32,19 @@ function envioAlquiler() {
   let formAlquiler = document.getElementById("form-alquiler");
   formAlquiler.addEventListener("submit", enviarAlquiler, true);
 
+  let editar = document.getElementById("idEditar");
+  editar.addEventListener("click", editarAlquiler, true);
+
   let msj = document.getElementById("respuesta");
   let detalle = document.getElementById("detalles");
+  let enviar = document.getElementById("idEnviar");
+  let campos = document.getElementById("idCampos");
+
+  function editarAlquiler() {
+    campos.disabled = false;
+    enviar.disabled = false;
+    editar.disabled = true;
+  }
 
   function enviarAlquiler(e) {
     e.preventDefault();
@@ -61,6 +72,10 @@ function envioAlquiler() {
           <div class="alert alert-primary w-50" role="alert">
             ${data.msg}  
           </div>`;
+          enviar.disabled = true;
+          campos.disabled = true;
+          editar.disabled = false;
+
           detalle.innerHTML = `
           <ul class="p-2 text-white text-left">
             <li><span class="font-weight-bold">Cliente:</span>  ${
