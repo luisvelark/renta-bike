@@ -2,10 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Controllers\AlquilerController;
 use App\Controllers\BaseController;
 use App\Controllers\ClienteController;
 use App\Controllers\PuntoEDController;
-use App\Controllers\AlquilerController;
 use App\Controllers\UsuarioController;
 
 class GestionController extends BaseController
@@ -17,7 +17,7 @@ class GestionController extends BaseController
         $this->Cpuntos = new PuntoEDController();
         $this->cCliente = new ClienteController();
         $this->cAlquiler = new AlquilerController();
-        $this->cUsuario= new UsuarioController();
+        $this->cUsuario = new UsuarioController();
     }
 
     public function index()
@@ -45,7 +45,6 @@ class GestionController extends BaseController
         $datos = ['datos' => $this->Cpuntos->puntoED->obtenerPuntosEntregaDevolucion()];
         echo view('layouts/nuevo-alquiler', $datos);
     }
-
 
     public function multasCredito()
     {
@@ -83,21 +82,21 @@ class GestionController extends BaseController
     }
     public function buscarPuntoED()
     {
-        
-        $coor=['coordenadas'=>$this->Cpuntos->puntoED->obtenerCoordenadas()];
-        echo view('layouts/buscar-punto-ed',$coor);
+
+        $coor = ['coordenadas' => $this->Cpuntos->puntoED->obtenerCoordenadas()];
+        echo view('layouts/buscar-punto-ed', $coor);
     }
-    
+
     public function modificarUsuario()
     {
         $user_session = session();
-        $datos=['usuario'=> $this->cUsuario->usuario->buscarUsuario($user_session->correo)];
-        echo view('layouts/modificar-usuario',$datos);
+        $datos = ['usuario' => $this->cUsuario->usuario->buscarUsuario($user_session->correo)];
+        echo view('layouts/modificar-usuario', $datos);
     }
     public function altaBicicleta()
     {
         $datos = ['datos' => $this->Cpuntos->puntoED->obtenerPuntosEntregaDevolucion()];
-        echo view('layouts/alta-bicicleta',$datos);
+        echo view('layouts/alta-bicicleta', $datos);
     }
     public function bajaBicicleta()
     {
@@ -106,5 +105,10 @@ class GestionController extends BaseController
     public function modificarBicicleta()
     {
         echo view('layouts/modificar-bicicleta');
+    }
+    public function realizarDevolucion()
+    {
+        $datos = ['datos' => $this->Cpuntos->puntoED->obtenerPuntosEntregaDevolucion()];
+        echo view('layouts/realizar-devolucion', $datos);
     }
 }
