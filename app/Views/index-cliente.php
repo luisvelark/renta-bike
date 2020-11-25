@@ -72,7 +72,7 @@ $user_session = session();
               devolución </a>
             <a id="idConfirmar" class="collapse-item" href="#"> <i class="fas fa-check-circle"></i> Confirmar
               alquiler</a>
-            <a class="collapse-item" href="#"> <i class="fas fa-redo-alt"></i> Modificar alquiler</a>
+            <!-- <a class="collapse-item" href="#"> <i class="fas fa-redo-alt"></i> Modificar alquiler</a> -->
             <a id="idAnular" class="collapse-item" href="#"> <i class="fas fa-ban"></i> Anular alquiler</a>
           </div>
         </div>
