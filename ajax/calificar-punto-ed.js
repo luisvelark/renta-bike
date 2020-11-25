@@ -1,4 +1,4 @@
-document.getElementById('idCalificacion').addEventListener("click", mostrar, true);
+/* document.getElementById('idCalificacion').addEventListener("click", mostrar, true); */
 
 
 function mostrar(e) {

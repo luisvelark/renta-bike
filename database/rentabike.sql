@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-11-2020 a las 21:00:00
+-- Tiempo de generación: 25-11-2020 a las 22:50:21
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -100,9 +100,9 @@ INSERT INTO `bicicleta` (`idBicicleta`, `numeroBicicleta`, `estado`, `daño`, `o
 (1, '001', 'Disponible', 'SinDanio', '', 1, 25000),
 (2, '002', 'Disponible', 'SinDanio', '', 1, 25000),
 (3, '003', 'Disponible', 'SinDanio', '', 1, 25000),
-(4, '004', 'Disponible', 'SinDanio', '', 2, 25000),
-(5, '005', 'Disponible', 'SinDanio', '', 2, 25000),
-(6, '006', 'Disponible', 'SinDanio', '', 2, 25000);
+(4, '004', 'EnReparacion', 'Recuperable', '', 2, 25000),
+(5, '005', 'EnAlquiler', 'SinDanio', '', 2, 25000),
+(6, '006', 'EnAlquiler', 'SinDanio', '', 2, 25000);
 
 -- --------------------------------------------------------
 
@@ -194,7 +194,20 @@ INSERT INTO `multa` (`idMulta`, `idUsuarioCliente`, `monto`, `fechaMulta`, `deta
 (3, 4, 5000, '2020-11-13', 'Por el email', 0),
 (4, 3, 6250, '2020-11-24', 'No declarar daños minimos', 0),
 (5, 3, 6250, '2020-11-24', 'No declarar daños minimos', 0),
-(6, 3, 6250, '2020-11-24', 'No declarar daños minimos', 0);
+(6, 3, 6250, '2020-11-24', 'No declarar daños minimos', 0),
+(7, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(8, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(9, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(10, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(11, 3, 25000, '2020-11-25', 'No declarar daños considerables', 0),
+(12, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(13, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(14, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(15, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(16, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(17, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(18, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(19, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0);
 
 -- --------------------------------------------------------
 
@@ -205,9 +218,18 @@ INSERT INTO `multa` (`idMulta`, `idUsuarioCliente`, `monto`, `fechaMulta`, `deta
 CREATE TABLE `puntaje` (
   `idPuntaje` int(11) NOT NULL,
   `idUsuarioCliente` int(11) NOT NULL,
+  `puntos` int(11) NOT NULL,
   `detallePuntaje` varchar(100) NOT NULL,
   `fechaPuntaje` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `puntaje`
+--
+
+INSERT INTO `puntaje` (`idPuntaje`, `idUsuarioCliente`, `puntos`, `detallePuntaje`, `fechaPuntaje`) VALUES
+(1, 1, 50, 'Reportar daño', '2020-11-25'),
+(2, 1, 50, 'No hay otra bicicleta disponible', '2020-11-25');
 
 -- --------------------------------------------------------
 
@@ -366,13 +388,13 @@ ALTER TABLE `calificacion`
 -- AUTO_INCREMENT de la tabla `multa`
 --
 ALTER TABLE `multa`
-  MODIFY `idMulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idMulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `puntaje`
 --
 ALTER TABLE `puntaje`
-  MODIFY `idPuntaje` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPuntaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `puntoentregadevolucion`
