@@ -125,7 +125,9 @@ $user_session = session();
     <div id="content-wrapper" class="d-flex flex-column">
 
       <!-- Main Content -->
-      <div id="content">
+      <div id="content"
+        style="background-image: url(<?php echo base_url('img/Biciseditado.jpg'); ?>);background-size:cover; "
+        class="mt-0">
 
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">

@@ -1,4 +1,4 @@
-<div>
+<div class="container py-4" style="  background: white;">
     <h3 style="color:blue">ALTA BICICLETA</h3>
     <form id="form-alquiler" class="user">
 
@@ -30,5 +30,5 @@
         <button type="submit" class="btn btn-primary btn-lg m-2">Enviar</button>
     </form>
 </div>
-<div id="respuesta">
+<div id="respuesta" class="container py-4" style="  background: white;">
 </div>
