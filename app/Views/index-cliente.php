@@ -68,7 +68,8 @@ $user_session = session();
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Nuevo alquiler </a>
-            <a class="collapse-item" href="#"> <i class="fas fa-arrow-circle-up"></i> Realizar devolución </a>
+            <a id="idRealizarDevolucion" class="collapse-item" href="#"> <i class="fas fa-arrow-circle-up"></i> Realizar
+              devolución </a>
             <a id="idConfirmar" class="collapse-item" href="#"> <i class="fas fa-check-circle"></i> Confirmar
               alquiler</a>
             <a class="collapse-item" href="#"> <i class="fas fa-redo-alt"></i> Modificar alquiler</a>
@@ -360,6 +361,8 @@ if (isset($puntuacion)) {
   <script src="<?php echo base_url('js/demo/datatables-demo.js') ?>"></script>
 
   <script src="<?php echo base_url('ajax/nuevo-alquiler.js') ?>"></script>
+  <script src="<?php echo base_url('ajax/realizar-devolucion.js') ?>"></script>
+
 
   <script src="<?php echo base_url('ajax/alquileres-concretados.js') ?>"></script>
 
