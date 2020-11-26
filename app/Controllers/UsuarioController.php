@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\AlquilerModel;
-use App\Models\ClienteModel;
 use App\Models\UsuarioModel;
 use CodeIgniter\HTTP\Request;
 
@@ -61,7 +60,7 @@ class UsuarioController extends BaseController
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
             $user = $this->usuario->buscarUsuario($email);
-            
+
             if ($user != null) {
                 //if (password_verify($password),$user['contraseña']){}
                 if ($user['contraseña'] == $password) {
@@ -75,14 +74,14 @@ class UsuarioController extends BaseController
                         'idUsuario' => $user['idUsuario'],
                         'nombre' => $user['nombre'],
                         'apellido' => $user['apellido'],
-                        'correo'=> $user['correo'],
-                        'tipo'=> 'cliente',
-                        'activo'=> 0
+                        'correo' => $user['correo'],
+                        'tipo' => 'cliente',
+                        'activo' => 0,
                     ];
-                    if($this->alquiler->buscarAlquilerActivo($user['idUsuario'])!=null){
-                        $datosSesion['activo']=1;
+                    if ($this->alquiler->buscarAlquilerActivo($user['idUsuario']) != null) {
+                        $datosSesion['activo'] = 1;
                     }
-                    var_dump($datosSesion);
+                    // var_dump($datosSesion);
                     $sesion = session();
                     $sesion->set($datosSesion);
                     if ($user['tipo'] == 'cliente') {
@@ -124,20 +123,19 @@ class UsuarioController extends BaseController
             $user = $this->usuario->buscarUsuario($this->request->getPost('correo'));
             $idUsuario = $user['idUsuario'];
 
-
             $datosSesion = [
                 'idUsuario' => $idUsuario,
                 'nombre' => $user['nombre'],
                 'apellido' => $user['apellido'],
-                'correo'=> $user['correo'],
-                'tipo'=> 'cliente'
+                'correo' => $user['correo'],
+                'tipo' => 'cliente',
             ];
 
             $sesion = session();
             $sesion->set($datosSesion);
-            $mensaje = ['msj'=>'¡Te has registrado de manera exitosa!'];
+            $mensaje = ['msj' => '¡Te has registrado de manera exitosa!'];
             /* return redirect()->to(base_url() . '/GestionController/indexCliente'); */
-            echo view('login',$mensaje);
+            echo view('login', $mensaje);
 
         } else {
             $data = [
@@ -154,10 +152,10 @@ class UsuarioController extends BaseController
     public function modificarUsuario()
     {
         if ($this->request->getMethod() == "post" && $this->validate($this->reglasRegistro)) {
-            
+
         } else {
             $data = ['validation' => $this->validator];
-                echo view('layouts/modificar-usuario',$data);
+            echo view('layouts/modificar-usuario', $data);
         }
     }
 }

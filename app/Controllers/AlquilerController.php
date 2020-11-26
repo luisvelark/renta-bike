@@ -66,7 +66,12 @@ class AlquilerController extends BaseController
             ];
             //cambiar el estado de la bicicleta a EnAlquiler
 
-            $this->alquilerModel->crearAlquiler($alquiler);
+            if ($this->alquilerModel->buscarAlquilerActivo($idUsuario) == null) {
+
+                $this->alquilerModel->crearAlquiler($alquiler);
+            } else {
+                $this->alquilerModel->actualizarAlquiler($alquiler);
+            }
 
             $arr = [
                 "msg" => 'Su reserva se realizo con éxito!',

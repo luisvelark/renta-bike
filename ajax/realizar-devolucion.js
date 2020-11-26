@@ -1,5 +1,6 @@
 //VENTANA DE REALIZAR DEVOLUCION!
-let btn = document.getElementById("idRealizarDevolucion");
+
+btn = document.getElementById("idRealizarDevolucion");
 btn.addEventListener("click", ventanaDevolucion, true);
 
 function ventanaDevolucion(e) {
