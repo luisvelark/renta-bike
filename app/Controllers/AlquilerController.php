@@ -70,7 +70,8 @@ class AlquilerController extends BaseController
 
                 $this->alquilerModel->crearAlquiler($alquiler);
             } else {
-                $this->alquilerModel->actualizarAlquiler($alquiler);
+                $elId = $this->alquilerModel->buscarIdAlquilerDelEstado('Activo');
+                $this->alquilerModel->actualizarAlquiler($elId, $alquiler);
             }
 
             $arr = [
