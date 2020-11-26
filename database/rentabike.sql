@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-11-2020 a las 22:50:21
+-- Tiempo de generación: 26-11-2020 a las 21:05:28
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -74,7 +74,7 @@ INSERT INTO `alquiler` (`idAlquiler`, `idUsuarioCliente`, `idBicicleta`, `idPunt
 (6, 1, 1, 2, 1, '2020-02-05', '14:30:00', '16:30:00', '16:25:00', NULL, 'Finalizado', 'SinDaño', NULL),
 (7, 1, 3, 2, 1, '2020-02-10', '14:30:00', '16:30:00', '16:29:00', NULL, 'Finalizado', 'SinDaño', NULL),
 (8, 3, 4, 2, 2, '2020-11-23', '12:12:12', '14:12:12', '00:00:00', NULL, 'Finalizado', 'SinDaño', 'la ruta'),
-(9, 1, 4, 2, 2, '2020-11-23', '16:09:09', '20:09:09', '00:00:00', NULL, 'Activo', 'SinDaño', 'la ruta');
+(9, 1, 5, 2, 2, '2020-11-23', '16:09:09', '20:09:09', '00:00:00', NULL, 'Activo', 'SinDaño', 'la ruta');
 
 -- --------------------------------------------------------
 
@@ -163,7 +163,7 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`idUsuario`, `puntajeTotal`, `credito`, `suspendido`, `fechaInicioSuspencion`, `fechaFinSuspencion`) VALUES
-(1, 0, 350, 0, '2020-11-09', '2020-11-09'),
+(1, 350, 350, 0, '2020-11-09', '2020-11-09'),
 (3, 0, 0, 0, '2020-11-09', '2020-11-09'),
 (4, 0, -350, 0, '2020-11-09', '2020-11-09'),
 (5, 0, 0, 0, '2020-11-09', '2020-11-09'),
@@ -207,7 +207,15 @@ INSERT INTO `multa` (`idMulta`, `idUsuarioCliente`, `monto`, `fechaMulta`, `deta
 (16, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
 (17, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
 (18, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
-(19, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0);
+(19, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(20, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(21, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(22, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(23, 3, 6250, '2020-11-26', 'No declarar daños minimos', 0),
+(24, 3, 6250, '2020-11-26', 'No declarar daños minimos', 0),
+(25, 3, 6250, '2020-11-26', 'No declarar daños minimos', 0),
+(26, 3, 6250, '2020-11-26', 'No declarar daños minimos', 0),
+(27, 3, 6250, '2020-11-26', 'No declarar daños minimos', 0);
 
 -- --------------------------------------------------------
 
@@ -229,7 +237,12 @@ CREATE TABLE `puntaje` (
 
 INSERT INTO `puntaje` (`idPuntaje`, `idUsuarioCliente`, `puntos`, `detallePuntaje`, `fechaPuntaje`) VALUES
 (1, 1, 50, 'Reportar daño', '2020-11-25'),
-(2, 1, 50, 'No hay otra bicicleta disponible', '2020-11-25');
+(2, 1, 50, 'No hay otra bicicleta disponible', '2020-11-25'),
+(3, 1, 50, 'No hay otra bicicleta disponible', '2020-11-25'),
+(4, 1, 50, 'No hay otra bicicleta disponible', '2020-11-25'),
+(5, 1, 50, 'No hay otra bicicleta disponible', '2020-11-26'),
+(6, 1, 50, 'No hay otra bicicleta disponible', '2020-11-26'),
+(7, 1, 50, 'No hay otra bicicleta disponible', '2020-11-26');
 
 -- --------------------------------------------------------
 
@@ -388,13 +401,13 @@ ALTER TABLE `calificacion`
 -- AUTO_INCREMENT de la tabla `multa`
 --
 ALTER TABLE `multa`
-  MODIFY `idMulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idMulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `puntaje`
 --
 ALTER TABLE `puntaje`
-  MODIFY `idPuntaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idPuntaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `puntoentregadevolucion`
