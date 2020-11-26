@@ -7,7 +7,8 @@ use App\Models\AlquilerModel;
 use CodeIgniter\HTTP\Request;
 use App\Controllers\MultaController;
 use App\Controllers\BicicletaController;
-use App\Controllers\PuntajeController;;
+use App\Controllers\PuntajeController;
+use App\Controllers\ClienteController;
 
 class AlquilerController extends BaseController
 {
@@ -24,6 +25,8 @@ class AlquilerController extends BaseController
         $this->cMulta = new MultaController();
         $this->cBicicleta = new BicicletaController();
         $this->cPuntaje = new PuntajeController();
+        $this->cCliente= new ClienteController();
+
     }
 
     public function solicitarAlquiler()
@@ -157,9 +160,12 @@ class AlquilerController extends BaseController
                     $mensaje = ['msjReportar' => '¡Has reportado con éxito, se te asignó una nueva bicicleta!'];
                     echo view('index-cliente', $mensaje);
                 } else {
-                    $mensaje = ['msjReportar' => '¡No hay otra bicicleta disponible, se dará por finalizado el alquiler!'];
+
                     $this->cPuntaje->puntaje->crearPuntaje($idUsuarioActual, 50, 'No hay otra bicicleta disponible');
                     $this->alquilerModel->cambiarEstado($alquilerActual['idAlquiler'],'Finalizado');
+                    $mensaje = ['msjReportar' => '¡No hay otra bicicleta disponible, se dará por finalizado el alquiler!'];
+                    $puntajeTotal= $this->cPuntaje->puntaje->buscarPuntos($idUsuarioActual);
+                    $this->cCliente->cliente->actualizarPuntaje($idUsuarioActual,$puntajeTotal);
                     echo view('index-cliente', $mensaje);
                 }
             }
