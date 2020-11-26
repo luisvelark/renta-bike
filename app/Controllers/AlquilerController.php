@@ -3,17 +3,17 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Controllers\BicicletaController;
+use App\Controllers\ClienteController;
+use App\Controllers\MultaController;
+use App\Controllers\PuntajeController;
 use App\Models\AlquilerModel;
 use CodeIgniter\HTTP\Request;
-use App\Controllers\MultaController;
-use App\Controllers\BicicletaController;
-use App\Controllers\PuntajeController;
-use App\Controllers\ClienteController;
 
 class AlquilerController extends BaseController
 {
 
-    /* protected $alquilerModel; */ //cambiar a protected
+    /* protected $alquilerModel; *///cambiar a protected
     protected $request;
     protected $controlPED;
 
@@ -25,7 +25,7 @@ class AlquilerController extends BaseController
         $this->cMulta = new MultaController();
         $this->cBicicleta = new BicicletaController();
         $this->cPuntaje = new PuntajeController();
-        $this->cCliente= new ClienteController();
+        $this->cCliente = new ClienteController();
 
     }
 
@@ -152,7 +152,7 @@ class AlquilerController extends BaseController
                 $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'EnReparacion');
                 $this->cBicicleta->bicicleta->aplicarDaño($idBicicleta, $this->request->getPost('comboDaño'));
                 if ($this->controlPED->biciDisponibles($alquilerActual['idPuntoE']) != null) {
-                    
+
                     $puntoYBici = $this->controlPED->biciDisponibles($alquilerActual['idPuntoE']);
                     $idBicicletaNueva = $puntoYBici['idBici'];
                     $this->alquilerModel->reemplazarBicicleta($alquilerActual['idAlquiler'], $idBicicletaNueva);
@@ -162,10 +162,10 @@ class AlquilerController extends BaseController
                 } else {
 
                     $this->cPuntaje->puntaje->crearPuntaje($idUsuarioActual, 50, 'No hay otra bicicleta disponible');
-                    $this->alquilerModel->cambiarEstado($alquilerActual['idAlquiler'],'Finalizado');
+                    $this->alquilerModel->cambiarEstado($alquilerActual['idAlquiler'], 'Finalizado');
                     $mensaje = ['msjReportar' => '¡No hay otra bicicleta disponible, se dará por finalizado el alquiler!'];
-                    $puntajeTotal= $this->cPuntaje->puntaje->buscarPuntos($idUsuarioActual);
-                    $this->cCliente->cliente->actualizarPuntaje($idUsuarioActual,$puntajeTotal);
+                    $puntajeTotal = $this->cPuntaje->puntaje->buscarPuntos($idUsuarioActual);
+                    $this->cCliente->cliente->actualizarPuntaje($idUsuarioActual, $puntajeTotal);
                     echo view('index-cliente', $mensaje);
                 }
             }

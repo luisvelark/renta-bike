@@ -76,6 +76,13 @@ function envioAlquiler() {
           campos.disabled = true;
           editar.disabled = false;
 
+          let clienteAlt;
+          if (data.detalle.clienteAlternativo === 0) {
+            clienteAlt = "---";
+          } else {
+            clienteAlt = data.detalle.clienteAlternativo;
+          }
+
           detalle.innerHTML = `
           <ul class="p-2 text-white text-left">
             <li><span class="font-weight-bold">Cliente:</span>  ${
@@ -96,9 +103,7 @@ function envioAlquiler() {
             <li><span class="font-weight-bold">Hora de fin alquiler:</span>  ${
               data.detalle.HoraFinAlquiler
             }</li>
-            <li><span class="font-weight-bold">Cliente Alternativo:</span>  ${
-              data.detalle.clienteAlternativo
-            }</li>
+            <li><span class="font-weight-bold">Cliente Alternativo:</span>  ${clienteAlt}</li>
           </ul>
           `;
         }
