@@ -73,7 +73,8 @@ class UsuarioController extends BaseController
                         'idUsuario' => $user['idUsuario'],
                         'nombre' => $user['nombre'],
                         'apellido' => $user['apellido'],
-                        'correo'=> $user['correo']
+                        'correo'=> $user['correo'],
+                        'tipo'=> 'cliente'
                     ];
 
                     $sesion = session();
@@ -122,7 +123,8 @@ class UsuarioController extends BaseController
                 'idUsuario' => $idUsuario,
                 'nombre' => $user['nombre'],
                 'apellido' => $user['apellido'],
-                'correo'=> $user['correo']
+                'correo'=> $user['correo'],
+                'tipo'=> 'cliente'
             ];
 
             $sesion = session();

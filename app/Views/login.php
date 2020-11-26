@@ -83,13 +83,11 @@
                   <hr>
                   <div class="text-center">
 
-                    <a class="medium" download="Acme Documentation (ver. 2.0.1).txt" href="<?php echo base_url('/download/Acme Documentation (ver. 2.0.1).txt') ?>">
+                    <a class="medium" download="Manual_Renta_Bike.pdf" href="<?php echo base_url('/download/Manual_Renta_Bike.pdf')?>">
                     <i class="far fa-file-alt"></i>
                     <span>Descargar manual de usuario</span></a>
                     
                   </div>
-                 
-                 
                 </div>
               </div>
             </div>
