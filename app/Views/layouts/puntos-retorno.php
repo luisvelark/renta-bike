@@ -1,4 +1,4 @@
-<div>
+<div class="container py-4" style="  background: white;">
 <h3 style="color:blue">REPORTE DE PUNTOS DE RETORNO MÁS UTILIZADOS</h3>
 <form id="formulario">
   <div>
@@ -13,5 +13,5 @@
   <button type="submit" class="btn btn-primary">Obtener punto de retorno</button>
 </form>
 </div>
-<div id="respuesta">
+<div id="respuesta" class="container py-4" style="  background: white;">
 </div>

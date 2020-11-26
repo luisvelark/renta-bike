@@ -1,4 +1,4 @@
-<div>
+<div class="container py-4" style="  background: white;">
 <h3 style="color:blue">MODIFICAR BICICLETA</h3>
 <form id="formulario">
   <div class="form-group">
@@ -10,5 +10,5 @@
   <button type="submit" class="btn btn-primary">Buscar bicicleta</button>
 </form>
 </div>
-<div id="respuesta">
+<div id="respuesta" class="container py-4" style="  background: white;">
 </div>
