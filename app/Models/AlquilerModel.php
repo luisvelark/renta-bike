@@ -85,6 +85,11 @@ class AlquilerModel extends Model
         $alquiler = $this->where('idUsuarioCliente', $id)->where('estadoAlquiler', 'Activo')->first();
         return $alquiler;
     }
+    public function buscarAlquilerEnProceso($id)
+    {
+        $alquiler = $this->where('idUsuarioCliente', $id)->where('estadoAlquiler', 'EnProceso')->first();
+        return $alquiler;
+    }
     public function buscarUltimoAlquilerPorBicicleta($idBicicleta)
     {
         $this->where('idBicicleta', $idBicicleta)->where('estadoAlquiler', 'Finalizado');

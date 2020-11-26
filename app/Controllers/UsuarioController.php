@@ -77,11 +77,15 @@ class UsuarioController extends BaseController
                         'correo' => $user['correo'],
                         'tipo' => 'cliente',
                         'activo' => 0,
+                        'enProceso' => 0 
                     ];
                     if ($this->alquiler->buscarAlquilerActivo($user['idUsuario']) != null) {
                         $datosSesion['activo'] = 1;
                     }
-                    // var_dump($datosSesion);
+                    if ($this->alquiler->buscarAlquilerEnProceso($user['idUsuario']) != null) {
+                        $datosSesion['enProceso'] = 1;
+                    }
+                    
                     $sesion = session();
                     $sesion->set($datosSesion);
                     if ($user['tipo'] == 'cliente') {
