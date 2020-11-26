@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\AlquilerModel;
 use App\Models\ClienteModel;
 use App\Models\UsuarioModel;
 use CodeIgniter\HTTP\Request;
@@ -14,7 +15,7 @@ class UsuarioController extends BaseController
 
     public function __construct()
     {
-        $this->cliente = new ClienteModel();
+        $this->alquiler = new AlquilerModel();
         $this->usuario = new UsuarioModel();
         /* $this->controladorCliente = new ClienteModel(); */
 
@@ -69,14 +70,19 @@ class UsuarioController extends BaseController
                     $this->cliente->insert(['idUsuario'=>$user['idUsuario'],'puntajeTotal' => 0, 'credito' => 0, 'suspendido' => 0, 'fechaInicioSuspencion' => '2020-12-12', 'fechaFinSuspencion' => '2020-12-12' ]);
 
                     } */
+
                     $datosSesion = [
                         'idUsuario' => $user['idUsuario'],
                         'nombre' => $user['nombre'],
                         'apellido' => $user['apellido'],
                         'correo'=> $user['correo'],
-                        'tipo'=> 'cliente'
+                        'tipo'=> 'cliente',
+                        'activo'=> 0
                     ];
-
+                    if($this->alquiler->buscarAlquilerActivo($user['idUsuario'])!=null){
+                        $datosSesion['activo']=1;
+                    }
+                    var_dump($datosSesion);
                     $sesion = session();
                     $sesion->set($datosSesion);
                     if ($user['tipo'] == 'cliente') {
