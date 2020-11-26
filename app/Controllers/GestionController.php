@@ -10,7 +10,6 @@ use App\Controllers\UsuarioController;
 
 class GestionController extends BaseController
 {
-    /* private $session; */
     public function __construct()
     {
         $this->session = session();
@@ -24,15 +23,21 @@ class GestionController extends BaseController
     {
         if (!isset($this->session->idUsuario)) {
             return redirect()->to(base_url());
+        } else {
+            if ($this->session->tipo!='cliente') {
+                echo view('index-administrador');
+            }else{
+                echo view('index-cliente');
+            }
         }
-        echo view('index-administrador');
     }
     public function indexCliente()
     {
         if (!isset($this->session->idUsuario)) {
             return redirect()->to(base_url());
+        } else {
+            echo view('index-cliente');
         }
-        echo view('index-cliente');
     }
     public function mostrarRegistroUsuario()
     {
@@ -53,15 +58,15 @@ class GestionController extends BaseController
     }
     public function alquileresConcretados()
     {
-        $user_session = session();
-        $datos = ['alquileres' => $this->cAlquiler->alquilerModel->verAlquileresConcretados($user_session->idUsuario)];
+        /* $user_session = session(); */
+        $datos = ['alquileres' => $this->cAlquiler->alquilerModel->verAlquileresConcretados($this->session->idUsuario)];
         echo view('layouts/alquileres-concretados', $datos);
     }
     public function creditoYMultasCliente()
     {
-        $user_session = session();
+        /* $user_session = session(); */
 
-        $datos = ['datos' => $this->cCliente->creditoMultasCliente($user_session->idUsuario)];
+        $datos = ['datos' => $this->cCliente->creditoMultasCliente($this->session->idUsuario)];
         echo view('layouts/credito-multas-cliente', $datos);
     }
     public function horarioMayorDemanda()
@@ -89,8 +94,8 @@ class GestionController extends BaseController
 
     public function modificarUsuario()
     {
-        $user_session = session();
-        $datos = ['usuario' => $this->cUsuario->usuario->buscarUsuario($user_session->correo)];
+        /* $user_session = session(); */
+        $datos = ['usuario' => $this->cUsuario->usuario->buscarUsuario($this->session->correo)];
         echo view('layouts/modificar-usuario', $datos);
     }
     public function altaBicicleta()

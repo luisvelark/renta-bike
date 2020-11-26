@@ -26,4 +26,18 @@ class PuntajeModel extends Model
         $this->insert(['idUsuarioCliente'=>$id ,'puntos'=>$puntos, 'detallePuntaje'=>$detalle,
          'fechaPuntaje'=> date("Y-m-d")]);
     }
+
+
+    public function buscarPuntos($id){
+        $this->select('puntos');
+        $this->where('idUsuarioCliente',$id);
+        $puntos= $this->findAll();
+        $suma= 0;
+
+        for ($i=0; $i <count($puntos); $i++) { 
+            $suma= $suma + ($puntos[$i]['puntos']);
+        }
+        return intval($suma);
+        }
+    
 }
