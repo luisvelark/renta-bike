@@ -89,5 +89,9 @@ class AlquilerModel extends Model
         $data= ['idBicicleta' => $idBicicleta];
         $this->update($idAlquiler,$data);
     }
+    public function cambiarEstado($idAlquiler,$estado){
+        $data= ['estadoAlquiler' => $estado];
+        $this->update($idAlquiler,$data);
+    }
 }
 
