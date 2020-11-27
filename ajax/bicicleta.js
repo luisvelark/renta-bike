@@ -237,7 +237,8 @@ function eliminaBicicleta(){
             .then( res => res.json())
             .then( data => {
                 if (data === 'error'){
-                    respuesta.innerHTML=data;
+                    texto='<h3>No existe esa bicicleta<h3>';
+                    respuesta.innerHTML=texto;
                 }
                 else{
                     //console.log(data.bicicleta);
