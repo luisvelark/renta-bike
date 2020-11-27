@@ -17,14 +17,15 @@
         </div>
         <div class="form-group">
           <label class="font-weight-bold">*Ingrese número de la Bicicleta:
-          <input id="nroBicicleta" type="text" class="form-control form-control-user my-1 text-center font-weight-bold"
-              name="numeroBicicleta" autofocus="">
+          <input id="nroBicicleta" type="number" class="form-control form-control-user my-1 text-center font-weight-bold"
+              name="numeroBicicleta" required autofocus="">
+          <span style="color:grey">Ej: 003</span>
           </label>
         </div>
         <div class="form-group">
           <label class="font-weight-bold">*Ingrese precio de la Bicicleta:
-          <input id="precio" type="text" class="form-control form-control-user my-1 text-center font-weight-bold"
-              name="precioBicicleta" autofocus="">
+          <input id="precio" type="number" class="form-control form-control-user my-1 text-center font-weight-bold"
+              name="precioBicicleta" required autofocus="">
           </label>
         </div>
         <button type="submit" class="btn btn-primary btn-lg m-2">Enviar</button>

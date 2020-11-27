@@ -95,7 +95,7 @@ function buscarBicicleta(){
                     tabla+='<td>Numero Bicicleta: '+data.bicicleta.numeroBicicleta+'</td>';
                     tabla+='<td>';
                     tabla+='<label class="font-weight-bold">Ingrese nuevo numero de la Bicicleta:';
-                    tabla+='<input type="text" value="'+data.bicicleta.numeroBicicleta+'" class="form-control form-control-user my-1 text-center font-weight-bold" name="numeroBicicleta" autofocus="">';
+                    tabla+='<input type="number" value="'+data.bicicleta.numeroBicicleta+'" class="form-control form-control-user my-1 text-center font-weight-bold" name="numeroBicicleta" autofocus="">';
                     tabla+='</label>';
                     tabla+='</td>';
                     tabla+='</tr>';
@@ -149,7 +149,7 @@ function buscarBicicleta(){
                     tabla+='<td>Precio de la Bicicleta: '+data.bicicleta.precio+'</td>';
                     tabla+='<td>';
                     tabla+='<label class="font-weight-bold">Ingrese nuevo precio de la Bicicleta:';
-                    tabla+='<input type="text" value="'+data.bicicleta.precio+'" class="form-control form-control-user my-1 text-center font-weight-bold" name="precioBicicleta" autofocus="">';
+                    tabla+='<input type="number" value="'+data.bicicleta.precio+'" class="form-control form-control-user my-1 text-center font-weight-bold" name="precioBicicleta" autofocus="">';
                     tabla+='</label>';
                     tabla+='</td>';
                     tabla+='</tr>';

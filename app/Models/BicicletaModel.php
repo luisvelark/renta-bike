@@ -39,7 +39,8 @@ class BicicletaModel extends Model
     }
     public function updateBicicleta($id, $cambios)
     {
-        $this->update($id, $cambios);
+        $confirma=$this->update($id, $cambios);
+        return $confirma;
     }
     public function cambiarEstado($id, $estado)
     {

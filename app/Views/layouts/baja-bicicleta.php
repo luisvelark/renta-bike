@@ -3,8 +3,8 @@
 <form id="formularioBajaBicicleta">
   <div class="form-group">
     <label class="font-weight-bold">*Ingrese número de la Bicicleta:
-      <input type="text" class="form-control form-control-user my-1 text-center font-weight-bold"
-            name="numeroBicicleta" autofocus="">
+      <input type="number" class="form-control form-control-user my-1 text-center font-weight-bold"
+            name="numeroBicicleta" required autofocus="">
     </label>
   </div>
   <button type="submit" class="btn btn-primary">Dar de baja</button>

@@ -103,46 +103,63 @@ class AlquilerController extends BaseController
         //$fechaFinal=date_create_from_format("Y-m-d", $_POST['fechaFinal']);
         $fechaInicio = $_POST['fechaInicio'];
         $fechaFinal = $_POST['fechaFinal'];
-        //$fechaInicio = date("Y-m-d", strtotime($_POST['fechaInicio']));
-        //$fechaFinal = date("Y-m-d", strtotime($_POST['fechaFinal']));
-        $datos = ['horasMayorDemanda' => $this->alquilerModel->obtenerHoraInicio($fechaInicio, $fechaFinal)];
-        //$datos= ['fechaInicio'=>$fechaInicio,'fechaFinal'=>$fechaFinal];
-        if (isset($datos['horasMayorDemanda'])) {
+        if($fechaInicio>$fechaFinal){
+            $datos = 'errorFecha';
             echo json_encode($datos);
             die();
-   
-        } else {
-            $datos = 'error';
-            echo json_encode($datos);
-            die();
+        }else{
+            $datos = ['horasMayorDemanda' => $this->alquilerModel->obtenerHoraInicio($fechaInicio, $fechaFinal)];
+            //$datos= ['fechaInicio'=>$fechaInicio,'fechaFinal'=>$fechaFinal];
+            if (isset($datos['horasMayorDemanda']) && $datos==false) {
+                echo json_encode($datos);
+                die();
+    
+            } else {
+                $datos = 'error';
+                echo json_encode($datos);
+                die();
+            }
         }
     }
     public function mostrarTiempoAlquiler()
     {
         $fechaInicio = $_POST['fechaInicio'];
         $fechaFinal = $_POST['fechaFinal'];
-        $datos = ['tiempoAlquiler' => $this->alquilerModel->obtenerTiempoAlquiler($fechaInicio, $fechaFinal)];
-        if (isset($datos['tiempoAlquiler'])) {
+        if($fechaInicio>$fechaFinal){
+            $datos = 'errorFecha';
             echo json_encode($datos);
             die();
-        } else {
-            $datos = 'error';
-            echo json_encode($datos);
-            die();
+        }else{
+            $datos = ['tiempoAlquiler' => $this->alquilerModel->obtenerTiempoAlquiler($fechaInicio, $fechaFinal)];
+            if (isset($datos['tiempoAlquiler']) && $datos==false) 
+            {
+                echo json_encode($datos);
+                die();
+            } else {
+                $datos = 'error';
+                echo json_encode($datos);
+                die();
+            }
         }
     }
     public function mostrarPuntoRetorno()
     {
         $fechaInicio = $_POST['fechaInicio'];
         $fechaFinal = $_POST['fechaFinal'];
-        $datos = ['puntosRetorno' => $this->alquilerModel->obtenerPuntosRetorno($fechaInicio, $fechaFinal)];
-        if (isset($datos['puntosRetorno'])) {
+        if($fechaInicio>$fechaFinal){
+            $datos = 'errorFecha';
             echo json_encode($datos);
             die();
-        } else {
-            $datos = 'error';
-            echo json_encode($datos);
-            die();
+        }else{
+            $datos = ['puntosRetorno' => $this->alquilerModel->obtenerPuntosRetorno($fechaInicio, $fechaFinal)];
+            if (isset($datos['puntosRetorno']) && $datos==false) {
+                echo json_encode($datos);
+                die();
+            } else {
+                $datos = 'error';
+                echo json_encode($datos);
+                die();
+            }
         }
     }
 

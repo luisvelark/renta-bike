@@ -3,11 +3,11 @@
 <form id="formulario">
   <div>
     <label style="color:black" for="exampleInputPassword1">Ingrese fecha inicio</label>
-    <input type="date" class="form-control" name="fechaInicio">
+    <input type="date" class="form-control" name="fechaInicio" required>
     <span style="color:grey">Ej: año-mes-dia</span>
     <br>
     <label style="color:black" for="exampleInputPassword1">Ingrese fecha final</label>
-    <input type="date" class="form-control" name="fechaFinal">
+    <input type="date" class="form-control" name="fechaFinal" required>
     <span style="color:grey">Ej: año-mes-dia</span>
   </div>
   <button type="submit" class="btn btn-primary">Obtener punto de retorno</button>

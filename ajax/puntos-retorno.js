@@ -35,7 +35,11 @@ function buscarPuntoRetorno() {
             .then( res => res.json())
             .then( data => {
                 if (data === 'error'){
-                    respuesta.innerHTML=data;
+                    texto='<h3>No se encuentran valores con las fechas ingresadas</h3>';
+                    respuesta.innerHTML=texto;
+                }else if(data === 'errorFecha'){
+                    texto='<h3>Fecha inicio tiene que ser menor o igual a fecha final</h3>';
+                    respuesta.innerHTML=texto;
                 }
                 else{
                     var tabla='<br><h3>Puntos de retorno mas utilizados<br> <br>';
