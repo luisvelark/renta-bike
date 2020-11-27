@@ -7,6 +7,7 @@ use App\Controllers\BicicletaController;
 use App\Controllers\ClienteController;
 use App\Controllers\MultaController;
 use App\Controllers\PuntajeController;
+use App\Controllers\PuntoEDController;
 use App\Models\AlquilerModel;
 use CodeIgniter\HTTP\Request;
 
@@ -15,7 +16,7 @@ class AlquilerController extends BaseController
 
     /* protected $alquilerModel; *///cambiar a protected
     protected $request;
-    protected $controlPED;
+    // protected $controlPED;
 
     public function __construct()
     {
@@ -45,6 +46,7 @@ class AlquilerController extends BaseController
             $puntoYBici = $this->controlPED->biciDisponibles(intval($puntoE));
 
             $sesion = session();
+            $sesion->set($puntoYBici);
             $idUsuario = $sesion->get('idUsuario');
             $nombreUser = $sesion->get('nombre');
             $apellidoUser = $sesion->get('apellido');
@@ -64,7 +66,6 @@ class AlquilerController extends BaseController
                 'ruta' => 'la ruta',
 
             ];
-            //cambiar el estado de la bicicleta a EnAlquiler
 
             if ($this->alquilerModel->buscarAlquilerActivo($idUsuario) == null) {
 
@@ -72,7 +73,7 @@ class AlquilerController extends BaseController
                 $sesion->set('activo', '1');
                 $this->cBicicleta->cambiarEstadoBicicleta($puntoYBici['idBici'], 'EnAlquiler');
             } else {
-                $elId = $this->alquilerModel->buscarIdAlquilerDelEstado('Activo');
+                $elId = $this->alquilerModel->buscarIdAlquilerDelEstado($idUsuario, 'Activo');
                 $this->alquilerModel->actualizarAlquiler($elId, $alquiler);
                 $sesion->set('activo', '1');
 
@@ -182,21 +183,49 @@ class AlquilerController extends BaseController
             }
         }
     }
-    public function soliticaAnularAlquiler(){
+    public function soliticaAnularAlquiler()
+    {
         if ($this->request->getMethod() == "post") {
 
             $sesion = session();
-            $idUsuario= $this->request->getPost('idUsuarioOculto');
+            $idUsuario = $this->request->getPost('idUsuarioOculto');
             $alquilerActivo = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
-            $horaInicio= $alquilerActivo['horaInicioAlquiler'];
-            
-            $idBicicleta= $alquilerActivo['idBicicleta'];
+            $horaInicio = $alquilerActivo['horaInicioAlquiler'];
+
+            $idBicicleta = $alquilerActivo['idBicicleta'];
             $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'Disponible');
             $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Anulado'); //Cambiar a finalizado
             $mensaje = ['msjAnular' => '¡Has anulado con éxito!'];
             $sesion->set('activo', '0');
             echo view('index-cliente', $mensaje);
-            
+
+        }
+    }
+    public function soliticaConfirmarAlquiler()
+    {
+        $sesion = session();
+        $idUsuario = $sesion->get('idUsuario');
+        $elId = $this->alquilerModel->buscarIdAlquilerDelEstado($idUsuario, 'Activo');
+        $this->alquilerModel->cambiarEstado($elId, 'EnProceso');
+        $sesion->set('activo', '2');
+        $noti = ["msj" => "alquiler confirmado"];
+        echo json_encode($noti);
+        die();
+
+    }
+
+    public function cargarDatosConfirmarAlquiler()
+    {
+        $sesion = session();
+        $idUsuario = $sesion->get('idUsuario');
+        $nombreUser = $sesion->get('nombre');
+        $apellidoUser = $sesion->get('apellido');
+        $miAlquiler = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
+        $datos = ["alquiler" => $miAlquiler,
+            "usuario" => ["nombre" => $nombreUser,
+                "apellido" => $apellidoUser]];
+        echo json_encode($datos);
+        die();
     }
 }
 
