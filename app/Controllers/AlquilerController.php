@@ -227,19 +227,17 @@ class AlquilerController extends BaseController
         echo json_encode($datos);
         die();
     }
-}
-
-public function mostrarPDF(){
-    echo view('layouts/ver_horasDemanda');
-}
-
-public function generaPuntosPDF(){
-    $pdf= new \FPDF('P','mm','letter');
-    $pdf->AddPage();
-    $pdf->SetMargins(10,10,10);
-    $pdf->SetTitle("Reporte Punto de alquiler mas frecuente");
-    $pdf->SetFont("Arial",'B',10);
-    $this->response->setHeader('Content-Type','application/pdf');
-    $pdf->Output('Prueba.pdf','I');    
-}
+    public function mostrarPDF(){
+        echo view('layouts/ver_horasDemanda');
+    }
+    
+    public function generaPuntosPDF(){
+        $pdf= new \FPDF('P','mm','letter');
+        $pdf->AddPage();
+        $pdf->SetMargins(10,10,10);
+        $pdf->SetTitle("Reporte Punto de alquiler mas frecuente");
+        $pdf->SetFont("Arial",'B',10);
+        $this->response->setHeader('Content-Type','application/pdf');
+        $pdf->Output('Prueba.pdf','I');    
+    }
 }
