@@ -110,10 +110,9 @@ class AlquilerController extends BaseController
         }else{
             $datos = ['horasMayorDemanda' => $this->alquilerModel->obtenerHoraInicio($fechaInicio, $fechaFinal)];
             //$datos= ['fechaInicio'=>$fechaInicio,'fechaFinal'=>$fechaFinal];
-            if (isset($datos['horasMayorDemanda']) && $datos==false) {
+            if (isset($datos['horasMayorDemanda'])) {
                 echo json_encode($datos);
                 die();
-    
             } else {
                 $datos = 'error';
                 echo json_encode($datos);
@@ -152,7 +151,7 @@ class AlquilerController extends BaseController
             die();
         }else{
             $datos = ['puntosRetorno' => $this->alquilerModel->obtenerPuntosRetorno($fechaInicio, $fechaFinal)];
-            if (isset($datos['puntosRetorno']) && $datos==false) {
+            if (isset($datos['puntosRetorno'])) {
                 echo json_encode($datos);
                 die();
             } else {
