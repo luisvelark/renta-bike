@@ -35,7 +35,8 @@ $user_session = session();
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url(); ?>/GestionController/indexCliente">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center"
+        href="<?php echo base_url(); ?>/GestionController/indexCliente">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-bicycle"></i>
         </div>
@@ -58,7 +59,8 @@ $user_session = session();
 
       <!--  componentes -->
       <li class="nav-item active">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+          aria-controls="collapseTwo">
           <i class="fas fa-bicycle"></i>
           <span>Alquiler</span>
         </a>
@@ -67,37 +69,40 @@ $user_session = session();
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
 
-            <?php if ($user_session->activo == 0) { ?>
-              <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Nuevo alquiler</a>
-              <a id="idRealizarDevolucion" class="collapse-item" href="#" hidden> <i class="fas fa-arrow-circle-up"></i>
-                Realizar devolución </a>
-              <a id="idConfirmar" class="collapse-item" href="#" hidden> <i class="fas fa-check-circle"></i> Confirmar
-                alquiler</a>
-              <a id="idAnular" class="collapse-item" href="#" hidden> <i class="fas fa-ban"></i> Anular alquiler</a>
+            <?php if ($user_session->activo == '0') {?>
+            <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Nuevo alquiler</a>
+            <a id="idRealizarDevolucion" class="collapse-item" href="#" hidden> <i class="fas fa-arrow-circle-up"></i>
+              Realizar devolución </a>
+            <a id="idConfirmar" class="collapse-item" href="#" hidden> <i class="fas fa-check-circle"></i> Confirmar
+              alquiler</a>
+            <a id="idAnular" class="collapse-item" href="#" hidden> <i class="fas fa-ban"></i> Anular alquiler</a>
 
-            <?php } else if ($user_session->activo == 1) {
+            <?php } else if ($user_session->activo == '1') {
 
-            ?>
-              <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Nuevo alquiler</a>
-              <a id="idRealizarDevolucion" class="collapse-item" href="#" hidden> <i class="fas fa-arrow-circle-up"></i> Realizar
-                devolución </a>
-              <a id="idConfirmar" class="collapse-item" href="#"> <i class="fas fa-check-circle"></i> Confirmar
-                alquiler</a>
-              <a id="idAnular" class="collapse-item" href="#"> <i class="fas fa-ban"></i> Anular alquiler</a>
-            <?php } else { ?>
-              <a id="idAlquiler" class="collapse-item" href="#" hidden> <i class="fas fa-plus-square"></i> Nuevo alquiler</a>
-              <a id="idRealizarDevolucion" class="collapse-item" href="#"> <i class="fas fa-arrow-circle-up"></i> Realizar
-                devolución </a>
-              <a id="idConfirmar" class="collapse-item" href="#" hidden> <i class="fas fa-check-circle"></i> Confirmar
-                alquiler</a>
-              <a id="idAnular" class="collapse-item" href="#" hidden> <i class="fas fa-ban"></i> Anular alquiler</a>
-            <?php } ?>
+    ?>
+            <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Nuevo alquiler</a>
+            <a id="idRealizarDevolucion" class="collapse-item" href="#" hidden> <i class="fas fa-arrow-circle-up"></i>
+              Realizar
+              devolución </a>
+            <a id="idConfirmar" class="collapse-item" href="#"> <i class="fas fa-check-circle"></i> Confirmar
+              alquiler</a>
+            <a id="idAnular" class="collapse-item" href="#"> <i class="fas fa-ban"></i> Anular alquiler</a>
+            <?php } else {?>
+            <a id="idAlquiler" class="collapse-item" href="#" hidden> <i class="fas fa-plus-square"></i> Nuevo
+              alquiler</a>
+            <a id="idRealizarDevolucion" class="collapse-item" href="#"> <i class="fas fa-arrow-circle-up"></i> Realizar
+              devolución </a>
+            <a id="idConfirmar" class="collapse-item" href="#" hidden> <i class="fas fa-check-circle"></i> Confirmar
+              alquiler</a>
+            <a id="idAnular" class="collapse-item" href="#" hidden> <i class="fas fa-ban"></i> Anular alquiler</a>
+            <?php }?>
           </div>
         </div>
       </li>
       <!-- ------------------------------------------------------------------------------------------------------------------------------------------------ -->
       <!-- Modal Confirmar-->
-      <div class="modal fade" id="idModalConfirmar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="idModalConfirmar" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -132,11 +137,14 @@ $user_session = session();
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form method="POST" class="user" action="<?php echo base_url(); ?>/AlquilerController/soliticaReportarDaños">
+            <form method="POST" class="user"
+              action="<?php echo base_url(); ?>/AlquilerController/soliticaReportarDaños">
               <div class="modal-body">
                 <div class="form-group">
                   <label class="font-weight-bold">Informe el tipo de daño</label><br>
-                  <select class="form-control form-control-user font-weight-bold custom-select py-3 my-2 h-50 w-75 text-center" name="comboDaño" id="">
+                  <select
+                    class="form-control form-control-user font-weight-bold custom-select py-3 my-2 h-50 w-75 text-center"
+                    name="comboDaño" id="">
                     <option selected value="Recuperable">Recuperable (daños menores)</option>
                     <option value="Irrecuperable">Irrecuperable (daños funcionales)</option>
                   </select>
@@ -224,7 +232,9 @@ $user_session = session();
     <div id="content-wrapper" class="d-flex flex-column">
 
       <!-- Main Content -->
-      <div id="content" style="background-image: url(<?php echo base_url('img/Biciseditado.jpg'); ?>);background-size:cover; " class="mt-0">
+      <div id="content"
+        style="background-image: url(<?php echo base_url('img/Biciseditado.jpg'); ?>);background-size:cover; "
+        class="mt-0">
 
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-0 static-top shadow">
@@ -253,14 +263,17 @@ $user_session = session();
 
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
             <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-search fa-fw"></i>
               </a>
               <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                aria-labelledby="searchDropdown">
                 <form class="form-inline mr-auto w-100 navbar-search">
                   <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                      aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                       <button class="btn btn-primary" type="button">
                         <i class="fas fa-search fa-sm"></i>
@@ -274,7 +287,8 @@ $user_session = session();
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                   <?php echo $user_session->nombre . ' ' . $user_session->apellido; ?></span>
                 <i class="fas fa-user"></i>
@@ -315,7 +329,7 @@ $user_session = session();
             echo '</div>';
           }
 
-          ?>
+?>
 
         </div>
         <!-- /.container-fluid -->
@@ -346,7 +360,8 @@ $user_session = session();
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">

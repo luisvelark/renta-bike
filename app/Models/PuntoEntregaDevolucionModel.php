@@ -11,7 +11,7 @@ class PuntoEntregaDevolucionModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['direccion', 'telefono', 'calificacionTotal','lat','lng'];
+    protected $allowedFields = ['direccion', 'telefono', 'calificacionTotal', 'lat', 'lng'];
 
     protected $useTimestamps = false;
     protected $createdField = 'created_at';
@@ -44,19 +44,21 @@ class PuntoEntregaDevolucionModel extends Model
         // var_dump($consulta);
         return $consulta;
     }
-    public function actualizarCalificacion($idPunto,$calificacion){
+    public function actualizarCalificacion($idPunto, $calificacion)
+    {
 
-        $data= ['calificacionTotal' => $calificacion];
-        $this->update($idPunto,$data);
+        $data = ['calificacionTotal' => $calificacion];
+        $this->update($idPunto, $data);
 
     }
-   
-    public function promediarCalificacion($calificaciones){
-    $total= count($calificaciones);
-    $suma=0;
-    for ($i=0; $i <$total; $i++) { 
-        $suma= $suma + ($calificaciones[$i]['puntos']);
-    }
-    return intval($suma/$total);
+
+    public function promediarCalificacion($calificaciones)
+    {
+        $total = count($calificaciones);
+        $suma = 0;
+        for ($i = 0; $i < $total; $i++) {
+            $suma = $suma + ($calificaciones[$i]['puntos']);
+        }
+        return intval($suma / $total);
     }
 }
