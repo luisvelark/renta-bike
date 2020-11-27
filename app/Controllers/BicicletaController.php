@@ -74,12 +74,19 @@ class BicicletaController extends BaseController
     public function darBajaBicicleta()
     {
         $numeroBicicleta = $_POST['numeroBicicleta'];
-        date_default_timezone_set('America/Argentina/Ushuaia');
-        $fechaActual = date("Y-m-d H:i:s");
-        $this->bicicleta->bajaLogica($numeroBicicleta, $fechaActual);
-        $texto = '<h3>Se elimino la bicicleta con éxito<h3>';
-        echo json_encode($texto);
-        die();
+        if(!null==$this->bicicleta->buscarBicicleta($numeroBicicleta))  {
+            date_default_timezone_set('America/Argentina/Ushuaia');
+            $fechaActual = date("Y-m-d H:i:s");
+            $this->bicicleta->bajaLogica($numeroBicicleta, $fechaActual);
+            $texto = '<h3>Se elimino la bicicleta con éxito<h3>';
+            echo json_encode($texto);
+            die();
+        }else{
+            $texto = 'error';
+            echo json_encode($texto);
+            die();
+        }
+        
     }
 
 }
