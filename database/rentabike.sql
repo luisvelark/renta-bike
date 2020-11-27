@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-11-2020 a las 21:05:28
+-- Tiempo de generación: 27-11-2020 a las 04:34:36
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -89,20 +89,21 @@ CREATE TABLE `bicicleta` (
   `daño` enum('SinDanio','Recuperable','Irrecuperable') NOT NULL,
   `observaciones` varchar(100) NOT NULL,
   `idPuntoED` int(11) NOT NULL,
-  `precio` int(11) NOT NULL
+  `precio` int(11) NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `bicicleta`
 --
 
-INSERT INTO `bicicleta` (`idBicicleta`, `numeroBicicleta`, `estado`, `daño`, `observaciones`, `idPuntoED`, `precio`) VALUES
-(1, '001', 'Disponible', 'SinDanio', '', 1, 25000),
-(2, '002', 'Disponible', 'SinDanio', '', 1, 25000),
-(3, '003', 'Disponible', 'SinDanio', '', 1, 25000),
-(4, '004', 'EnReparacion', 'Recuperable', '', 2, 25000),
-(5, '005', 'EnAlquiler', 'SinDanio', '', 2, 25000),
-(6, '006', 'EnAlquiler', 'SinDanio', '', 2, 25000);
+INSERT INTO `bicicleta` (`idBicicleta`, `numeroBicicleta`, `estado`, `daño`, `observaciones`, `idPuntoED`, `precio`, `deleted_at`) VALUES
+(1, '001', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
+(2, '002', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
+(3, '003', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
+(4, '004', 'EnReparacion', 'Recuperable', '', 2, 25000, NULL),
+(5, '005', 'EnAlquiler', 'SinDanio', '', 2, 25000, NULL),
+(6, '006', 'EnAlquiler', 'SinDanio', '', 2, 25000, NULL);
 
 -- --------------------------------------------------------
 

@@ -36,7 +36,7 @@ function envioAlquiler() {
   editar.addEventListener("click", editarAlquiler, true);
 
   let msj = document.getElementById("respuesta");
-  let detalle = document.getElementById("detalles");
+  let detalles = document.getElementById("detalles");
   let enviar = document.getElementById("idEnviar");
   let campos = document.getElementById("idCampos");
 
@@ -63,13 +63,14 @@ function envioAlquiler() {
         console.log(data);
         if (data.msg === "error") {
           msj.innerHTML = `
-          <div class="alert alert-danger w-50" role="alert">
+          <div id="noti" class="alert alert-danger w-50" role="alert">
              llena todos los campos obligatorios!
           </div>`;
-          detalle.innerHTML = `<p class="p-2 small text-white text-center">NO HAY DETALLES</p>`;
+
+          detalles.innerHTML = `<p class="p-2 small text-white text-center">NO HAY DETALLES</p>`;
         } else {
           msj.innerHTML = `
-          <div class="alert alert-primary w-50" role="alert">
+          <div id="noti" class="alert alert-primary w-50" role="alert">
             ${data.msg}  
           </div>`;
           enviar.disabled = true;
@@ -83,7 +84,7 @@ function envioAlquiler() {
             clienteAlt = data.detalle.clienteAlternativo;
           }
 
-          detalle.innerHTML = `
+          detalles.innerHTML = `
           <ul class="p-2 text-white text-left">
             <li><span class="font-weight-bold">Cliente:</span>  ${
               data.usuario.nombre
@@ -107,6 +108,10 @@ function envioAlquiler() {
           </ul>
           `;
         }
+        setTimeout(() => {
+          let div = document.getElementById("noti");
+          div.style.display = "none";
+        }, 3000);
       });
     // .catch((err) => console.log(err));
   }
