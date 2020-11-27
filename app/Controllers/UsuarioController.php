@@ -75,7 +75,7 @@ class UsuarioController extends BaseController
                         'nombre' => $user['nombre'],
                         'apellido' => $user['apellido'],
                         'correo' => $user['correo'],
-                        'tipo' => 'cliente',
+                        'tipo' => $user['tipo'],
                         'activo' => '0',
                     ];
                     if ($this->alquiler->buscarAlquilerActivo($user['idUsuario']) != null) {

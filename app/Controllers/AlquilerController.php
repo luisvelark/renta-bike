@@ -183,12 +183,17 @@ class AlquilerController extends BaseController
     }
     public function soliticaAnularAlquiler(){
         if ($this->request->getMethod() == "post") {
+
+            $sesion = session();
             $idUsuario= $this->request->getPost('idUsuarioOculto');
             $alquilerActivo = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
+            $horaInicio= $alquilerActivo['horaInicioAlquiler'];
+            
             $idBicicleta= $alquilerActivo['idBicicleta'];
             $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'Disponible');
-            $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Finalizado'); //Cambiar a finalizado
+            $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Anulado'); //Cambiar a finalizado
             $mensaje = ['msjAnular' => '¡Has anulado con éxito!'];
+            $sesion->set('activo', '0');
             echo view('index-cliente', $mensaje);
             
     }

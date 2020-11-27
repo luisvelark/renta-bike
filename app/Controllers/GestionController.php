@@ -23,13 +23,12 @@ class GestionController extends BaseController
     {
         if (!isset($this->session->idUsuario)) {
             return redirect()->to(base_url());
-        } else {
-            if ($this->session->tipo!='cliente') {
+        } else if($this->session->tipo=='administrador') {
                 echo view('index-administrador');
-            }else{
+            } else{
                 echo view('index-cliente');
             }
-        }
+        
     }
     public function indexCliente()
     {

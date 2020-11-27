@@ -28,3 +28,12 @@
         });
     });
 })();
+
+(function() {
+    // Reportar daños;
+    $(function() {
+        $("#idBotonConfirmar").on("click", function() {
+            $("#idModalCalificar").modal();
+        });
+    });
+})();

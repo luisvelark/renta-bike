@@ -1,4 +1,4 @@
-<div class="container py-4" style="  background: white;">
+<!-- <div class="container py-4" style="  background: white;">
   <h2>Calificar Punto de Entrega</h2>
 
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop"></button>
@@ -13,7 +13,7 @@
               <span aria-hidden="false">&times;</span>
             </button>
           </div>
-          <form method="POST" class="user" action="<?php echo base_url(); ?>/CalificacionController/calificar">
+          <form method="POST" class="user" action="/CalificacionController/calificar">
             <div class="modal-body">
               <div class="form-group">
                 <label for="exampleInputEmail1">Calificación del 1 al 5 (1 muy malo, 5 excelente)</label><br>
@@ -39,4 +39,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

@@ -19,15 +19,17 @@ class CalificacionController extends BaseController
     {
         if ($this->request->getMethod() == "post") {
 
+            $idUsuario= $this->request->getPost('idUsuarioOculto');
             if ($this->request->getPost('comentario') != null) {
-                $this->calificacion->altaCalificacion($idPunto, 1, $this->request->getPost('estrellas'), $this->request->getPost('comentario'));
+                
+                $this->calificacion->altaCalificacion($idPunto, $idUsuario, $this->request->getPost('estrellas'), $this->request->getPost('comentario'));
             } else {
-                $this->calificacion->altaCalificacion($idPunto, 1, $this->request->getPost('estrellas'), "");
+                $this->calificacion->altaCalificacion($idPunto, $idUsuario, $this->request->getPost('estrellas'), "");
             }
 
             $promedio = $this->cPuntoED->puntoED->promediarCalificacion($this->calificacion->buscarCalificacionTotal($idPunto));
             $this->cPuntoED->puntoED->actualizarCalificacion($idPunto, $promedio);
-            $puntaje = ['puntuacion' => $this->request->getPost('estrellas'), 'comentario' => $this->request->getPost('comentario')];
+            $puntaje = ['msjCalificacion' => '¡Gracias por tu calificación!'];
             echo view('index-cliente', $puntaje);
         }
     }
