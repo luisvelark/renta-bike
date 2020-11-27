@@ -54,7 +54,7 @@ $hora = new DateTime("now", new DateTimeZone('America/Argentina/Ushuaia'));
           <div class="form-group">
             <label class="font-weight-bold">Dni optativo para devolucion:
               <input type="text" class="form-control form-control-user my-1 text-center font-weight-bold"
-                name="dni-optativo" autofocus="">
+                name="dni-optativo" autofocus="" maxlength="8">
               <span class="small m-2">Ej: 12345678</span>
             </label>
           </div>

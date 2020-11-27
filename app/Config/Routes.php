@@ -47,6 +47,8 @@ $routes->get('baja-bicicleta', 'GestionController::bajaBicicleta');
 
 //*************RUTA DE ALQUILER CONTROLLER******************
 $routes->post('alquiler-nuevo', 'AlquilerController::solicitarAlquiler');
+$routes->get('confirmar-alquiler', 'AlquilerController::soliticaConfirmarAlquiler');
+$routes->get('datos-confirmar-alquiler', 'AlquilerController::cargarDatosConfirmarAlquiler');
 
 /**
  * --------------------------------------------------------------------

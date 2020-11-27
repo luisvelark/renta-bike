@@ -91,10 +91,11 @@ class AlquilerModel extends Model
         return $alquiler;
     }
 
-    public function buscarIdAlquilerDelEstado($estado)
+    public function buscarIdAlquilerDelEstado($id, $estado)
     {
         $this->select('idAlquiler');
         $this->where('estadoAlquiler', $estado);
+        $this->where('idUsuarioCliente', $id);
         $id = $this->first();
         return $id;
     }
@@ -116,4 +117,5 @@ class AlquilerModel extends Model
         $data = ['estadoAlquiler' => $estado];
         $this->update($idAlquiler, $data);
     }
+
 }
