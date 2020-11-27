@@ -146,6 +146,7 @@ class AlquilerController extends BaseController
 
     public function soliticaReportarDaños()
     {
+        $sesion = session();
         if ($this->request->getMethod() == "post") {
             $idUsuarioActual = $this->request->getPost('idUsuarioOculto');
             $alquilerActivo = $this->alquilerModel->buscarAlquilerActivo($idUsuarioActual);
@@ -157,7 +158,7 @@ class AlquilerController extends BaseController
             } else {
                 $alquilerUltimo = $this->alquilerModel->buscarUltimoAlquilerPorBicicleta($idBicicleta);
                 $idUsuarioUltimo = $alquilerUltimo['idUsuarioCliente'];
-                $precio = 25000;
+                $precio = $this->cBicicleta->bicicleta->obtenerPrecio();
                 $this->cMulta->multa->crearMulta($idUsuarioUltimo, $this->request->getPost('comboDaño'), $precio);
                 $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'EnReparacion');
                 $this->cBicicleta->bicicleta->aplicarDaño($idBicicleta, $this->request->getPost('comboDaño'));
@@ -170,12 +171,12 @@ class AlquilerController extends BaseController
                     $mensaje = ['msjReportar' => '¡Has reportado con éxito, se te asignó una nueva bicicleta!'];
                     echo view('index-cliente', $mensaje);
                 } else {
-
                     $this->cPuntaje->puntaje->crearPuntaje($idUsuarioActual, 50, 'No hay otra bicicleta disponible');
                     $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Finalizado');
                     $mensaje = ['msjReportar' => '¡No hay otra bicicleta disponible, se dará por finalizado el alquiler!'];
                     $puntajeTotal = $this->cPuntaje->puntaje->buscarPuntos($idUsuarioActual);
                     $this->cCliente->cliente->actualizarPuntaje($idUsuarioActual, $puntajeTotal);
+                    $sesion->set('activo', '0');
                     echo view('index-cliente', $mensaje);
                 }
             }

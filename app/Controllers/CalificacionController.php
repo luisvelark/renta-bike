@@ -15,7 +15,7 @@ class CalificacionController extends BaseController
         $this->cPuntoED = new PuntoEDController();
     }
 
-    public function calificar($idPunto = 1) //PASAR EL ID DEL PUNTO DE ENTREGA Y EL ID USUARIO
+    public function calificar($idPunto = 1) //PASAR EL ID DEL PUNTO DE ENTREGA Y EL DE DEVOLUCION
     {
         if ($this->request->getMethod() == "post") {
 
