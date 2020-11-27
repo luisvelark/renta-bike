@@ -159,22 +159,26 @@ $user_session = session();
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Anular Alquiler</h5>
+              <h5 class="modal-title" id="exampleModalLabel">¿Desea anular el alquiler?</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
-              <p><span class="font-weight-bold">Estado del Alquiler: </span>Activo</p>
-              <p><span class="font-weight-bold">Punto de entrega: </span>Av.Hipólito Yrioyen 2351</p>
-              <p><span class="font-weight-bold">Hora de inicio: </span>16:32:00</p>
-              <p><span class="font-weight-bold">Hora de fin: </span>19:32:00</p>
-            </div>
-            <div class="modal-footer">
-              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-              <button type="button" class="btn btn-primary">Anular</button>
-            </div>
+            <form method="POST" class="user" action="<?php echo base_url(); ?>/AlquilerController/soliticaAnularAlquiler">
+              <div class="modal-body">
+                <div class="form-group">
+                  <p><span class="font-weight-bold">Estado del Alquiler: </span>Activo</p>
+                  <p><span class="font-weight-bold">Punto de entrega: </span>Av.Hipólito Yrioyen 2351</p>
+                  <p><span class="font-weight-bold">Hora de inicio: </span>16:32:00</p>
+                  <p><span class="font-weight-bold">Hora de fin: </span>19:32:00</p>
+                  <input type="hidden" name="idUsuarioOculto" value=" <?php echo $user_session->idUsuario ?>">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Anular</button>
+              </div>
           </div>
+          </form>
         </div>
       </div>
       <!-- ------------------------------------------------------------------------------------------------------------------------------------------------ -->
@@ -303,6 +307,11 @@ $user_session = session();
           if (isset($msjReportar)) {
             echo '<div class="container py-4" style="background: white">';
             echo '<h3>' . $msjReportar . '</h3>';
+            echo '</div>';
+          }
+          if (isset($msjAnular)) {
+            echo '<div class="container py-4" style="background: white">';
+            echo '<h3>' . $msjAnular . '</h3>';
             echo '</div>';
           }
 

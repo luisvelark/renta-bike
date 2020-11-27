@@ -144,8 +144,8 @@ class AlquilerController extends BaseController
     {
         if ($this->request->getMethod() == "post") {
             $idUsuarioActual = $this->request->getPost('idUsuarioOculto');
-            $alquilerActual = $this->alquilerModel->buscarAlquilerActivo($idUsuarioActual);
-            $idBicicleta = $alquilerActual['idBicicleta'];
+            $alquilerActivo = $this->alquilerModel->buscarAlquilerActivo($idUsuarioActual);
+            $idBicicleta = $alquilerActivo['idBicicleta'];
 
             if ($this->alquilerModel->buscarUltimoAlquilerPorBicicleta($idBicicleta) == null) {
                 $mensaje = ['msjReportar' => '¡No existe un alquiler anterior a éste!'];
@@ -157,18 +157,18 @@ class AlquilerController extends BaseController
                 $this->cMulta->multa->crearMulta($idUsuarioUltimo, $this->request->getPost('comboDaño'), $precio);
                 $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'EnReparacion');
                 $this->cBicicleta->bicicleta->aplicarDaño($idBicicleta, $this->request->getPost('comboDaño'));
-                if ($this->controlPED->biciDisponibles($alquilerActual['idPuntoE']) != null) {
+                if ($this->controlPED->biciDisponibles($alquilerActivo['idPuntoE']) != null) {
 
-                    $puntoYBici = $this->controlPED->biciDisponibles($alquilerActual['idPuntoE']);
+                    $puntoYBici = $this->controlPED->biciDisponibles($alquilerActivo['idPuntoE']);
                     $idBicicletaNueva = $puntoYBici['idBici'];
-                    $this->alquilerModel->reemplazarBicicleta($alquilerActual['idAlquiler'], $idBicicletaNueva);
+                    $this->alquilerModel->reemplazarBicicleta($alquilerActivo['idAlquiler'], $idBicicletaNueva);
                     $this->cBicicleta->bicicleta->cambiarEstado($idBicicletaNueva, 'EnAlquiler');
                     $mensaje = ['msjReportar' => '¡Has reportado con éxito, se te asignó una nueva bicicleta!'];
                     echo view('index-cliente', $mensaje);
                 } else {
 
                     $this->cPuntaje->puntaje->crearPuntaje($idUsuarioActual, 50, 'No hay otra bicicleta disponible');
-                    $this->alquilerModel->cambiarEstado($alquilerActual['idAlquiler'], 'Finalizado');
+                    $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Finalizado');
                     $mensaje = ['msjReportar' => '¡No hay otra bicicleta disponible, se dará por finalizado el alquiler!'];
                     $puntajeTotal = $this->cPuntaje->puntaje->buscarPuntos($idUsuarioActual);
                     $this->cCliente->cliente->actualizarPuntaje($idUsuarioActual, $puntajeTotal);
@@ -177,4 +177,16 @@ class AlquilerController extends BaseController
             }
         }
     }
+    public function soliticaAnularAlquiler(){
+        if ($this->request->getMethod() == "post") {
+            $idUsuario= $this->request->getPost('idUsuarioOculto');
+            $alquilerActivo = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
+            $idBicicleta= $alquilerActivo['idBicicleta'];
+            $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'Disponible');
+            $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Finalizado'); //Cambiar a finalizado
+            $mensaje = ['msjAnular' => '¡Has anulado con éxito!'];
+            echo view('index-cliente', $mensaje);
+            
+    }
+}
 }
