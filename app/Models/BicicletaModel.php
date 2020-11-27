@@ -52,5 +52,10 @@ class BicicletaModel extends Model
         $data = ['daño' => $daño];
         $this->update($id, $data);
     }
+    public function obtenerPrecio()
+    {
+        return $this->select('precio')->first();
+        
+    }
 
 }
