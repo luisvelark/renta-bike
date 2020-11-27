@@ -25,19 +25,24 @@ function buscarCliente() {
         e.preventDefault();
         console.log("Me diste un click");
         var datos =new FormData(formulario);
-        console.log(datos.get('dniCliente'))
+        console.log(typeof datos.get('dniCliente'))
         fetch("http://localhost/renta-bike/ClienteController/mostrarCliente",{
             method: 'POST',
             body: datos
         })
             .then( res => res.json())
             .then( data => {
-                if (data === 'error'){
-                    respuesta.innerHTML=data;
+                if (data === 'errorBase'){
+                    texto='<h3>Ese dni no se encuentra registrado</h3>';
+                    respuesta.innerHTML=texto;
+                }
+                else if(data === 'errorLongitud'){
+                    texto='<h3>El dni tienen que ser 8 dígitos</h3>';
+                    respuesta.innerHTML=texto;
                 }
                 else{
                     console.log(data)
-                    var tabla='<br><h3>'+data.usuario.nombre+' '+data.usuario.apellido+' crédito actual es: '+data.multaCredito.credito+'<br> <br>';
+                    var tabla='<br><h3>'+data.usuario.nombre+' '+data.usuario.apellido+' su crédito actual es: '+data.multaCredito.credito+'<br> <br>';
                     tabla +='<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">';
                     tabla +='<thead>';
                     tabla +='<tr>';

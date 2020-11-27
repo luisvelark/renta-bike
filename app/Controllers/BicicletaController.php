@@ -20,11 +20,16 @@ class BicicletaController extends BaseController
         $numeroBicicleta = $_POST['numeroBicicleta'];
         $precioBicicleta = $_POST['precioBicicleta'];
         $idPuntoED = $_POST['punto-entrega'];
-        if ($idPuntoED === '---' || empty($precioBicicleta) || empty($numeroBicicleta)) {
-            $texto = '<h3 style="color:red;">Ingrese todos los valores</h3>';
+        if ($idPuntoED === '---') {
+            $texto = '<h3 style="color:red;">Seleccione un punto de entrega</h3>';
             echo json_encode($texto);
             die();
-        } else {
+        } else if(!null==$this->bicicleta->buscarBicicleta($numeroBicicleta))  {
+            $texto = '<h3 style="color:red;">Ese numero de bicicleta ya esta usado</h3>';
+            echo json_encode($texto);
+            die();
+        }       
+        else{
             $bicicleta = [
                 'numeroBicicleta' => $numeroBicicleta,
                 'idPuntoED' => $idPuntoED,
@@ -44,10 +49,15 @@ class BicicletaController extends BaseController
         $numero = $_POST['numeroBicicleta'];
         $id = $_POST['idBicicleta'];
         $cambios = ['estado' => $estado, 'daño' => $daño, 'observaciones' => $observaciones, 'precio' => $precio, 'numeroBicicleta' => $numero];
-        $this->bicicleta->updateBicicleta($id, $cambios);
-        $texto = '<h3>Se modifico la bicicleta con éxito<h3>';
-        echo json_encode($texto);
-        die();
+        if($this->bicicleta->updateBicicleta($id, $cambios)){
+            $texto = '<h3>Se modifico la bicicleta con éxito<h3>';
+            echo json_encode($texto);
+            die();
+        }else{
+            $texto = '<h3>No se modifico la bicicleta<h3>';
+            echo json_encode($texto);
+            die();
+        }
     }
     public function mostrarBicicleta()
     {

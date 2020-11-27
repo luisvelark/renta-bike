@@ -35,10 +35,14 @@ function tiempoAlquilerRepetido(){
             .then( res => res.json())
             .then( data => {
                 if (data === 'error'){
-                    respuesta.innerHTML=data;
+                    texto='<h3>No se encuentran valores con las fechas ingresadas</h3>';
+                    respuesta.innerHTML=texto;
+                }else if(data === 'errorFecha'){
+                    texto='<h3>Fecha inicio tiene que ser menor o igual a fecha final</h3>';
+                    respuesta.innerHTML=texto;
                 }
                 else{
-                    console.log(data.tiempoAlquiler[0].resta.slice(0,1));
+                    console.log(data);
                     console.log(typeof data.tiempoAlquiler[0].resta);
                     $2=0;
                     $3=0;

@@ -40,8 +40,8 @@ $routes->get('horarios-mayor-demanda', 'GestionController::horarioMayorDemanda')
 $routes->get('tiempo-alquiler', 'GestionController::tiempoAlquiler');
 $routes->get('calificar-punto-ed', 'GestionController::calificarPuntoED');
 $routes->get('buscar-punto-ed', 'GestionController::buscarPuntoED');
-$routes->get('horario-mayor-demanda', 'AlquilerController::mostrarPDF');
-$routes->get('horario-mayor-demanda', 'AlquilerController::generaPuntosPDF');
+//$routes->get('horario-mayor-demanda', 'AlquilerController::mostrarPDF');
+//$routes->get('horario-mayor-demanda', 'AlquilerController::generaPuntosPDF');
 $routes->get('alta-bicicleta', 'GestionController::altaBicicleta');
 $routes->get('modificar-bicicleta', 'GestionController::modificarBicicleta');
 $routes->get('baja-bicicleta', 'GestionController::bajaBicicleta');
