@@ -69,7 +69,7 @@
                                                                                                                                                                             } ?>" required>
                             </div>
                         </div>
-                        <button class="btn btn-primary btn-user btn-block" data-toggle="modal" data-target="#ventanaModal" type="submit">Actualizar</button>
+                        <button class="btn btn-primary btn-user btn-block" data-toggle="modal" data-target="#ventanaModal" type="button">Actualizar</button>
                         </a>
                         <hr>
 
