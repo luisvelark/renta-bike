@@ -69,9 +69,13 @@ class AlquilerController extends BaseController
             if ($this->alquilerModel->buscarAlquilerActivo($idUsuario) == null) {
 
                 $this->alquilerModel->crearAlquiler($alquiler);
+                $sesion->set('activo', '1');
+                $this->cBicicleta->cambiarEstadoBicicleta($puntoYBici['idBici'], 'EnAlquiler');
             } else {
                 $elId = $this->alquilerModel->buscarIdAlquilerDelEstado('Activo');
                 $this->alquilerModel->actualizarAlquiler($elId, $alquiler);
+                $sesion->set('activo', '1');
+
             }
 
             $arr = [
