@@ -51,8 +51,9 @@ function buscarHorarioMayorDemanda() {
                     for ($i = 0; $i < data.horasMayorDemanda.length; $i++){
                         tabla +='<tr>';
                         tabla +='<td>'+data.horasMayorDemanda[$i].horaInicioAlquiler+'</td>';
-                        tabla +='<td>'+data.horasMayorDemanda[$i].conteo+'</td>';
+                        tabla +='<td>'+data.horasMayorDemanda[$i].conteo+'</td></tr>';
                     }
+                   // tabla +='<tr> <td colspan="2"><a href="<?php echo base_url();?>/AlquilerController/generaPuntosPDF" class="btn btn-primary">PDF horas Mayor Demanda</a></td></tr>';
                     tabla +='</tbody>';
                     tabla +='</tabla>';
                     respuesta.innerHTML=tabla;
