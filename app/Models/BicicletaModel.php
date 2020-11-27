@@ -9,9 +9,9 @@ class BicicletaModel extends Model
     protected $primaryKey = 'idBicicleta';
 
     protected $returnType = 'array';
-    protected $useSoftDeletes = false;
+    protected $useSoftDeletes = true;
 
-    protected $allowedFields = ['numeroBicicleta', 'estado', 'daño', 'observaciones', 'idPuntoED', 'precio'];
+    protected $allowedFields = ['numeroBicicleta', 'estado', 'daño', 'observaciones', 'idPuntoED', 'precio', 'deleted_at'];
 
     protected $useTimestamps = false;
     protected $createdField = 'created_at';
@@ -22,6 +22,25 @@ class BicicletaModel extends Model
     protected $validationMessages = [];
     protected $skipValidation = false;
 
+    public function crearBicicleta($bicicleta)
+    {
+        $this->insert($bicicleta);
+    }
+    public function buscarBicicleta($numBicicleta)
+    {
+        return $this->where('numeroBicicleta', $numBicicleta)->first();
+    }
+    public function bajaLogica($numBicicleta, $fechaActual)
+    {
+        $bicicleta = $this->buscarBicicleta($numBicicleta);
+        $deleted = ['deleted_at' => $fechaActual];
+        $id = $bicicleta['idBicicleta'];
+        $this->update($id, $deleted);
+    }
+    public function updateBicicleta($id, $cambios)
+    {
+        $this->update($id, $cambios);
+    }
     public function cambiarEstado($id, $estado)
     {
         $data = ['estado' => $estado];
