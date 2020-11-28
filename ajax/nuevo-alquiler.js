@@ -61,30 +61,31 @@ function envioAlquiler() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        if (data.msg === "error") {
-          msj.innerHTML = `
+        if (data.code !== "500") {
+          if (data.msg === "error") {
+            msj.innerHTML = `
           <div id="noti" class="alert alert-danger w-50" role="alert">
              llena todos los campos obligatorios!
           </div>`;
 
-          detalles.innerHTML = `<p class="p-2 small text-white text-center">NO HAY DETALLES</p>`;
-        } else {
-          msj.innerHTML = `
+            detalles.innerHTML = `<p class="p-2 small text-white text-center">NO HAY DETALLES</p>`;
+          } else {
+            msj.innerHTML = `
           <div id="noti" class="alert alert-primary w-50" role="alert">
             ${data.msg}  
           </div>`;
-          enviar.disabled = true;
-          campos.disabled = true;
-          editar.disabled = false;
+            enviar.disabled = true;
+            campos.disabled = true;
+            editar.disabled = false;
 
-          let clienteAlt;
-          if (data.detalle.clienteAlternativo === 0) {
-            clienteAlt = "---";
-          } else {
-            clienteAlt = data.detalle.clienteAlternativo;
-          }
+            let clienteAlt;
+            if (data.detalle.clienteAlternativo === 0) {
+              clienteAlt = "---";
+            } else {
+              clienteAlt = data.detalle.clienteAlternativo;
+            }
 
-          detalles.innerHTML = `
+            detalles.innerHTML = `
           <ul class="p-2 text-white text-left">
             <li><span class="font-weight-bold">Cliente:</span>  ${
               data.usuario.nombre
@@ -107,11 +108,19 @@ function envioAlquiler() {
             <li><span class="font-weight-bold">Cliente Alternativo:</span>  ${clienteAlt}</li>
           </ul>
           `;
+          }
+        } else {
+          msj.innerHTML = `
+          <div id="noti" class="alert alert-danger w-100 text-center" role="alert">
+             "${data.aviso}"
+             <p class="mb-0">-Seleccione otro punto de entrega porfavor.</p>
+          </div>`;
         }
+
         setTimeout(() => {
           let div = document.getElementById("noti");
           div.style.display = "none";
-        }, 3000);
+        }, 6000);
       });
     // .catch((err) => console.log(err));
   }
