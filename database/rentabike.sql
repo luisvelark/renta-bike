@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-11-2020 a las 04:34:36
+-- Tiempo de generación: 29-11-2020 a las 21:27:06
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -28,16 +28,16 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `administrador` (
-  `idUsuario` int(11) NOT NULL
+  `idFachada` int(11) NOT NULL,
+  `idUsuarioAdminFK` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `administrador`
 --
 
-INSERT INTO `administrador` (`idUsuario`) VALUES
-(2),
-(7);
+INSERT INTO `administrador` (`idFachada`, `idUsuarioAdminFK`) VALUES
+(1, 7);
 
 -- --------------------------------------------------------
 
@@ -151,7 +151,8 @@ INSERT INTO `calificacion` (`fechaCalificacion`, `idPuntoED`, `idUsuarioCliente`
 --
 
 CREATE TABLE `cliente` (
-  `idUsuario` int(11) NOT NULL,
+  `idFachada` int(11) NOT NULL,
+  `idUsuarioFK` int(11) NOT NULL,
   `puntajeTotal` float NOT NULL DEFAULT 0,
   `credito` float NOT NULL DEFAULT 0,
   `suspendido` tinyint(1) NOT NULL DEFAULT 0,
@@ -163,12 +164,13 @@ CREATE TABLE `cliente` (
 -- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `cliente` (`idUsuario`, `puntajeTotal`, `credito`, `suspendido`, `fechaInicioSuspencion`, `fechaFinSuspencion`) VALUES
-(1, 350, 350, 0, '2020-11-09', '2020-11-09'),
-(3, 0, 0, 0, '2020-11-09', '2020-11-09'),
-(4, 0, -350, 0, '2020-11-09', '2020-11-09'),
-(5, 0, 0, 0, '2020-11-09', '2020-11-09'),
-(8, 0, 0, 0, '2020-11-09', '2020-11-09');
+INSERT INTO `cliente` (`idFachada`, `idUsuarioFK`, `puntajeTotal`, `credito`, `suspendido`, `fechaInicioSuspencion`, `fechaFinSuspencion`) VALUES
+(1, 1, 350, 350, 0, '2020-11-09', '2020-11-09'),
+(2, 3, 0, 0, 0, '2020-11-09', '2020-11-09'),
+(3, 4, 0, -350, 0, '2020-11-09', '2020-11-09'),
+(4, 5, 0, 0, 0, '2020-11-09', '2020-11-09'),
+(5, 8, 0, 0, 0, '2020-11-09', '2020-11-09'),
+(6, 2, 0, 0, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -318,7 +320,8 @@ INSERT INTO `usuario` (`idUsuario`, `dni`, `nombre`, `apellido`, `correo`, `tele
 -- Indices de la tabla `administrador`
 --
 ALTER TABLE `administrador`
-  ADD PRIMARY KEY (`idUsuario`);
+  ADD PRIMARY KEY (`idFachada`),
+  ADD UNIQUE KEY `idUsuario` (`idUsuarioAdminFK`);
 
 --
 -- Indices de la tabla `alquiler`
@@ -348,7 +351,8 @@ ALTER TABLE `calificacion`
 -- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`idUsuario`);
+  ADD PRIMARY KEY (`idFachada`),
+  ADD UNIQUE KEY `idUsuario` (`idUsuarioFK`);
 
 --
 -- Indices de la tabla `multa`
@@ -381,6 +385,12 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `administrador`
+--
+ALTER TABLE `administrador`
+  MODIFY `idFachada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `alquiler`
 --
 ALTER TABLE `alquiler`
@@ -397,6 +407,12 @@ ALTER TABLE `bicicleta`
 --
 ALTER TABLE `calificacion`
   MODIFY `idPuntoED` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `idFachada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `multa`
@@ -430,14 +446,14 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `administrador`
 --
 ALTER TABLE `administrador`
-  ADD CONSTRAINT `administrador_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`);
+  ADD CONSTRAINT `administrador_ibfk_1` FOREIGN KEY (`idUsuarioAdminFK`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `alquiler`
 --
 ALTER TABLE `alquiler`
   ADD CONSTRAINT `alquiler_ibfk_1` FOREIGN KEY (`idBicicleta`) REFERENCES `bicicleta` (`idBicicleta`),
-  ADD CONSTRAINT `alquiler_ibfk_2` FOREIGN KEY (`idUsuarioCliente`) REFERENCES `cliente` (`idUsuario`),
+  ADD CONSTRAINT `alquiler_ibfk_2` FOREIGN KEY (`idUsuarioCliente`) REFERENCES `cliente` (`idUsuarioFK`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `alquiler_ibfk_3` FOREIGN KEY (`idPuntoD`) REFERENCES `puntoentregadevolucion` (`idPuntoED`),
   ADD CONSTRAINT `alquiler_ibfk_4` FOREIGN KEY (`idPuntoE`) REFERENCES `puntoentregadevolucion` (`idPuntoED`);
 
@@ -452,25 +468,25 @@ ALTER TABLE `bicicleta`
 --
 ALTER TABLE `calificacion`
   ADD CONSTRAINT `calificacion_ibfk_1` FOREIGN KEY (`idPuntoED`) REFERENCES `puntoentregadevolucion` (`idPuntoED`),
-  ADD CONSTRAINT `calificacion_ibfk_2` FOREIGN KEY (`idUsuarioCliente`) REFERENCES `cliente` (`idUsuario`);
+  ADD CONSTRAINT `calificacion_ibfk_2` FOREIGN KEY (`idUsuarioCliente`) REFERENCES `cliente` (`idUsuarioFK`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  ADD CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `cliente_ibfk1` FOREIGN KEY (`idUsuarioFK`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `multa`
 --
 ALTER TABLE `multa`
-  ADD CONSTRAINT `multa_ibfk_1` FOREIGN KEY (`idUsuarioCliente`) REFERENCES `cliente` (`idUsuario`);
+  ADD CONSTRAINT `multa_ibfk_1` FOREIGN KEY (`idUsuarioCliente`) REFERENCES `cliente` (`idUsuarioFK`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `puntaje`
 --
 ALTER TABLE `puntaje`
-  ADD CONSTRAINT `puntaje_ibfk_1` FOREIGN KEY (`idUsuarioCliente`) REFERENCES `cliente` (`idUsuario`);
+  ADD CONSTRAINT `puntaje_ibfk_1` FOREIGN KEY (`idUsuarioCliente`) REFERENCES `cliente` (`idUsuarioFK`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
