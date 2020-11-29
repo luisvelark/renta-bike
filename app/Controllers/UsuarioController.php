@@ -133,6 +133,7 @@ class UsuarioController extends BaseController
                 'correo' => $user['correo'],
                 'tipo' => 'cliente',
             ];
+            
 
             $sesion = session();
             $sesion->set($datosSesion);

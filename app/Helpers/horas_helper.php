@@ -1,4 +1,5 @@
-<?php
+<?php 
+
 
 function calcularSumaHoras($horaInicio, $cantHora)
 {
@@ -13,3 +14,29 @@ function calcularSumaHoras($horaInicio, $cantHora)
     return $newHora;
 
 }
+function restarMinutos($horaInicio, $cantidadMinutos)
+{
+    $hora = strtotime($horaInicio);
+    $miHora = date('H:i:s', $hora);
+
+    $newHora = strtotime('+0 hour', strtotime($miHora));
+    $newHora = strtotime('-'.$cantidadMinutos.' minute', $newHora);
+    $newHora = strtotime('-0 second', $newHora);
+    $newHora = date('H:i:s', $newHora);
+    return $newHora;
+
+}
+function sumarMinutos($horaInicio, $cantidadMinutos)
+{
+    $hora = strtotime($horaInicio);
+    $miHora = date('H:i:s', $hora);
+
+    $newHora = strtotime('+0 hour', strtotime($miHora));
+    $newHora = strtotime('+'.$cantidadMinutos.' minute', $newHora);
+    $newHora = strtotime('-0 second', $newHora);
+    $newHora = date('H:i:s', $newHora);
+    return $newHora;
+
+}
+
+?>

@@ -26,6 +26,7 @@ class MultaModel extends Model
     }
 
     public function crearMulta($id,$daño,$precio){
+        date_default_timezone_set('America/Argentina/Ushuaia');
         if($daño=='Recuperable'){
             $monto= $precio*0.25;
             $this->insert(['idUsuarioCliente'=>$id ,'monto'=>$monto, 'fechaMulta'=> date("Y-m-d"),'detalleMulta'=> 'No declarar daños minimos',
