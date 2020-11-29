@@ -5,12 +5,12 @@ use App\Models\UsuarioModel;
 class AdministradorModel extends UsuarioModel
 {
     protected $table      = 'administrador';
-    protected $primaryKey = 'idUsuario';
+    protected $primaryKey = 'idFachada';
 
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = [];
+    protected $allowedFields = ['idUsuarioAdminFK'];
 
 
     protected $useTimestamps = false;
