@@ -44,7 +44,7 @@ class AlquilerModel extends Model
 
     public function obtenerHoraInicio($fechaInicio, $fechaFinal)
     {
-        $array = ['fechaAlquiler >' => $fechaInicio, 'fechaAlquiler <' => $fechaFinal];
+        $array = ['fechaAlquiler >=' => $fechaInicio, 'fechaAlquiler <=' => $fechaFinal];
         $builder = $this->builder();
         $fecha = $this->select('horaInicioAlquiler')
             ->selectCount('horaInicioAlquiler', 'conteo')
@@ -56,7 +56,7 @@ class AlquilerModel extends Model
     }
     public function obtenerTiempoAlquiler($fechaInicio, $fechaFinal)
     {
-        $array = ['fechaAlquiler >' => $fechaInicio, 'fechaAlquiler <' => $fechaFinal];
+        $array = ['fechaAlquiler >=' => $fechaInicio, 'fechaAlquiler <=' => $fechaFinal];
         $builder = $this->builder();
         $fecha = $this->select('(horaFinAlquiler - horaInicioAlquiler) AS resta') //calcular la hora restante
             ->where($array)
@@ -67,7 +67,7 @@ class AlquilerModel extends Model
     }
     public function obtenerPuntosRetorno($fechaInicio, $fechaFinal)
     {
-        $array = ['fechaAlquiler >' => $fechaInicio, 'fechaAlquiler <' => $fechaFinal];
+        $array = ['fechaAlquiler >=' => $fechaInicio, 'fechaAlquiler <=' => $fechaFinal];
         $builder = $this->builder();
         $puntoD = $this->select('pd.direccion,pd.telefono,pd.calificacionTotal') //calcular la hora restante
             ->selectCount('idPuntoD', 'conteo')

@@ -107,15 +107,15 @@ function buscarBicicleta(){
                         tabla+='<option value="Disponible">Disponible</option>';
                         tabla+='<option value="Disponible">Disponible</option>';
                         tabla+='<option value="EnAlquiler">En alquiler</option>';
-                        tabla+='<option value="EnReparacion">En reparacion</option>';
+                        tabla+='<option value="EnReparacion">En reparación</option>';
                     }else if(data.bicicleta.estado=='EnAlquiler'){
                         tabla+='<option value="EnAlquiler">En alquiler</option>';
                         tabla+='<option value="EnAlquiler">En alquiler</option>';
                         tabla+='<option value="Disponible">Disponible</option>';
-                        tabla+='<option value="EnReparacion">En reparacion</option>';
+                        tabla+='<option value="EnReparacion">En reparación</option>';
                     }else{
-                        tabla+='<option value="EnReparacion">En reparacion</option>';
-                        tabla+='<option value="EnReparacion">En reparacion</option>';
+                        tabla+='<option value="EnReparacion">En reparación</option>';
+                        tabla+='<option value="EnReparacion">En reparación</option>';
                         tabla+='<option value="EnAlquiler">En alquiler</option>';
                         tabla+='<option value="Disponible">Disponible</option>';
                     }
@@ -161,8 +161,8 @@ function buscarBicicleta(){
                     }
                     tabla+='<td>';
                     tabla+='<label class="font-weight-bold">Ingrese nueva observacion de la Bicicleta:';
-                    //tabla+='<input type="text" class="form-control form-control-user my-1 text-center font-weight-bold" name="numeroBicicleta" autofocus="">';
-                    tabla+='<textarea name="observaciones" value="'+data.bicicleta.observaciones+'" class="form-control" rows="3"></textarea>';
+                    //tabla+='<input type="text" value="'+data.bicicleta.observaciones+'" class="form-control form-control-user my-1 text-center font-weight-bold" name="numeroBicicleta" autofocus="">';
+                    tabla+='<textarea name="observaciones" class="form-control" rows="3">'+data.bicicleta.observaciones+'</textarea>';
                     tabla+='</label>';
                     tabla+='</td>';
                     tabla+='</tr>';

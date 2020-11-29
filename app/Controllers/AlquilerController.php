@@ -108,7 +108,7 @@ class AlquilerController extends BaseController
         } else {
             $datos = ['horasMayorDemanda' => $this->alquilerModel->obtenerHoraInicio($fechaInicio, $fechaFinal)];
             //$datos= ['fechaInicio'=>$fechaInicio,'fechaFinal'=>$fechaFinal];
-            if (isset($datos['horasMayorDemanda'])) {
+            if (isset($datos['horasMayorDemanda'])&&count($datos['horasMayorDemanda'])!=0) {
                 echo json_encode($datos);
                 die();
             } else {
@@ -128,7 +128,7 @@ class AlquilerController extends BaseController
             die();
         } else {
             $datos = ['tiempoAlquiler' => $this->alquilerModel->obtenerTiempoAlquiler($fechaInicio, $fechaFinal)];
-            if (isset($datos['tiempoAlquiler']) && $datos == false) {
+            if (isset($datos['tiempoAlquiler'])&&count($datos['tiempoAlquiler'])!=0) {
                 echo json_encode($datos);
                 die();
             } else {
@@ -148,7 +148,7 @@ class AlquilerController extends BaseController
             die();
         } else {
             $datos = ['puntosRetorno' => $this->alquilerModel->obtenerPuntosRetorno($fechaInicio, $fechaFinal)];
-            if (isset($datos['puntosRetorno'])) {
+            if (isset($datos['puntosRetorno'])&&count($datos['puntosRetorno'])!=0) {
                 echo json_encode($datos);
                 die();
             } else {

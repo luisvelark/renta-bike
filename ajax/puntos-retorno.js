@@ -42,13 +42,13 @@ function buscarPuntoRetorno() {
                     respuesta.innerHTML=texto;
                 }
                 else{
-                    var tabla='<br><h3>Puntos de retorno mas utilizados<br> <br>';
+                    var tabla='<br><h3>Puntos de retorno más utilizados<br> <br>';
                     tabla +='<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">';
                     tabla +='<thead>';
                     tabla +='<tr>';
-                    tabla +='<th>Direccion</th>';
-                    tabla +='<th>Telefono</th>';
-                    tabla +='<th>Calificacion</th>';
+                    tabla +='<th>Dirección</th>';
+                    tabla +='<th>Teléfono</th>';
+                    tabla +='<th>Calificación</th>';
                     tabla +='<th>Conteo</th>';
                     tabla +='</tr>';
                     tabla +='</thead>';
