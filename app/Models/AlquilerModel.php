@@ -117,5 +117,4 @@ class AlquilerModel extends Model
         $data = ['estadoAlquiler' => $estado];
         $this->update($idAlquiler, $data);
     }
-
 }

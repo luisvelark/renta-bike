@@ -63,5 +63,9 @@ class ClienteModel extends Model
     public function actualizarPuntaje($id, $puntos){
         $data= ['puntajeTotal' => $puntos];
         $this->update($id,$data);
-    } 
+    }   
+    public function suspendido($id){
+        $valor = $this->where('idUsuario', $id)->first();
+        return $valor['suspendido'];
+}
 }

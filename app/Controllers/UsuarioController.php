@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\AlquilerModel;
 use App\Models\UsuarioModel;
+use App\Models\ClienteModel;
 use CodeIgniter\HTTP\Request;
 
 class UsuarioController extends BaseController
@@ -16,6 +17,7 @@ class UsuarioController extends BaseController
     {
         $this->alquiler = new AlquilerModel();
         $this->usuario = new UsuarioModel();
+        $this->cliente= new ClienteModel();
         /* $this->controladorCliente = new ClienteModel(); */
 
         helper(['form']);
@@ -77,12 +79,16 @@ class UsuarioController extends BaseController
                         'correo' => $user['correo'],
                         'tipo' => $user['tipo'],
                         'activo' => '0',
+                        'suspendido' => 0,
                     ];
                     if ($this->alquiler->buscarAlquilerActivo($user['idUsuario']) != null) {
                         $datosSesion['activo'] = '1';
                     }
                     if ($this->alquiler->buscarAlquilerEnProceso($user['idUsuario']) != null) {
                         $datosSesion['activo'] = '2';
+                    }
+                    if ($this->cliente->suspendido($user['idUsuario'])) {
+                        $datosSesion['suspendido'] = 1;
                     }
 
                     $sesion = session();
