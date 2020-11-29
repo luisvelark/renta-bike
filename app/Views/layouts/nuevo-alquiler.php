@@ -15,7 +15,7 @@ $hora = new DateTime("now", new DateTimeZone('America/Argentina/Ushuaia'));
 
           <div class="form-group">
             <label class="font-weight-bold">*Seleccionar punto de entrega:
-              <select
+              <select id="idPunto"
                 class="form-control form-control-user font-weight-bold custom-select py-3 my-2 h-50 w-75 text-center"
                 name="punto-entrega">
                 <option selected>---</option>
@@ -29,16 +29,17 @@ $hora = new DateTime("now", new DateTimeZone('America/Argentina/Ushuaia'));
           <div class="form-group">
             <label class="font-weight-bold">*Seleccionar hora de inicio:
 
-              <input type="time" class="form-control form-control-user font-weight-bold py-3 pl-3 my-1 w-75 h-50 "
-                name="hora-inicio" value=<?php echo '"' . $hora->format('G:i') . '"' ?>
-                min=<?php echo '"' . $hora->format('G:i') . '"' ?> max="23:00" step="1">
+              <input id="horaAlquiler" type="time"
+                class="form-control form-control-user font-weight-bold py-3 pl-3 my-1 w-75 h-50 " name="hora-inicio"
+                value=<?php echo '"' . $hora->format('H:i:s') . '"' ?>
+                min=<?php echo '"' . $hora->format('H:i:s') . '"' ?> max="23:00" step="1">
               <span class="small m-2">*Ingresa una hora mayor a la actual</span>
             </label>
           </div>
 
           <div class="form-group">
             <label class="font-weight-bold">*Seleccionar cantidad de horas:
-              <select
+              <select id="idCantHora"
                 class="form-control form-control-user custom-select py-3 my-2 h-50 w-50 text-center font-weight-bold"
                 name="cant-hora">
                 <option selected>---</option>
@@ -53,8 +54,9 @@ $hora = new DateTime("now", new DateTimeZone('America/Argentina/Ushuaia'));
 
           <div class="form-group">
             <label class="font-weight-bold">Dni optativo para devolucion:
-              <input type="text" class="form-control form-control-user my-1 text-center font-weight-bold"
-                name="dni-optativo" autofocus="" maxlength="8">
+              <input id="dniOptativo" type="text"
+                class="form-control form-control-user my-1 text-center font-weight-bold" name="dni-optativo"
+                autofocus="" maxlength="8">
               <span class="small m-2">Ej: 12345678</span>
             </label>
           </div>

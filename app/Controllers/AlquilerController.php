@@ -30,6 +30,30 @@ class AlquilerController extends BaseController
 
     }
 
+    public function hayAlquiler()
+    {
+        $sesion = session();
+        $idUsuario = $sesion->get('idUsuario');
+        $nombreUser = $sesion->get('nombre');
+        $apellidoUser = $sesion->get('apellido');
+
+        $alquiler = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
+        $puntoYBici = $this->controlPED->biciDisponibles($alquiler['idPuntoE']);
+
+        $arr = ["existe" => true,
+            "alquiler" => $alquiler,
+            "usuario" => [
+                "nombre" => $nombreUser,
+                "apellido" => $apellidoUser,
+            ],
+            "puntoBici" => $puntoYBici];
+        // echo "<pre>";
+        // var_dump($arr);
+        // print_r($arr);
+        echo json_encode($arr);
+        die();
+    }
+
     public function solicitarAlquiler()
     {
         $puntoE = $this->request->getPost('punto-entrega');
@@ -50,7 +74,7 @@ class AlquilerController extends BaseController
             } else {
 
                 $sesion = session();
-                $sesion->set($puntoYBici);
+                // $sesion->set($puntoYBici);
                 $idUsuario = $sesion->get('idUsuario');
                 $nombreUser = $sesion->get('nombre');
                 $apellidoUser = $sesion->get('apellido');
