@@ -14,7 +14,7 @@ use CodeIgniter\HTTP\Request;
 class AlquilerController extends BaseController
 {
 
-    /* protected $alquilerModel; *///cambiar a protected
+    /* protected $alquilerModel; */ //cambiar a protected
     protected $request;
     // protected $controlPED;
 
@@ -27,7 +27,6 @@ class AlquilerController extends BaseController
         $this->cBicicleta = new BicicletaController();
         $this->cPuntaje = new PuntajeController();
         $this->cCliente = new ClienteController();
-
     }
 
     public function solicitarAlquiler()
@@ -76,7 +75,6 @@ class AlquilerController extends BaseController
                 $elId = $this->alquilerModel->buscarIdAlquilerDelEstado($idUsuario, 'Activo');
                 $this->alquilerModel->actualizarAlquiler($elId, $alquiler);
                 $sesion->set('activo', '1');
-
             }
 
             $arr = [
@@ -103,11 +101,11 @@ class AlquilerController extends BaseController
         //$fechaFinal=date_create_from_format("Y-m-d", $_POST['fechaFinal']);
         $fechaInicio = $_POST['fechaInicio'];
         $fechaFinal = $_POST['fechaFinal'];
-        if($fechaInicio>$fechaFinal){
+        if ($fechaInicio > $fechaFinal) {
             $datos = 'errorFecha';
             echo json_encode($datos);
             die();
-        }else{
+        } else {
             $datos = ['horasMayorDemanda' => $this->alquilerModel->obtenerHoraInicio($fechaInicio, $fechaFinal)];
             //$datos= ['fechaInicio'=>$fechaInicio,'fechaFinal'=>$fechaFinal];
             if (isset($datos['horasMayorDemanda'])) {
@@ -124,14 +122,13 @@ class AlquilerController extends BaseController
     {
         $fechaInicio = $_POST['fechaInicio'];
         $fechaFinal = $_POST['fechaFinal'];
-        if($fechaInicio>$fechaFinal){
+        if ($fechaInicio > $fechaFinal) {
             $datos = 'errorFecha';
             echo json_encode($datos);
             die();
-        }else{
+        } else {
             $datos = ['tiempoAlquiler' => $this->alquilerModel->obtenerTiempoAlquiler($fechaInicio, $fechaFinal)];
-            if (isset($datos['tiempoAlquiler']) && $datos==false) 
-            {
+            if (isset($datos['tiempoAlquiler']) && $datos == false) {
                 echo json_encode($datos);
                 die();
             } else {
@@ -145,11 +142,11 @@ class AlquilerController extends BaseController
     {
         $fechaInicio = $_POST['fechaInicio'];
         $fechaFinal = $_POST['fechaFinal'];
-        if($fechaInicio>$fechaFinal){
+        if ($fechaInicio > $fechaFinal) {
             $datos = 'errorFecha';
             echo json_encode($datos);
             die();
-        }else{
+        } else {
             $datos = ['puntosRetorno' => $this->alquilerModel->obtenerPuntosRetorno($fechaInicio, $fechaFinal)];
             if (isset($datos['puntosRetorno'])) {
                 echo json_encode($datos);
@@ -169,34 +166,47 @@ class AlquilerController extends BaseController
             $idUsuarioActual = $this->request->getPost('idUsuarioOculto');
             $alquilerActivo = $this->alquilerModel->buscarAlquilerActivo($idUsuarioActual);
             $idBicicleta = $alquilerActivo['idBicicleta'];
+            $max = $alquilerActivo['horaInicioAlquiler'];
+            date_default_timezone_set('America/Argentina/Ushuaia');
+            $actual = date("H:i:s");
+            $min = restarMinutos($max, '10');
+            if (($actual <= $max) && ($actual >= $min)) {
 
-            if ($this->alquilerModel->buscarUltimoAlquilerPorBicicleta($idBicicleta) == null) {
-                $mensaje = ['msjReportar' => '¡No existe un alquiler anterior a éste!'];
-                echo view('index-cliente', $mensaje);
-            } else {
-                $alquilerUltimo = $this->alquilerModel->buscarUltimoAlquilerPorBicicleta($idBicicleta);
-                $idUsuarioUltimo = $alquilerUltimo['idUsuarioCliente'];
-                $precio = $this->cBicicleta->bicicleta->obtenerPrecio();
-                $this->cMulta->multa->crearMulta($idUsuarioUltimo, $this->request->getPost('comboDaño'), $precio);
-                $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'EnReparacion');
-                $this->cBicicleta->bicicleta->aplicarDaño($idBicicleta, $this->request->getPost('comboDaño'));
-                if ($this->controlPED->biciDisponibles($alquilerActivo['idPuntoE']) != null) {
+                if ($this->alquilerModel->buscarUltimoAlquilerPorBicicleta($idBicicleta) == null) {
 
-                    $puntoYBici = $this->controlPED->biciDisponibles($alquilerActivo['idPuntoE']);
-                    $idBicicletaNueva = $puntoYBici['idBici'];
-                    $this->alquilerModel->reemplazarBicicleta($alquilerActivo['idAlquiler'], $idBicicletaNueva);
-                    $this->cBicicleta->bicicleta->cambiarEstado($idBicicletaNueva, 'EnAlquiler');
-                    $mensaje = ['msjReportar' => '¡Has reportado con éxito, se te asignó una nueva bicicleta!'];
+                    $mensaje = ['msjReportar' => '¡No existe un alquiler anterior a éste!'];
                     echo view('index-cliente', $mensaje);
                 } else {
-                    $this->cPuntaje->puntaje->crearPuntaje($idUsuarioActual, 50, 'No hay otra bicicleta disponible');
-                    $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Finalizado');
-                    $mensaje = ['msjReportar' => '¡No hay otra bicicleta disponible, se dará por finalizado el alquiler!'];
-                    $puntajeTotal = $this->cPuntaje->puntaje->buscarPuntos($idUsuarioActual);
-                    $this->cCliente->cliente->actualizarPuntaje($idUsuarioActual, $puntajeTotal);
-                    $sesion->set('activo', '0');
-                    echo view('index-cliente', $mensaje);
+                    $alquilerUltimo = $this->alquilerModel->buscarUltimoAlquilerPorBicicleta($idBicicleta);
+                    $idUsuarioUltimo = $alquilerUltimo['idUsuarioCliente'];
+
+                    $precio = 25000; //PREGUNTAR A LA ANDREA
+
+
+                    $this->cMulta->multa->crearMulta($idUsuarioUltimo, $this->request->getPost('comboDaño'), $precio);
+                    $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'EnReparacion');
+                    $this->cBicicleta->bicicleta->aplicarDaño($idBicicleta, $this->request->getPost('comboDaño'));
+                    if ($this->controlPED->biciDisponibles($alquilerActivo['idPuntoE']) != null) {
+
+                        $puntoYBici = $this->controlPED->biciDisponibles($alquilerActivo['idPuntoE']);
+                        $idBicicletaNueva = $puntoYBici['idBici'];
+                        $this->alquilerModel->reemplazarBicicleta($alquilerActivo['idAlquiler'], $idBicicletaNueva);
+                        $this->cBicicleta->bicicleta->cambiarEstado($idBicicletaNueva, 'EnAlquiler');
+                        $mensaje = ['msjReportar' => '¡Has reportado con éxito, se te asignó una nueva bicicleta!'];
+                        echo view('index-cliente', $mensaje);
+                    } else {
+                        $this->cPuntaje->puntaje->crearPuntaje($idUsuarioActual, 50, 'No hay otra bicicleta disponible');
+                        $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Finalizado');
+                        $mensaje = ['msjReportar' => '¡No hay otra bicicleta disponible, se dará por finalizado el alquiler!'];
+                        $puntajeTotal = $this->cPuntaje->puntaje->buscarPuntos($idUsuarioActual);
+                        $this->cCliente->cliente->actualizarPuntaje($idUsuarioActual, $puntajeTotal);
+                        $sesion->set('activo', '0');
+                        echo view('index-cliente', $mensaje);
+                    }
                 }
+            }else{
+                $mensaje = ['msjReportar' => '¡El tiempo de anulación es de: ' . $min . ' hasta ' . $max . '!'];
+                echo view('index-cliente', $mensaje);
             }
         }
     }
@@ -207,15 +217,21 @@ class AlquilerController extends BaseController
             $sesion = session();
             $idUsuario = $this->request->getPost('idUsuarioOculto');
             $alquilerActivo = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
-            $horaInicio = $alquilerActivo['horaInicioAlquiler'];
-
-            $idBicicleta = $alquilerActivo['idBicicleta'];
-            $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'Disponible');
-            $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Anulado'); //Cambiar a finalizado
-            $mensaje = ['msjAnular' => '¡Has anulado con éxito!'];
-            $sesion->set('activo', '0');
-            echo view('index-cliente', $mensaje);
-
+            $max = $alquilerActivo['horaInicioAlquiler'];
+            date_default_timezone_set('America/Argentina/Ushuaia');
+            $actual = date("H:i:s");
+            $min = restarMinutos($max, '10');
+            if (($actual <= $max) && ($actual >= $min)) {
+                $idBicicleta = $alquilerActivo['idBicicleta'];
+                $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'Disponible');
+                $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Anulado');
+                $mensaje = ['msjAnular' => '¡Has anulado con éxito!'];
+                $sesion->set('activo', '0');
+                echo view('index-cliente', $mensaje);
+            } else {
+                $mensaje = ['msjAnular' => '¡El tiempo de anulación es de: ' . $min . ' hasta ' . $max . '!'];
+                echo view('index-cliente', $mensaje);
+            }
         }
     }
     public function soliticaConfirmarAlquiler()
@@ -223,12 +239,23 @@ class AlquilerController extends BaseController
         $sesion = session();
         $idUsuario = $sesion->get('idUsuario');
         $elId = $this->alquilerModel->buscarIdAlquilerDelEstado($idUsuario, 'Activo');
-        $this->alquilerModel->cambiarEstado($elId, 'EnProceso');
-        $sesion->set('activo', '2');
-        $noti = ["msj" => "alquiler confirmado"];
-        echo json_encode($noti);
-        die();
-
+        $alquilerActivo = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
+        $horaInicio = $alquilerActivo['horaInicioAlquiler'];
+        date_default_timezone_set('America/Argentina/Ushuaia');
+        $actual = date("H:i:s");
+        $min = restarMinutos($horaInicio, '10');
+        $max = sumarMinutos($horaInicio, '10');
+        if (($actual <= $max) && ($actual >= $min)) {
+            $this->alquilerModel->cambiarEstado($elId, 'EnProceso');
+            $sesion->set('activo', '2');
+            $noti = ["msj" => "alquiler confirmado"];
+            echo json_encode($noti);
+            die();
+        } else {
+            $noti = ['msj' => '¡El tiempo de confirmación es de: ' . $min . ' hasta ' . $max . '!'];
+            echo json_encode($noti);
+            die();
+        }
     }
 
     public function cargarDatosConfirmarAlquiler()
@@ -238,23 +265,30 @@ class AlquilerController extends BaseController
         $nombreUser = $sesion->get('nombre');
         $apellidoUser = $sesion->get('apellido');
         $miAlquiler = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
-        $datos = ["alquiler" => $miAlquiler,
-            "usuario" => ["nombre" => $nombreUser,
-                "apellido" => $apellidoUser]];
+        $datos = [
+            "alquiler" => $miAlquiler,
+            "usuario" => [ //AGREGAR EL NUMERO DE BICICLETAAAAAAAAAAAAAAAA
+                "nombre" => $nombreUser,
+                "apellido" => $apellidoUser
+            ]
+        ];
         echo json_encode($datos);
         die();
     }
-    public function mostrarPDF(){
+
+    public function mostrarPDF()
+    {
         echo view('layouts/ver_horasDemanda');
     }
-    
-    public function generaPuntosPDF(){
-        $pdf= new \FPDF('P','mm','letter');
+
+    public function generaPuntosPDF()
+    {
+        $pdf = new \FPDF('P', 'mm', 'letter');
         $pdf->AddPage();
-        $pdf->SetMargins(10,10,10);
+        $pdf->SetMargins(10, 10, 10);
         $pdf->SetTitle("Reporte Punto de alquiler mas frecuente");
-        $pdf->SetFont("Arial",'B',10);
-        $this->response->setHeader('Content-Type','application/pdf');
-        $pdf->Output('Prueba.pdf','I');    
+        $pdf->SetFont("Arial", 'B', 10);
+        $this->response->setHeader('Content-Type', 'application/pdf');
+        $pdf->Output('Prueba.pdf', 'I');
     }
 }

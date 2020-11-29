@@ -166,11 +166,9 @@ $user_session = session();
             </div>
             <form method="POST" class="user" action="<?php echo base_url(); ?>/AlquilerController/soliticaAnularAlquiler">
               <div class="modal-body">
+              <div id="datosAnular">
+              </div>
                 <div class="form-group">
-                  <p><span class="font-weight-bold">Estado del Alquiler: </span>Activo</p>
-                  <p><span class="font-weight-bold">Punto de entrega: </span>Av.Hipólito Yrioyen 2351</p>
-                  <p><span class="font-weight-bold">Hora de inicio: </span>16:32:00</p>
-                  <p><span class="font-weight-bold">Hora de fin: </span>19:32:00</p>
                   <input type="hidden" name="idUsuarioOculto" value=" <?php echo $user_session->idUsuario ?>">
                 </div>
               </div>
