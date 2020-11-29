@@ -43,7 +43,6 @@ class AlquilerController extends BaseController
         } else {
 
             $puntoYBici = $this->controlPED->biciDisponibles(intval($puntoE));
-
             $sesion = session();
             $sesion->set($puntoYBici);
             $idUsuario = $sesion->get('idUsuario');
@@ -179,9 +178,7 @@ class AlquilerController extends BaseController
                 } else {
                     $alquilerUltimo = $this->alquilerModel->buscarUltimoAlquilerPorBicicleta($idBicicleta);
                     $idUsuarioUltimo = $alquilerUltimo['idUsuarioCliente'];
-
-                    $precio = 25000; //PREGUNTAR A LA ANDREA
-
+                    $precio = 25000; /* $this->cBicicleta->bicicleta->obtenerPrecio($idBicicleta); */
 
                     $this->cMulta->multa->crearMulta($idUsuarioUltimo, $this->request->getPost('comboDaño'), $precio);
                     $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'EnReparacion');
@@ -205,7 +202,7 @@ class AlquilerController extends BaseController
                     }
                 }
             }else{
-                $mensaje = ['msjReportar' => '¡El tiempo de anulación es de: ' . $min . ' hasta ' . $max . '!'];
+                $mensaje = ['msjReportar' => '¡El tiempo de reportar daño es de: ' . $min . ' hasta ' . $max . '!'];
                 echo view('index-cliente', $mensaje);
             }
         }
@@ -259,6 +256,24 @@ class AlquilerController extends BaseController
     }
 
     public function cargarDatosConfirmarAlquiler()
+    {
+        $sesion = session();
+        $idUsuario = $sesion->get('idUsuario');
+        $nombreUser = $sesion->get('nombre');
+        $apellidoUser = $sesion->get('apellido');
+        $miAlquiler = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
+        $datos = [
+            "alquiler" => $miAlquiler,
+            "usuario" => [ //AGREGAR EL NUMERO DE BICICLETAAAAAAAAAAAAAAAA
+                "nombre" => $nombreUser,
+                "apellido" => $apellidoUser
+            ]
+        ];
+        echo json_encode($datos);
+        die();
+    }
+    
+    public function cargarDatosAnularAlquiler()
     {
         $sesion = session();
         $idUsuario = $sesion->get('idUsuario');

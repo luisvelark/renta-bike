@@ -66,34 +66,44 @@ $user_session = session();
 
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-
-            <?php if ($user_session->activo == '0') { ?>
-              <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Nuevo alquiler</a>
+            <?php if ($user_session->suspendido == 1) { ?>
+              <a id="idAlquiler" class="collapse-item" href="#" hidden> <i class="fas fa-plus-square"></i> Nuevo alquiler</a>
               <a id="idRealizarDevolucion" class="collapse-item" href="#" hidden> <i class="fas fa-arrow-circle-up"></i>
                 Realizar devolución </a>
               <a id="idConfirmar" class="collapse-item" href="#" hidden> <i class="fas fa-check-circle"></i> Confirmar
                 alquiler</a>
               <a id="idAnular" class="collapse-item" href="#" hidden> <i class="fas fa-ban"></i> Anular alquiler</a>
-
-            <?php } else if ($user_session->activo == '1') {
-
-            ?>
-              <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Nuevo alquiler</a>
-              <a id="idRealizarDevolucion" class="collapse-item" href="#" hidden> <i class="fas fa-arrow-circle-up"></i>
-                Realizar
-                devolución </a>
-              <a id="idConfirmar" class="collapse-item" href="#"> <i class="fas fa-check-circle"></i> Confirmar
-                alquiler</a>
-              <a id="idAnular" class="collapse-item" href="#"> <i class="fas fa-ban"></i> Anular alquiler</a>
             <?php } else { ?>
-              <a id="idAlquiler" class="collapse-item" href="#" hidden> <i class="fas fa-plus-square"></i> Nuevo
-                alquiler</a>
-              <a id="idRealizarDevolucion" class="collapse-item" href="#"> <i class="fas fa-arrow-circle-up"></i> Realizar
-                devolución </a>
-              <a id="idConfirmar" class="collapse-item" href="#" hidden> <i class="fas fa-check-circle"></i> Confirmar
-                alquiler</a>
-              <a id="idAnular" class="collapse-item" href="#" hidden> <i class="fas fa-ban"></i> Anular alquiler</a>
+
+              <?php if ($user_session->activo == '0') { ?>
+                <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Nuevo alquiler</a>
+                <a id="idRealizarDevolucion" class="collapse-item" href="#" hidden> <i class="fas fa-arrow-circle-up"></i>
+                  Realizar devolución </a>
+                <a id="idConfirmar" class="collapse-item" href="#" hidden> <i class="fas fa-check-circle"></i> Confirmar
+                  alquiler</a>
+                <a id="idAnular" class="collapse-item" href="#" hidden> <i class="fas fa-ban"></i> Anular alquiler</a>
+
+              <?php } else if ($user_session->activo == '1') {
+
+              ?>
+                <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Nuevo alquiler</a>
+                <a id="idRealizarDevolucion" class="collapse-item" href="#" hidden> <i class="fas fa-arrow-circle-up"></i>
+                  Realizar
+                  devolución </a>
+                <a id="idConfirmar" class="collapse-item" href="#"> <i class="fas fa-check-circle"></i> Confirmar
+                  alquiler</a>
+                <a id="idAnular" class="collapse-item" href="#"> <i class="fas fa-ban"></i> Anular alquiler</a>
+              <?php } else { ?>
+                <a id="idAlquiler" class="collapse-item" href="#" hidden> <i class="fas fa-plus-square"></i> Nuevo
+                  alquiler</a>
+                <a id="idRealizarDevolucion" class="collapse-item" href="#"> <i class="fas fa-arrow-circle-up"></i> Realizar
+                  devolución </a>
+                <a id="idConfirmar" class="collapse-item" href="#" hidden> <i class="fas fa-check-circle"></i> Confirmar
+                  alquiler</a>
+                <a id="idAnular" class="collapse-item" href="#" hidden> <i class="fas fa-ban"></i> Anular alquiler</a>
+              <?php } ?>
             <?php } ?>
+
           </div>
         </div>
       </li>
@@ -111,7 +121,6 @@ $user_session = session();
             <!-- TODO: -->
             <div class="modal-body">
               <div id="datosConfirmar">
-
               </div>
             </div>
             <div class="modal-footer">
@@ -166,8 +175,10 @@ $user_session = session();
             </div>
             <form method="POST" class="user" action="<?php echo base_url(); ?>/AlquilerController/soliticaAnularAlquiler">
               <div class="modal-body">
-              <div id="datosAnular">
-              </div>
+
+                <div id="datosAnular">
+                </div>
+
                 <div class="form-group">
                   <input type="hidden" name="idUsuarioOculto" value=" <?php echo $user_session->idUsuario ?>">
                 </div>
@@ -310,7 +321,7 @@ $user_session = session();
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                  <?php echo $user_session->nombre . ' ' . $user_session->apellido; ?></span>
+                  <?php echo $user_session->nombre . ' ' . $user_session->apellido;?></span>
                 <i class="fas fa-user"></i>
                 <!-- <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60"> -->
               </a>
@@ -434,8 +445,9 @@ $user_session = session();
   <script src="<?php echo base_url('ajax/buscar-punto-ed.js') ?>"></script>
   <script src="<?php echo base_url('ajax/api-map.js') ?>"></script>
   <script src="<?php echo base_url('ajax/modificar-usuario.js') ?>"></script>
+  <script src="<?php echo base_url('ajax/anular-alquiler.js') ?>"></script>
   <script src="<?php echo base_url('ajax/modales.js') ?>"></script>
-
+ 
 </body>
 
 </html>

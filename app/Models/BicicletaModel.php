@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use CodeIgniter\Model;
@@ -39,7 +40,7 @@ class BicicletaModel extends Model
     }
     public function updateBicicleta($id, $cambios)
     {
-        $confirma=$this->update($id, $cambios);
+        $confirma = $this->update($id, $cambios);
         return $confirma;
     }
     public function cambiarEstado($id, $estado)
@@ -54,8 +55,12 @@ class BicicletaModel extends Model
     }
     public function obtenerPrecio($id)
     {
-        $precio= $this->select('precio')->where('idBicicleta',$id)->first();
-        return $precio;
+        $valor = $this->where('idBicicleta', $id)->first();
+        return intval($valor['precio']);
     }
-
+    public function buscarBicletaId($id)
+    {
+    $bicicleta= $this->where('idBicicleta',$id)->first();
+    return $bicicleta;
+    }
 }
