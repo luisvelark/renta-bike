@@ -11,7 +11,6 @@ use CodeIgniter\HTTP\Request;
 class UsuarioController extends BaseController
 {
     private $reglasRegistro;
-    private $cliente;
 
     public function __construct()
     {

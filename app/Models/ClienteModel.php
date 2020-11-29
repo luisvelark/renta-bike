@@ -65,7 +65,7 @@ class ClienteModel extends Model
         $this->update($id,$data);
     }   
     public function suspendido($id){
-        $valor = $this->where('idUsuario', $id)->first();
+        $valor = $this->where('idUsuarioFK', $id)->first();
         return $valor['suspendido'];
 }
 }
