@@ -14,7 +14,7 @@ use CodeIgniter\HTTP\Request;
 class AlquilerController extends BaseController
 {
 
-    /* protected $alquilerModel; */ //cambiar a protected
+    /* protected $alquilerModel; *///cambiar a protected
     protected $request;
     // protected $controlPED;
 
@@ -29,9 +29,37 @@ class AlquilerController extends BaseController
         $this->cCliente = new ClienteController();
     }
 
-    public function solicitarAlquiler()
+    public function hayAlquiler()
     {
 
+        $sesion = session();
+        $idUsuario = $sesion->get('idUsuario');
+        $nombreUser = $sesion->get('nombre');
+        $apellidoUser = $sesion->get('apellido');
+
+        $alquiler = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
+        if ($alquiler != null) {
+            $puntoYBici = $this->controlPED->biciDisponibles($alquiler['idPuntoE']);
+            $arr = ["existe" => true,
+                "alquiler" => $alquiler,
+                "usuario" => [
+                    "nombre" => $nombreUser,
+                    "apellido" => $apellidoUser,
+                ],
+                "puntoBici" => $puntoYBici];
+        } else {
+            $arr = ["aviso" => "No tiene ningun alquiler activo..."];
+        }
+
+        // echo "<pre>";
+        // var_dump($arr);
+        // print_r($arr);
+        echo json_encode($arr);
+        die();
+    }
+
+    public function solicitarAlquiler()
+    {
         $puntoE = $this->request->getPost('punto-entrega');
         $horaInicio = $this->request->getPost('hora-inicio');
         $cantHoras = $this->request->getPost('cant-hora');
@@ -39,54 +67,63 @@ class AlquilerController extends BaseController
 
         if ($puntoE === '---' || empty($horaInicio) || $cantHoras === '---' || empty($puntoE) || empty($cantHoras)) {
 
-            $arr = ["msg" => "error"];
+            $arr = ["code" => "400", "msg" => "error"];
         } else {
 
             $puntoYBici = $this->controlPED->biciDisponibles(intval($puntoE));
-            $sesion = session();
-            $sesion->set($puntoYBici);
-            $idUsuario = $sesion->get('idUsuario');
-            $nombreUser = $sesion->get('nombre');
-            $apellidoUser = $sesion->get('apellido');
 
-            $alquiler = [
-                'idUsuarioCliente' => $idUsuario,
-                'idBicicleta' => $puntoYBici['idBici'],
-                'idPuntoE' => intval($puntoE),
-                'idPuntoD' => 2,
-                'fechaAlquiler' => date("Y-m-d"),
-                'horaInicioAlquiler' => date("H:i:s", strtotime($horaInicio)),
-                'HoraFinAlquiler' => calcularSumaHoras($horaInicio, $cantHoras),
-                'HoraEntregaAlquiler' => " ",
-                'clienteAlternativo' => intval($dniAlternativo),
-                'estadoAlquiler' => 'Activo',
-                'daño' => $puntoYBici['dañoBici'],
-                'ruta' => 'la ruta',
+            if ($puntoYBici == null) {
+                $arr = ["code" => "500", "aviso" => "No existen bicicletas disponibles en el punto de entrega."];
 
-            ];
-
-            if ($this->alquilerModel->buscarAlquilerActivo($idUsuario) == null) {
-
-                $this->alquilerModel->crearAlquiler($alquiler);
-                $sesion->set('activo', '1');
-                $this->cBicicleta->cambiarEstadoBicicleta($puntoYBici['idBici'], 'EnAlquiler');
             } else {
-                $elId = $this->alquilerModel->buscarIdAlquilerDelEstado($idUsuario, 'Activo');
-                $this->alquilerModel->actualizarAlquiler($elId, $alquiler);
-                $sesion->set('activo', '1');
+
+                $sesion = session();
+                // $sesion->set($puntoYBici);
+                $idUsuario = $sesion->get('idUsuario');
+                $nombreUser = $sesion->get('nombre');
+                $apellidoUser = $sesion->get('apellido');
+
+                $alquiler = [
+                    'idUsuarioCliente' => $idUsuario,
+                    'idBicicleta' => $puntoYBici['idBici'],
+                    'idPuntoE' => intval($puntoE),
+                    'idPuntoD' => 2,
+                    'fechaAlquiler' => date("Y-m-d"),
+                    'horaInicioAlquiler' => date("H:i:s", strtotime($horaInicio)),
+                    'HoraFinAlquiler' => calcularSumaHoras($horaInicio, $cantHoras),
+                    'HoraEntregaAlquiler' => " ",
+                    'clienteAlternativo' => intval($dniAlternativo),
+                    'estadoAlquiler' => 'Activo',
+                    'daño' => $puntoYBici['dañoBici'],
+                    'ruta' => 'la ruta',
+
+                ];
+
+                if ($this->alquilerModel->buscarAlquilerActivo($idUsuario) == null) {
+
+                    $this->alquilerModel->crearAlquiler($alquiler);
+                    $sesion->set('activo', '1');
+                    $this->cBicicleta->cambiarEstadoBicicleta($puntoYBici['idBici'], 'EnAlquiler');
+                } else {
+                    $elId = $this->alquilerModel->buscarIdAlquilerDelEstado($idUsuario, 'Activo');
+                    $this->alquilerModel->actualizarAlquiler($elId, $alquiler);
+                    $sesion->set('activo', '1');
+
+                }
+
+                $arr = ["code" => "200",
+                    "msg" => 'Su reserva se realizo con éxito!',
+                    "detalle" => $alquiler,
+                    "usuario" => [
+                        "nombre" => $nombreUser,
+                        "apellido" => $apellidoUser,
+                    ],
+                    "puntoYBici" => $puntoYBici,
+                ];
+
             }
 
-            $arr = [
-                "msg" => 'Su reserva se realizo con éxito!',
-                "detalle" => $alquiler,
-                "usuario" => [
-                    "nombre" => $nombreUser,
-                    "apellido" => $apellidoUser,
-                ],
-                "puntoYBici" => $puntoYBici,
-            ];
         }
-
         echo json_encode($arr);
         die();
     }
@@ -107,7 +144,7 @@ class AlquilerController extends BaseController
         } else {
             $datos = ['horasMayorDemanda' => $this->alquilerModel->obtenerHoraInicio($fechaInicio, $fechaFinal)];
             //$datos= ['fechaInicio'=>$fechaInicio,'fechaFinal'=>$fechaFinal];
-            if (isset($datos['horasMayorDemanda'])&&count($datos['horasMayorDemanda'])!=0) {
+            if (isset($datos['horasMayorDemanda']) && count($datos['horasMayorDemanda']) != 0) {
                 echo json_encode($datos);
                 die();
             } else {
@@ -127,7 +164,7 @@ class AlquilerController extends BaseController
             die();
         } else {
             $datos = ['tiempoAlquiler' => $this->alquilerModel->obtenerTiempoAlquiler($fechaInicio, $fechaFinal)];
-            if (isset($datos['tiempoAlquiler'])&&count($datos['tiempoAlquiler'])!=0) {
+            if (isset($datos['tiempoAlquiler']) && count($datos['tiempoAlquiler']) != 0) {
                 echo json_encode($datos);
                 die();
             } else {
@@ -147,7 +184,7 @@ class AlquilerController extends BaseController
             die();
         } else {
             $datos = ['puntosRetorno' => $this->alquilerModel->obtenerPuntosRetorno($fechaInicio, $fechaFinal)];
-            if (isset($datos['puntosRetorno'])&&count($datos['puntosRetorno'])!=0) {
+            if (isset($datos['puntosRetorno']) && count($datos['puntosRetorno']) != 0) {
                 echo json_encode($datos);
                 die();
             } else {
@@ -201,7 +238,7 @@ class AlquilerController extends BaseController
                         echo view('index-cliente', $mensaje);
                     }
                 }
-            }else{
+            } else {
                 $mensaje = ['msjReportar' => '¡El tiempo de reportar daño es de: ' . $min . ' hasta ' . $max . '!'];
                 echo view('index-cliente', $mensaje);
             }
@@ -266,13 +303,13 @@ class AlquilerController extends BaseController
             "alquiler" => $miAlquiler,
             "usuario" => [ //AGREGAR EL NUMERO DE BICICLETAAAAAAAAAAAAAAAA
                 "nombre" => $nombreUser,
-                "apellido" => $apellidoUser
-            ]
+                "apellido" => $apellidoUser,
+            ],
         ];
         echo json_encode($datos);
         die();
     }
-    
+
     public function cargarDatosAnularAlquiler()
     {
         $sesion = session();
@@ -284,13 +321,12 @@ class AlquilerController extends BaseController
             "alquiler" => $miAlquiler,
             "usuario" => [ //AGREGAR EL NUMERO DE BICICLETAAAAAAAAAAAAAAAA
                 "nombre" => $nombreUser,
-                "apellido" => $apellidoUser
-            ]
+                "apellido" => $apellidoUser,
+            ],
         ];
         echo json_encode($datos);
         die();
     }
-
     public function mostrarPDF()
     {
         echo view('layouts/ver_horasDemanda');

@@ -12,15 +12,10 @@ class PuntoEDController extends BaseController
         $this->puntoED = new PuntoEntregaDevolucionModel();
     }
 
-    public function biciDisponibles($id)
+    public function biciDisponibles($idPED)
     {
-        $biciDelPunto = $this->puntoED->obtenerBicicletaDisponible($id, 'Disponible');
+        $biciDelPunto = $this->puntoED->obtenerBicicletaDisponible($idPED, 'Disponible');
         return $biciDelPunto;
     }
 
-    public function direccionED($elId)
-    {
-        $dir = $this->puntoED->obtenerDireccionED($elId);
-        return $dir;
-    }
 }

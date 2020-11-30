@@ -4,6 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
+
 class BicicletaModel extends Model
 {
     protected $table = 'bicicleta';
@@ -62,5 +63,10 @@ class BicicletaModel extends Model
     {
     $bicicleta= $this->where('idBicicleta',$id)->first();
     return $bicicleta;
+    }
+    public function buscarBicicletas()
+    {
+        $bicicletas= $this->findAll();
+        return $bicicletas;
     }
 }

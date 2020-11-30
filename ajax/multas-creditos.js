@@ -55,7 +55,7 @@ function buscarCliente() {
                     tabla +='<tbody>';
                     for ($i = 0; $i < data.multaCredito.multas.length; $i++){
                         tabla +='<tr>';
-                        tabla +='<td>'+data.multaCredito.multas[$i].monto+'</td>';
+                        tabla +='<td class="text-right">'+data.multaCredito.multas[$i].monto+'</td>';
                         tabla +='<td>'+data.multaCredito.multas[$i].fechaMulta+'</td>';
                         tabla +='<td>'+data.multaCredito.multas[$i].detalleMulta+'</td>';
                         if (data.multaCredito.multas[$i].pagado=='1'){

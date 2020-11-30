@@ -7,6 +7,7 @@ use App\Controllers\BaseController;
 use App\Controllers\ClienteController;
 use App\Controllers\PuntoEDController;
 use App\Controllers\UsuarioController;
+use App\Controllers\BicicletaController;
 
 class GestionController extends BaseController
 {
@@ -17,6 +18,7 @@ class GestionController extends BaseController
         $this->cCliente = new ClienteController();
         $this->cAlquiler = new AlquilerController();
         $this->cUsuario = new UsuarioController();
+        $this->cBicicleta=new BicicletaController();
     }
 
     public function index()
@@ -108,7 +110,9 @@ class GestionController extends BaseController
     }
     public function modificarBicicleta()
     {
-        echo view('layouts/modificar-bicicleta');
+        $datos = ['datos' => $this->cBicicleta->bicicleta->buscarBicicletas()];
+        echo view('layouts/modificar-bicicleta',$datos);
+        //echo view('layouts/modificar-bicicleta');
     }
     public function realizarDevolucion()
     {

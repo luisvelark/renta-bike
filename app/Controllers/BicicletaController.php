@@ -40,6 +40,11 @@ class BicicletaController extends BaseController
             die();
         }
     }
+
+    public function solicitarBicicletas(){
+        return $this->bicicleta->buscarBicicletas();
+    }
+
     public function modificarBicicleta()
     {
         $observaciones = $_POST['observaciones'];
