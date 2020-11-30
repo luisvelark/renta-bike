@@ -161,7 +161,6 @@ function buscarBicicleta(){
                     }
                     tabla+='<td>';
                     tabla+='<label class="font-weight-bold">Ingrese nueva observacion de la Bicicleta:';
-                    //tabla+='<input type="text" value="'+data.bicicleta.observaciones+'" class="form-control form-control-user my-1 text-center font-weight-bold" name="numeroBicicleta" autofocus="">';
                     tabla+='<textarea name="observaciones" class="form-control" rows="3">'+data.bicicleta.observaciones+'</textarea>';
                     tabla+='</label>';
                     tabla+='</td>';
