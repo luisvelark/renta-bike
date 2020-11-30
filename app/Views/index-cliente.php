@@ -34,14 +34,13 @@ $user_session = session();
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center"
-        href="<?php echo base_url(); ?>/GestionController/indexCliente">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url(); ?>/GestionController/indexCliente">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-bicycle"></i>
         </div>
         <div class="sidebar-brand-text mx-3">Renta Bike</div>
       </a>
-      
+
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
@@ -59,8 +58,7 @@ $user_session = session();
 
       <!--  componentes -->
       <li class="nav-item active">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-          aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-bicycle"></i>
           <span>Alquiler</span>
         </a>
@@ -69,51 +67,50 @@ $user_session = session();
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
 
-            <?php if ($user_session->suspendido == 1) {?>
-            <a id="idAlquiler" class="collapse-item" href="#" hidden> <i class="fas fa-plus-square"></i> Nuevo
-              alquiler</a>
-            <a id="idRealizarDevolucion" class="collapse-item" href="#" hidden> <i class="fas fa-arrow-circle-up"></i>
-              Realizar devolución </a>
-            <a id="idConfirmar" class="collapse-item" href="#" hidden> <i class="fas fa-check-circle"></i> Confirmar
-              alquiler</a>
-            <a id="idAnular" class="collapse-item" href="#" hidden> <i class="fas fa-ban"></i> Anular alquiler</a>
-            <?php } else {?>
+            <?php if ($user_session->suspendido == 1) { ?>
+              <a id="idAlquiler" class="collapse-item" href="#" hidden> <i class="fas fa-plus-square"></i> Nuevo
+                alquiler</a>
+              <a id="idRealizarDevolucion" class="collapse-item" href="#" hidden> <i class="fas fa-arrow-circle-up"></i>
+                Realizar devolución </a>
+              <a id="idConfirmar" class="collapse-item" href="#" hidden> <i class="fas fa-check-circle"></i> Confirmar
+                alquiler</a>
+              <a id="idAnular" class="collapse-item" href="#" hidden> <i class="fas fa-ban"></i> Anular alquiler</a>
+            <?php } else { ?>
 
-            <?php if ($user_session->activo == '0') {?>
-            <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Nuevo alquiler</a>
-            <a id="idRealizarDevolucion" class="collapse-item" href="#" hidden> <i class="fas fa-arrow-circle-up"></i>
-              Realizar devolución </a>
-            <a id="idConfirmar" class="collapse-item" href="#" hidden> <i class="fas fa-check-circle"></i> Confirmar
-              alquiler</a>
-            <a id="idAnular" class="collapse-item" href="#" hidden> <i class="fas fa-ban"></i> Anular alquiler</a>
+              <?php if ($user_session->activo == '0') { ?>
+                <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Nuevo alquiler</a>
+                <a id="idRealizarDevolucion" class="collapse-item" href="#" hidden> <i class="fas fa-arrow-circle-up"></i>
+                  Realizar devolución </a>
+                <a id="idConfirmar" class="collapse-item" href="#" hidden> <i class="fas fa-check-circle"></i> Confirmar
+                  alquiler</a>
+                <a id="idAnular" class="collapse-item" href="#" hidden> <i class="fas fa-ban"></i> Anular alquiler</a>
 
-            <?php } else if ($user_session->activo == '1') {
+              <?php } else if ($user_session->activo == '1') {
 
-    ?>
-            <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Mi alquiler</a>
-            <a id="idRealizarDevolucion" class="collapse-item" href="#" hidden> <i class="fas fa-arrow-circle-up"></i>
-              Realizar
-              devolución </a>
-            <a id="idConfirmar" class="collapse-item" href="#"> <i class="fas fa-check-circle"></i> Confirmar
-              alquiler</a>
-            <a id="idAnular" class="collapse-item" href="#"> <i class="fas fa-ban"></i> Anular alquiler</a>
-            <?php } else {?>
-            <a id="idAlquiler" class="collapse-item" href="#" hidden> <i class="fas fa-plus-square"></i> Nuevo
-              alquiler</a>
-            <a id="idRealizarDevolucion" class="collapse-item" href="#"> <i class="fas fa-arrow-circle-up"></i> Realizar
-              devolución </a>
-            <a id="idConfirmar" class="collapse-item" href="#" hidden> <i class="fas fa-check-circle"></i> Confirmar
-              alquiler</a>
-            <a id="idAnular" class="collapse-item" href="#" hidden> <i class="fas fa-ban"></i> Anular alquiler</a>
-            <?php }?>
-            <?php }?>
+              ?>
+                <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Mi alquiler</a>
+                <a id="idRealizarDevolucion" class="collapse-item" href="#" hidden> <i class="fas fa-arrow-circle-up"></i>
+                  Realizar
+                  devolución </a>
+                <a id="idConfirmar" class="collapse-item" href="#"> <i class="fas fa-check-circle"></i> Confirmar
+                  alquiler</a>
+                <a id="idAnular" class="collapse-item" href="#"> <i class="fas fa-ban"></i> Anular alquiler</a>
+              <?php } else { ?>
+                <a id="idAlquiler" class="collapse-item" href="#" hidden> <i class="fas fa-plus-square"></i> Nuevo
+                  alquiler</a>
+                <a id="idRealizarDevolucion" class="collapse-item" href="#"> <i class="fas fa-arrow-circle-up"></i> Realizar
+                  devolución </a>
+                <a id="idConfirmar" class="collapse-item" href="#" hidden> <i class="fas fa-check-circle"></i> Confirmar
+                  alquiler</a>
+                <a id="idAnular" class="collapse-item" href="#" hidden> <i class="fas fa-ban"></i> Anular alquiler</a>
+              <?php } ?>
+            <?php } ?>
           </div>
         </div>
       </li>
       <!-- ------------------------------------------------------------------------------------------------------------------------------------------------ -->
       <!-- Modal Confirmar-->
-      <div class="modal fade" id="idModalConfirmar" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+      <div class="modal fade" id="idModalConfirmar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -130,8 +127,7 @@ $user_session = session();
             <div class="modal-footer">
               <button id="idReportarDaños" type="button" class="btn btn-danger" data-dismiss="modal">Reportar
                 Daños</button>
-              <button id="idBotonConfirmar" type="button" class="btn btn-primary"
-                data-dismiss="modal">Confirmar</button>
+              <button id="idBotonConfirmar" type="button" class="btn btn-primary" data-dismiss="modal">Confirmar</button>
             </div>
           </div>
         </div>
@@ -147,15 +143,12 @@ $user_session = session();
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form method="POST" class="user"
-              action="<?php echo base_url(); ?>/AlquilerController/soliticaReportarDaños">
+            <form method="POST" class="user" action="<?php echo base_url(); ?>/AlquilerController/soliticaReportarDaños">
               <div class="modal-body">
                 <div id="modalReportar"></div>
                 <div class="form-group">
                   <label class="font-weight-bold">Informe el tipo de daño</label><br>
-                  <select
-                    class="form-control form-control-user font-weight-bold custom-select py-3 my-2 h-50 w-75 text-center"
-                    name="comboDaño" id="">
+                  <select class="form-control form-control-user font-weight-bold custom-select py-3 my-2 h-50 w-75 text-center" name="comboDaño" id="">
                     <option selected value="Recuperable">Recuperable (daños menores)</option>
                     <option value="Irrecuperable">Irrecuperable (daños funcionales)</option>
                   </select>
@@ -182,8 +175,7 @@ $user_session = session();
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form method="POST" class="user"
-              action="<?php echo base_url(); ?>/AlquilerController/soliticaAnularAlquiler">
+            <form method="POST" class="user" action="<?php echo base_url(); ?>/AlquilerController/soliticaAnularAlquiler">
               <div class="modal-body">
 
                 <div id="datosAnular">
@@ -202,25 +194,71 @@ $user_session = session();
       </div>
       <!-- ------------CAlIFICAR PUNTOS DE ENTREGA---------------------------------------------------------------------------------------------------------------------- -->
 
-      <div class="modal fade" id="idModalCalificar" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+      <div class="modal fade" id="idModalCalificar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Calificar atención del punto</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Calificar atención del punto de entrega</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form method="POST" class="user" action="<?php echo base_url(); ?>/CalificacionController/calificar">
+            <form method="POST" class="user" action="<?php echo base_url(); ?>/CalificacionController/calificarEntrega">
               <div class="modal-body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Calificación del 1 al 5 (1 muy malo, 5 excelente)</label><br>
-                  <input id="radio1" type="radio" name="estrellas" value="1" required><label for="radio1">1</label>
-                  <input id="radio2" type="radio" name="estrellas" value="2" required><label for="radio2">2</label>
-                  <input id="radio3" type="radio" name="estrellas" value="3" required><label for="radio3">3</label>
-                  <input id="radio4" type="radio" name="estrellas" value="4" required><label for="radio4">4</label>
-                  <input id="radio5" type="radio" name="estrellas" value="5" required><label for="radio5">5</label>
+                    <p class="clasificacion">
+                    <input id="radio1" type="radio" name="estrellas" value="5">
+                    <label style="font-size: 300%;" for="radio1">★</label>
+                    <input id="radio2" type="radio" name="estrellas" value="4">
+                    <label style="font-size: 300%;" for="radio2">★</label>
+                    <input id="radio3" type="radio" name="estrellas" value="3">
+                    <label style="font-size: 300%;" for="radio3">★</label>
+                    <input id="radio4" type="radio" name="estrellas" value="2">
+                    <label style="font-size: 300%;" for="radio4">★</label>
+                    <input id="radio5" type="radio" name="estrellas" value="1">
+                    <label style="font-size: 300%;" for="radio5">★</label>
+                  </p>
+                  <input type="hidden" name="idUsuarioOculto" value=" <?php echo $user_session->idUsuario ?>">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Comentarios (opcional)</label>
+                  <input type="input" name="comentario" class="form-control form-control-user">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Enviar calificación</button>
+              </div>
+          </div>
+          </form>
+        </div>
+      </div>
+            <!-- ------------CAlIFICAR PUNTOS DE DEVOLUCION---------------------------------------------------------------------------------------------------------------------- -->
+            <div class="modal fade" id="idModalCalificarDevolucion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Calificar atención del punto de devolución</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form method="POST" class="user" action="<?php echo base_url(); ?>/CalificacionController/calificarDevolucion">
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Calificación del 1 al 5 (1 muy malo, 5 excelente)</label><br>
+                    <p class="clasificacion">
+                    <input id="radio1" type="radio" name="estrellas" value="5">
+                    <label style="font-size: 300%;" for="radio1">★</label>
+                    <input id="radio2" type="radio" name="estrellas" value="4">
+                    <label style="font-size: 300%;" for="radio2">★</label>
+                    <input id="radio3" type="radio" name="estrellas" value="3">
+                    <label style="font-size: 300%;" for="radio3">★</label>
+                    <input id="radio4" type="radio" name="estrellas" value="2">
+                    <label style="font-size: 300%;" for="radio4">★</label>
+                    <input id="radio5" type="radio" name="estrellas" value="1">
+                    <label style="font-size: 300%;" for="radio5">★</label>
+                  </p>
                   <input type="hidden" name="idUsuarioOculto" value=" <?php echo $user_session->idUsuario ?>">
                 </div>
                 <div class="form-group">
@@ -280,9 +318,7 @@ $user_session = session();
     <div id="content-wrapper" class="d-flex flex-column">
 
       <!-- Main Content -->
-      <div id="content"
-        style="background-image: url(<?php echo base_url('img/Biciseditado.jpg'); ?>);background-size:cover; "
-        class="mt-0">
+      <div id="content" style="background-image: url(<?php echo base_url('img/Biciseditado.jpg'); ?>);background-size:cover; " class="mt-0">
 
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-0 static-top shadow">
@@ -308,14 +344,14 @@ $user_session = session();
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
-          <li class="nav-item dropdown no-arrow mx-1">
+            <li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bell fa-fw"></i>
                 <!-- Counter - Alerts -->
                 <span class="badge badge-danger badge-counter">
-                  <?php if($user_session->suspendido==1){
+                  <?php if ($user_session->suspendido == 1) {
                     echo '+1';
-                  }?>
+                  } ?>
                 </span>
               </a>
               <!-- Dropdown - Alerts -->
@@ -323,40 +359,39 @@ $user_session = session();
                 <h6 class="dropdown-header">
                   Alertas
                 </h6>
-                <?php if($user_session->suspendido==1){ ?>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-warning">
-                      <i class="fas fa-exclamation-triangle text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">¡Estás suspendido!</div>
-                    No vas a poder alquilar durante un tiempo determinado. Acercate a un punto de entrega.
-                  </div>
-                </a>
-                <?php } else{ ?>
+                <?php if ($user_session->suspendido == 1) { ?>
                   <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-warning">
-                    <i class="fas fa-check-circle text-white"></i>
+                    <div class="mr-3">
+                      <div class="icon-circle bg-warning">
+                        <i class="fas fa-exclamation-triangle text-white"></i>
+                      </div>
                     </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">¡Todo correcto!</div>
-                    No hay notificaciones nuevas.
-                  </div>
-                </a>
-                <?php }?>
+                    <div>
+                      <div class="small text-gray-500">¡Estás suspendido!</div>
+                      No vas a poder alquilar durante un tiempo determinado. Acercate a un punto de entrega.
+                    </div>
+                  </a>
+                <?php } else { ?>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                      <div class="icon-circle bg-warning">
+                        <i class="fas fa-check-circle text-white"></i>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="small text-gray-500">¡Todo correcto!</div>
+                      No hay notificaciones nuevas.
+                    </div>
+                  </a>
+                <?php } ?>
               </div>
             </li>
-           
+
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                   <?php echo $user_session->nombre . ' ' . $user_session->apellido; ?></span>
                 <i class="fas fa-user"></i>
@@ -387,23 +422,23 @@ $user_session = session();
         <div id="contenido" class="container-fluid">
           <!--------------------------------------mensajes de los modales ---------------------------------------------------->
           <?php
-if (isset($msjReportar)) {
-    echo '<div class="col-md-4" style="background: white; margin:0 auto">';
-    echo '<h5 style="text-align: center;">' . $msjReportar . '</h5>';
-    echo '</div>';
-}
-if (isset($msjAnular)) {
-    echo '<div class="col-md-4" style="background: white; margin:0 auto">';
-    echo '<h5 style="text-align: center;">' . $msjAnular . '</h5>';
-    echo '</div>';
-}
-if (isset($msjCalificacion)) {
-    echo '<div class="col-md-4" style="background: white; margin:0 auto">';
-    echo '<h5 style="text-align: center;">' . $msjCalificacion . '</h5>';
-    echo '</div>';
-}
+          if (isset($msjReportar)) {
+            echo '<div class="col-md-4" style="background: white; margin:0 auto">';
+            echo '<h5 style="text-align: center;">' . $msjReportar . '</h5>';
+            echo '</div>';
+          }
+          if (isset($msjAnular)) {
+            echo '<div class="col-md-4" style="background: white; margin:0 auto">';
+            echo '<h5 style="text-align: center;">' . $msjAnular . '</h5>';
+            echo '</div>';
+          }
+          if (isset($msjCalificacion)) {
+            echo '<div class="col-md-4" style="background: white; margin:0 auto">';
+            echo '<h5 style="text-align: center;">' . $msjCalificacion . '</h5>';
+            echo '</div>';
+          }
 
-?>
+          ?>
           <div id="notificaciones" class="row align-items-center justify-content-center vh-100"></div>
 
         </div>
@@ -435,8 +470,7 @@ if (isset($msjCalificacion)) {
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">

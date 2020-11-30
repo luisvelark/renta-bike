@@ -43,8 +43,6 @@
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-
-
 *,
 *::before,
 *::after {
@@ -61,29 +59,30 @@ html {
 
 /* ------------------------------------- */
 
-
-/* input[type="radio"] {
-    display: none;
+p.clasificacion {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
 }
 
-label {
-    color: grey;
-    font-size: 100px;
+p.clasificacion input {
+    position: absolute;
+    top: -100px;
 }
 
-.clasificacion {
-    direction: rtl;
-    unicode-bidi: bidi-override;
+p.clasificacion label {
+    float: right;
+    color: #333;
 }
 
-label:hover,
-label:hover~label {
-    color: orange;
+p.clasificacion label:hover,
+p.clasificacion label:hover~label,
+p.clasificacion input:checked~label {
+    color: #dd4;
 }
 
-input[type="radio"]:checked~label {
-    color: orange;
-} */
+
+/* ------------------------------------- */
 
 article,
 aside,
@@ -11213,10 +11212,9 @@ a:focus {
     height: 100%;
 }
 
-.registrar-image{
+.registrar-image {
     width: 110%;
     height: 104%;
-
 }
 
 .bg-login-image {
