@@ -61,11 +61,11 @@ class PuntoEntregaDevolucionModel extends Model
         }
         return intval($suma / $total);
     }
-    public function obtenerDireccionED($id)
-    {
-        $this->select('puntoentregadevolucion.direccion AS dirPunto');
-        $this->where('puntoentregadevolucion.idPuntoED', $id);
-        $direccion = $this->first();
-        return $direccion;
-    }
+    // public function obtenerDireccionED($id)
+    // {
+    //     $this->select('puntoentregadevolucion.direccion AS dirPunto');
+    //     $this->where('puntoentregadevolucion.idPuntoED', $id);
+    //     $direccion = $this->first();
+    //     return $direccion;
+    // }
 }
