@@ -60,7 +60,13 @@ class BicicletaModel extends Model
     }
     public function buscarBicletaId($id)
     {
-    $bicicleta= $this->where('idBicicleta',$id)->first();
-    return $bicicleta;
+        $bicicleta = $this->where('idBicicleta', $id)->first();
+        return $bicicleta;
+    }
+
+    public function obtenerNumeroDeBici($id)
+    {
+        $numBicicleta = $this->select('numeroBicicleta')->where('idBicicleta', $id)->first();
+        return $numBicicleta;
     }
 }

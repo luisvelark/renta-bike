@@ -82,10 +82,10 @@ function consultaAlquiler() {
               datos.usuario.nombre
             } ${datos.usuario.apellido}</li>
             <li><span class="font-weight-bold">Punto de entrega:</span>  ${
-              datos.puntoBici.dirPunto
+              datos.puntoBici[0].direccion
             }</li>
             <li><span class="font-weight-bold">N° de bicicleta:</span>  ${
-              datos.puntoBici.numBici
+              datos.puntoBici[1].numeroBicicleta
             }</li>
             <li><span class="font-weight-bold">Fecha de alquiler:</span>  ${formato(
               datos.alquiler.fechaAlquiler
@@ -105,10 +105,11 @@ function consultaAlquiler() {
 
         deshabilitarCampos(campos, enviar, editar);
       } else {
+        //no hay alquileres activos!
         const msj = document.getElementById("respuesta");
         msj.innerHTML = `
       <div id="notif" class="alert alert-info w-50" text-center font-weight-bold" role="alert">
-         ${datos.aviso}
+         ${datos.aviso} 
       </div>`;
         setTimeout(() => {
           let div = document.getElementById("notif");
@@ -149,12 +150,14 @@ function enviarAlquiler(e) {
 
           detalles.innerHTML = `<p class="p-2 small text-white text-center">NO HAY DETALLES</p>`;
         } else {
+          //su reserva se realizo con exito!
           msj.innerHTML = `
           <div id="noti" class="alert alert-primary w-50" role="alert">
             ${data.msg}  
           </div>`;
 
           deshabilitarCampos(campos, enviar, editar);
+          console.log("editar activado");
 
           let clienteAlt;
           if (data.detalle.clienteAlternativo === 0) {
@@ -188,17 +191,21 @@ function enviarAlquiler(e) {
           `;
         }
       } else {
+        //No existen bicicletas disponibles en el punto de entrega.
         msj.innerHTML = `
-          <div id="noti" class="alert alert-danger w-100 text-center" role="alert">
+          <div id="noti" class="alert alert-danger w-100" role="alert">
              "${data.aviso}"
              <p class="mb-0">-Seleccione otro punto de entrega porfavor.</p>
+             <p class="mb-0">-De no lo contrario comuniquese con el call center(0800-222-0224)</p>
+
+
           </div>`;
       }
 
       setTimeout(() => {
         let div = document.getElementById("noti");
         div.style.display = "none";
-      }, 6000);
+      }, 10000);
     });
   // .catch((err) => console.log(err));
 }

@@ -39,7 +39,11 @@ class AlquilerController extends BaseController
 
         $alquiler = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
         if ($alquiler != null) {
-            $puntoYBici = $this->controlPED->biciDisponibles($alquiler['idPuntoE']);
+
+            $punto = $this->controlPED->direccionDelPED($alquiler['idPuntoE']);
+            $bici = $this->cBicicleta->mostrarNumeroDeBici($alquiler['idBicicleta']);
+
+            $puntoYBici = [$punto, $bici];
             $arr = ["existe" => true,
                 "alquiler" => $alquiler,
                 "usuario" => [
@@ -52,7 +56,7 @@ class AlquilerController extends BaseController
         }
 
         // echo "<pre>";
-        // var_dump($arr);
+        // // var_dump($arr);
         // print_r($arr);
         echo json_encode($arr);
         die();

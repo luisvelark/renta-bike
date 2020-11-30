@@ -24,12 +24,11 @@ class BicicletaController extends BaseController
             $texto = '<h3 style="color:red;">Seleccione un punto de entrega</h3>';
             echo json_encode($texto);
             die();
-        } else if(!null==$this->bicicleta->buscarBicicleta($numeroBicicleta))  {
+        } else if (!null == $this->bicicleta->buscarBicicleta($numeroBicicleta)) {
             $texto = '<h3 style="color:red;">Ese numero de bicicleta ya esta usado</h3>';
             echo json_encode($texto);
             die();
-        }       
-        else{
+        } else {
             $bicicleta = [
                 'numeroBicicleta' => $numeroBicicleta,
                 'idPuntoED' => $idPuntoED,
@@ -49,11 +48,11 @@ class BicicletaController extends BaseController
         $numero = $_POST['numeroBicicleta'];
         $id = $_POST['idBicicleta'];
         $cambios = ['estado' => $estado, 'daño' => $daño, 'observaciones' => $observaciones, 'precio' => $precio, 'numeroBicicleta' => $numero];
-        if($this->bicicleta->updateBicicleta($id, $cambios)){
+        if ($this->bicicleta->updateBicicleta($id, $cambios)) {
             $texto = '<h3>Se modifico la bicicleta con éxito<h3>';
             echo json_encode($texto);
             die();
-        }else{
+        } else {
             $texto = '<h3>No se modifico la bicicleta<h3>';
             echo json_encode($texto);
             die();
@@ -74,20 +73,24 @@ class BicicletaController extends BaseController
     public function darBajaBicicleta()
     {
         $numeroBicicleta = $_POST['numeroBicicleta'];
-        if(!null==$this->bicicleta->buscarBicicleta($numeroBicicleta))  {
+        if (!null == $this->bicicleta->buscarBicicleta($numeroBicicleta)) {
             date_default_timezone_set('America/Argentina/Ushuaia');
             $fechaActual = date("Y-m-d H:i:s");
             $this->bicicleta->bajaLogica($numeroBicicleta, $fechaActual);
             $texto = '<h3>Se elimino la bicicleta con éxito<h3>';
             echo json_encode($texto);
             die();
-        }else{
+        } else {
             $texto = 'error';
             echo json_encode($texto);
             die();
         }
-        
+
     }
-    
+
+    public function mostrarNumeroDeBici($id)
+    {
+        return $this->bicicleta->obtenerNumeroDeBici($id);
+    }
 
 }
