@@ -52,7 +52,9 @@ class ClienteModel extends Model
     }
 
     public function altaCliente($id){
-        $this->insert(['idUsuarioFK'=>$id,'puntajeTotal' => 0, 'credito' => 0, 'suspendido' => 0]);
+        date_default_timezone_set('America/Argentina/Ushuaia');
+        $this->insert(['idUsuarioFK'=>$id,'puntajeTotal' => 0, 'credito' => 0, 'suspendido' => 0,
+        'fechaInicioSuspencion'=>date("Y-m-d"), 'fechaFinSuspencion'=>date("Y-m-d")]);
     } 
     public function obtenerClienteID($id)
     {

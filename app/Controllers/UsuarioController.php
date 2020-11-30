@@ -22,7 +22,7 @@ class UsuarioController extends BaseController
 
         $this->reglasRegistro = [
             'dni' => [
-                'rules' => 'exact_length[8]|is_unique[usuario.dni]',
+                'rules' => 'is_unique[usuario.dni]|exact_length[8]',
                 'errors' => [
                     'is_unique' => 'El dni ya se encuentra registrado',
                     'exact_leght' => 'El dni tiene que tener 8 numeros',
