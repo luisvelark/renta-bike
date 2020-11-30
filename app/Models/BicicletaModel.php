@@ -56,17 +56,24 @@ class BicicletaModel extends Model
     }
     public function obtenerPrecio($id)
     {
-        $valor = $this->where('idBicicleta', $id)->first();
-        return intval($valor['precio']);
+       $bicicleta =$this->where('idBicicleta', $id)->first();
+       return $bicicleta['precio'];
+        
     }
     public function buscarBicletaId($id)
     {
-    $bicicleta= $this->where('idBicicleta',$id)->first();
+    $bicicleta= $this->where('idBicicleta', $id)->first();
     return $bicicleta;
     }
     public function buscarBicicletas()
     {
         $bicicletas= $this->findAll();
         return $bicicletas;
+    }
+    public function obtenerNumeroBicicleta($id)
+    {
+       $bicicleta =$this->where('idBicicleta', $id)->first();
+       return $bicicleta['numeroBicicleta'];
+        
     }
 }

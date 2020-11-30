@@ -33,7 +33,6 @@ $user_session = session();
 
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center"
         href="<?php echo base_url(); ?>/GestionController/indexCliente">
@@ -42,6 +41,7 @@ $user_session = session();
         </div>
         <div class="sidebar-brand-text mx-3">Renta Bike</div>
       </a>
+      
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
@@ -150,6 +150,7 @@ $user_session = session();
             <form method="POST" class="user"
               action="<?php echo base_url(); ?>/AlquilerController/soliticaReportarDaños">
               <div class="modal-body">
+                <div id="modalReportar"></div>
                 <div class="form-group">
                   <label class="font-weight-bold">Informe el tipo de daño</label><br>
                   <select
@@ -176,7 +177,7 @@ $user_session = session();
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">¿Desea anular el alquiler?</h5>
+              <h5 class="modal-title" id="exampleModalLabel"> Anular alquiler</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -307,29 +308,49 @@ $user_session = session();
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
-
-            <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-            <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-search fa-fw"></i>
+          <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
+                <!-- Counter - Alerts -->
+                <span class="badge badge-danger badge-counter">
+                  <?php if($user_session->suspendido==1){
+                    echo '+1';
+                  }?>
+                </span>
               </a>
-              <!-- Dropdown - Messages -->
-              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
-                  <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                      aria-label="Search" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">
-                        <i class="fas fa-search fa-sm"></i>
-                      </button>
+              <!-- Dropdown - Alerts -->
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                  Alertas
+                </h6>
+                <?php if($user_session->suspendido==1){ ?>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-warning">
+                      <i class="fas fa-exclamation-triangle text-white"></i>
                     </div>
                   </div>
-                </form>
+                  <div>
+                    <div class="small text-gray-500">¡Estás suspendido!</div>
+                    No vas a poder alquilar durante un tiempo determinado. Acercate a un punto de entrega.
+                  </div>
+                </a>
+                <?php } else{ ?>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-warning">
+                    <i class="fas fa-check-circle text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">¡Todo correcto!</div>
+                    No hay notificaciones nuevas.
+                  </div>
+                </a>
+                <?php }?>
               </div>
             </li>
+           
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
@@ -463,6 +484,7 @@ if (isset($msjCalificacion)) {
   <script src="<?php echo base_url('ajax/api-map.js') ?>"></script>
   <script src="<?php echo base_url('ajax/modificar-usuario.js') ?>"></script>
   <script src="<?php echo base_url('ajax/anular-alquiler.js') ?>"></script>
+  <script src="<?php echo base_url('ajax/reportar-alquiler.js') ?>"></script>
   <script src="<?php echo base_url('ajax/modales.js') ?>"></script>
 
 </body>

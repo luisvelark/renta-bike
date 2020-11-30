@@ -202,10 +202,11 @@ class AlquilerController extends BaseController
             $idUsuarioActual = $this->request->getPost('idUsuarioOculto');
             $alquilerActivo = $this->alquilerModel->buscarAlquilerActivo($idUsuarioActual);
             $idBicicleta = $alquilerActivo['idBicicleta'];
-            $max = $alquilerActivo['horaInicioAlquiler'];
+            $horaInicio = $alquilerActivo['horaInicioAlquiler'];
             date_default_timezone_set('America/Argentina/Ushuaia');
             $actual = date("H:i:s");
-            $min = restarMinutos($max, '10');
+            $min = restarMinutos($horaInicio, '10');
+            $max = sumarMinutos($horaInicio, '10');
             if (($actual <= $max) && ($actual >= $min)) {
 
                 if ($this->alquilerModel->buscarUltimoAlquilerPorBicicleta($idBicicleta) == null) {
@@ -215,7 +216,8 @@ class AlquilerController extends BaseController
                 } else {
                     $alquilerUltimo = $this->alquilerModel->buscarUltimoAlquilerPorBicicleta($idBicicleta);
                     $idUsuarioUltimo = $alquilerUltimo['idUsuarioCliente'];
-                    $precio = 25000; /* $this->cBicicleta->bicicleta->obtenerPrecio($idBicicleta); */
+                   
+                    $precio= $this->cBicicleta->bicicleta->obtenerPrecio($idBicicleta);
 
                     $this->cMulta->multa->crearMulta($idUsuarioUltimo, $this->request->getPost('comboDaño'), $precio);
                     $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'EnReparacion');
@@ -299,9 +301,11 @@ class AlquilerController extends BaseController
         $nombreUser = $sesion->get('nombre');
         $apellidoUser = $sesion->get('apellido');
         $miAlquiler = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
+        $nroBicicleta=  $this->cBicicleta->bicicleta->obtenerNumeroBicicleta($miAlquiler['idBicicleta']);
         $datos = [
             "alquiler" => $miAlquiler,
-            "usuario" => [ //AGREGAR EL NUMERO DE BICICLETAAAAAAAAAAAAAAAA
+            "nroBicicleta"=> $nroBicicleta,
+            "usuario" => [ 
                 "nombre" => $nombreUser,
                 "apellido" => $apellidoUser,
             ],
@@ -310,23 +314,6 @@ class AlquilerController extends BaseController
         die();
     }
 
-    public function cargarDatosAnularAlquiler()
-    {
-        $sesion = session();
-        $idUsuario = $sesion->get('idUsuario');
-        $nombreUser = $sesion->get('nombre');
-        $apellidoUser = $sesion->get('apellido');
-        $miAlquiler = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
-        $datos = [
-            "alquiler" => $miAlquiler,
-            "usuario" => [ //AGREGAR EL NUMERO DE BICICLETAAAAAAAAAAAAAAAA
-                "nombre" => $nombreUser,
-                "apellido" => $apellidoUser,
-            ],
-        ];
-        echo json_encode($datos);
-        die();
-    }
     public function mostrarPDF()
     {
         echo view('layouts/ver_horasDemanda');
