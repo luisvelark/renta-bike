@@ -48,7 +48,7 @@ class AlquilerController extends BaseController
                 ],
                 "puntoBici" => $puntoYBici];
         } else {
-            $arr = ["aviso" => "No tiene ningun alquiler activo,su alquiler esta en proceso..."];
+            $arr = ["aviso" => "No tiene ningun alquiler activo..."];
         }
 
         // echo "<pre>";

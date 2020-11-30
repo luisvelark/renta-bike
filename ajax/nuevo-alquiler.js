@@ -107,7 +107,7 @@ function consultaAlquiler() {
       } else {
         const msj = document.getElementById("respuesta");
         msj.innerHTML = `
-      <div id="notif" class="alert alert-danger w-100" text-center font-weight-bold" role="alert">
+      <div id="notif" class="alert alert-info w-50" text-center font-weight-bold" role="alert">
          ${datos.aviso}
       </div>`;
         setTimeout(() => {
