@@ -33,6 +33,6 @@ function confirmarAlquiler() {
       setTimeout(() => {
         let div = document.getElementById("notif");
         div.style.display = "none";
-      }, 4000);
+      }, 6000);
     });
 }

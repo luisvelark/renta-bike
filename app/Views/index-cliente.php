@@ -70,7 +70,7 @@ $user_session = session();
           <div class="bg-white py-2 collapse-inner rounded">
 
             <?php if ($user_session->activo == '0') {?>
-            <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Nuevo alquiler</a>
+            <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i>Nuevo alquiler</a>
             <a id="idRealizarDevolucion" class="collapse-item" href="#" hidden> <i class="fas fa-arrow-circle-up"></i>
               Realizar devolución </a>
             <a id="idConfirmar" class="collapse-item" href="#" hidden> <i class="fas fa-check-circle"></i> Confirmar
@@ -80,7 +80,7 @@ $user_session = session();
             <?php } else if ($user_session->activo == '1') {
 
     ?>
-            <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Nuevo alquiler</a>
+            <a id="idAlquiler" class="collapse-item" href="#"> <i class="fas fa-plus-square"></i> Mi alquiler</a>
             <a id="idRealizarDevolucion" class="collapse-item" href="#" hidden> <i class="fas fa-arrow-circle-up"></i>
               Realizar
               devolución </a>

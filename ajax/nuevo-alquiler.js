@@ -54,25 +54,66 @@ function consultaAlquiler() {
     .then((res) => res.json())
     .then((datos) => {
       if (datos.existe === true) {
+        const titulo = document.getElementById("tituloAlquiler");
+        titulo.innerHTML = "Mi alquiler:";
+
         const punto = document.getElementById("idPunto");
         const hora = document.getElementById("horaAlquiler");
         const dni = document.getElementById("dniOptativo");
         const editar = document.getElementById("idEditar");
         const enviar = document.getElementById("idEnviar");
         const campos = document.getElementById("idCampos");
+        const detalles = document.getElementById("detalles");
 
-        // const cantHora = document.getElementById("idCantHora");
-
-        // let formulario = new FormData(form);
-        // formulario.set("punto-entrega", datos.puntoBici.dirPunto);
         punto.value = datos.alquiler.idPuntoE;
         hora.value = datos.alquiler.horaInicioAlquiler;
         dni.value = datos.alquiler.clienteAlternativo;
 
-        console.log(datos.puntoBici.dirPunto);
-        console.log(datos.alquiler.horaInicioAlquiler);
+        let clienteAl;
+        if (datos.alquiler.clienteAlternativo === 0) {
+          clienteAl = "---";
+        } else {
+          clienteAl = datos.alquiler.clienteAlternativo;
+        }
+
+        detalles.innerHTML = `
+          <ul class="p-2 text-white text-left">
+            <li><span class="font-weight-bold">Cliente:</span>  ${
+              datos.usuario.nombre
+            } ${datos.usuario.apellido}</li>
+            <li><span class="font-weight-bold">Punto de entrega:</span>  ${
+              datos.puntoBici.dirPunto
+            }</li>
+            <li><span class="font-weight-bold">N° de bicicleta:</span>  ${
+              datos.puntoBici.numBici
+            }</li>
+            <li><span class="font-weight-bold">Fecha de alquiler:</span>  ${formato(
+              datos.alquiler.fechaAlquiler
+            )}</li>
+            <li><span class="font-weight-bold">Hora de inicio alquiler:</span>  ${
+              datos.alquiler.horaInicioAlquiler
+            }</li>
+            <li><span class="font-weight-bold">Hora de fin alquiler:</span>  ${
+              datos.alquiler.HoraFinAlquiler
+            }</li>
+            <li><span class="font-weight-bold">Cliente Alternativo:</span>  ${clienteAl}</li>
+          </ul>
+          `;
+
+        // console.log(datos.puntoBici.dirPunto);
+        // console.log(datos.alquiler.horaInicioAlquiler);
 
         deshabilitarCampos(campos, enviar, editar);
+      } else {
+        const msj = document.getElementById("respuesta");
+        msj.innerHTML = `
+      <div id="notif" class="alert alert-danger w-100" text-center font-weight-bold" role="alert">
+         ${datos.aviso}
+      </div>`;
+        setTimeout(() => {
+          let div = document.getElementById("notif");
+          div.style.display = "none";
+        }, 6000);
       }
     });
 }

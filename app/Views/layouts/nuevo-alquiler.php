@@ -8,7 +8,7 @@ $hora = new DateTime("now", new DateTimeZone('America/Argentina/Ushuaia'));
     <!-- seccion del formulario! -->
     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
 
-      <h2 class="my-3">Nuevo Alquiler:</h2>
+      <h2 id="tituloAlquiler" class="my-3">Nuevo Alquiler:</h2>
 
       <form id="form-alquiler" class="user">
         <fieldset id="idCampos">
