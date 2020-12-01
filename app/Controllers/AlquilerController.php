@@ -254,8 +254,8 @@ class AlquilerController extends BaseController
                 } else {
                     $alquilerUltimo = $this->alquilerModel->buscarUltimoAlquilerPorBicicleta($idBicicleta);
                     $idUsuarioUltimo = $alquilerUltimo['idUsuarioCliente'];
-                   
-                    $precio= $this->cBicicleta->bicicleta->obtenerPrecio($idBicicleta);
+
+                    $precio = $this->cBicicleta->bicicleta->obtenerPrecio($idBicicleta);
 
                     $this->cMulta->multa->crearMulta($idUsuarioUltimo, $this->request->getPost('comboDaño'), $precio);
                     $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'EnReparacion');
@@ -339,11 +339,11 @@ class AlquilerController extends BaseController
         $nombreUser = $sesion->get('nombre');
         $apellidoUser = $sesion->get('apellido');
         $miAlquiler = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
-        $nroBicicleta=  $this->cBicicleta->bicicleta->obtenerNumeroBicicleta($miAlquiler['idBicicleta']);
+        $nroBicicleta = $this->cBicicleta->bicicleta->obtenerNumeroDeBici($miAlquiler['idBicicleta']);
         $datos = [
             "alquiler" => $miAlquiler,
-            "nroBicicleta"=> $nroBicicleta,
-            "usuario" => [ 
+            "nroBicicleta" => $nroBicicleta['numeroBicicleta'],
+            "usuario" => [
                 "nombre" => $nombreUser,
                 "apellido" => $apellidoUser,
             ],
