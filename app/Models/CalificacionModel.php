@@ -7,7 +7,6 @@ use CodeIgniter\Model;
 class CalificacionModel extends Model
 {
     protected $table      = 'calificacion';
-    /*  protected $primaryKey = 'fechaCalificacion'; */
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
@@ -25,6 +24,7 @@ class CalificacionModel extends Model
 
     public function altaCalificacion($idPunto, $idCliente, $puntos, $descripcion)
     {
+        date_default_timezone_set('America/Argentina/Ushuaia');
         $this->save([
             'fechaCalificacion' => date("Y-m-d"), 'idPuntoED' => $idPunto, 'idUsuarioCliente' => $idCliente,
             'puntos' => $puntos, 'descripcion' => $descripcion

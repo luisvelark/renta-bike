@@ -117,4 +117,11 @@ class AlquilerModel extends Model
         $data = ['estadoAlquiler' => $estado];
         $this->update($idAlquiler, $data);
     }
+    public function buscarUltimoAlquiler($idUsuario)
+    {
+        $this->where('idUsuarioCliente', $idUsuario);
+        $this->orderBy('idAlquiler', 'DESC');
+        $alquiler = $this->first();
+        return $alquiler;
+    }
 }

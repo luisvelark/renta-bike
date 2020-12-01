@@ -66,7 +66,7 @@ class UsuarioController extends BaseController
                 if ($user['contraseña'] == $password) {
 
                     if($this->cliente->obtenerClienteID($user['idUsuario'])==null){
-                    //$this->cliente->insert(['idUsuario'=>$user['idUsuario'],'puntajeTotal' => 0, 'credito' => 0, 'suspendido' => 0, 'fechaInicioSuspencion' => '2020-12-12', 'fechaFinSuspencion' => '2020-12-12' ]);
+
                         $this->cliente->altaCliente($user['idUsuario']);
                     }
 
@@ -142,7 +142,7 @@ class UsuarioController extends BaseController
             $sesion = session();
             $sesion->set($datosSesion);
             $mensaje = ['msj' => '¡Te has registrado de manera exitosa!'];
-            /* return redirect()->to(base_url() . '/GestionController/indexCliente'); */
+           
             echo view('login', $mensaje);
 
         } else {
