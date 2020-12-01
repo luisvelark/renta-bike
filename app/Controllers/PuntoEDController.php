@@ -18,4 +18,9 @@ class PuntoEDController extends BaseController
         return $biciDelPunto;
     }
 
+    public function direccionDelPED($id)
+    {
+        return $this->puntoED->obtenerDireccionED($id);
+    }
+
 }
