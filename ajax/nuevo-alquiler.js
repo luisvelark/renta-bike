@@ -70,7 +70,7 @@ function consultaAlquiler() {
         dni.value = datos.alquiler.clienteAlternativo;
 
         let clienteAl;
-        if (datos.alquiler.clienteAlternativo === 0) {
+        if (datos.alquiler.clienteAlternativo == 0) {
           clienteAl = "---";
         } else {
           clienteAl = datos.alquiler.clienteAlternativo;
@@ -172,10 +172,10 @@ function enviarAlquiler(e) {
               data.usuario.nombre
             } ${data.usuario.apellido}</li>
             <li><span class="font-weight-bold">Punto de entrega:</span>  ${
-              data.puntoYBici.dirPunto
+              data.dirPunto
             }</li>
             <li><span class="font-weight-bold">N° de bicicleta:</span>  ${
-              data.puntoYBici.numBici
+              data.numBici
             }</li>
             <li><span class="font-weight-bold">Fecha de alquiler:</span>  ${formato(
               data.detalle.fechaAlquiler
