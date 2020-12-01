@@ -4,7 +4,6 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-
 class BicicletaModel extends Model
 {
     protected $table = 'bicicleta';
@@ -56,24 +55,24 @@ class BicicletaModel extends Model
     }
     public function obtenerPrecio($id)
     {
-       $bicicleta =$this->where('idBicicleta', $id)->first();
-       return $bicicleta['precio'];
-        
+        $bicicleta = $this->where('idBicicleta', $id)->first();
+        return $bicicleta['precio'];
+
     }
     public function buscarBicletaId($id)
     {
-    $bicicleta= $this->where('idBicicleta', $id)->first();
-    return $bicicleta;
+        $bicicleta = $this->where('idBicicleta', $id)->first();
+        return $bicicleta;
     }
     public function buscarBicicletas()
     {
-        $bicicletas= $this->findAll();
+        $bicicletas = $this->findAll();
         return $bicicletas;
     }
-    public function obtenerNumeroBicicleta($id)
+
+    public function obtenerNumeroDeBici($id)
     {
-       $bicicleta =$this->where('idBicicleta', $id)->first();
-       return $bicicleta['numeroBicicleta'];
-        
+        $numBicicleta = $this->select('numeroBicicleta')->where('idBicicleta', $id)->first();
+        return $numBicicleta;
     }
 }
