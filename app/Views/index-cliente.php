@@ -138,7 +138,7 @@ $user_session = session();
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Reportar daños</h5>
+              <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Reportar daños</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -170,7 +170,7 @@ $user_session = session();
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Anular alquiler</h5>
+              <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Anular alquiler</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -198,7 +198,7 @@ $user_session = session();
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Calificar atención del punto de entrega</h5>
+              <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Calificar atención del punto de entrega</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -207,10 +207,10 @@ $user_session = session();
               <div class="modal-body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Calificación del 1 al 5 (1 muy malo, 5 excelente)</label><br>
-                    <p class="clasificacion">
+                  <p class="clasificacion">
                     <input id="radio1" type="radio" name="estrellas" value="5" required>
                     <label style="font-size: 300%;" for="radio1">★</label>
-                    <input id="radio2" type="radio" name="estrellas" value="4" required>
+                    <input id="radio2"  type="radio" name="estrellas" value="4" required>
                     <label style="font-size: 300%;" for="radio2">★</label>
                     <input id="radio3" type="radio" name="estrellas" value="3" required>
                     <label style="font-size: 300%;" for="radio3">★</label>
@@ -233,12 +233,12 @@ $user_session = session();
           </form>
         </div>
       </div>
-            <!-- ------------CAlIFICAR PUNTOS DE DEVOLUCION---------------------------------------------------------------------------------------------------------------------- -->
-            <div class="modal fade" id="idModalCalificarDevolucion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <!-- ------------CAlIFICAR PUNTOS DE DEVOLUCION---------------------------------------------------------------------------------------------------------------------- -->
+      <div class="modal fade" id="idModalCalificarDevolucion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Calificar atención del punto de devolución</h5>
+              <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Calificar atención del punto de devolución</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -247,17 +247,17 @@ $user_session = session();
               <div class="modal-body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Calificación del 1 al 5 (1 muy malo, 5 excelente)</label><br>
-                    <p class="clasificacion">
-                    <input id="radio1" type="radio" name="estrellas" value="5" required>
-                    <label style="font-size: 300%;" for="radio1">★</label>
-                    <input id="radio2" type="radio" name="estrellas" value="4" required>
-                    <label style="font-size: 300%;" for="radio2">★</label>
-                    <input id="radio3" type="radio" name="estrellas" value="3" required>
-                    <label style="font-size: 300%;" for="radio3">★</label>
-                    <input id="radio4" type="radio" name="estrellas" value="2" required>
-                    <label style="font-size: 300%;" for="radio4">★</label>
-                    <input id="radio5" type="radio" name="estrellas" value="1" required>
-                    <label style="font-size: 300%;" for="radio5">★</label>
+                  <p class="clasificacion">
+                    <input id="radio6" type="radio" name="estrellas" value="5" required>
+                    <label style="font-size: 300%;" for="radio6">★</label>
+                    <input id="radio7" type="radio" name="estrellas" value="4" required>
+                    <label style="font-size: 300%;" for="radio7">★</label>
+                    <input id="radio8" type="radio" name="estrellas" value="3" required>
+                    <label style="font-size: 300%;" for="radio8">★</label>
+                    <input id="radio9" type="radio" name="estrellas" value="2" required>
+                    <label style="font-size: 300%;" for="radio9">★</label>
+                    <input id="radio10" type="radio" name="estrellas" value="1" required>
+                    <label style="font-size: 300%;" for="radio10">★</label>
                   </p>
                   <input type="hidden" name="idUsuarioOculto" value=" <?php echo $user_session->idUsuario ?>">
                 </div>

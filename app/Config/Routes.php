@@ -45,7 +45,6 @@ $routes->get('buscar-punto-ed', 'GestionController::buscarPuntoED');
 $routes->get('alta-bicicleta', 'GestionController::altaBicicleta');
 $routes->get('modificar-bicicleta', 'GestionController::modificarBicicleta');
 $routes->get('baja-bicicleta', 'GestionController::bajaBicicleta');
-
 //*************RUTA DE ALQUILER CONTROLLER******************
 $routes->post('alquiler-nuevo', 'AlquilerController::solicitarAlquiler');
 $routes->get('confirmar-alquiler', 'AlquilerController::soliticaConfirmarAlquiler');

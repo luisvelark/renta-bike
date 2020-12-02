@@ -75,7 +75,7 @@
                     <input type="password" class="form-control form-control-user" id="rcontraseña" name="rcontraseña" placeholder="Repetir contraseña" required>
                   </div>
                 </div>
-                <button class="btn btn-primary btn-user btn-block" data-toggle="modal" data-target="#ventanaModal" type="submit">Registrarse</button>
+                <button class="btn btn-primary btn-user btn-block" type="submit">Registrarse</button>
                 </a>
                 <hr>
 

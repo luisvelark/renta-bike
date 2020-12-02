@@ -32,4 +32,14 @@ class UsuarioModel extends Model
         $datosUsuario = $this->where('dni', $dni)->first();
         return $datosUsuario;
     }
+    public function buscarUsuarioId($id)
+    {
+        $datosUsuario = $this->where('idUsuario', $id)->first();
+        return $datosUsuario;
+    }
+    public function modificarDatosUsuario($id,$datos)
+    {
+        $confirma = $this->update($id, $datos);
+        return $confirma;
+    }
 }
