@@ -17,6 +17,7 @@ class UsuarioController extends BaseController
         $this->alquiler = new AlquilerModel();
         $this->usuario = new UsuarioModel();
         $this->cliente = new ClienteModel();
+        $this->session = session();
 
         helper(['form']);
 
@@ -46,14 +47,34 @@ class UsuarioController extends BaseController
                     'min_length' => 'La contraseña tiene que tener como minimo 8 caracteres',
                 ],
             ], 'cuil' => [
+                'rules' => 'is_unique[usuario.correo]|exact_length[11]',
+                'errors' => [
+                    'is_unique' => 'El cuil ya se encuentra registrado',
+                    'exact_length' => 'El cuil tiene que tener 11 numeros',
+                ],
+            ],
+        ];
+        $this->reglasModificar = [
+            'rcontraseña' => [
+                'rules' => 'matches[contraseña]',
+                'errors' => [
+                    'matches' => 'Las contraseñas no coinciden',
+                ],
+            ],
+            'contraseña' => [
+                'rules' => 'min_length[8]',
+                'errors' => [
+                    'min_length' => 'La contraseña tiene que tener como minimo 8 caracteres',
+                ],
+            ], 'cuil' => [
                 'rules' => 'exact_length[11]',
                 'errors' => [
                     'exact_length' => 'El cuil tiene que tener 11 numeros',
                 ],
             ],
         ];
+       
     }
-
     public function ingresarAlSistema()
     {
         if ($this->request->getMethod() == "post") {
@@ -65,7 +86,7 @@ class UsuarioController extends BaseController
                 //if (password_verify($password),$user['contraseña']){}
                 if ($user['contraseña'] == $password) {
 
-                    if($this->cliente->obtenerClienteID($user['idUsuario'])==null){
+                    if ($this->cliente->obtenerClienteID($user['idUsuario']) == null) {
 
                         $this->cliente->altaCliente($user['idUsuario']);
                     }
@@ -125,7 +146,8 @@ class UsuarioController extends BaseController
                 'apellido' => $this->request->getPost('apellido'), 'correo' => $this->request->getPost('correo'),
                 'telefono' => $this->request->getPost('telefono'), 'domicilio' => $this->request->getPost('domicilio'),
                 'cuil-cuit' => $this->request->getPost('cuil'), 'fechaNacimiento' => $this->request->getPost('fecha'),
-                'contraseña' => $this->request->getPost('contraseña'), 'tipo' => 'cliente']); //'contraseña' => $hash
+                'contraseña' => $this->request->getPost('contraseña'), 'tipo' => 'cliente'
+            ]); //'contraseña' => $hash
 
             $user = $this->usuario->buscarUsuario($this->request->getPost('correo'));
             $idUsuario = $user['idUsuario'];
@@ -137,14 +159,13 @@ class UsuarioController extends BaseController
                 'correo' => $user['correo'],
                 'tipo' => 'cliente',
             ];
-            
+
 
             $sesion = session();
             $sesion->set($datosSesion);
             $mensaje = ['msj' => '¡Te has registrado de manera exitosa!'];
-           
-            echo view('login', $mensaje);
 
+            echo view('login', $mensaje);
         } else {
             $data = [
                 'validation' => $this->validator, 'dni' => $this->request->getPost('dni'),
@@ -157,13 +178,58 @@ class UsuarioController extends BaseController
             echo view('registrar', $data);
         }
     }
-    public function modificarUsuario()
+    public function actualizarUsuario()
     {
-        if ($this->request->getMethod() == "post" && $this->validate($this->reglasRegistro)) {
+        if ($this->request->getMethod() == "post" && $this->validate($this->reglasModificar)) {
+
+            $correoIngresado = $this->request->getPost('correo');
+            $user= $this->usuario->buscarUsuarioId($this->session->idUsuario);
+            $correoActual= $user['correo'];
+
+            if($this->usuario->buscarUsuario($correoIngresado)==null) {
+            $datos= [
+                'nombre' => $this->request->getPost('nombre'),
+                'apellido' => $this->request->getPost('apellido'), 
+                'correo' => $this->request->getPost('correo'),
+                'telefono' => $this->request->getPost('telefono'), 
+                'domicilio' => $this->request->getPost('domicilio'),
+                'fechaNacimiento' => $this->request->getPost('fecha'),
+                'contraseña' => $this->request->getPost('contraseña')];    
+            if($this->usuario->modificarDatosUsuario($this->session->idUsuario,$datos)){
+                $data = ['ok' => 'Se modificaron los datos correctamente. Vuelva a iniciar sesión para que no haya inconvenientes' ];
+            }else{
+                $data = ['ok' => 'Ocurrió un problema inesperado' ];
+            }
+            echo json_encode($data);
+            die(); 
+
+            } else if($correoIngresado==$correoActual){
+                $datos= [
+                    'nombre' => $this->request->getPost('nombre'),
+                    'apellido' => $this->request->getPost('apellido'), 
+                    'correo' => $this->request->getPost('correo'),
+                    'telefono' => $this->request->getPost('telefono'), 
+                    'domicilio' => $this->request->getPost('domicilio'),
+                    'fechaNacimiento' => $this->request->getPost('fecha'),
+                    'contraseña' => $this->request->getPost('contraseña')];    
+                if($this->usuario->modificarDatosUsuario($this->session->idUsuario,$datos)){
+                    $data = ['ok' => 'Se modificaron los datos correctamente. Vuelva a iniciar sesión para que no haya inconvenientes' ];
+                }else{
+                    $data = ['ok' => 'Ocurrió un problema inesperado' ];
+                }
+                echo json_encode($data);
+                die(); 
+                
+            } else{
+                $data = ['ok' => 'Hay otro cliente con ese correo' ];
+                echo json_encode($data);
+                die(); 
+            }
 
         } else {
-            $data = ['validation' => $this->validator];
-            echo view('layouts/modificar-usuario', $data);
+            $data = ['ok' =>  $this->validator->listErrors()];
+            echo json_encode($data);
+            die();
         }
     }
 }

@@ -99,6 +99,10 @@ class GestionController extends BaseController
         $datos = ['usuario' => $this->cUsuario->usuario->buscarUsuario($this->session->correo)];
         echo view('layouts/modificar-usuario', $datos);
     }
+    public function bajaUsuario()
+    {
+        echo view('layouts/baja-usuario');
+    }
     public function altaBicicleta()
     {
         $datos = ['datos' => $this->Cpuntos->puntoED->obtenerPuntosEntregaDevolucion()];

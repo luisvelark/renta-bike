@@ -138,7 +138,7 @@ $user_session = session();
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Reportar daños</h5>
+              <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Reportar daños</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -170,7 +170,7 @@ $user_session = session();
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Anular alquiler</h5>
+              <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Anular alquiler</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -198,7 +198,7 @@ $user_session = session();
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Calificar atención del punto de entrega</h5>
+              <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Calificar atención del punto de entrega</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -207,10 +207,10 @@ $user_session = session();
               <div class="modal-body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Calificación del 1 al 5 (1 muy malo, 5 excelente)</label><br>
-                    <p class="clasificacion">
+                  <p class="clasificacion">
                     <input id="radio1" type="radio" name="estrellas" value="5" required>
                     <label style="font-size: 300%;" for="radio1">★</label>
-                    <input id="radio2" type="radio" name="estrellas" value="4" required>
+                    <input id="radio2"  type="radio" name="estrellas" value="4" required>
                     <label style="font-size: 300%;" for="radio2">★</label>
                     <input id="radio3" type="radio" name="estrellas" value="3" required>
                     <label style="font-size: 300%;" for="radio3">★</label>
@@ -233,12 +233,12 @@ $user_session = session();
           </form>
         </div>
       </div>
-            <!-- ------------CAlIFICAR PUNTOS DE DEVOLUCION---------------------------------------------------------------------------------------------------------------------- -->
-            <div class="modal fade" id="idModalCalificarDevolucion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <!-- ------------CAlIFICAR PUNTOS DE DEVOLUCION---------------------------------------------------------------------------------------------------------------------- -->
+      <div class="modal fade" id="idModalCalificarDevolucion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Calificar atención del punto de devolución</h5>
+              <h5 class="modal-title font-weight-bold" id="exampleModalLabel">Calificar atención del punto de devolución</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -247,17 +247,17 @@ $user_session = session();
               <div class="modal-body">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Calificación del 1 al 5 (1 muy malo, 5 excelente)</label><br>
-                    <p class="clasificacion">
-                    <input id="radio1" type="radio" name="estrellas" value="5" required>
-                    <label style="font-size: 300%;" for="radio1">★</label>
-                    <input id="radio2" type="radio" name="estrellas" value="4" required>
-                    <label style="font-size: 300%;" for="radio2">★</label>
-                    <input id="radio3" type="radio" name="estrellas" value="3" required>
-                    <label style="font-size: 300%;" for="radio3">★</label>
-                    <input id="radio4" type="radio" name="estrellas" value="2" required>
-                    <label style="font-size: 300%;" for="radio4">★</label>
-                    <input id="radio5" type="radio" name="estrellas" value="1" required>
-                    <label style="font-size: 300%;" for="radio5">★</label>
+                  <p class="clasificacion">
+                    <input id="radio6" type="radio" name="estrellas" value="5" required>
+                    <label style="font-size: 300%;" for="radio6">★</label>
+                    <input id="radio7" type="radio" name="estrellas" value="4" required>
+                    <label style="font-size: 300%;" for="radio7">★</label>
+                    <input id="radio8" type="radio" name="estrellas" value="3" required>
+                    <label style="font-size: 300%;" for="radio8">★</label>
+                    <input id="radio9" type="radio" name="estrellas" value="2" required>
+                    <label style="font-size: 300%;" for="radio9">★</label>
+                    <input id="radio10" type="radio" name="estrellas" value="1" required>
+                    <label style="font-size: 300%;" for="radio10">★</label>
                   </p>
                   <input type="hidden" name="idUsuarioOculto" value=" <?php echo $user_session->idUsuario ?>">
                 </div>
@@ -318,7 +318,7 @@ $user_session = session();
     <div id="content-wrapper" class="d-flex flex-column">
 
       <!-- Main Content -->
-      <div id="content" style="background-image: url(<?php echo base_url('img/Biciseditado.jpg'); ?>);background-size:cover; " class="mt-0">
+      <div id="content" style="background-image: url(<?php echo base_url('img/Biciseditado.jpg'); ?>); background-size:cover; " class="mt-0">
 
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-0 static-top shadow">
@@ -403,6 +403,10 @@ $user_session = session();
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Modificar perfil
                 </a>
+                <a id="idBajaUsuario" class="dropdown-item" href="#">
+                <i class="fas fa-ban fa-sm fa-fw mr-2 text-gray-400"></i></i>
+                  Darme de baja
+                </a>
 
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?php echo base_url(); ?>/UsuarioController/salirDelSistema">
@@ -421,25 +425,27 @@ $user_session = session();
         <!-- Begin Page Content Body -->
         <div id="contenido" class="container-fluid">
           <!--------------------------------------mensajes de los modales ---------------------------------------------------->
+         
+          <div id="notificaciones" class="row align-items-center justify-content-center vh-50"><!-- lo cambiamos pa proba -->
           <?php
           if (isset($msjReportar)) {
-            echo '<div class="col-md-4" style="background: white; margin:0 auto">';
-            echo '<h5 style="text-align: center;">' . $msjReportar . '</h5>';
+            echo '<div class="alert alert-success col-sm-3 w-50 text-center font-weight-bold" role="alert" tabindex="-1">';
+            echo $msjReportar ;
             echo '</div>';
           }
           if (isset($msjAnular)) {
-            echo '<div class="col-md-4" style="background: white; margin:0 auto">';
-            echo '<h5 style="text-align: center;">' . $msjAnular . '</h5>';
+            echo '<div class="alert alert-success col-sm-3 w-50 text-center font-weight-bold" role="alert" tabindex="-1">';
+            echo $msjAnular ;
             echo '</div>';
           }
           if (isset($msjCalificacion)) {
-            echo '<div class="col-md-4" style="background: white; margin:0 auto">';
-            echo '<h5 style="text-align: center;">' . $msjCalificacion . '</h5>';
+            echo '<div class="alert alert-success col-sm-3 w-50 text-center font-weight-bold" role="alert" tabindex="-1">';
+            echo $msjCalificacion ;
             echo '</div>';
           }
 
           ?>
-          <div id="notificaciones" class="row align-items-center justify-content-center vh-100"></div>
+          </div>
 
         </div>
         <!-- /.container-fluid -->
@@ -519,6 +525,7 @@ $user_session = session();
   <script src="<?php echo base_url('ajax/modificar-usuario.js') ?>"></script>
   <script src="<?php echo base_url('ajax/anular-alquiler.js') ?>"></script>
   <script src="<?php echo base_url('ajax/reportar-alquiler.js') ?>"></script>
+  <script src="<?php echo base_url('ajax/baja-usuario.js') ?>"></script>
   <script src="<?php echo base_url('ajax/modales.js') ?>"></script>
 
 </body>
