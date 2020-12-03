@@ -42,7 +42,7 @@ function actualizarUsuario() {
             .then(res => res.json())
             .then(data => {
 
-                if (data.ok === 'Se modificaron los datos correctamente') {
+                if (data.ok === 'Se modificaron los datos correctamente. Vuelva a iniciar sesión para que no haya inconvenientes') {
 
                     respuesta.className = 'alert alert-success';
                     respuesta.innerHTML = data.ok;

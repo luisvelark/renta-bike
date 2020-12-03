@@ -318,7 +318,7 @@ $user_session = session();
     <div id="content-wrapper" class="d-flex flex-column">
 
       <!-- Main Content -->
-      <div id="content" style="background-image: url(<?php echo base_url('img/Biciseditado.jpg'); ?>);background-size:cover; " class="mt-0">
+      <div id="content" style="background-image: url(<?php echo base_url('img/Biciseditado.jpg'); ?>); background-size:cover; " class="mt-0">
 
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-0 static-top shadow">
@@ -403,6 +403,10 @@ $user_session = session();
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Modificar perfil
                 </a>
+                <a id="idBajaUsuario" class="dropdown-item" href="#">
+                <i class="fas fa-ban fa-sm fa-fw mr-2 text-gray-400"></i></i>
+                  Darme de baja
+                </a>
 
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?php echo base_url(); ?>/UsuarioController/salirDelSistema">
@@ -421,25 +425,27 @@ $user_session = session();
         <!-- Begin Page Content Body -->
         <div id="contenido" class="container-fluid">
           <!--------------------------------------mensajes de los modales ---------------------------------------------------->
+         
+          <div id="notificaciones" class="row align-items-center justify-content-center vh-50"><!-- lo cambiamos pa proba -->
           <?php
           if (isset($msjReportar)) {
-            echo '<div class="col-md-4" style="background: white; margin:0 auto">';
-            echo '<h5 style="text-align: center;">' . $msjReportar . '</h5>';
+            echo '<div class="alert alert-success col-sm-3 w-50 text-center font-weight-bold" role="alert" tabindex="-1">';
+            echo $msjReportar ;
             echo '</div>';
           }
           if (isset($msjAnular)) {
-            echo '<div class="col-md-4" style="background: white; margin:0 auto">';
-            echo '<h5 style="text-align: center;">' . $msjAnular . '</h5>';
+            echo '<div class="alert alert-success col-sm-3 w-50 text-center font-weight-bold" role="alert" tabindex="-1">';
+            echo $msjAnular ;
             echo '</div>';
           }
           if (isset($msjCalificacion)) {
-            echo '<div class="col-md-4" style="background: white; margin:0 auto">';
-            echo '<h5 style="text-align: center;">' . $msjCalificacion . '</h5>';
+            echo '<div class="alert alert-success col-sm-3 w-50 text-center font-weight-bold" role="alert" tabindex="-1">';
+            echo $msjCalificacion ;
             echo '</div>';
           }
 
           ?>
-          <div id="notificaciones" class="row align-items-center justify-content-center vh-100"></div>
+          </div>
 
         </div>
         <!-- /.container-fluid -->
@@ -519,6 +525,7 @@ $user_session = session();
   <script src="<?php echo base_url('ajax/modificar-usuario.js') ?>"></script>
   <script src="<?php echo base_url('ajax/anular-alquiler.js') ?>"></script>
   <script src="<?php echo base_url('ajax/reportar-alquiler.js') ?>"></script>
+  <script src="<?php echo base_url('ajax/baja-usuario.js') ?>"></script>
   <script src="<?php echo base_url('ajax/modales.js') ?>"></script>
 
 </body>

@@ -73,15 +73,7 @@ class UsuarioController extends BaseController
                 ],
             ],
         ];
-        $this->reglasCorreo = [
-
-            'correo' => [
-                'rules' => 'is_unique[usuario.correo]',
-                'errors' => [
-                    'is_unique' => 'El correo electronico ya existe',
-                ]
-            ]
-        ];
+       
     }
     public function ingresarAlSistema()
     {
@@ -204,9 +196,9 @@ class UsuarioController extends BaseController
                 'fechaNacimiento' => $this->request->getPost('fecha'),
                 'contraseña' => $this->request->getPost('contraseña')];    
             if($this->usuario->modificarDatosUsuario($this->session->idUsuario,$datos)){
-                $data = ['ok' => 'Se modificaron los datos correctamente' ];
+                $data = ['ok' => 'Se modificaron los datos correctamente. Vuelva a iniciar sesión para que no haya inconvenientes' ];
             }else{
-                $data = ['ok' => 'Ocurrió un problema' ];
+                $data = ['ok' => 'Ocurrió un problema inesperado' ];
             }
             echo json_encode($data);
             die(); 
@@ -221,9 +213,9 @@ class UsuarioController extends BaseController
                     'fechaNacimiento' => $this->request->getPost('fecha'),
                     'contraseña' => $this->request->getPost('contraseña')];    
                 if($this->usuario->modificarDatosUsuario($this->session->idUsuario,$datos)){
-                    $data = ['ok' => 'Se modificaron los datos correctamente' ];
+                    $data = ['ok' => 'Se modificaron los datos correctamente. Vuelva a iniciar sesión para que no haya inconvenientes' ];
                 }else{
-                    $data = ['ok' => 'Ocurrió un problema' ];
+                    $data = ['ok' => 'Ocurrió un problema inesperado' ];
                 }
                 echo json_encode($data);
                 die(); 

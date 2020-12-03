@@ -1,4 +1,4 @@
-<div class="container py-4" style="  background: white;">
+<div class="container py-4" style="background: white;">
     <h1>Modificar perfil</h1>
 
     <div class="card-body p-0">

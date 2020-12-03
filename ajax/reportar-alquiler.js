@@ -13,8 +13,6 @@ function datosAnularAlquiler() {
         <p><span class="font-weight-bold">Estado del Alquiler: </span>${data.alquiler.estadoAlquiler}</p>
         <p><span class="font-weight-bold">Numero de bicicleta: </span>${data.nroBicicleta}</p>
         <p><span class="font-weight-bold">Cliente: </span>${data.usuario.nombre} ${data.usuario.apellido}</p>
-        <p><span class="font-weight-bold">Hora de inicio: </span>${data.alquiler.horaInicioAlquiler}</p>
-        <p><span class="font-weight-bold">Hora de fin: </span>${data.alquiler.HoraFinAlquiler}</p>
         `;
         });
 }
