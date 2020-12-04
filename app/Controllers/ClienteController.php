@@ -24,8 +24,9 @@ class ClienteController extends BaseController
 
         $dni = $_POST['dniCliente'];
         if(strlen($dni)<8 || strlen($dni)>8){
-            $texto = 'errorLongitud';
-            echo json_encode($texto);
+            
+            $datos =['rta'=>'errorLongitud'] ;
+            echo json_encode($datos);
             die();
         }else{
         $datos = ['usuario' => $this->cUsuario->usuario->buscarUsuarioDNI($dni)];
@@ -34,7 +35,7 @@ class ClienteController extends BaseController
             $datos = ['multaCredito' => $this->creditoMultasCliente($id), 'usuario' => $this->cUsuario->usuario->buscarUsuarioDNI($dni)];
             echo json_encode($datos);
             die();} else {
-            $datos = 'errorBase';
+            $datos =['rta'=>'errorBase'] ;
             echo json_encode($datos);
             die();
         }

@@ -12,6 +12,8 @@
   </div>
   <button type="submit" class="btn btn-primary">Obtener tiempo de alquiler</button>
 </form>
+<hr>
+<div id="respuesta">
 </div>
-<div id="respuesta" class="container py-4" style="  background: white;">
 </div>
+

@@ -9,6 +9,7 @@
   </div>
   <button type="submit" class="btn btn-primary">Dar de baja</button>
 </form>
+<hr>
+<div id="respuestaBajaBicicleta">
 </div>
-<div id="respuestaBajaBicicleta" class="container py-4" style="  background: white;">
 </div>

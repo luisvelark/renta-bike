@@ -21,12 +21,13 @@ class BicicletaController extends BaseController
         $precioBicicleta = $_POST['precioBicicleta'];
         $idPuntoED = $_POST['punto-entrega'];
         if ($idPuntoED === '---') {
-            $texto = '<h3 style="color:red;">Seleccione un punto de entrega</h3>';
-            echo json_encode($texto);
+            $datos =['rta'=>'Seleccione un punto de entrega'] ;
+            
+            echo json_encode($datos);
             die();
         } else if (!null == $this->bicicleta->buscarBicicleta($numeroBicicleta)) {
-            $texto = '<h3 style="color:red;">Ese numero de bicicleta ya esta usado</h3>';
-            echo json_encode($texto);
+            $datos =['rta'=>'Ese numero de bicicleta ya esta usado'] ;
+            echo json_encode($datos);
             die();
         } else {
             $bicicleta = [
@@ -34,8 +35,8 @@ class BicicletaController extends BaseController
                 'idPuntoED' => $idPuntoED,
                 'precio' => $precioBicicleta];
             $this->bicicleta->crearBicicleta($bicicleta);
-            $texto = '<h3>Se creo la bicicleta con éxito<h3>';
-            echo json_encode($texto);
+            $datos =['rta'=>'Se creó la bicicleta con éxito'] ;
+            echo json_encode($datos);
             die();
         }
     }
@@ -54,12 +55,13 @@ class BicicletaController extends BaseController
         $id = $_POST['idBicicleta'];
         $cambios = ['estado' => $estado, 'daño' => $daño, 'observaciones' => $observaciones, 'precio' => $precio, 'numeroBicicleta' => $numero];
         if ($this->bicicleta->updateBicicleta($id, $cambios)) {
-            $texto = '<h3>Se modifico la bicicleta con éxito<h3>';
-            echo json_encode($texto);
+          
+            $datos =['rta'=>'Se modificó la bicicleta con éxito'] ;
+            echo json_encode($datos);
             die();
         } else {
-            $texto = '<h3>No se modifico la bicicleta<h3>';
-            echo json_encode($texto);
+            $datos =['rta'=>'No se modificó la bicicleta'] ;
+            echo json_encode($datos);
             die();
         }
     }
@@ -68,10 +70,11 @@ class BicicletaController extends BaseController
         $numeroBicicleta = $_POST['numeroBicicleta'];
         $dato = ['bicicleta' => $this->bicicleta->buscarBicicleta($numeroBicicleta)];
         if (isset($dato['bicicleta'])) {
-            echo json_encode($dato);
+            $datos =['rta'=>$dato] ;
+            echo json_encode($datos);
             die();} else {
-            $dato = 'error';
-            echo json_encode($dato);
+                $datos =['rta'=>'error'] ;
+            echo json_encode($datos);
             die();
         }
     }
@@ -82,12 +85,12 @@ class BicicletaController extends BaseController
             date_default_timezone_set('America/Argentina/Ushuaia');
             $fechaActual = date("Y-m-d H:i:s");
             $this->bicicleta->bajaLogica($numeroBicicleta, $fechaActual);
-            $texto = '<h3>Se elimino la bicicleta con éxito<h3>';
-            echo json_encode($texto);
+            $datos =['rta'=>'Se eliminó la bicicleta con éxito'] ;
+            echo json_encode($datos);
             die();
         } else {
-            $texto = 'error';
-            echo json_encode($texto);
+            $datos =['rta'=>'No existe esa bicicleta'] ;
+            echo json_encode($datos);
             die();
         }
 

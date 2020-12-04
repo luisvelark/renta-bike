@@ -37,9 +37,10 @@
       </div>
     </div>
   </div>
+  <hr>
+<div id="respuestaBicicleta">
 </div>
-
-<div id="respuestaBicicleta" class="container py-4" style="  background: white;">
+<hr>
+<div id="respuestaModificar">
 </div>
-<div id="respuestaModificar" class="container py-4" style="  background: white;">
 </div>
