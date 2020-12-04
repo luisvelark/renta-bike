@@ -176,7 +176,7 @@ class AlquilerController extends BaseController
         $fechaInicio = $_POST['fechaInicio'];
         $fechaFinal = $_POST['fechaFinal'];
         if ($fechaInicio > $fechaFinal) {
-            $datos = 'errorFecha';
+            $datos =['rta'=>'errorFecha'] ;
             echo json_encode($datos);
             die();
         } else {
@@ -186,7 +186,7 @@ class AlquilerController extends BaseController
                 echo json_encode($datos);
                 die();
             } else {
-                $datos = 'error';
+                $datos =['rta'=>'error'] ;
                 echo json_encode($datos);
                 die();
             }
@@ -197,7 +197,7 @@ class AlquilerController extends BaseController
         $fechaInicio = $_POST['fechaInicio'];
         $fechaFinal = $_POST['fechaFinal'];
         if ($fechaInicio > $fechaFinal) {
-            $datos = 'errorFecha';
+            $datos =['rta'=>'errorFecha'] ;
             echo json_encode($datos);
             die();
         } else {
@@ -206,7 +206,7 @@ class AlquilerController extends BaseController
                 echo json_encode($datos);
                 die();
             } else {
-                $datos = 'error';
+                $datos =['rta'=>'error'] ;
                 echo json_encode($datos);
                 die();
             }
@@ -217,7 +217,7 @@ class AlquilerController extends BaseController
         $fechaInicio = $_POST['fechaInicio'];
         $fechaFinal = $_POST['fechaFinal'];
         if ($fechaInicio > $fechaFinal) {
-            $datos = 'errorFecha';
+            $datos =['rta'=>'errorFecha'] ;
             echo json_encode($datos);
             die();
         } else {
@@ -226,7 +226,7 @@ class AlquilerController extends BaseController
                 echo json_encode($datos);
                 die();
             } else {
-                $datos = 'error';
+                $datos =['rta'=>'error'] ;
                 echo json_encode($datos);
                 die();
             }

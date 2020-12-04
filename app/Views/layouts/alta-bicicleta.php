@@ -30,6 +30,7 @@
         </div>
         <button type="submit" class="btn btn-primary btn-lg m-2">Enviar</button>
     </form>
+    <hr>
+    <div id="respuestaAltaBicicleta">
 </div>
-<div id="respuestaAltaBicicleta" class="container py-4" style="background: white;">
 </div>
