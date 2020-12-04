@@ -37,21 +37,13 @@ class ClienteModel extends Model
         return $credito['credito'];
     }
 
-    public function obtenerCliente($dni) 
+    public function obtenerCliente($dni) //Busca en la bd y devuelve el cliente por el dni
     {
-        //$bd      = \Config\Database::connect();
-        //$builder = $bd->table('usuario');
-        //$builder->select('idUsuario','nombre','apellido')->getCompiledSelect();
-        //$builder->getWhere(['dni'=>$dni])->getCompiledSelect();
-        //return $builder->get();
-        //$query = 'SELECT idUsuario, nombre,apellido FROM usuario WHERE us.dni='.$dni;
-        //$resultados = $this->db->query($query);
-        //return $resultados->result();
         $cliente = $this->where('idUsuarioFK', $dni)->first();
         return $cliente;
     }
 
-    public function altaCliente($id){
+    public function altaCliente($id){//crea al cliente
         date_default_timezone_set('America/Argentina/Ushuaia');
         $this->insert(['idUsuarioFK'=>$id,'puntajeTotal' => 0, 'credito' => 0, 'suspendido' => 0,
         'fechaInicioSuspencion'=>date("Y-m-d"), 'fechaFinSuspencion'=>date("Y-m-d")]);
