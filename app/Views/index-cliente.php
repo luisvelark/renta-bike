@@ -440,6 +440,27 @@ $user_session = session();
         <!-- End of Topbar -->
 
         <div id="avisos">
+          <?php
+if (isset($msjReportar)) {
+    echo '<div id="msjReportar" class="alert alert-success col-sm-12 text-center w-100" role="alert">';
+    echo $msjReportar;
+    echo '</div>';
+}
+// <div class="alert alert-success col-sm-12 text-center w-100" role="alert">
+//          ${data.msj}
+//       </div>`;
+if (isset($msjAnular)) {
+    echo '<div id="msjAnular" class="alert alert-success col-sm-12 text-center w-100" role="alert">';
+    echo $msjAnular;
+    echo '</div>';
+}
+if (isset($msjCalificacion)) {
+    echo '<div id="msjCalificar" class="alert alert-success col-sm-12 text-center w-100" role="alert">';
+    echo $msjCalificacion;
+    echo '</div>';
+}
+
+?>
         </div>
         <!-- Begin Page Content Body -->
         <div id="contenido" class="container-fluid">
@@ -447,24 +468,7 @@ $user_session = session();
 
           <div id="notificaciones" class="row align-items-center justify-content-center vh-50 w-100">
             <!-- lo cambiamos pa proba -->
-            <?php
-if (isset($msjReportar)) {
-    echo '<div class="alert alert-success col-sm-3 w-50 text-center font-weight-bold" role="alert" tabindex="-1">';
-    echo $msjReportar;
-    echo '</div>';
-}
-if (isset($msjAnular)) {
-    echo '<div class="alert alert-success col-sm-3 w-50 text-center font-weight-bold" role="alert" tabindex="-1">';
-    echo $msjAnular;
-    echo '</div>';
-}
-if (isset($msjCalificacion)) {
-    echo '<div class="alert alert-success col-sm-3 w-50 text-center font-weight-bold" role="alert" tabindex="-1">';
-    echo $msjCalificacion;
-    echo '</div>';
-}
 
-?>
           </div>
 
         </div>
