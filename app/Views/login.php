@@ -43,11 +43,19 @@
                 <div class="p-5">
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">¡Inicia sesión para empezar!</h1>
-                    <div class="text-center">
-                    <span><?php if (isset($msj)){
-                      echo $msj;
-                    } ?></span>
-                    <br><br>
+                    <div id= "divLogin"class="text-center">
+                    <?php if (isset($msj)){
+                       echo '<div class= "alert alert-success">';
+                       echo $msj;
+                       echo '</div>';
+                      
+                    } ?>
+                    <?php if (isset($_GET['exit'])){
+                      echo '<div class= "alert alert-success">';
+                      echo 'Te has dado de baja correctamente';
+                      echo '</div>';
+                    } ?>
+                    <br>
                   </div>
                   </div>
 
@@ -112,6 +120,7 @@
 
   <!-- Custom scripts for all pages-->
   <script src="<?php echo base_url('js/sb-admin-2.js') ?>"></script>
+
 
 </body>
 

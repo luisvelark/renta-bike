@@ -11,7 +11,8 @@ class UsuarioModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['dni', 'nombre', 'apellido', 'correo', 'telefono', 'domicilio', 'cuil-cuit', 'fechaNacimiento', 'contraseña', 'tipo'];
+    protected $allowedFields = ['dni', 'nombre', 'apellido', 'correo', 'telefono', 'domicilio', 
+    'cuil-cuit', 'fechaNacimiento', 'contraseña', 'tipo','deleted_at'];
 
     protected $useTimestamps = false;
     protected $createdField = 'created_at';
@@ -41,5 +42,12 @@ class UsuarioModel extends Model
     {
         $confirma = $this->update($id, $datos);
         return $confirma;
+    }
+    public function bajaLogica($id)
+    {
+        date_default_timezone_set('America/Argentina/Ushuaia');
+        $fechaActual= date("Y-m-d H:i:s");
+        $deleted = ['deleted_at' => $fechaActual];
+        $this->update($id, $deleted);
     }
 }
