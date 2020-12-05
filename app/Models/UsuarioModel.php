@@ -11,7 +11,7 @@ class UsuarioModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['dni', 'nombre', 'apellido', 'correo', 'telefono', 'domicilio', 'cuil-cuit', 'fechaNacimiento', 'contraseña', 'tipo'];
+    protected $allowedFields = ['dni', 'nombre', 'apellido', 'correo', 'telefono', 'domicilio', 'cuil-cuit', 'fechaNacimiento', 'contraseña', 'tipo','deleted_at'];
 
     protected $useTimestamps = false;
     protected $createdField = 'created_at';
