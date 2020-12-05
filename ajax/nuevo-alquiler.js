@@ -106,14 +106,14 @@ function consultaAlquiler() {
         deshabilitarCampos(campos, enviar, editar);
       } else {
         //no hay alquileres activos!
-        const msj = document.getElementById("respuesta");
-        msj.innerHTML = `
-      <div id="notif" class="alert alert-info w-50" text-center font-weight-bold" role="alert">
+        const miAviso = document.getElementById("avisos");
+        miAviso.innerHTML = `
+      <div class="alert alert-info col-sm-12 text-center w-100" role="alert">
          ${datos.aviso} 
       </div>`;
         setTimeout(() => {
-          let div = document.getElementById("notif");
-          div.style.display = "none";
+          // let div = document.getElementById("notif");
+          miAviso.style.display = "none";
         }, 6000);
       }
     });

@@ -73,7 +73,6 @@ class UsuarioController extends BaseController
                 ],
             ],
         ];
-       
     }
     public function ingresarAlSistema()
     {
@@ -183,53 +182,75 @@ class UsuarioController extends BaseController
         if ($this->request->getMethod() == "post" && $this->validate($this->reglasModificar)) {
 
             $correoIngresado = $this->request->getPost('correo');
-            $user= $this->usuario->buscarUsuarioId($this->session->idUsuario);
-            $correoActual= $user['correo'];
+            $user = $this->usuario->buscarUsuarioId($this->session->idUsuario);
+            $correoActual = $user['correo'];
 
-            if($this->usuario->buscarUsuario($correoIngresado)==null) {
-            $datos= [
-                'nombre' => $this->request->getPost('nombre'),
-                'apellido' => $this->request->getPost('apellido'), 
-                'correo' => $this->request->getPost('correo'),
-                'telefono' => $this->request->getPost('telefono'), 
-                'domicilio' => $this->request->getPost('domicilio'),
-                'fechaNacimiento' => $this->request->getPost('fecha'),
-                'contraseña' => $this->request->getPost('contraseña')];    
-            if($this->usuario->modificarDatosUsuario($this->session->idUsuario,$datos)){
-                $data = ['ok' => 'Se modificaron los datos correctamente. Vuelva a iniciar sesión para que no haya inconvenientes' ];
-            }else{
-                $data = ['ok' => 'Ocurrió un problema inesperado' ];
-            }
-            echo json_encode($data);
-            die(); 
-
-            } else if($correoIngresado==$correoActual){
-                $datos= [
+            if ($this->usuario->buscarUsuario($correoIngresado) == null) {
+                $datos = [
                     'nombre' => $this->request->getPost('nombre'),
-                    'apellido' => $this->request->getPost('apellido'), 
+                    'apellido' => $this->request->getPost('apellido'),
                     'correo' => $this->request->getPost('correo'),
-                    'telefono' => $this->request->getPost('telefono'), 
+                    'telefono' => $this->request->getPost('telefono'),
                     'domicilio' => $this->request->getPost('domicilio'),
                     'fechaNacimiento' => $this->request->getPost('fecha'),
-                    'contraseña' => $this->request->getPost('contraseña')];    
-                if($this->usuario->modificarDatosUsuario($this->session->idUsuario,$datos)){
-                    $data = ['ok' => 'Se modificaron los datos correctamente. Vuelva a iniciar sesión para que no haya inconvenientes' ];
-                }else{
-                    $data = ['ok' => 'Ocurrió un problema inesperado' ];
+                    'contraseña' => $this->request->getPost('contraseña')
+                ];
+                if ($this->usuario->modificarDatosUsuario($this->session->idUsuario, $datos)) {
+                    $data = ['ok' => 'Se modificaron los datos correctamente. Vuelva a iniciar sesión para que no haya inconvenientes'];
+                } else {
+                    $data = ['ok' => 'Ocurrió un problema inesperado'];
                 }
                 echo json_encode($data);
-                die(); 
-                
-            } else{
-                $data = ['ok' => 'Hay otro cliente con ese correo' ];
+                die();
+            } else if ($correoIngresado == $correoActual) {
+                $datos = [
+                    'nombre' => $this->request->getPost('nombre'),
+                    'apellido' => $this->request->getPost('apellido'),
+                    'correo' => $this->request->getPost('correo'),
+                    'telefono' => $this->request->getPost('telefono'),
+                    'domicilio' => $this->request->getPost('domicilio'),
+                    'fechaNacimiento' => $this->request->getPost('fecha'),
+                    'contraseña' => $this->request->getPost('contraseña')
+                ];
+                if ($this->usuario->modificarDatosUsuario($this->session->idUsuario, $datos)) {
+                    $data = ['ok' => 'Se modificaron los datos correctamente. Vuelva a iniciar sesión para que no haya inconvenientes'];
+                } else {
+                    $data = ['ok' => 'Ocurrió un problema inesperado'];
+                }
                 echo json_encode($data);
-                die(); 
+                die();
+            } else {
+                $data = ['ok' => 'Hay otro cliente con ese correo'];
+                echo json_encode($data);
+                die();
             }
-
         } else {
             $data = ['ok' =>  $this->validator->listErrors()];
             echo json_encode($data);
             die();
+        }
+    }
+    public function bajaUsuario()
+    {
+        $user_session = session();
+        if ($this->request->getMethod() == "post") {
+            $correoIngresado = $this->request->getPost('correo');
+            $contraseñaIngresada = $this->request->getPost('contraseña');
+
+            $user = $this->usuario->buscarUsuarioId($user_session->idUsuario);
+            $correo = $user['correo'];
+            $contraseña = $user['contraseña'];
+            if (($correo == $correoIngresado) && ($contraseña == $contraseñaIngresada)) {
+                $user_session->destroy();
+                $this->usuario->bajaLogica($user_session->idUsuario);
+                $data = ['ok' => ''];
+                echo json_encode($data);
+                die();
+            } else {
+                $data = ['ok' => 'error'];
+                echo json_encode($data);
+                die();
+            }
         }
     }
 }
