@@ -9,6 +9,7 @@ $miHora = new DateTime("now", new DateTimeZone('America/Argentina/Ushuaia'));
     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
 
       <h2 class="my-3">Realizar Devolución:</h2>
+      <h2 class="my-3"><?php echo $alquiler['idAlquiler'].' Hora:'.$alquiler['HoraFinAlquiler'];?></h2>
 
       <form id="form-devolucion" class="user">
 

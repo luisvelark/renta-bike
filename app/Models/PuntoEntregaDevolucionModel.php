@@ -40,6 +40,7 @@ class PuntoEntregaDevolucionModel extends Model
         $this->join('bicicleta b', 'puntoentregadevolucion.idPuntoED=b.idPuntoED');
         $this->where('puntoentregadevolucion.idPuntoED', $id);
         $this->where('b.estado', $estado);
+        $this->where('b.deleted_at IS NULL');
         $consulta = $this->first();
         // var_dump($consulta);
         return $consulta;

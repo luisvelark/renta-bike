@@ -93,7 +93,7 @@ class AlquilerModel extends Model
 
     public function buscarIdAlquilerDelEstado($id, $estado)
     {
-        $this->select('idAlquiler');
+        $this->select('idAlquiler, idUsuarioCliente ,idBicicleta, idPuntoE, idPuntoD, fechaAlquiler, horaInicioAlquiler, HoraFinAlquiler, HoraEntregaAlquiler, clienteAlternativo, estadoAlquiler, daño, ruta');
         $this->where('estadoAlquiler', $estado);
         $this->where('idUsuarioCliente', $id);
         $id = $this->first();
