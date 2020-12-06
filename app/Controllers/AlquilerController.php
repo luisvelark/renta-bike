@@ -96,10 +96,8 @@ class AlquilerController extends BaseController
                         'fechaAlquiler' => date("Y-m-d"),
                         'horaInicioAlquiler' => date("H:i:s", strtotime($horaInicio)),
                         'HoraFinAlquiler' => calcularSumaHoras($horaInicio, $cantHoras),
-                        'HoraEntregaAlquiler' => " ",
                         'clienteAlternativo' => intval($dniAlternativo),
                         'estadoAlquiler' => 'Activo',
-                        'daño' => $puntoYBici['dañoBici'],
                         'ruta' => 'la ruta',
 
                     ];
