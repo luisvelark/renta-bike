@@ -25,7 +25,9 @@ class UsuarioModel extends Model
 
     public function buscarUsuario($correo)
     {
-        $datosUsuario = $this->where('correo', $correo)->first();
+        $this->where('correo', $correo);
+       /*  $this->where('deleted_at', null); */
+        $datosUsuario= $this->first();
         return $datosUsuario;
     }
     public function buscarUsuarioDNI($dni)

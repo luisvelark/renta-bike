@@ -1,6 +1,6 @@
 <div class="container py-4" style="background: white;">
     <h1>Modificar perfil</h1>
-
+    <label> Si realizas alguna modificación, se cerrará sesion para que no haya inconvenientes</label> <br>
     <div class="card-body p-0">
         <!-- Nested Row within Card Body -->
         <div class="row">
