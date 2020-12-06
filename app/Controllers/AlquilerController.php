@@ -320,7 +320,7 @@ class AlquilerController extends BaseController
         if (($actual <= $max) && ($actual >= $min)) {
             $this->alquilerModel->cambiarEstado($elId, 'EnProceso');
             $sesion->set('activo', '2');
-            $noti = ["msj" => "alquiler confirmado"];
+            $noti = ["msj" => "su alquiler ha sido confirmado correctamente!"];
             echo json_encode($noti);
             die();
         } else {

@@ -2,10 +2,11 @@
     <h1>Baja de cliente</h1>
 
 
-    <form class="user">
+    <form class="user" id="formBaja">
             <div class="form-group row">
                 <div class="col-sm-6 mb-6 mb-sm-0">
-                   <label> Recuerda que para darte de baja tienes que tener todas las multas canceladas y no tener un alquiler en proceso</label>
+                   <label> Recuerda que para darte de baja tienes que tener todas las multas canceladas y no tener un alquiler en proceso</label> <br>
+                   <label> Para darte de baja tienes que ingresar tu correo y contraseña</label>
                 </div>
             </div>
             <div class="form-group row">
@@ -23,7 +24,10 @@
                     <button class="btn btn-primary btn-user btn-block" type="submit">Darme de baja</button>
                 </div>
             </div>
-            <hr>
+           
     </form>
-
+    <hr>
+    <div  id="divRespuestaBaja"> </div>
+    
+    
 </div>

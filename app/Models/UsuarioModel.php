@@ -11,7 +11,8 @@ class UsuarioModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['dni', 'nombre', 'apellido', 'correo', 'telefono', 'domicilio', 'cuil-cuit', 'fechaNacimiento', 'contraseña', 'tipo'];
+    protected $allowedFields = ['dni', 'nombre', 'apellido', 'correo', 'telefono', 'domicilio', 
+    'cuil-cuit', 'fechaNacimiento', 'contraseña', 'tipo','deleted_at'];
 
     protected $useTimestamps = false;
     protected $createdField = 'created_at';
@@ -24,7 +25,9 @@ class UsuarioModel extends Model
 
     public function buscarUsuario($correo)
     {
-        $datosUsuario = $this->where('correo', $correo)->first();
+        $this->where('correo', $correo);
+       /*  $this->where('deleted_at', null); */
+        $datosUsuario= $this->first();
         return $datosUsuario;
     }
     public function buscarUsuarioDNI($dni)
@@ -41,5 +44,12 @@ class UsuarioModel extends Model
     {
         $confirma = $this->update($id, $datos);
         return $confirma;
+    }
+    public function bajaLogica($id)
+    {
+        date_default_timezone_set('America/Argentina/Ushuaia');
+        $fechaActual= date("Y-m-d H:i:s");
+        $deleted = ['deleted_at' => $fechaActual];
+        $this->update($id, $deleted);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Controllers\MultaController;
 use App\Models\AlquilerModel;
 use App\Models\UsuarioModel;
 use App\Models\ClienteModel;
@@ -17,6 +18,7 @@ class UsuarioController extends BaseController
         $this->alquiler = new AlquilerModel();
         $this->usuario = new UsuarioModel();
         $this->cliente = new ClienteModel();
+        $this->cMulta = new MultaController();
         $this->session = session();
 
         helper(['form']);
@@ -73,7 +75,6 @@ class UsuarioController extends BaseController
                 ],
             ],
         ];
-       
     }
     public function ingresarAlSistema()
     {
@@ -83,39 +84,71 @@ class UsuarioController extends BaseController
             $user = $this->usuario->buscarUsuario($email);
 
             if ($user != null) {
+
                 //if (password_verify($password),$user['contraseña']){}
                 if ($user['contraseña'] == $password) {
 
-                    if ($this->cliente->obtenerClienteID($user['idUsuario']) == null) {
-
-                        $this->cliente->altaCliente($user['idUsuario']);
-                    }
-
-                    $datosSesion = [
-                        'idUsuario' => $user['idUsuario'],
-                        'nombre' => $user['nombre'],
-                        'apellido' => $user['apellido'],
-                        'correo' => $user['correo'],
-                        'tipo' => $user['tipo'],
-                        'activo' => '0',
-                        'suspendido' => 0,
-                    ];
-                    if ($this->alquiler->buscarAlquilerActivo($user['idUsuario']) != null) {
-                        $datosSesion['activo'] = '1';
-                    }
-                    if ($this->alquiler->buscarAlquilerEnProceso($user['idUsuario']) != null) {
-                        $datosSesion['activo'] = '2';
-                    }
-                    if ($this->cliente->suspendido($user['idUsuario'])) {
-                        $datosSesion['suspendido'] = 1;
-                    }
-
-                    $sesion = session();
-                    $sesion->set($datosSesion);
-                    if ($user['tipo'] == 'cliente') {
-                        return redirect()->to(base_url() . '/GestionController/indexCliente');
+                    if ($user['deleted_at'] != null) {
+                        $modal = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Esta cuenta se encuentra desactivada. Haz clic aquí para reactivarla </button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Reactivar cuenta</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <form method="POST" class="user"
+                        action="'. base_url().'/UsuarioController/reactivarCuenta">
+                        <div class="modal-body">
+                         ¿Está seguro de que quiere reactivar su cuenta?
+                        </div>
+                        
+                        <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                        </div>
+                        </div>
+                        </form>
+                        </div>
+                        </div>';
+                        $dato = ['modal' => $modal];
+                        echo view('login', $dato);
+                        
                     } else {
-                        return redirect()->to(base_url() . '/GestionController/index');
+
+                        if ($this->cliente->obtenerClienteID($user['idUsuario']) == null) {
+
+                            $this->cliente->altaCliente($user['idUsuario']);
+                        }
+
+                        $datosSesion = [
+                            'idUsuario' => $user['idUsuario'],
+                            'nombre' => $user['nombre'],
+                            'apellido' => $user['apellido'],
+                            'correo' => $user['correo'],
+                            'tipo' => $user['tipo'],
+                            'activo' => '0',
+                            'suspendido' => 0,
+                        ];
+                        if ($this->alquiler->buscarAlquilerActivo($user['idUsuario']) != null) {
+                            $datosSesion['activo'] = '1';
+                        }
+                        if ($this->alquiler->buscarAlquilerEnProceso($user['idUsuario']) != null) {
+                            $datosSesion['activo'] = '2';
+                        }
+                        if ($this->cliente->suspendido($user['idUsuario'])) {
+                            $datosSesion['suspendido'] = 1;
+                        }
+
+                        $sesion = session();
+                        $sesion->set($datosSesion);
+                        if ($user['tipo'] == 'cliente') {
+                            return redirect()->to(base_url() . '/GestionController/indexCliente');
+                        } else {
+                            return redirect()->to(base_url() . '/GestionController/index');
+                        }
                     }
                 } else {
                     $data['error'] = 'La contraseña no coincide';
@@ -181,55 +214,111 @@ class UsuarioController extends BaseController
     public function actualizarUsuario()
     {
         if ($this->request->getMethod() == "post" && $this->validate($this->reglasModificar)) {
+            $user_session = session();
 
             $correoIngresado = $this->request->getPost('correo');
-            $user= $this->usuario->buscarUsuarioId($this->session->idUsuario);
-            $correoActual= $user['correo'];
+            $user = $this->usuario->buscarUsuarioId($this->session->idUsuario);
+            $correoActual = $user['correo'];
 
-            if($this->usuario->buscarUsuario($correoIngresado)==null) {
-            $datos= [
-                'nombre' => $this->request->getPost('nombre'),
-                'apellido' => $this->request->getPost('apellido'), 
-                'correo' => $this->request->getPost('correo'),
-                'telefono' => $this->request->getPost('telefono'), 
-                'domicilio' => $this->request->getPost('domicilio'),
-                'fechaNacimiento' => $this->request->getPost('fecha'),
-                'contraseña' => $this->request->getPost('contraseña')];    
-            if($this->usuario->modificarDatosUsuario($this->session->idUsuario,$datos)){
-                $data = ['ok' => 'Se modificaron los datos correctamente. Vuelva a iniciar sesión para que no haya inconvenientes' ];
-            }else{
-                $data = ['ok' => 'Ocurrió un problema inesperado' ];
-            }
-            echo json_encode($data);
-            die(); 
-
-            } else if($correoIngresado==$correoActual){
-                $datos= [
+            if ($this->usuario->buscarUsuario($correoIngresado) == null) {
+                $datos = [
                     'nombre' => $this->request->getPost('nombre'),
-                    'apellido' => $this->request->getPost('apellido'), 
+                    'apellido' => $this->request->getPost('apellido'),
                     'correo' => $this->request->getPost('correo'),
-                    'telefono' => $this->request->getPost('telefono'), 
+                    'telefono' => $this->request->getPost('telefono'),
                     'domicilio' => $this->request->getPost('domicilio'),
                     'fechaNacimiento' => $this->request->getPost('fecha'),
-                    'contraseña' => $this->request->getPost('contraseña')];    
-                if($this->usuario->modificarDatosUsuario($this->session->idUsuario,$datos)){
-                    $data = ['ok' => 'Se modificaron los datos correctamente. Vuelva a iniciar sesión para que no haya inconvenientes' ];
-                }else{
-                    $data = ['ok' => 'Ocurrió un problema inesperado' ];
+                    'contraseña' => $this->request->getPost('contraseña')
+                ];
+                if ($this->usuario->modificarDatosUsuario($this->session->idUsuario, $datos)) {
+                    $user_session->destroy();
+                    $data = ['ok' => 'ok'];
+                } else {
+                    $data = ['ok' => 'Ocurrió un problema inesperado'];
                 }
                 echo json_encode($data);
-                die(); 
-                
-            } else{
-                $data = ['ok' => 'Hay otro cliente con ese correo' ];
+                die();
+            } else if ($correoIngresado == $correoActual) {
+                $datos = [
+                    'nombre' => $this->request->getPost('nombre'),
+                    'apellido' => $this->request->getPost('apellido'),
+                    'correo' => $this->request->getPost('correo'),
+                    'telefono' => $this->request->getPost('telefono'),
+                    'domicilio' => $this->request->getPost('domicilio'),
+                    'fechaNacimiento' => $this->request->getPost('fecha'),
+                    'contraseña' => $this->request->getPost('contraseña')
+                ];
+                if ($this->usuario->modificarDatosUsuario($this->session->idUsuario, $datos)) {
+                    $data = ['ok' => 'ok'];
+                    $user_session->destroy();
+                } else {
+                    $data = ['ok' => 'Ocurrió un problema inesperado'];
+                }
                 echo json_encode($data);
-                die(); 
+                die();
+            } else {
+                $data = ['ok' => 'Hay otro cliente con ese correo'];
+                echo json_encode($data);
+                die();
             }
-
         } else {
             $data = ['ok' =>  $this->validator->listErrors()];
             echo json_encode($data);
             die();
         }
+    }
+    public function bajaUsuario()
+    {
+        $user_session = session();
+        if ($this->request->getMethod() == "post") {
+            $correoIngresado = $this->request->getPost('correo');
+            $contraseñaIngresada = $this->request->getPost('contraseña');
+
+            $user = $this->usuario->buscarUsuarioId($user_session->idUsuario);
+            $correo = $user['correo'];
+            $contraseña = $user['contraseña'];
+            if (($correo == $correoIngresado) && ($contraseña == $contraseñaIngresada)) {
+
+                $multa = $this->cMulta->multa->buscarMultaNoPagada($user_session->idUsuario);
+                $alquilerActivo = $this->alquiler->buscarAlquilerActivo($user_session->idUsuario);
+                $alquilerEnProceso = $this->alquiler->buscarAlquilerEnProceso($user_session->idUsuario);
+
+                if ($multa != null) {
+                    $data = ['ok' => 'Tiene multa/s no pagada/s. Acercate a un punto de entrega'];
+                    echo json_encode($data);
+                    die();
+                }
+
+                if ($alquilerActivo != null) {
+                    $data = ['ok' => 'No se puede dar de baja. Tiene un alquiler activo'];
+                    echo json_encode($data);
+                    die();
+                }
+
+
+                if ($alquilerEnProceso != null) {
+                    $data = ['ok' => 'No se puede dar de baja. Tiene un alquiler en proceso'];
+                    echo json_encode($data);
+                    die();
+                }
+
+                if (($multa == null) && ($alquilerActivo == null) && ($alquilerEnProceso == null)) {
+                    $this->usuario->bajaLogica($user_session->idUsuario);
+                    $user_session->destroy();
+                    $data = ['ok' => ''];
+                    echo json_encode($data);
+                    die();
+                }
+            } else {
+                $data = ['ok' => 'Los datos ingresados no coinciden'];
+                echo json_encode($data);
+                die();
+            }
+        }
+    }
+
+    public function reactivarCuenta(){
+        $dato = ['cuenta' => 'Cuenta reactivada con éxito'];
+        echo view('login', $dato);
     }
 }

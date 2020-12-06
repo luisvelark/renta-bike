@@ -32,7 +32,9 @@
         <div class="card o-hidden border-0 shadow-lg my-5">
          
         <h2 class="h2 text-gray-900 mb-4" style="margin: 0 auto;">Bienvenido a Renta Bike <i class="fas fa-bicycle"></i></h2>
-        
+        <?php if(isset($modal)){
+          print_r($modal);
+        } ?>
           <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
@@ -43,11 +45,30 @@
                 <div class="p-5">
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">¡Inicia sesión para empezar!</h1>
-                    <div class="text-center">
-                    <span><?php if (isset($msj)){
-                      echo $msj;
-                    } ?></span>
-                    <br><br>
+                    <div id= "divLogin"class="text-center">
+                    <?php if (isset($msj)){
+                       echo '<div class= "alert alert-success">';
+                       echo $msj;
+                       echo '</div>';
+                      
+                    } ?>
+                    <?php if (isset($cuenta)){
+                       echo '<div class= "alert alert-success">';
+                       echo $cuenta;
+                       echo '</div>';
+                      
+                    } ?>
+                    <?php if (isset($_GET['exit'])){
+                      echo '<div class= "alert alert-success">';
+                      echo 'Te has dado de baja correctamente';
+                      echo '</div>';
+                    } ?>
+                     <?php if (isset($_GET['cambios'])){
+                      echo '<div class= "alert alert-success">';
+                      echo 'Se modificaron los datos correctamente. Vuelva a iniciar sesión por favor';
+                      echo '</div>';
+                    } ?>
+                    <br>
                   </div>
                   </div>
 
@@ -112,6 +133,7 @@
 
   <!-- Custom scripts for all pages-->
   <script src="<?php echo base_url('js/sb-admin-2.js') ?>"></script>
+
 
 </body>
 
