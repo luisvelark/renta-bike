@@ -38,5 +38,17 @@ class MultaModel extends Model
         }
     }
 
+    public function buscarMultaNoPagada($id)
+    {
+        $this->where('idUsuarioCliente', $id);
+        $this->where('pagado', 0);
+        $multa= $this->first();
+        return $multa;
+    }
+
+
+
+
+
 }
  

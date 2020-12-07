@@ -42,10 +42,10 @@ function actualizarUsuario() {
             .then(res => res.json())
             .then(data => {
 
-                if (data.ok === 'Se modificaron los datos correctamente. Vuelva a iniciar sesión para que no haya inconvenientes') {
+                if (data.ok === 'ok') {
 
-                    respuesta.className = 'alert alert-success';
-                    respuesta.innerHTML = data.ok;
+                    location.href = "http://localhost/renta-bike/?cambios=1";
+
 
                 } else {
                     respuesta.className = 'alert alert-danger';

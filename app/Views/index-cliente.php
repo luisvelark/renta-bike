@@ -417,15 +417,25 @@ $user_session = session();
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a id="idModificarPerfil" class="dropdown-item" href="#">
+              <?php if ($user_session->suspendido == 1) {?>
+                <a id="idModificarPerfil" class="dropdown-item" href="#" hidden >
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Modificar perfil
                 </a>
-                <a id="idBajaUsuario" class="dropdown-item" href="#">
+                <a id="idBajaUsuario" class="dropdown-item" href="#" hidden>
                   <i class="fas fa-ban fa-sm fa-fw mr-2 text-gray-400"></i></i>
                   Darme de baja
                 </a>
-
+                <?php } else {?>
+                  <a id="idModificarPerfil" class="dropdown-item" href="#"  >
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Modificar perfil
+                </a>
+                <a id="idBajaUsuario" class="dropdown-item" href="#" >
+                  <i class="fas fa-ban fa-sm fa-fw mr-2 text-gray-400"></i></i>
+                  Darme de baja
+                </a>
+                <?php }?>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?php echo base_url(); ?>/UsuarioController/salirDelSistema">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
