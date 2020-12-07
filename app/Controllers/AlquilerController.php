@@ -294,8 +294,8 @@ class AlquilerController extends BaseController
             $max = $alquilerActivo['horaInicioAlquiler'];
             date_default_timezone_set('America/Argentina/Ushuaia');
             $actual = date("H:i:s");
-            $min = restarMinutos($max, '10');
-            if (($actual <= $max) && ($actual >= $min)) {
+            $minMax = restarMinutos($max, '10');
+            if ($actual <= $minMax) {
                 $idBicicleta = $alquilerActivo['idBicicleta'];
                 $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'Disponible');
                 $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Anulado');
@@ -303,7 +303,7 @@ class AlquilerController extends BaseController
                 $sesion->set('activo', '0');
                 echo view('index-cliente', $mensaje);
             } else {
-                $mensaje = ['msjAnular' => '¡El tiempo de anulación es de: ' . $min . ' hasta ' . $max . '!'];
+                $mensaje = ['msjAnular' => '¡El tiempo de anulación es hasta: ' . $minMax];
                 echo view('index-cliente', $mensaje);
             }
         }
