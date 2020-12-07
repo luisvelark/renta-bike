@@ -52,4 +52,10 @@ class UsuarioModel extends Model
         $deleted = ['deleted_at' => $fechaActual];
         $this->update($id, $deleted);
     }
+
+    public function altaLogica($id)
+    {
+        $deleted = ['deleted_at' => null];
+        $this->update($id, $deleted);
+    }
 }

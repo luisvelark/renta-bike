@@ -62,4 +62,15 @@ class ClienteModel extends Model
         $valor = $this->where('idUsuarioFK', $id)->first();
         return $valor['suspendido'];
 }
+public function suspendidoFechaInicio($id){
+    $this->select('fechaInicioSuspencion');
+    $valor = $this->where('idUsuarioFK', $id)->first();
+    return $valor;
+}
+
+public function suspendidoFechaFin($id){
+    $this->select('fechaFinSuspencion');
+    $valor = $this->where('idUsuarioFK', $id)->first();
+    return $valor;
+}
 }
