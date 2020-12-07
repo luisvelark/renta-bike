@@ -33,7 +33,8 @@ class BicicletaController extends BaseController
             $bicicleta = [
                 'numeroBicicleta' => $numeroBicicleta,
                 'idPuntoED' => $idPuntoED,
-                'precio' => $precioBicicleta];
+                'precio' => $precioBicicleta,
+                 'estado' => 'Disponible'];
             $this->bicicleta->crearBicicleta($bicicleta);
             $datos =['rta'=>'Se creó la bicicleta con éxito'] ;
             echo json_encode($datos);

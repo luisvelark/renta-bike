@@ -385,7 +385,7 @@ $user_session = session();
                   </div>
                   <div>
                     <div class="small text-gray-500">¡Estás suspendido!</div>
-                    No vas a poder alquilar durante un tiempo determinado. Acercate a un punto de entrega.
+                    No vas a poder alquilar <?php echo ' desde  '.date("d/m/y", strtotime($user_session->fechaInicio)). ' hasta '.date("d/m/y", strtotime($user_session->fechaFin)) ?>. Acercate a un punto de entrega.
                   </div>
                 </a>
                 <?php } else {?>
