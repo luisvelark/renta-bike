@@ -45,7 +45,7 @@ function buscarCliente() {
                     respuesta.innerHTML = texto;
                 } else {
                     console.log(data)
-                    var tabla = '<br><h3>' + data.usuario.nombre + ' ' + data.usuario.apellido + ' su crédito actual es: ' + data.multaCredito.credito + '</h3><br> <br>';
+                    var tabla = '<br><h3>' + data.usuario.nombre + ' ' + data.usuario.apellido + ' su crédito actual es: ' + data.multaCredito.credito + ' y su puntaje actual es: '+data.puntaje.puntajeTotal+' </h3><br> <br>';
                     tabla += '<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">';
                     tabla += '<thead>';
                     tabla += '<tr>';

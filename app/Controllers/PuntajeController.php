@@ -12,4 +12,9 @@ class PuntajeController extends BaseController
         $this->puntaje= new PuntajeModel();
     }
 
+    public function crearPuntaje($id, $puntos,$detalle){
+        $datos=['idUsuarioCliente'=>$id ,'puntos'=>$puntos, 'detallePuntaje'=>$detalle,
+        'fechaPuntaje'=> date("Y-m-d")];
+        $this->puntaje->altaPuntaje($datos);
+    }
 }

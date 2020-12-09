@@ -9,12 +9,10 @@ $miHora = new DateTime("now", new DateTimeZone('America/Argentina/Ushuaia'));
     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
 
       <h2 class="my-3">Realizar Devolución:</h2>
-      <h2 class="my-3"><?php echo $alquiler['idAlquiler'].' Hora:'.$alquiler['HoraFinAlquiler'];?></h2>
-
       <form id="form-devolucion" class="user">
 
         <div class="form-group">
-          <label class="font-weight-bold">*Seleccionar punto de devolucion:
+          <label class="font-weight-bold">*Seleccionar punto de devolución:
             <select
               class="form-control form-control-user font-weight-bold custom-select py-3 my-2 h-50 w-75 text-center"
               name="punto-entrega">
@@ -31,32 +29,41 @@ $miHora = new DateTime("now", new DateTimeZone('America/Argentina/Ushuaia'));
           <label class="font-weight-bold">*Daños de la bicicleta:
             <select
               class="form-control form-control-user custom-select py-3 my-2 h-50 w-100 text-center font-weight-bold"
-              name="cant-hora">
+              name="daño">
               <option selected>---</option>
-              <option value="2">Sin Daño</option>
-              <option value="3">Recuperable</option>
-              <option value="4">Irrecuperable</option>
+              <option value="SinDanio">Sin Daño</option>
+              <option value="Recuperable">Recuperable</option>
+              <option value="Irrecuperable">Irrecuperable</option>
 
             </select>
           </label>
         </div>
 
+        <div class="form-group">
+          <label class="font-weight-bold">Especificar daños:
+            <textarea class="form-control"
+              name="espeDaños" rows="3"></textarea>
+          </label>
+        </div>
 
 
         <div class="form-group">
           <label class="font-weight-bold">Ruta:
-            <input type="text" class="form-control form-control-user my-1 text-center font-weight-bold w-100"
-              name="dni-optativo" autofocus="">
+            <textarea class="form-control"
+              name="ruta" rows="3"></textarea>
           </label>
         </div>
 
         <div class="form-group">
-          <label class="font-weight-bold">hora de entrega:
+          <label class="font-weight-bold">Hora de entrega:
 
             <input type="time" class="form-control form-control-user font-weight-bold py-3 pl-3 my-1 w-100 h-50 "
-              name="hora-inicio" value=<?php echo '"' . $miHora->format('G:i') . '"' ?>
+              value=<?php echo '"' . $miHora->format('G:i:s') . '"' ?>
               min=<?php echo '"' . $miHora->format('G:i') . '"' ?> max="23:00" step="1" disabled>
           </label>
+          <input type="hidden" name="horaActual" value=<?php echo '"' . $miHora->format('G:i:s') . '"' ?>>
+          <input type="hidden" name="idAlquiler" value=<?php echo $alquiler['idAlquiler'] ?>>
+          <input type="hidden" name="horaFin" value=<?php echo $alquiler['HoraFinAlquiler'] ?>>
         </div>
 
         <button type="submit" class="btn btn-primary btn-lg m-2">Enviar</button>
@@ -64,14 +71,15 @@ $miHora = new DateTime("now", new DateTimeZone('America/Argentina/Ushuaia'));
       </form>
 
       <div>
-        <span class="small my-2">*campos obligatorios</span>
+        <span class="small my-2">*Campos obligatorios</span>
       </div>
+
 
 
     </div>
 
   </div>
-
+  <div id="respuesta"></div>
 
 
 </div>
