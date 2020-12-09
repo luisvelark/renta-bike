@@ -35,10 +35,10 @@ function realizarAlta() {
             })
             .then(res => res.json())
             .then(data => {
-                if (data.rta === 'Seleccione un punto de entrega') {
+                if (data.rta === '¡Seleccione un punto de entrega!') {
                     respuesta.className = 'alert alert-danger';
                     respuesta.innerHTML = data.rta;
-                } else if (data.rta === 'Ese numero de bicicleta ya esta usado') {
+                } else if (data.rta === '¡El  numero de bicicleta ya está en uso!') {
                     respuesta.className = 'alert alert-danger';
                     respuesta.innerHTML = data.rta;
                 } else {
@@ -84,7 +84,7 @@ function buscarBicicleta() {
                 if (data.rta === 'error') {
                     respuesta1.className = 'alert alert-danger';
                     respuesta1.style.backgroundColor = '';
-                    $texto = 'No existe esa bicicleta';
+                    $texto = '¡No existe esa bicicleta!';
                     respuesta1.innerHTML = $texto;
                 } else {
                     //console.log(data.bicicleta.numeroBicicleta)
@@ -92,15 +92,15 @@ function buscarBicicleta() {
                     tabla += '<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">';
                     tabla += '<thead>';
                     tabla += '<tr>';
-                    tabla += '<th style="color:black;">Valor Actual</th>';
+                    tabla += '<th style="color:black;">Valor actual</th>';
                     tabla += '<th style="color:black;">Valor a modificar</th>';
                     tabla += '</tr>';
                     tabla += '</thead>';
                     tabla += '<tbody>';
                     tabla += '<tr>';
-                    tabla += '<td>Numero Bicicleta: ' + data.rta.bicicleta.numeroBicicleta + '</td>';
+                    tabla += '<td>Número Bicicleta: ' + data.rta.bicicleta.numeroBicicleta + '</td>';
                     tabla += '<td>';
-                    tabla += '<label class="font-weight-bold">Ingrese nuevo numero de la Bicicleta:';
+                    tabla += '<label class="font-weight-bold">Ingrese nuevo número de la bicicleta:';
                     tabla += '<input type="number" value="' + data.rta.bicicleta.numeroBicicleta + '" class="form-control form-control-user my-1 text-center font-weight-bold" name="numeroBicicleta" autofocus="">';
                     tabla += '</label>';
                     tabla += '</td>';
@@ -166,7 +166,7 @@ function buscarBicicleta() {
                         tabla += '<td>Observaciones: No tiene observaciones</td>';
                     }
                     tabla += '<td>';
-                    tabla += '<label class="font-weight-bold">Ingrese nueva observacion de la Bicicleta:';
+                    tabla += '<label class="font-weight-bold">Ingrese nueva observación de la Bicicleta:';
                     tabla += '<textarea name="observaciones" class="form-control" rows="3">' + data.rta.bicicleta.observaciones + '</textarea>';
                     tabla += '</label>';
                     tabla += '</td>';
@@ -201,7 +201,7 @@ function modificarBicicleta() {
             })
             .then(res => res.json())
             .then(data => {
-                if (data.rta === 'No se modificó la bicicleta') {
+                if (data.rta === '¡No se modificó la bicicleta!') {
                     respuesta1.className = 'alert alert-danger';
                     respuesta1.innerHTML = data.rta;
                 } else {
@@ -245,7 +245,7 @@ function eliminaBicicleta() {
             })
             .then(res => res.json())
             .then(data => {
-                if (data.rta === 'No existe esa bicicleta') {
+                if (data.rta === '¡No existe esa bicicleta!') {
                     respuesta.className = 'alert alert-danger';
                     respuesta.innerHTML = data.rta;
                 } else {

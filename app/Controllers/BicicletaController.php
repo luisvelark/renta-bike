@@ -21,12 +21,12 @@ class BicicletaController extends BaseController
         $precioBicicleta = $_POST['precioBicicleta'];
         $idPuntoED = $_POST['punto-entrega'];
         if ($idPuntoED === '---') {
-            $datos =['rta'=>'Seleccione un punto de entrega'] ;
+            $datos =['rta'=>'¡Seleccione un punto de entrega!'] ;
             
             echo json_encode($datos);
             die();
         } else if (!null == $this->bicicleta->buscarBicicleta($numeroBicicleta)) {
-            $datos =['rta'=>'Ese numero de bicicleta ya esta usado'] ;
+            $datos =['rta'=>'¡El  numero de bicicleta ya está en uso!'] ;
             echo json_encode($datos);
             die();
         } else {
@@ -36,7 +36,7 @@ class BicicletaController extends BaseController
                 'precio' => $precioBicicleta,
                  'estado' => 'Disponible'];
             $this->bicicleta->crearBicicleta($bicicleta);
-            $datos =['rta'=>'Se creó la bicicleta con éxito'] ;
+            $datos =['rta'=>'¡Se creó la bicicleta con éxito!'] ;
             echo json_encode($datos);
             die();
         }
@@ -57,11 +57,11 @@ class BicicletaController extends BaseController
         $cambios = ['estado' => $estado, 'daño' => $daño, 'observaciones' => $observaciones, 'precio' => $precio, 'numeroBicicleta' => $numero];
         if ($this->bicicleta->updateBicicleta($id, $cambios)) {
           
-            $datos =['rta'=>'Se modificó la bicicleta con éxito'] ;
+            $datos =['rta'=>'¡Se modificó la bicicleta con éxito!'] ;
             echo json_encode($datos);
             die();
         } else {
-            $datos =['rta'=>'No se modificó la bicicleta'] ;
+            $datos =['rta'=>'¡No se modificó la bicicleta!'] ;
             echo json_encode($datos);
             die();
         }
@@ -86,11 +86,11 @@ class BicicletaController extends BaseController
             date_default_timezone_set('America/Argentina/Ushuaia');
             $fechaActual = date("Y-m-d H:i:s");
             $this->bicicleta->bajaLogica($numeroBicicleta, $fechaActual);
-            $datos =['rta'=>'Se eliminó la bicicleta con éxito'] ;
+            $datos =['rta'=>'¡Se eliminó la bicicleta con éxito!'] ;
             echo json_encode($datos);
             die();
         } else {
-            $datos =['rta'=>'No existe esa bicicleta'] ;
+            $datos =['rta'=>'¡No existe esa bicicleta!'] ;
             echo json_encode($datos);
             die();
         }

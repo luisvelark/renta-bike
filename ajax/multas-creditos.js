@@ -36,16 +36,16 @@ function buscarCliente() {
                 if (data.rta === 'errorBase') {
                     respuesta.className = 'alert alert-danger';
                     respuesta.style.backgroundColor = '';
-                    texto = 'Ese dni no se encuentra registrado';
+                    texto = '¡El dni ingresado no se encuentra registrado!';
                     respuesta.innerHTML = texto;
                 } else if (data.rta === 'errorLongitud') {
                     respuesta.className = 'alert alert-danger';
                     respuesta.style.backgroundColor = '';
-                    texto = 'El dni tienen que ser 8 dígitos';
+                    texto = '¡El dni tiene que tener 8 dígitos!';
                     respuesta.innerHTML = texto;
                 } else {
                     console.log(data)
-                    var tabla = '<br><h3>' + data.usuario.nombre + ' ' + data.usuario.apellido + ' su crédito actual es: ' + data.multaCredito.credito + '</h3><br> <br>';
+                    var tabla = '<h3> Cliente: ' + data.usuario.nombre + ' ' + data.usuario.apellido + '</h3> <br> <h4> Su crédito actual es: ' + data.multaCredito.credito + '</h4><br>';
                     tabla += '<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">';
                     tabla += '<thead>';
                     tabla += '<tr>';

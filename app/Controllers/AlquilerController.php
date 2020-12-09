@@ -54,7 +54,7 @@ class AlquilerController extends BaseController
                 "puntoBici" => $puntoYBici
             ];
         } else {
-            $arr = ["aviso" => "No tiene ningun alquiler activo..."];
+            $arr = ["aviso" => "¡No tiene ningun alquiler activo!"];
         }
 
         // echo "<pre>";
@@ -112,7 +112,7 @@ class AlquilerController extends BaseController
 
                     $arr = [
                         "code" => "200",
-                        "msg" => 'Su reserva se realizo con éxito!',
+                        "msg" => '¡Su reserva se realizó con éxito!',
                         "detalle" => $alquiler,
                         "usuario" => [
                             "nombre" => $nombreUser,
@@ -122,7 +122,7 @@ class AlquilerController extends BaseController
                         "numBici" => $puntoYBici['numBici'],
                     ];
                 } else {
-                    $arr = ["code" => "500", "aviso" => "No existen bicicletas disponibles en el punto de entrega."];
+                    $arr = ["code" => "500", "aviso" => '¡No hay bicicletas disponibles para el punto de entrega seleccionado!'];
                 }
             } else {
 
@@ -152,7 +152,7 @@ class AlquilerController extends BaseController
 
                 $arr = [
                     "code" => "200",
-                    "msg" => 'Su reserva se realizo con éxito!',
+                    "msg" => '¡Su reserva se realizó con éxito!',
                     "detalle" => $alquiler,
                     "usuario" => [
                         "nombre" => $nombreUser,
@@ -325,7 +325,7 @@ class AlquilerController extends BaseController
 
             $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'EnProceso');
             $sesion->set('activo', '2');
-            $noti = ["msj" => "su alquiler ha sido confirmado correctamente!"];
+            $noti = ["msj" => "¡Su alquiler ha sido confirmado correctamente!"];
             echo json_encode($noti);
             die();
         } else if ($actual < $min) {
@@ -340,6 +340,8 @@ class AlquilerController extends BaseController
             $this->cCliente->cliente->actualizarPuntaje($idUsuario, $puntajeTotal);
             $this->cPuntaje->puntaje->crearPuntaje($idUsuario, -4, 'Por no concretar el alquiler');
             $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Perdido');
+            $idBicicleta = $alquilerActivo['idBicicleta'];
+            $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'Disponible');
             $sesion->set('activo', '0');
             echo json_encode($noti);
             die();
