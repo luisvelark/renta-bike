@@ -14,9 +14,9 @@ use CodeIgniter\HTTP\Request;
 class AlquilerController extends BaseController
 {
 
-    /* protected $alquilerModel; */ //cambiar a protected
+    
     protected $request;
-    // protected $controlPED;
+    
 
     public function __construct()
     {
@@ -31,7 +31,7 @@ class AlquilerController extends BaseController
 
     public function hayAlquiler()
     {
-
+        //subi la base
         $sesion = session();
         $idUsuario = $sesion->get('idUsuario');
         $nombreUser = $sesion->get('nombre');
@@ -142,7 +142,7 @@ class AlquilerController extends BaseController
 
                 ];
 
-                /* $elId = $this->alquilerModel->buscarIdAlquilerDelEstado($idUsuario, 'Activo'); */
+               
                 $alquilerActivo = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
                 $this->alquilerModel->actualizarAlquiler($alquilerActivo['idAlquiler'], $alquiler);
                 $sesion->set('activo', '1');
