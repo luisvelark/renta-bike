@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-12-2020 a las 20:21:47
+-- Tiempo de generación: 09-12-2020 a las 02:58:23
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -56,7 +56,7 @@ CREATE TABLE `alquiler` (
   `HoraFinAlquiler` time NOT NULL,
   `HoraEntregaAlquiler` time NOT NULL,
   `clienteAlternativo` int(11) DEFAULT NULL,
-  `estadoAlquiler` enum('EnProceso','Activo','Finalizado','Anulado') NOT NULL,
+  `estadoAlquiler` enum('EnProceso','Activo','Finalizado','Anulado','Perdido') NOT NULL,
   `daño` enum('SinDaño','Recuperable','Irrecuperable') NOT NULL,
   `ruta` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -80,7 +80,18 @@ INSERT INTO `alquiler` (`idAlquiler`, `idUsuarioCliente`, `idBicicleta`, `idPunt
 (12, 1, 2, 1, 2, '2020-12-01', '19:19:19', '21:19:19', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
 (13, 1, 3, 1, 2, '2020-12-04', '15:49:14', '17:49:14', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
 (14, 1, 9, 1, 2, '2020-12-04', '19:00:00', '21:00:00', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
-(15, 3, 1, 1, 2, '2020-12-05', '19:00:20', '21:00:20', '00:00:00', 0, 'EnProceso', '', 'la ruta');
+(15, 3, 1, 1, 2, '2020-12-05', '19:00:20', '21:00:20', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
+(16, 1, 1, 1, 2, '2020-12-07', '12:51:39', '15:51:39', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
+(17, 1, 1, 1, 2, '2020-12-07', '14:00:00', '16:00:00', '00:00:00', 0, 'Anulado', '', 'la ruta'),
+(18, 1, 1, 1, 2, '2020-12-07', '13:00:00', '15:00:00', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
+(19, 1, 2, 1, 2, '2020-12-08', '16:50:00', '19:50:00', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
+(20, 1, 1, 1, 2, '2020-12-08', '18:11:36', '20:11:36', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
+(21, 1, 1, 1, 2, '2020-12-08', '18:34:11', '20:34:11', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
+(22, 1, 1, 1, 2, '2020-12-08', '18:45:00', '20:45:00', '00:00:00', 0, 'Anulado', '', 'la ruta'),
+(23, 1, 1, 1, 2, '2020-12-08', '18:40:08', '20:40:08', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
+(24, 1, 1, 1, 2, '2020-12-08', '18:43:08', '20:43:08', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
+(25, 1, 1, 1, 2, '2020-12-08', '18:59:45', '20:50:00', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
+(26, 1, 1, 1, 2, '2020-12-08', '19:40:00', '21:10:00', '00:00:00', 0, 'Perdido', '', 'la ruta');
 
 -- --------------------------------------------------------
 
@@ -105,14 +116,14 @@ CREATE TABLE `bicicleta` (
 
 INSERT INTO `bicicleta` (`idBicicleta`, `numeroBicicleta`, `estado`, `daño`, `observaciones`, `idPuntoED`, `precio`, `deleted_at`) VALUES
 (1, '001', 'EnAlquiler', 'SinDanio', '', 1, 25000, NULL),
-(2, '002', 'EnAlquiler', 'SinDanio', '', 1, 25000, NULL),
-(3, '003', 'EnAlquiler', 'SinDanio', '', 1, 25000, NULL),
-(4, '004', 'EnReparacion', 'Recuperable', '', 2, 25000, NULL),
-(5, '005', 'EnAlquiler', 'SinDanio', '', 2, 25000, NULL),
-(6, '006', 'Disponible', 'SinDanio', '', 2, 25000, '2020-12-03 01:43:33'),
-(7, '006', 'EnAlquiler', 'SinDanio', '', 1, 25000, NULL),
-(8, '110', 'EnAlquiler', 'SinDanio', '', 1, 0, '2020-12-04 03:01:23'),
-(9, '100', 'EnAlquiler', 'SinDanio', '', 2, 25000, '2020-12-04 22:31:44');
+(2, '002', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
+(3, '003', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
+(4, '004', 'Disponible', 'SinDanio', '', 2, 25000, NULL),
+(5, '005', 'Disponible', 'SinDanio', '', 2, 25000, NULL),
+(6, '006', 'EnReparacion', 'SinDanio', '', 2, 25000, '2020-12-03 01:43:33'),
+(7, '006', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
+(8, '110', 'EnReparacion', 'SinDanio', '', 1, 0, '2020-12-04 03:01:23'),
+(9, '100', 'Disponible', 'SinDanio', '', 2, 25000, '2020-12-04 22:31:44');
 
 -- --------------------------------------------------------
 
@@ -169,7 +180,10 @@ INSERT INTO `calificacion` (`fechaCalificacion`, `idPuntoED`, `idUsuarioCliente`
 ('2020-12-01', 1, 1, 5, 'brenda sos mala pero te banco'),
 ('2020-12-02', 1, 1, 5, 'xq me atendieron sin ganas los hdp'),
 ('2020-12-02', 1, 1, 5, ''),
-('2020-12-02', 1, 1, 5, '');
+('2020-12-02', 1, 1, 5, ''),
+('2020-12-07', 1, 1, 5, ''),
+('2020-12-08', 1, 1, 5, ''),
+('2020-12-08', 1, 1, 5, 'F');
 
 -- --------------------------------------------------------
 
@@ -192,7 +206,7 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`idFachada`, `idUsuarioFK`, `puntajeTotal`, `credito`, `suspendido`, `fechaInicioSuspencion`, `fechaFinSuspencion`) VALUES
-(1, 1, 350, 350, 0, '2020-11-09', '2020-11-09'),
+(1, 1, 346, 350, 0, '2020-11-09', '2020-11-09'),
 (2, 3, 0, 0, 0, '2020-11-09', '2020-11-09'),
 (3, 4, 0, -350, 0, '2020-11-09', '2020-11-09'),
 (4, 5, 0, 0, 0, '2020-11-09', '2020-11-09'),
@@ -285,7 +299,9 @@ INSERT INTO `puntaje` (`idPuntaje`, `idUsuarioCliente`, `puntos`, `detallePuntaj
 (4, 1, 50, 'No hay otra bicicleta disponible', '2020-11-25'),
 (5, 1, 50, 'No hay otra bicicleta disponible', '2020-11-26'),
 (6, 1, 50, 'No hay otra bicicleta disponible', '2020-11-26'),
-(7, 1, 50, 'No hay otra bicicleta disponible', '2020-11-26');
+(7, 1, 50, 'No hay otra bicicleta disponible', '2020-11-26'),
+(8, 1, -4, 'Por no concretar el alquiler', '2020-12-08'),
+(9, 1, -4, 'Por no concretar el alquiler', '2020-12-08');
 
 -- --------------------------------------------------------
 
@@ -437,7 +453,7 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de la tabla `alquiler`
 --
 ALTER TABLE `alquiler`
-  MODIFY `idAlquiler` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idAlquiler` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `bicicleta`
@@ -467,7 +483,7 @@ ALTER TABLE `multa`
 -- AUTO_INCREMENT de la tabla `puntaje`
 --
 ALTER TABLE `puntaje`
-  MODIFY `idPuntaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idPuntaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `puntoentregadevolucion`

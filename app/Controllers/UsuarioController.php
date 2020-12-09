@@ -110,6 +110,7 @@ class UsuarioController extends BaseController
                         <button type="submit" class="btn btn-primary">Confirmar</button>
                         </div>
                         </div>
+                        <input type="hidden" name="ocultoUsuario" value="'.$user['idUsuario'].'"> 
                         </form>
                         </div>
                         </div>';
@@ -131,6 +132,8 @@ class UsuarioController extends BaseController
                             'tipo' => $user['tipo'],
                             'activo' => '0',
                             'suspendido' => 0,
+                            'fechaInicio' => '',
+                            'fechaFin' => '',
                         ];
                         if ($this->alquiler->buscarAlquilerActivo($user['idUsuario']) != null) {
                             $datosSesion['activo'] = '1';
@@ -140,7 +143,11 @@ class UsuarioController extends BaseController
                         }
                         if ($this->cliente->suspendido($user['idUsuario'])) {
                             $datosSesion['suspendido'] = 1;
-                        }
+                            /* $datosSesion['fechaInicio'] = '2020-02-23';
+                            $datosSesion['fechaFin'] = '2020-02-30'; */
+                            $datosSesion['fechaInicio'] = implode($this->cliente->suspendidoFechaInicio($user['idUsuario']));
+                            $datosSesion['fechaFin'] = implode($this->cliente->suspendidoFechaInicio($user['idUsuario']));
+                        } 
 
                         $sesion = session();
                         $sesion->set($datosSesion);
@@ -318,7 +325,11 @@ class UsuarioController extends BaseController
     }
 
     public function reactivarCuenta(){
-        $dato = ['cuenta' => 'Cuenta reactivada con éxito'];
-        echo view('login', $dato);
+        if ($this->request->getMethod() == "post") {
+            $this->usuario->altaLogica($this->request->getPost('ocultoUsuario'));
+            $dato = ['cuenta' => 'Cuenta reactivada con éxito'];
+            echo view('login', $dato);
+        }
+        
     }
 }

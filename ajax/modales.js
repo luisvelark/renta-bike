@@ -24,7 +24,9 @@
   // Reportar daños;
   $(function () {
     $("#idReportarDaños").on("click", function () {
-      $("#idModalReportar").modal();
+      setTimeout(() => {
+        $("#idModalReportar").modal();
+      }, 5000);
     });
   });
 })();
@@ -33,7 +35,9 @@
   // Reportar daños;
   $(function () {
     $("#idBotonConfirmar").on("click", function () {
-      $("#idModalCalificar").modal();
+      setTimeout(() => {
+        $("#idModalCalificar").modal();
+      }, 5000);
     });
   });
 })();

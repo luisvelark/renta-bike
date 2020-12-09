@@ -14,9 +14,9 @@ use CodeIgniter\HTTP\Request;
 class AlquilerController extends BaseController
 {
 
-    /* protected $alquilerModel; *///cambiar a protected
+    
     protected $request;
-    // protected $controlPED;
+    
 
     public function __construct()
     {
@@ -31,7 +31,7 @@ class AlquilerController extends BaseController
 
     public function hayAlquiler()
     {
-
+        //subi la base
         $sesion = session();
         $idUsuario = $sesion->get('idUsuario');
         $nombreUser = $sesion->get('nombre');
@@ -44,13 +44,15 @@ class AlquilerController extends BaseController
             $bici = $this->cBicicleta->mostrarNumeroDeBici($alquiler['idBicicleta']);
 
             $puntoYBici = [$punto, $bici];
-            $arr = ["existe" => true,
+            $arr = [
+                "existe" => true,
                 "alquiler" => $alquiler,
                 "usuario" => [
                     "nombre" => $nombreUser,
                     "apellido" => $apellidoUser,
                 ],
-                "puntoBici" => $puntoYBici];
+                "puntoBici" => $puntoYBici
+            ];
         } else {
             $arr = ["aviso" => "No tiene ningun alquiler activo..."];
         }
@@ -104,7 +106,8 @@ class AlquilerController extends BaseController
                     $sesion->set('activo', '1');
                     $this->cBicicleta->cambiarEstadoBicicleta($puntoYBici['idBici'], 'EnAlquiler');
 
-                    $arr = ["code" => "200",
+                    $arr = [
+                        "code" => "200",
                         "msg" => 'Su reserva se realizo con éxito!',
                         "detalle" => $alquiler,
                         "usuario" => [
@@ -114,11 +117,9 @@ class AlquilerController extends BaseController
                         "dirPunto" => $puntoYBici['dirPunto'],
                         "numBici" => $puntoYBici['numBici'],
                     ];
-
                 } else {
                     $arr = ["code" => "500", "aviso" => "No existen bicicletas disponibles en el punto de entrega."];
                 }
-
             } else {
 
                 $alquiler = [
@@ -133,14 +134,16 @@ class AlquilerController extends BaseController
                     'daño' => $miAlquiler['daño'],
                 ];
 
-                $elId = $this->alquilerModel->buscarIdAlquilerDelEstado($idUsuario, 'Activo');
-                $this->alquilerModel->actualizarAlquiler($elId, $alquiler);
+               
+                $alquilerActivo = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
+                $this->alquilerModel->actualizarAlquiler($alquilerActivo['idAlquiler'], $alquiler);
                 $sesion->set('activo', '1');
 
                 $punto = $this->controlPED->direccionDelPED($alquiler['idPuntoE']);
                 $bici = $this->cBicicleta->mostrarNumeroDeBici($miAlquiler['idBicicleta']);
 
-                $arr = ["code" => "200",
+                $arr = [
+                    "code" => "200",
                     "msg" => 'Su reserva se realizo con éxito!',
                     "detalle" => $alquiler,
                     "usuario" => [
@@ -150,9 +153,7 @@ class AlquilerController extends BaseController
                     "dirPunto" => $punto['direccion'],
                     "numBici" => $bici['numeroBicicleta'],
                 ];
-
             }
-
         }
         echo json_encode($arr);
         die();
@@ -168,7 +169,7 @@ class AlquilerController extends BaseController
         $fechaInicio = $_POST['fechaInicio'];
         $fechaFinal = $_POST['fechaFinal'];
         if ($fechaInicio > $fechaFinal) {
-            $datos =['rta'=>'errorFecha'] ;
+            $datos = ['rta' => 'errorFecha'];
             echo json_encode($datos);
             die();
         } else {
@@ -178,7 +179,7 @@ class AlquilerController extends BaseController
                 echo json_encode($datos);
                 die();
             } else {
-                $datos =['rta'=>'error'] ;
+                $datos = ['rta' => 'error'];
                 echo json_encode($datos);
                 die();
             }
@@ -189,7 +190,7 @@ class AlquilerController extends BaseController
         $fechaInicio = $_POST['fechaInicio'];
         $fechaFinal = $_POST['fechaFinal'];
         if ($fechaInicio > $fechaFinal) {
-            $datos =['rta'=>'errorFecha'] ;
+            $datos = ['rta' => 'errorFecha'];
             echo json_encode($datos);
             die();
         } else {
@@ -198,7 +199,7 @@ class AlquilerController extends BaseController
                 echo json_encode($datos);
                 die();
             } else {
-                $datos =['rta'=>'error'] ;
+                $datos = ['rta' => 'error'];
                 echo json_encode($datos);
                 die();
             }
@@ -209,7 +210,7 @@ class AlquilerController extends BaseController
         $fechaInicio = $_POST['fechaInicio'];
         $fechaFinal = $_POST['fechaFinal'];
         if ($fechaInicio > $fechaFinal) {
-            $datos =['rta'=>'errorFecha'] ;
+            $datos = ['rta' => 'errorFecha'];
             echo json_encode($datos);
             die();
         } else {
@@ -218,7 +219,7 @@ class AlquilerController extends BaseController
                 echo json_encode($datos);
                 die();
             } else {
-                $datos =['rta'=>'error'] ;
+                $datos = ['rta' => 'error'];
                 echo json_encode($datos);
                 die();
             }
@@ -241,7 +242,7 @@ class AlquilerController extends BaseController
 
                 if ($this->alquilerModel->buscarUltimoAlquilerPorBicicleta($idBicicleta) == null) {
 
-                    $mensaje = ['msjReportar' => '¡No existe un alquiler anterior a éste!'];
+                    $mensaje = ['msjReportar' => '¡No existe un alquiler anterior a este!'];
                     echo view('index-cliente', $mensaje);
                 } else {
                     $alquilerUltimo = $this->alquilerModel->buscarUltimoAlquilerPorBicicleta($idBicicleta);
@@ -261,7 +262,7 @@ class AlquilerController extends BaseController
                         $mensaje = ['msjReportar' => '¡Has reportado con éxito, se te asignó una nueva bicicleta!'];
                         echo view('index-cliente', $mensaje);
                     } else {
-                        $this->cPuntaje->puntaje->crearPuntaje($idUsuarioActual, 50, 'No hay otra bicicleta disponible');
+                        $this->cPuntaje->puntaje->crearPuntaje($idUsuarioActual, 50, '¡No hay otra bicicleta disponible!');
                         $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Finalizado');
                         $mensaje = ['msjReportar' => '¡No hay otra bicicleta disponible, se dará por finalizado el alquiler!'];
                         $puntajeTotal = $this->cPuntaje->puntaje->buscarPuntos($idUsuarioActual);
@@ -286,8 +287,8 @@ class AlquilerController extends BaseController
             $max = $alquilerActivo['horaInicioAlquiler'];
             date_default_timezone_set('America/Argentina/Ushuaia');
             $actual = date("H:i:s");
-            $min = restarMinutos($max, '10');
-            if (($actual <= $max) && ($actual >= $min)) {
+            $minMax = restarMinutos($max, '10');
+            if ($actual <= $minMax) {
                 $idBicicleta = $alquilerActivo['idBicicleta'];
                 $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'Disponible');
                 $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Anulado');
@@ -295,7 +296,7 @@ class AlquilerController extends BaseController
                 $sesion->set('activo', '0');
                 echo view('index-cliente', $mensaje);
             } else {
-                $mensaje = ['msjAnular' => '¡El tiempo de anulación es de: ' . $min . ' hasta ' . $max . '!'];
+                $mensaje = ['msjAnular' => '¡El tiempo de anulación es hasta: ' . $minMax . '!'];
                 echo view('index-cliente', $mensaje);
             }
         }
@@ -304,21 +305,34 @@ class AlquilerController extends BaseController
     {
         $sesion = session();
         $idUsuario = $sesion->get('idUsuario');
-        $elId = $this->alquilerModel->buscarIdAlquilerDelEstado($idUsuario, 'Activo');
         $alquilerActivo = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
+
         $horaInicio = $alquilerActivo['horaInicioAlquiler'];
         date_default_timezone_set('America/Argentina/Ushuaia');
         $actual = date("H:i:s");
         $min = restarMinutos($horaInicio, '10');
         $max = sumarMinutos($horaInicio, '10');
+
         if (($actual <= $max) && ($actual >= $min)) {
-            $this->alquilerModel->cambiarEstado($elId, 'EnProceso');
+
+            $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'EnProceso');
             $sesion->set('activo', '2');
             $noti = ["msj" => "su alquiler ha sido confirmado correctamente!"];
             echo json_encode($noti);
             die();
-        } else {
+        } else if ($actual < $min) {
             $noti = ['msj' => '¡El tiempo de confirmación es de: ' . $min . ' hasta ' . $max . '!'];
+            echo json_encode($noti);
+            die();
+        } else if ($actual > $max) {
+            $noti = ['msj' => '¡El tiempo de confirmación ha pasado! Se le descontará puntos y el alquiler se dará como perdido'];
+
+
+            $puntajeTotal = $this->cPuntaje->puntaje->buscarPuntos($idUsuario);
+            $this->cCliente->cliente->actualizarPuntaje($idUsuario, $puntajeTotal);
+            $this->cPuntaje->puntaje->crearPuntaje($idUsuario, -4, 'Por no concretar el alquiler');
+            $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Perdido');
+            $sesion->set('activo', '0');
             echo json_encode($noti);
             die();
         }
