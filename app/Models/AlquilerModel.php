@@ -37,6 +37,11 @@ class AlquilerModel extends Model
         $this->insert($alquiler);
     }
 
+    public function obtenerAlquiler($idAlq){
+        $alquiler=$this->where('idAlquiler',$idAlq)->first();
+        return $alquiler;
+    }
+
     public function actualizarAlquiler($idAlq, $alquiler)
     {
         $this->update($idAlq, $alquiler);
@@ -93,7 +98,7 @@ class AlquilerModel extends Model
 
     public function buscarIdAlquilerDelEstado($id, $estado)
     {
-        $this->select('idAlquiler, idUsuarioCliente ,idBicicleta, idPuntoE, idPuntoD, fechaAlquiler, horaInicioAlquiler, HoraFinAlquiler, HoraEntregaAlquiler, clienteAlternativo, estadoAlquiler, daño, ruta');
+        $this->select('idAlquiler');
         $this->where('estadoAlquiler', $estado);
         $this->where('idUsuarioCliente', $id);
         $id = $this->first();

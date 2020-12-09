@@ -120,7 +120,7 @@ class GestionController extends BaseController
     }
     public function realizarDevolucion()
     {
-        $datos = ['datos' => $this->Cpuntos->puntoED->obtenerPuntosEntregaDevolucion(),'alquiler'=>$this->cAlquiler->alquilerModel->buscarIdAlquilerDelEstado($this->session->idUsuario, 'EnProceso')];
+        $datos = ['datos' => $this->Cpuntos->puntoED->obtenerPuntosEntregaDevolucion(),'alquiler'=>$this->cAlquiler->alquilerModel->buscarAlquilerEnProceso($this->session->idUsuario)];
         echo view('layouts/realizar-devolucion', $datos);
     }
 }

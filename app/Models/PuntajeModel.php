@@ -22,11 +22,9 @@ class PuntajeModel extends Model
     protected $validationMessages = [];
     protected $skipValidation     = false;
 
-    public function crearPuntaje($id, $puntos,$detalle){
-        $this->insert(['idUsuarioCliente'=>$id ,'puntos'=>$puntos, 'detallePuntaje'=>$detalle,
-         'fechaPuntaje'=> date("Y-m-d")]);
+    public function altaPuntaje($datos){
+        $this->insert($datos);
     }
-
 
     public function buscarPuntos($id){
         $this->select('puntos');
