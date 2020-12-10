@@ -11,8 +11,8 @@ class UsuarioModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['dni', 'nombre', 'apellido', 'correo', 'telefono', 'domicilio', 
-    'cuil-cuit', 'fechaNacimiento', 'contraseña', 'tipo','deleted_at'];
+    protected $allowedFields = ['dni', 'nombre', 'apellido', 'correo', 'telefono', 'domicilio',
+        'cuil-cuit', 'fechaNacimiento', 'contraseña', 'tipo', 'deleted_at'];
 
     protected $useTimestamps = false;
     protected $createdField = 'created_at';
@@ -26,8 +26,8 @@ class UsuarioModel extends Model
     public function buscarUsuario($correo)
     {
         $this->where('correo', $correo);
-       /*  $this->where('deleted_at', null); */
-        $datosUsuario= $this->first();
+        /*  $this->where('deleted_at', null); */
+        $datosUsuario = $this->first();
         return $datosUsuario;
     }
     public function buscarUsuarioDNI($dni)
@@ -40,7 +40,7 @@ class UsuarioModel extends Model
         $datosUsuario = $this->where('idUsuario', $id)->first();
         return $datosUsuario;
     }
-    public function modificarDatosUsuario($id,$datos)
+    public function modificarDatosUsuario($id, $datos)
     {
         $confirma = $this->update($id, $datos);
         return $confirma;
@@ -48,7 +48,7 @@ class UsuarioModel extends Model
     public function bajaLogica($id)
     {
         date_default_timezone_set('America/Argentina/Ushuaia');
-        $fechaActual= date("Y-m-d H:i:s");
+        $fechaActual = date("Y-m-d H:i:s");
         $deleted = ['deleted_at' => $fechaActual];
         $this->update($id, $deleted);
     }
@@ -58,4 +58,9 @@ class UsuarioModel extends Model
         $deleted = ['deleted_at' => null];
         $this->update($id, $deleted);
     }
+    // public function clienteAlternativo($dni)
+    // {
+    //     $clienteAlt = $this->select('nombre', 'apellido')->where('dni', $dni)->first();
+    //     return $clienteAlt;
+    // }
 }
