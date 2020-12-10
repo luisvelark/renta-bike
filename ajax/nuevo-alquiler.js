@@ -194,6 +194,13 @@ function enviarAlquiler(e) {
           </div>`;
 
           detalles.innerHTML = `<p class="p-2 small text-white text-center">NO HAY DETALLES</p>`;
+        }else if(data.msg==="fueraHorario"){
+          msj.innerHTML = `
+  <div id="noti" class="alert alert-danger w-50" role="alert">
+     ¡El horario de alquiler es de 8am a 9pm!
+  </div>`;
+
+            detalles.innerHTML = `<p class="p-2 small text-white text-center">Aún no hay detalles</p>`;
         } else {
           if (data.code == 1000) {
             return (msj.innerHTML = `
