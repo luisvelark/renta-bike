@@ -41,16 +41,14 @@ $miHora = new DateTime("now", new DateTimeZone('America/Argentina/Ushuaia'));
 
         <div class="form-group">
           <label class="font-weight-bold">Especificar daños:
-            <textarea class="form-control"
-              name="espeDaños" rows="3"></textarea>
+            <textarea class="form-control" name="espeDaños" rows="3"></textarea>
           </label>
         </div>
 
 
         <div class="form-group">
           <label class="font-weight-bold">Ruta:
-            <textarea class="form-control"
-              name="ruta" rows="3"></textarea>
+            <textarea class="form-control" name="ruta" rows="3"></textarea>
           </label>
         </div>
 
@@ -66,7 +64,7 @@ $miHora = new DateTime("now", new DateTimeZone('America/Argentina/Ushuaia'));
           <input type="hidden" name="horaFin" value=<?php echo $alquiler['HoraFinAlquiler'] ?>>
         </div>
 
-        <button id="idBotonRealizar" type="submit" class="btn btn-primary btn-lg m-2">Enviar</button>
+        <button id="btnDev" type="submit" class="btn btn-primary btn-lg m-2">Enviar</button>
 
       </form>
 

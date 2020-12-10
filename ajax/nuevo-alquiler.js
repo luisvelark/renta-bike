@@ -194,23 +194,23 @@ function enviarAlquiler(e) {
           </div>`;
 
           detalles.innerHTML = `<p class="p-2 small text-white text-center">NO HAY DETALLES</p>`;
-        }else if(data.msg==="fueraHorario"){
+        } else if (data.msg === "fueraHorario") {
           msj.innerHTML = `
   <div id="noti" class="alert alert-danger w-50" role="alert">
      ¡El horario de alquiler es de 8am a 9pm!
   </div>`;
 
-            detalles.innerHTML = `<p class="p-2 small text-white text-center">Aún no hay detalles</p>`;
+          detalles.innerHTML = `<p class="p-2 small text-white text-center">Aún no hay detalles</p>`;
         } else {
           if (data.code == 1000) {
             return (msj.innerHTML = `
-          <div id="noti" class="alert alert-primary w-50" role="alert">
+          <div id="noti" class="alert alert-danger w-50" role="alert">
             verifica el dni del cliente optativo para su devolucion! 
           </div>`);
           }
           //su reserva se realizo con exito!
           msj.innerHTML = `
-          <div id="noti" class="alert alert-primary w-50" role="alert">
+          <div id="noti" class="alert alert-success w-50" role="alert">
             ${data.msg}  
           </div>`;
 
