@@ -159,9 +159,7 @@ class AlquilerController extends BaseController
                         "dirPunto" => $punto['direccion'],
                         "numBici" => $bici['numeroBicicleta'],
                     ];
-
                 }
-
             } else {
                 $arr = ["code" => "1000"];
             }
@@ -240,50 +238,67 @@ class AlquilerController extends BaseController
     public function soliticaReportarDaños()
     {
         $sesion = session();
+
         if ($this->request->getMethod() == "post") {
             $idUsuarioActual = $this->request->getPost('idUsuarioOculto');
             $alquilerActivo = $this->alquilerModel->buscarAlquilerActivo($idUsuarioActual);
-            $idBicicleta = $alquilerActivo['idBicicleta'];
-            $horaInicio = $alquilerActivo['horaInicioAlquiler'];
-            date_default_timezone_set('America/Argentina/Ushuaia');
-            $actual = date("H:i:s");
-            $min = restarMinutos($horaInicio, '10');
-            $max = sumarMinutos($horaInicio, '10');
-            if (($actual <= $max) && ($actual >= $min)) {
+            $diaActual = date("Y-m-d");
+            $diaAlquiler = $alquilerActivo['fechaAlquiler'];
 
-                if ($this->alquilerModel->buscarUltimoAlquilerPorBicicleta($idBicicleta) == null) {
+            if ($diaActual == $diaAlquiler) {
 
-                    $mensaje = ['msjReportar' => '¡No existe un alquiler anterior a este!'];
-                    echo view('index-cliente', $mensaje);
-                } else {
-                    $alquilerUltimo = $this->alquilerModel->buscarUltimoAlquilerPorBicicleta($idBicicleta);
-                    $idUsuarioUltimo = $alquilerUltimo['idUsuarioCliente'];
+                $idBicicleta = $alquilerActivo['idBicicleta'];
+                $horaInicio = $alquilerActivo['horaInicioAlquiler'];
+                date_default_timezone_set('America/Argentina/Ushuaia');
+                $actual = date("H:i:s");
+                $min = restarMinutos($horaInicio, '10');
+                $max = sumarMinutos($horaInicio, '10');
+                if (($actual <= $max) && ($actual >= $min)) {
 
-                    $precio = $this->cBicicleta->bicicleta->obtenerPrecio($idBicicleta);
+                    if ($this->alquilerModel->buscarUltimoAlquilerPorBicicleta($idBicicleta) == null) {
 
-                    $this->cMulta->multa->crearMulta($idUsuarioUltimo, $this->request->getPost('comboDaño'), $precio);
-                    $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'EnReparacion');
-                    $this->cBicicleta->bicicleta->aplicarDaño($idBicicleta, $this->request->getPost('comboDaño'));
-                    if ($this->controlPED->biciDisponibles($alquilerActivo['idPuntoE']) != null) {
-
-                        $puntoYBici = $this->controlPED->biciDisponibles($alquilerActivo['idPuntoE']);
-                        $idBicicletaNueva = $puntoYBici['idBici'];
-                        $this->alquilerModel->reemplazarBicicleta($alquilerActivo['idAlquiler'], $idBicicletaNueva);
-                        $this->cBicicleta->bicicleta->cambiarEstado($idBicicletaNueva, 'EnAlquiler');
-                        $mensaje = ['msjReportar' => '¡Has reportado con éxito, se te asignó una nueva bicicleta!'];
+                        $mensaje = ['msjReportar' => '¡No existe un alquiler anterior a este!'];
                         echo view('index-cliente', $mensaje);
                     } else {
-                        $this->cPuntaje->crearPuntaje($idUsuarioActual, 50, '¡No hay otra bicicleta disponible!');
-                        $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Finalizado');
-                        $mensaje = ['msjReportar' => '¡No hay otra bicicleta disponible, se dará por finalizado el alquiler!'];
-                        $puntajeTotal = $this->cPuntaje->puntaje->buscarPuntos($idUsuarioActual);
-                        $this->cCliente->cliente->actualizarPuntaje($idUsuarioActual, $puntajeTotal);
-                        $sesion->set('activo', '0');
-                        echo view('index-cliente', $mensaje);
+                        $alquilerUltimo = $this->alquilerModel->buscarUltimoAlquilerPorBicicleta($idBicicleta);
+                        $idUsuarioUltimo = $alquilerUltimo['idUsuarioCliente'];
+
+                        $precio = $this->cBicicleta->bicicleta->obtenerPrecio($idBicicleta);
+
+                        $this->cMulta->multa->crearMulta($idUsuarioUltimo, $this->request->getPost('comboDaño'), $precio);
+                        $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'EnReparacion');
+                        $this->cBicicleta->bicicleta->aplicarDaño($idBicicleta, $this->request->getPost('comboDaño'));
+                        if ($this->controlPED->biciDisponibles($alquilerActivo['idPuntoE']) != null) {
+
+                            $puntoYBici = $this->controlPED->biciDisponibles($alquilerActivo['idPuntoE']);
+                            $idBicicletaNueva = $puntoYBici['idBici'];
+                            $this->alquilerModel->reemplazarBicicleta($alquilerActivo['idAlquiler'], $idBicicletaNueva);
+                            $this->cBicicleta->bicicleta->cambiarEstado($idBicicletaNueva, 'EnAlquiler');
+                            $mensaje = ['msjReportar' => '¡Has reportado con éxito, se te asignó una nueva bicicleta!'];
+                            echo view('index-cliente', $mensaje);
+                        } else {
+                            $this->cPuntaje->crearPuntaje($idUsuarioActual, 50, '¡No hay otra bicicleta disponible!');
+                            $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Finalizado');
+                            $mensaje = ['msjReportar' => '¡No hay otra bicicleta disponible, se dará por finalizado el alquiler!'];
+                            $puntajeTotal = $this->cPuntaje->puntaje->buscarPuntos($idUsuarioActual);
+                            $this->cCliente->cliente->actualizarPuntaje($idUsuarioActual, $puntajeTotal);
+                            $sesion->set('activo', '0');
+                            echo view('index-cliente', $mensaje);
+                        }
                     }
+                } else {
+                    $mensaje = ['msjReportar' => '¡El tiempo de reportar daño es de: ' . $min . ' hasta ' . $max . '!'];
+                    echo view('index-cliente', $mensaje);
                 }
             } else {
-                $mensaje = ['msjReportar' => '¡El tiempo de reportar daño es de: ' . $min . ' hasta ' . $max . '!'];
+                $mensaje = ['msjReportar' => '¡No se puede reportar daños, las fechas no coinciden!. Se dará el alquiler como perdido'];
+                $puntajeTotal = $this->cPuntaje->puntaje->buscarPuntos($idUsuarioActual);
+                $this->cPuntaje->crearPuntaje($idUsuarioActual, -4, 'Por no concretar el alquiler');
+                $this->cCliente->cliente->actualizarPuntaje($idUsuarioActual, $puntajeTotal);
+                $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Perdido');
+                $idBicicleta = $alquilerActivo['idBicicleta'];
+                $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'Disponible');
+                $sesion->set('activo', '0');
                 echo view('index-cliente', $mensaje);
             }
         }
@@ -291,23 +306,37 @@ class AlquilerController extends BaseController
     public function soliticaAnularAlquiler()
     {
         if ($this->request->getMethod() == "post") {
-
             $sesion = session();
+            date_default_timezone_set('America/Argentina/Ushuaia');
             $idUsuario = $this->request->getPost('idUsuarioOculto');
             $alquilerActivo = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
-            $max = $alquilerActivo['horaInicioAlquiler'];
-            date_default_timezone_set('America/Argentina/Ushuaia');
-            $actual = date("H:i:s");
-            $minMax = restarMinutos($max, '10');
-            if ($actual <= $minMax) {
+            $diaActual = date("Y-m-d");
+            $diaAlquiler = $alquilerActivo['fechaAlquiler'];
+
+            if ($diaActual == $diaAlquiler) {
+                $max = $alquilerActivo['horaInicioAlquiler'];
+                $actual = date("H:i:s");
+                $minMax = restarMinutos($max, '10');
+                if ($actual <= $minMax) {
+                    $idBicicleta = $alquilerActivo['idBicicleta'];
+                    $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'Disponible');
+                    $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Anulado');
+                    $mensaje = ['msjAnular' => '¡Has anulado con éxito!'];
+                    $sesion->set('activo', '0');
+                    echo view('index-cliente', $mensaje);
+                } else {
+                    $mensaje = ['msjAnular' => '¡El tiempo de anulación es hasta: ' . $minMax . '!'];
+                    echo view('index-cliente', $mensaje);
+                }
+            } else {
+                $mensaje = ['msjAnular' => '¡No se puede anular, las fechas no coinciden!. Se dará el alquiler como perdido'];
+                $puntajeTotal = $this->cPuntaje->puntaje->buscarPuntos($idUsuario);
+                $this->cPuntaje->crearPuntaje($idUsuario, -4, 'Por no concretar el alquiler');
+                $this->cCliente->cliente->actualizarPuntaje($idUsuario, $puntajeTotal);
+                $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Perdido');
                 $idBicicleta = $alquilerActivo['idBicicleta'];
                 $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'Disponible');
-                $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Anulado');
-                $mensaje = ['msjAnular' => '¡Has anulado con éxito!'];
                 $sesion->set('activo', '0');
-                echo view('index-cliente', $mensaje);
-            } else {
-                $mensaje = ['msjAnular' => '¡El tiempo de anulación es hasta: ' . $minMax . '!'];
                 echo view('index-cliente', $mensaje);
             }
         }
@@ -315,29 +344,46 @@ class AlquilerController extends BaseController
     public function soliticaConfirmarAlquiler()
     {
         $sesion = session();
+        date_default_timezone_set('America/Argentina/Ushuaia');
         $idUsuario = $sesion->get('idUsuario');
         $alquilerActivo = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
+        $diaActual = date("Y-m-d");
+        $diaAlquiler = $alquilerActivo['fechaAlquiler'];
 
-        $horaInicio = $alquilerActivo['horaInicioAlquiler'];
-        date_default_timezone_set('America/Argentina/Ushuaia');
-        $actual = date("H:i:s");
-        $min = restarMinutos($horaInicio, '10');
-        $max = sumarMinutos($horaInicio, '10');
+        if ($diaActual == $diaAlquiler) {
 
-        if (($actual <= $max) && ($actual >= $min)) {
 
-            $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'EnProceso');
-            $sesion->set('activo', '2');
-            $noti = ["msj" => "¡Su alquiler ha sido confirmado correctamente!"];
-            echo json_encode($noti);
-            die();
-        } else if ($actual < $min) {
-            $noti = ['msj' => '¡El tiempo de confirmación es de: ' . $min . ' hasta ' . $max . '!'];
-            echo json_encode($noti);
-            die();
-        } else if ($actual > $max) {
-            $noti = ['msj' => '¡El tiempo de confirmación ha pasado! Se le descontará puntos y el alquiler se dará como perdido'];
+            $horaInicio = $alquilerActivo['horaInicioAlquiler'];
+            $actual = date("H:i:s");
+            $min = restarMinutos($horaInicio, '10');
+            $max = sumarMinutos($horaInicio, '10');
 
+            if (($actual <= $max) && ($actual >= $min)) {
+
+                $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'EnProceso');
+                $sesion->set('activo', '2');
+                $noti = ["msj" => "¡Su alquiler ha sido confirmado correctamente!"];
+                echo json_encode($noti);
+                die();
+            } else if ($actual < $min) {
+                $noti = ['msj' => '¡El tiempo de confirmación es de: ' . $min . ' hasta ' . $max . '!'];
+                echo json_encode($noti);
+                die();
+            } else if ($actual > $max) {
+                $noti = ['msj' => '¡El tiempo de confirmación ha pasado! Se le descontará puntos y el alquiler se dará como perdido'];
+
+                $puntajeTotal = $this->cPuntaje->puntaje->buscarPuntos($idUsuario);
+                $this->cPuntaje->crearPuntaje($idUsuario, -4, 'Por no concretar el alquiler');
+                $this->cCliente->cliente->actualizarPuntaje($idUsuario, $puntajeTotal);
+                $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Perdido');
+                $idBicicleta = $alquilerActivo['idBicicleta'];
+                $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'Disponible');
+                $sesion->set('activo', '0');
+                echo json_encode($noti);
+                die();
+            }
+        } else {
+            $noti = ['msj' => '¡No se puede confirmar, las fechas no coinicden! Se le descontará puntos y el alquiler se dará como perdido'];
             $puntajeTotal = $this->cPuntaje->puntaje->buscarPuntos($idUsuario);
             $this->cPuntaje->crearPuntaje($idUsuario, -4, 'Por no concretar el alquiler');
             $this->cCliente->cliente->actualizarPuntaje($idUsuario, $puntajeTotal);
@@ -392,35 +438,43 @@ class AlquilerController extends BaseController
             echo json_encode($datos);
             die();
         } else if ($aux['fechaAlquiler'] === $actual) {
-            if ($horaActual <= $horaTope){
+            if ($horaActual <= $horaTope) {
                 if ($daño === 'SinDanio') {
-                    $bicicleta = ['estado' => 'Disponible',
-                        'idPuntoED' => $punto];
+                    $bicicleta = [
+                        'estado' => 'Disponible',
+                        'idPuntoED' => $punto
+                    ];
                     $puntos = 5;
                     $detalle = "Retorno en terminos y sin incidentes";
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
                     $this->cCliente->calcularPuntajeTotal($idCliente);
                 } else {
-                    $bicicleta = ['estado' => 'NoDisponible',
+                    $bicicleta = [
+                        'estado' => 'NoDisponible',
                         'daño' => $daño,
-                        'idPuntoED' => $punto];
+                        'idPuntoED' => $punto
+                    ];
                     $puntos = -40;
                     $detalle = 'Retorno en terminos y con incidentes';
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
                     $this->cCliente->calcularPuntajeTotal($idCliente);
                 }
-            }else if($horaActual > $horaTope && $horaActual <= $fueraTermino) {
+            } else if ($horaActual > $horaTope && $horaActual <= $fueraTermino) {
                 if ($daño === 'SinDanio') {
-                    $bicicleta = ['estado' => 'Disponible',
-                        'idPuntoED' => $punto];
+                    $bicicleta = [
+                        'estado' => 'Disponible',
+                        'idPuntoED' => $punto
+                    ];
                     $puntos = -5;
                     $detalle = "Retorno fuera de termino y sin incidentes";
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
                     $this->cCliente->calcularPuntajeTotal($idCliente);
                 } else {
-                    $bicicleta = ['estado' => 'NoDisponible',
+                    $bicicleta = [
+                        'estado' => 'NoDisponible',
                         'daño' => $daño,
-                        'idPuntoED' => $punto];
+                        'idPuntoED' => $punto
+                    ];
                     if ($this->cPuntaje->cantidadFueraTermino($idCliente) != 0) {
                         $puntos = -20;
                     } else {
@@ -430,37 +484,43 @@ class AlquilerController extends BaseController
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
                     $this->cCliente->calcularPuntajeTotal($idCliente);
                 }
-            } else{
+            } else {
                 if ($daño === 'SinDanio') {
-                    $bicicleta = ['estado' => 'Disponible',
-                        'idPuntoED' => $punto];
+                    $bicicleta = [
+                        'estado' => 'Disponible',
+                        'idPuntoED' => $punto
+                    ];
                     $puntos = -50;
                     $detalle = "Retorno despues de fuera de termino y sin incidentes";
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
                     $this->cCliente->calcularPuntajeTotal($idCliente);
                 } else {
-                    $bicicleta = ['estado' => 'NoDisponible',
+                    $bicicleta = [
+                        'estado' => 'NoDisponible',
                         'daño' => $daño,
-                        'idPuntoED' => $punto];
+                        'idPuntoED' => $punto
+                    ];
                     $puntos = -90;
                     $detalle = 'Retorno despues de fuera de terminos y con incidentes';
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
                     $this->cCliente->calcularPuntajeTotal($idCliente);
                 }
             }
-            $alquiler = ['idPuntoD' => $punto,
+            $alquiler = [
+                'idPuntoD' => $punto,
                 'HoraEntregaAlquiler' => $_POST['horaActual'],
                 'estadoAlquiler' => 'Finalizado',
                 'daño' => $daño,
-                'ruta' => $ruta];
+                'ruta' => $ruta
+            ];
             $this->alquilerModel->actualizarAlquiler($idAlquiler, $alquiler);
             $sesion->set('activo', '0');
             $this->cBicicleta->bicicleta->updateBicicleta($idBicicleta, $bicicleta);
-            if($this->cCliente->cliente->suspendido($idCliente)!=0){
+            if ($this->cCliente->cliente->suspendido($idCliente) != 0) {
                 $datos = ['rta' => 'suspendido'];
                 echo json_encode($datos);
                 die();
-            }else{
+            } else {
                 $datos = ['rta' => 'ta bien'];
                 echo json_encode($datos);
                 die();
@@ -468,16 +528,20 @@ class AlquilerController extends BaseController
         } else {
             if ($horaActual <= $fueraTermino) {
                 if ($daño === 'SinDanio') {
-                    $bicicleta = ['estado' => 'Disponible',
-                        'idPuntoED' => $punto];
+                    $bicicleta = [
+                        'estado' => 'Disponible',
+                        'idPuntoED' => $punto
+                    ];
                     $puntos = -5;
                     $detalle = "Retorno fuera de termino y sin incidentes";
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
                     $this->cCliente->calcularPuntajeTotal($idCliente);
                 } else {
-                    $bicicleta = ['estado' => 'NoDisponible',
+                    $bicicleta = [
+                        'estado' => 'NoDisponible',
                         'daño' => $daño,
-                        'idPuntoED' => $punto];
+                        'idPuntoED' => $punto
+                    ];
                     if ($this->cPuntaje->cantidadFueraTermino($idCliente) === 0) {
                         $puntos = -60;
                     } else {
@@ -489,41 +553,46 @@ class AlquilerController extends BaseController
                 }
             } else {
                 if ($daño === 'SinDanio') {
-                    $bicicleta = ['estado' => 'Disponible',
-                        'idPuntoED' => $punto];
+                    $bicicleta = [
+                        'estado' => 'Disponible',
+                        'idPuntoED' => $punto
+                    ];
                     $puntos = -50;
                     $detalle = "Retorno despues de fuera de termino y sin incidentes";
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
                     $this->cCliente->calcularPuntajeTotal($idCliente);
                 } else {
-                    $bicicleta = ['estado' => 'NoDisponible',
+                    $bicicleta = [
+                        'estado' => 'NoDisponible',
                         'daño' => $daño,
-                        'idPuntoED' => $punto];
+                        'idPuntoED' => $punto
+                    ];
                     $puntos = -90;
                     $detalle = 'Retorno despues de fuera de terminos y con incidentes';
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
                     $this->cCliente->calcularPuntajeTotal($idCliente);
                 }
             }
-            $alquiler = ['idPuntoD' => $punto,
+            $alquiler = [
+                'idPuntoD' => $punto,
                 'HoraEntregaAlquiler' => $_POST['horaActual'],
                 'estadoAlquiler' => 'Finalizado',
                 'daño' => $daño,
-                'ruta' => $ruta];
+                'ruta' => $ruta
+            ];
             $this->alquilerModel->actualizarAlquiler($idAlquiler, $alquiler);
             $sesion->set('activo', '0');
             $this->cBicicleta->bicicleta->updateBicicleta($idBicicleta, $bicicleta);
-            if($this->cCliente->cliente->suspendido($idCliente)!=0){
+            if ($this->cCliente->cliente->suspendido($idCliente) != 0) {
                 $datos = ['rta' => 'suspendido'];
                 echo json_encode($datos);
                 die();
-            }else{
+            } else {
                 $datos = ['rta' => 'ta bien'];
                 echo json_encode($datos);
                 die();
             }
         }
-
     }
 
     public function mostrarPDF()
