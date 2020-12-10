@@ -25,6 +25,12 @@ class MultaModel extends Model
         return $multa;
     }
 
+    public function altaMulta($id,$monto,$tipoMulta){
+        date_default_timezone_set('America/Argentina/Ushuaia');
+        $this->insert(['idUsuarioCliente'=>$id ,'monto'=>$monto, 'fechaMulta'=> date("Y-m-d"),'detalleMulta'=> $tipoMulta,
+            'pagado'=>0]);
+    }
+
     public function crearMulta($id,$daño,$precio){
         date_default_timezone_set('America/Argentina/Ushuaia');
         if($daño=='Recuperable'){

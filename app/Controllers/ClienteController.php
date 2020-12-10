@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Controllers\UsuarioController;
 use App\Controllers\PuntajeController;
+use App\Controllers\MultaController;
 use App\Models\ClienteModel;
 
 class ClienteController extends BaseController
@@ -14,6 +15,7 @@ class ClienteController extends BaseController
         $this->cliente = new ClienteModel();
         $this->cUsuario = new UsuarioController();
         $this->cPuntaje= new PuntajeController();
+        $this->cMulta= new MultaController();
     }
 
     public function creditoMultasCliente($id)
@@ -48,6 +50,9 @@ class ClienteController extends BaseController
         $puntajes=$this->cPuntaje->puntaje->buscarPuntos($id);
         $idFachada=$this->cliente->obtenerClienteID($id);
         $this->cliente->actualizarPuntaje($idFachada['idFachada'], $puntajes);
-        
+        if($puntajes<0 && $puntajes>-200){
+            $monto=100;
+            $this->cMulta->multa->altaMulta($id);
+        }
     }
 }
