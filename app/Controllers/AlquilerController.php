@@ -76,11 +76,11 @@ class AlquilerController extends BaseController
 
             $arr = ["code" => "400", "msg" => "error"];
         } else {
-            $horaMax = date_create_from_format("G:i:s", '21:00:00');
-            $horaMin = date_create_from_format("G:i:s", '08:00:00');
+            $horaMax = '21:00:00';
+            $horaMin = '08:00:00';
             $horaFin = calcularSumaHoras($horaInicio, $cantHoras);
             if ($horaInicio > $horaMax || $horaFin > $horaMax || $horaInicio < $horaMin) {
-                $arr = ["code" => "400", "msg" => "fueraHorario"];
+                $arr = ["code" => "400", "msg" => "fueraHorario","hora"=>$horaMin];
             } elseif ($this->usuarioModel->buscarUsuarioDNI(intval($dniAlternativo)) != null || $dniAlternativo == "") {
 
                 $sesion = session();
