@@ -22,7 +22,12 @@ function ventanaDevolucion(e) {
 
       let contenedor = document.getElementById("contenido");
       contenedor.innerHTML = respuesta;
+
+      let enviar = document.getElementById("btnDev");
+      let calificar = document.getElementById("idModalCalificar");
+
       realizaDevolucion();
+      modalCalificar(enviar, calificar);
     }
   }
 }
@@ -72,4 +77,25 @@ function realizaDevolucion() {
     },
     true
   );
+}
+
+// function modalCalificar() {
+//   // Modal calificar;
+//   $(function () {
+//     $("#btnDev").on("click", function () {
+//       setTimeout(() => {
+//         $("#idModalCalificar").modal();
+//       }, 6000);
+//     });
+//   });
+// }
+function modalCalificar(ev, c) {
+  // Modal calificar;
+  $(function () {
+    ev.addEventListener("click", () => {
+      setTimeout(() => {
+        $(c).modal();
+      }, 6000);
+    });
+  });
 }
