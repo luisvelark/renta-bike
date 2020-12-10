@@ -77,7 +77,7 @@ class AlquilerController extends BaseController
             $arr = ["code" => "400", "msg" => "error"];
         } else {
 
-            if ($this->usuarioModel->buscarUsuarioId(intval($dniAlternativo)) != null || $dniAlternativo == "") {
+            if ($this->usuarioModel->buscarUsuarioDNI(intval($dniAlternativo)) != null || $dniAlternativo == "") {
 
                 $sesion = session();
                 // $sesion->set($puntoYBici);
