@@ -39,11 +39,11 @@ function buscarPuntoRetorno() {
 
                     respuesta.className = 'alert alert-danger';
                     respuesta.style.backgroundColor = '';
-                    texto = 'No se encuentran valores con las fechas ingresadas';
+                    texto = '¡No se encuentran valores con las fechas ingresadas!';
                     respuesta.innerHTML = texto;
                 } else if (data.rta === 'errorFecha') {
                     respuesta.className = 'alert alert-danger';
-                    texto = 'Fecha inicio tiene que ser menor o igual a fecha final';
+                    texto = '¡La fecha de inicio tiene que ser menor o igual a la fecha final!';
                     respuesta.innerHTML = texto;
                 } else {
                     var tabla = '<br><h3>Puntos de retorno más utilizados</h3><br> <br>';

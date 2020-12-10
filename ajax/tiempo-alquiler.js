@@ -37,11 +37,11 @@ function tiempoAlquilerRepetido() {
             .then(data => {
                 if (data.rta === 'error') {
                     respuesta.className = 'alert alert-danger';
-                    texto = 'No se encuentran valores con las fechas ingresadas';
+                    texto = '¡No se encuentran valores con las fechas ingresadas!';
                     respuesta.innerHTML = texto;
                 } else if (data.rta === 'errorFecha') {
                     respuesta.className = 'alert alert-danger';
-                    texto = 'Fecha inicio tiene que ser menor o igual a fecha final';
+                    texto = '¡La fecha de inicio tiene que ser menor o igual a la fecha final!';
                     respuesta.innerHTML = texto;
                 } else {
                     console.log(data);
