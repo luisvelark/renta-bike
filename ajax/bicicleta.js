@@ -101,7 +101,7 @@ function buscarBicicleta() {
                     tabla += '<td>Número Bicicleta: ' + data.rta.bicicleta.numeroBicicleta + '</td>';
                     tabla += '<td>';
                     tabla += '<label class="font-weight-bold">Ingrese nuevo número de la bicicleta:';
-                    tabla += '<input type="number" value="' + data.rta.bicicleta.numeroBicicleta + '" class="form-control form-control-user my-1 text-center font-weight-bold" name="numeroBicicleta" autofocus="">';
+                    tabla += '<input type="number" value="' + data.rta.bicicleta.numeroBicicleta + '" class="form-control form-control-user my-1 text-center font-weight-bold" name="numeroBicicleta" readOnly autofocus="">';
                     tabla += '</label>';
                     tabla += '</td>';
                     tabla += '</tr>';
