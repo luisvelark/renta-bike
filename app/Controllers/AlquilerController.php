@@ -362,6 +362,8 @@ class AlquilerController extends BaseController
 
     public function realizarDevolucion()
     {
+        $sesion = session();
+        date_default_timezone_set('America/Argentina/Ushuaia');
         $ruta=$_POST['ruta'];
         $daño=$_POST['daño'];
         $punto=$_POST['punto-entrega'];
@@ -381,7 +383,7 @@ class AlquilerController extends BaseController
             echo json_encode($datos);
             die();
         }
-        else if($aux['fechaAlquiler']===$actual)
+        else if($aux['fechaAlquiler']==$actual)
         {
             if($horaActual > $horaTope && $horaActual<=$fueraTermino){
                 if ($daño==='SinDanio'){
@@ -453,8 +455,9 @@ class AlquilerController extends BaseController
             'daño' => $daño,
             'ruta' => $ruta];
             $this->alquilerModel->actualizarAlquiler($idAlquiler,$alquiler);
+            $sesion->set('activo', '0');
             $this->cBicicleta->bicicleta->updateBicicleta($idBicicleta, $bicicleta);
-            $datos =['rta'=>'ta bien'];
+            $datos =['rta'=>'ta bien','fechaActual'=>$actual,'fechaAlquiler'=>$aux['fechaAlquiler']];
             echo json_encode($datos);
             die();
         }else{
@@ -507,8 +510,9 @@ class AlquilerController extends BaseController
             'daño' => $daño,
             'ruta' => $ruta];
             $this->alquilerModel->actualizarAlquiler($idAlquiler,$alquiler);
+            $sesion->set('activo', '0');
             $this->cBicicleta->bicicleta->updateBicicleta($idBicicleta, $bicicleta);
-            $datos =['rta'=>'ta bien'];
+            $datos =['rta'=>'ta bien','fechaActual'=>$actual,'fechaAlquiler'=>$aux['fechaAlquiler']];
             echo json_encode($datos);
             die();
         }

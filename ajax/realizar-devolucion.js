@@ -50,7 +50,7 @@ function realizaDevolucion() {
           else{
             respuesta.className = 'container py-4';
             respuesta.style.backgroundColor = 'white';
-            $texto = 'Ta todo bien';
+            $texto = 'Ta todo bien fA'+data.fechaActual+' fAlq'+data.fechaAlquiler;
             respuesta.innerHTML = $texto;
           }
           })
