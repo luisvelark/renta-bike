@@ -454,7 +454,7 @@ $user_session = session();
         <div id="avisos">
           <?php
 if (isset($msjReportar)) {
-    echo '<div id="msjReportar" class="alert alert-success col-sm-12 text-center w-100" role="alert">';
+    echo '<div id="msjReportar" class="alert alert-info col-sm-12 text-center w-100" role="alert">';
     echo $msjReportar;
     echo '</div>';
 }
@@ -462,12 +462,12 @@ if (isset($msjReportar)) {
 //          ${data.msj}
 //       </div>`;
 if (isset($msjAnular)) {
-    echo '<div id="msjAnular" class="alert alert-success col-sm-12 text-center w-100" role="alert">';
+    echo '<div id="msjAnular" class="alert alert-info col-sm-12 text-center w-100" role="alert">';
     echo $msjAnular;
     echo '</div>';
 }
 if (isset($msjCalificacion)) {
-    echo '<div id="msjCalificar" class="alert alert-success col-sm-12 text-center w-100" role="alert">';
+    echo '<div id="msjCalificar" class="alert alert-info col-sm-12 text-center w-100" role="alert">';
     echo $msjCalificacion;
     echo '</div>';
 }
