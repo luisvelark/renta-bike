@@ -53,7 +53,9 @@ class ClienteModel extends Model
         return $this->where('idUsuarioFK', $id)->first();
         
     }
-
+    public function modificarCliente($id,$modificar){
+        $this->update($id,$modificar);
+    }
     public function actualizarPuntaje($id, $puntos){
         $data= ['puntajeTotal' => $puntos];
         $this->update($id,$data);

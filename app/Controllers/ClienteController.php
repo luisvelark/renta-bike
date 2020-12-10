@@ -49,22 +49,39 @@ class ClienteController extends BaseController
     public function calcularPuntajeTotal($id){
         $puntajes=$this->cPuntaje->puntaje->buscarPuntos($id);
         $idFachada=$this->cliente->obtenerClienteID($id);
+        date_default_timezone_set('America/Argentina/Ushuaia');
         $this->cliente->actualizarPuntaje($idFachada['idFachada'], $puntajes);
         if($puntajes<0 && $puntajes>=-200){
             $monto=100;
             $this->cMulta->multa->altaMulta($id,$monto,'Asistencia a capacitación');
         }else if($puntajes<-200 && $puntajes>=-500){
-            $cantMulta=$this->cMulta->multa->algo();
-            if($cantMulta<4){
-                $monto=500*$cantMulta;
-                $this->cMulta->multa->altaMulta($id,$monto,'Multa '+$cantMulta);
-            }else if($cantMulta=4){
-                
-            }
-            else{
+            $cantMulta=$this->cMulta->multa->contarMultas($id);
+            if($cantMulta=0){
                 $monto=500;
                 $this->cMulta->multa->altaMulta($id,$monto,'Multa 1');
+            }else if($cantMulta<4){
+                $monto=500*$cantMulta;
+                $this->cMulta->multa->altaMulta($id,$monto,'Multa '+$cantMulta);
             }
+            else if($cantMulta>4){
+                $monto=1000*$cantMulta;
+                $this->cMulta->multa->altaMulta($id,$monto,'Multa '+$cantMulta);
+                $fechaFin=date("Y-m-d",strtotime($fecha_actual."+ 3 month"));
+                $cambios=['supendido'=>1,'fechaInicioSuspencion'=>date("Y-m-d"),'fechaFinSuspencion'=>$fechaFin];
+                $this->cliente->modificarCliente($idFachada,$cambios);
+            }
+        }else if($puntajes<-500 && $puntajes>=-1000){
+            $monto=1000*$cantMulta;
+            $this->cMulta->multa->altaMulta($id,$monto,'Multa '+$cantMulta);
+            $fechaFin=date("Y-m-d",strtotime($fecha_actual."+ 6 month"));
+            $cambios=['supendido'=>1,'fechaInicioSuspencion'=>date("Y-m-d"),'fechaFinSuspencion'=>$fechaFin];
+            $this->cliente->modificarCliente($idFachada,$cambios);
+        }else if($puntajes<-1000){
+            $monto=15000;
+            $this->cMulta->multa->altaMulta($id,$monto,'Multa '+$cantMulta);
+            $fechaFin=date("Y-m-d",strtotime($fecha_actual."+ 3 year"));
+            $cambios=['supendido'=>1,'fechaInicioSuspencion'=>date("Y-m-d"),'fechaFinSuspencion'=>$fechaFin];
+            $this->cliente->modificarCliente($idFachada,$cambios);
         }
     }
 }

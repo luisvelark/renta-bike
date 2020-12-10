@@ -30,7 +30,11 @@ class MultaModel extends Model
         $this->insert(['idUsuarioCliente'=>$id ,'monto'=>$monto, 'fechaMulta'=> date("Y-m-d"),'detalleMulta'=> $tipoMulta,
             'pagado'=>0]);
     }
-
+    public function contarMultas($id){
+        $cantMultas=$this->selectCount('idMulta','conteo')
+                    ->where('idUsuarioCliente='.$id.' AND detalleMulta LIKE "%Multa%"')->first();
+        return $cantMultas;
+    }
     public function crearMulta($id,$daño,$precio){
         date_default_timezone_set('America/Argentina/Ushuaia');
         if($daño=='Recuperable'){
