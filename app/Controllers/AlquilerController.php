@@ -80,7 +80,7 @@ class AlquilerController extends BaseController
             $horaMin = '08:00:00';
             $horaFin = calcularSumaHoras($horaInicio, $cantHoras);
             if ($horaInicio > $horaMax || $horaFin > $horaMax || $horaInicio < $horaMin) {
-                $arr = ["code" => "400", "msg" => "fueraHorario","hora"=>$horaMin];
+                $arr = ["code" => "400", "msg" => "fueraHorario"];
             } elseif ($this->usuarioModel->buscarUsuarioDNI(intval($dniAlternativo)) != null || $dniAlternativo == "") {
 
                 $sesion = session();
