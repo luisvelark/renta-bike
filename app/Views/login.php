@@ -68,6 +68,11 @@
                       echo 'Se modificaron los datos correctamente. Vuelva a iniciar sesión por favor';
                       echo '</div>';
                     } ?>
+                    <?php if (isset($_GET['estaSuspendido'])){
+                      echo '<div class= "alert alert-danger">';
+                      echo 'Usted está suspendido. Vuelva a iniciar sesión por favor';
+                      echo '</div>';
+                    } ?>
                     <br>
                   </div>
                   </div>

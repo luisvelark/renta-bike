@@ -47,10 +47,13 @@ function realizaDevolucion() {
               $texto = 'Por favor complete los campos obligatorios';
               respuesta.innerHTML = $texto;
           } 
+          else if (data.rta === 'suspendido') {
+            location.href = "http://localhost/renta-bike/?estaSuspendido=1";
+          }
           else{
             respuesta.className = 'container py-4';
             respuesta.style.backgroundColor = 'white';
-            $texto = 'Ta todo bien p='+typeof data.puntaje+' cM='+data.cantMulta;
+            $texto = 'Ta todo bien';
             respuesta.innerHTML = $texto;
           }
           })

@@ -456,11 +456,15 @@ class AlquilerController extends BaseController
             $this->alquilerModel->actualizarAlquiler($idAlquiler, $alquiler);
             $sesion->set('activo', '0');
             $this->cBicicleta->bicicleta->updateBicicleta($idBicicleta, $bicicleta);
-            $cantM=$this->cMulta->multa->contarMultas($idCliente);
-            $fecha_actual=date("Y-m-d");
-            $datos = ['rta' => 'ta bien', 'puntaje' => $this->cCliente->cliente->suspendido($idCliente), 'cantMulta' => date("Y-m-d",strtotime($fecha_actual."+ 3 month"))];
-            echo json_encode($datos);
-            die();
+            if($this->cCliente->cliente->suspendido($idCliente)!=0){
+                $datos = ['rta' => 'suspendido'];
+                echo json_encode($datos);
+                die();
+            }else{
+                $datos = ['rta' => 'ta bien'];
+                echo json_encode($datos);
+                die();
+            }
         } else {
             if ($horaActual <= $fueraTermino) {
                 if ($daño === 'SinDanio') {
@@ -474,10 +478,10 @@ class AlquilerController extends BaseController
                     $bicicleta = ['estado' => 'NoDisponible',
                         'daño' => $daño,
                         'idPuntoED' => $punto];
-                    if ($this->cPuntaje->cantidadFueraTermino($idCliente) != 0) {
-                        $puntos = -20;
-                    } else {
+                    if ($this->cPuntaje->cantidadFueraTermino($idCliente) === 0) {
                         $puntos = -60;
+                    } else {
+                        $puntos = -20;
                     }
                     $detalle = 'Retorno fuera de terminos y con incidentes';
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
@@ -509,11 +513,15 @@ class AlquilerController extends BaseController
             $this->alquilerModel->actualizarAlquiler($idAlquiler, $alquiler);
             $sesion->set('activo', '0');
             $this->cBicicleta->bicicleta->updateBicicleta($idBicicleta, $bicicleta);
-            $cantM=$this->cMulta->multa->contarMultas($idCliente);
-            $fecha_actual=date("Y-m-d");
-            $datos = ['rta' => 'ta bien', 'puntaje' => $this->cCliente->cliente->suspendido($idCliente), 'cantMulta' => date("Y-m-d",strtotime($fecha_actual."+ 3 month"))];
-            echo json_encode($datos);
-            die();
+            if($this->cCliente->cliente->suspendido($idCliente)!=0){
+                $datos = ['rta' => 'suspendido'];
+                echo json_encode($datos);
+                die();
+            }else{
+                $datos = ['rta' => 'ta bien'];
+                echo json_encode($datos);
+                die();
+            }
         }
 
     }
