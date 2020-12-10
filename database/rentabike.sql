@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-12-2020 a las 02:58:23
+-- Tiempo de generación: 10-12-2020 a las 02:59:09
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -50,14 +50,14 @@ CREATE TABLE `alquiler` (
   `idUsuarioCliente` int(11) NOT NULL,
   `idBicicleta` int(11) NOT NULL,
   `idPuntoE` int(11) NOT NULL,
-  `idPuntoD` int(11) NOT NULL,
+  `idPuntoD` int(11) DEFAULT NULL,
   `fechaAlquiler` date NOT NULL,
   `horaInicioAlquiler` time NOT NULL,
   `HoraFinAlquiler` time NOT NULL,
-  `HoraEntregaAlquiler` time NOT NULL,
+  `HoraEntregaAlquiler` time DEFAULT NULL,
   `clienteAlternativo` int(11) DEFAULT NULL,
-  `estadoAlquiler` enum('EnProceso','Activo','Finalizado','Anulado','Perdido') NOT NULL,
-  `daño` enum('SinDaño','Recuperable','Irrecuperable') NOT NULL,
+  `estadoAlquiler` enum('EnProceso','Activo','Finalizado','Perdido','Anulado') NOT NULL,
+  `daño` enum('SinDanio','Recuperable','Irrecuperable') DEFAULT NULL,
   `ruta` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -66,32 +66,12 @@ CREATE TABLE `alquiler` (
 --
 
 INSERT INTO `alquiler` (`idAlquiler`, `idUsuarioCliente`, `idBicicleta`, `idPuntoE`, `idPuntoD`, `fechaAlquiler`, `horaInicioAlquiler`, `HoraFinAlquiler`, `HoraEntregaAlquiler`, `clienteAlternativo`, `estadoAlquiler`, `daño`, `ruta`) VALUES
-(1, 1, 1, 2, 1, '2019-11-18', '14:30:00', '16:30:00', '16:25:00', NULL, 'Finalizado', 'SinDaño', NULL),
-(2, 1, 2, 2, 1, '2019-11-20', '14:30:00', '16:30:00', '16:26:00', NULL, 'Finalizado', 'SinDaño', NULL),
-(3, 1, 1, 2, 1, '2019-12-20', '14:00:00', '16:00:00', '15:55:00', NULL, 'Finalizado', 'SinDaño', NULL),
-(4, 1, 1, 2, 1, '2020-01-25', '16:00:00', '18:00:00', '17:55:00', NULL, 'Finalizado', 'SinDaño', NULL),
-(5, 1, 1, 2, 1, '2020-01-28', '16:00:00', '18:00:00', '17:56:00', NULL, 'Finalizado', 'SinDaño', NULL),
-(6, 1, 1, 2, 1, '2020-02-05', '14:30:00', '16:30:00', '16:25:00', NULL, 'Finalizado', 'SinDaño', NULL),
-(7, 1, 3, 2, 1, '2020-02-10', '14:30:00', '16:30:00', '16:29:00', NULL, 'Finalizado', 'SinDaño', NULL),
-(8, 3, 4, 2, 2, '2020-11-23', '12:12:12', '14:12:12', '00:00:00', NULL, 'Finalizado', 'SinDaño', 'la ruta'),
-(9, 1, 5, 2, 2, '2020-11-23', '01:45:41', '20:09:09', '00:00:00', NULL, 'Finalizado', 'SinDaño', 'la ruta'),
-(10, 1, 1, 1, 2, '2020-11-30', '15:02:20', '18:02:20', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
-(11, 1, 2, 1, 2, '2020-11-30', '23:50:31', '17:50:31', '00:00:00', 0, 'Anulado', '', 'la ruta'),
-(12, 1, 2, 1, 2, '2020-12-01', '19:19:19', '21:19:19', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
-(13, 1, 3, 1, 2, '2020-12-04', '15:49:14', '17:49:14', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
-(14, 1, 9, 1, 2, '2020-12-04', '19:00:00', '21:00:00', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
-(15, 3, 1, 1, 2, '2020-12-05', '19:00:20', '21:00:20', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
-(16, 1, 1, 1, 2, '2020-12-07', '12:51:39', '15:51:39', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
-(17, 1, 1, 1, 2, '2020-12-07', '14:00:00', '16:00:00', '00:00:00', 0, 'Anulado', '', 'la ruta'),
-(18, 1, 1, 1, 2, '2020-12-07', '13:00:00', '15:00:00', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
-(19, 1, 2, 1, 2, '2020-12-08', '16:50:00', '19:50:00', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
-(20, 1, 1, 1, 2, '2020-12-08', '18:11:36', '20:11:36', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
-(21, 1, 1, 1, 2, '2020-12-08', '18:34:11', '20:34:11', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
-(22, 1, 1, 1, 2, '2020-12-08', '18:45:00', '20:45:00', '00:00:00', 0, 'Anulado', '', 'la ruta'),
-(23, 1, 1, 1, 2, '2020-12-08', '18:40:08', '20:40:08', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
-(24, 1, 1, 1, 2, '2020-12-08', '18:43:08', '20:43:08', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
-(25, 1, 1, 1, 2, '2020-12-08', '18:59:45', '20:50:00', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
-(26, 1, 1, 1, 2, '2020-12-08', '19:40:00', '21:10:00', '00:00:00', 0, 'Perdido', '', 'la ruta');
+(8, 3, 4, 2, 2, '2020-11-23', '12:12:12', '14:12:12', '00:00:00', NULL, 'EnProceso', '', 'la ruta'),
+(10, 8, 1, 1, 2, '2020-11-29', '20:20:00', '22:20:00', '00:00:00', 0, 'Activo', '', 'la ruta'),
+(12, 2, 2, 1, 2, '2020-12-03', '17:10:00', '19:10:00', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
+(19, 2, 11, 1, 1, '2020-12-09', '22:20:34', '00:20:34', '22:44:28', 0, 'Finalizado', 'SinDanio', ''),
+(20, 2, 11, 1, NULL, '2020-12-09', '22:55:00', '00:55:00', NULL, 0, 'Activo', NULL, NULL),
+(21, 1, 1, 1, NULL, '2020-12-09', '22:59:32', '00:59:32', NULL, 0, 'Activo', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -102,8 +82,8 @@ INSERT INTO `alquiler` (`idAlquiler`, `idUsuarioCliente`, `idBicicleta`, `idPunt
 CREATE TABLE `bicicleta` (
   `idBicicleta` int(11) NOT NULL,
   `numeroBicicleta` varchar(3) NOT NULL,
-  `estado` enum('EnAlquiler','EnReparacion','Disponible') NOT NULL,
-  `daño` enum('SinDanio','Recuperable','Irrecuperable') NOT NULL,
+  `estado` enum('EnAlquiler','EnReparacion','Disponible','NoDisponible') NOT NULL DEFAULT 'Disponible',
+  `daño` enum('SinDanio','Recuperable','Irrecuperable') NOT NULL DEFAULT 'SinDanio',
   `observaciones` varchar(100) NOT NULL,
   `idPuntoED` int(11) NOT NULL,
   `precio` int(11) NOT NULL,
@@ -117,13 +97,18 @@ CREATE TABLE `bicicleta` (
 INSERT INTO `bicicleta` (`idBicicleta`, `numeroBicicleta`, `estado`, `daño`, `observaciones`, `idPuntoED`, `precio`, `deleted_at`) VALUES
 (1, '001', 'EnAlquiler', 'SinDanio', '', 1, 25000, NULL),
 (2, '002', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
-(3, '003', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
-(4, '004', 'Disponible', 'SinDanio', '', 2, 25000, NULL),
-(5, '005', 'Disponible', 'SinDanio', '', 2, 25000, NULL),
-(6, '006', 'EnReparacion', 'SinDanio', '', 2, 25000, '2020-12-03 01:43:33'),
-(7, '006', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
-(8, '110', 'EnReparacion', 'SinDanio', '', 1, 0, '2020-12-04 03:01:23'),
-(9, '100', 'Disponible', 'SinDanio', '', 2, 25000, '2020-12-04 22:31:44');
+(3, '003', 'EnAlquiler', 'SinDanio', '', 1, 25000, NULL),
+(4, '004', 'EnAlquiler', 'SinDanio', '', 2, 25000, NULL),
+(5, '005', 'EnAlquiler', 'SinDanio', '', 2, 25000, NULL),
+(6, '006', 'EnAlquiler', 'SinDanio', '', 2, 25000, NULL),
+(7, '015', 'EnAlquiler', 'SinDanio', '', 2, 25000, '2020-12-04 23:41:46'),
+(8, '010', 'EnAlquiler', 'SinDanio', '', 2, 25000, NULL),
+(9, '011', 'EnAlquiler', 'Recuperable', '', 1, 25000, NULL),
+(10, '012', 'Disponible', 'SinDanio', '', 2, 25000, NULL),
+(11, '013', 'EnAlquiler', 'SinDanio', '', 1, 25000, NULL),
+(12, '014', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
+(13, '015', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
+(14, '016', 'Disponible', 'SinDanio', '', 1, 25000, NULL);
 
 -- --------------------------------------------------------
 
@@ -163,27 +148,26 @@ INSERT INTO `calificacion` (`fechaCalificacion`, `idPuntoED`, `idUsuarioCliente`
 ('2020-11-23', 1, 1, 5, 'brenda mala onda'),
 ('2020-11-23', 1, 1, 5, 'brenda mala onda'),
 ('2020-11-23', 1, 1, 5, ''),
-('2020-11-30', 1, 1, 5, ''),
-('2020-11-30', 1, 1, 2, ''),
-('2020-11-30', 1, 1, 4, 'brenda desbloqueame'),
-('2020-11-30', 1, 1, 1, 'xq me atendieron sin ganas los hdp'),
-('2020-11-30', 1, 1, 1, ''),
-('2020-11-30', 1, 1, 1, ''),
-('2020-11-30', 1, 1, 1, ''),
-('2020-11-30', 1, 1, 1, ''),
-('2020-11-30', 1, 1, 3, ''),
-('2020-11-30', 1, 1, 1, ''),
-('2020-11-30', 1, 1, 1, ''),
-('2020-11-30', 1, 1, 1, ''),
-('2020-11-30', 1, 1, 1, ''),
-('2020-11-30', 1, 1, 1, ''),
-('2020-12-01', 1, 1, 5, 'brenda sos mala pero te banco'),
-('2020-12-02', 1, 1, 5, 'xq me atendieron sin ganas los hdp'),
-('2020-12-02', 1, 1, 5, ''),
-('2020-12-02', 1, 1, 5, ''),
-('2020-12-07', 1, 1, 5, ''),
-('2020-12-08', 1, 1, 5, ''),
-('2020-12-08', 1, 1, 5, 'F');
+('2020-12-02', 1, 1, 3, ''),
+('2020-12-03', 1, 2, 5, ''),
+('2020-12-03', 1, 2, 5, ''),
+('2020-12-03', 1, 2, 5, ''),
+('2020-12-03', 1, 2, 5, ''),
+('2020-12-03', 1, 2, 5, ''),
+('2020-12-03', 1, 2, 5, ''),
+('2020-12-03', 1, 2, 5, ''),
+('2020-12-03', 1, 2, 5, ''),
+('2020-12-03', 1, 2, 5, ''),
+('2020-12-03', 1, 2, 5, ''),
+('2020-12-03', 1, 2, 5, ''),
+('2020-12-03', 1, 2, 5, ''),
+('2020-12-03', 1, 2, 5, ''),
+('2020-12-03', 1, 2, 5, ''),
+('2020-12-03', 1, 2, 5, ''),
+('2020-12-03', 1, 2, 5, ''),
+('2020-12-03', 1, 2, 5, ''),
+('2020-12-07', 2, 2, 3, ''),
+('2020-12-09', 1, 2, 3, '');
 
 -- --------------------------------------------------------
 
@@ -206,19 +190,14 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`idFachada`, `idUsuarioFK`, `puntajeTotal`, `credito`, `suspendido`, `fechaInicioSuspencion`, `fechaFinSuspencion`) VALUES
-(1, 1, 346, 350, 0, '2020-11-09', '2020-11-09'),
+(1, 1, 250, 350, 0, '2020-11-09', '2020-11-09'),
 (2, 3, 0, 0, 0, '2020-11-09', '2020-11-09'),
 (3, 4, 0, -350, 0, '2020-11-09', '2020-11-09'),
 (4, 5, 0, 0, 0, '2020-11-09', '2020-11-09'),
 (5, 8, 0, 0, 0, '2020-11-09', '2020-11-09'),
-(6, 2, 0, 0, 0, NULL, NULL),
-(7, 17, 0, 0, 0, NULL, NULL),
-(8, 18, 0, 0, 0, '2020-11-29', '2020-11-29'),
-(9, 7, 0, 0, 0, '2020-12-02', '2020-12-02'),
-(10, 9, 0, 0, 0, '2020-12-04', '2020-12-04'),
-(11, 10, 0, 0, 0, '2020-12-04', '2020-12-04'),
-(12, 11, 0, 0, 0, '2020-12-04', '2020-12-04'),
-(13, 14, 0, 0, 0, '2020-12-05', '2020-12-05');
+(6, 2, -175, 0, 0, NULL, NULL),
+(7, 6, 0, 0, 0, NULL, NULL),
+(8, 7, 0, 0, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -243,36 +222,31 @@ INSERT INTO `multa` (`idMulta`, `idUsuarioCliente`, `monto`, `fechaMulta`, `deta
 (1, 1, 500, '2020-12-12', 'Por llegar tarde', 1),
 (2, 1, 534, '2020-11-10', 'Por no confirmar alquiler', 1),
 (3, 4, 5000, '2020-11-13', 'Por el email', 0),
-(4, 3, 6250, '2020-11-24', 'No declarar daños minimos', 1),
+(4, 3, 6250, '2020-11-24', 'No declarar daños minimos', 0),
 (5, 3, 6250, '2020-11-24', 'No declarar daños minimos', 0),
-(6, 3, 6250, '2020-11-24', 'No declarar daños minimos', 1),
-(7, 3, 6250, '2020-11-25', 'No declarar daños minimos', 1),
-(8, 3, 6250, '2020-11-25', 'No declarar daños minimos', 1),
-(9, 3, 6250, '2020-11-25', 'No declarar daños minimos', 1),
-(10, 3, 6250, '2020-11-25', 'No declarar daños minimos', 1),
-(11, 3, 25000, '2020-11-25', 'No declarar daños considerables', 1),
-(12, 3, 6250, '2020-11-25', 'No declarar daños minimos', 1),
-(13, 3, 6250, '2020-11-25', 'No declarar daños minimos', 1),
-(14, 3, 6250, '2020-11-25', 'No declarar daños minimos', 1),
-(15, 3, 6250, '2020-11-25', 'No declarar daños minimos', 1),
-(16, 3, 6250, '2020-11-25', 'No declarar daños minimos', 1),
-(17, 3, 6250, '2020-11-25', 'No declarar daños minimos', 1),
-(18, 3, 6250, '2020-11-25', 'No declarar daños minimos', 1),
-(19, 3, 6250, '2020-11-25', 'No declarar daños minimos', 1),
-(20, 3, 6250, '2020-11-25', 'No declarar daños minimos', 1),
-(21, 3, 6250, '2020-11-25', 'No declarar daños minimos', 1),
-(22, 3, 6250, '2020-11-25', 'No declarar daños minimos', 1),
-(23, 3, 6250, '2020-11-26', 'No declarar daños minimos', 1),
-(24, 3, 6250, '2020-11-26', 'No declarar daños minimos', 1),
-(25, 3, 6250, '2020-11-26', 'No declarar daños minimos', 1),
-(26, 3, 6250, '2020-11-26', 'No declarar daños minimos', 1),
-(27, 3, 6250, '2020-11-26', 'No declarar daños minimos', 1),
-(28, 3, 0, '2020-11-30', 'No declarar daños minimos', 1),
-(29, 3, 0, '2020-11-30', 'No declarar daños minimos', 1),
-(30, 3, 0, '2020-11-30', 'No declarar daños minimos', 1),
-(31, 3, 6250, '2020-11-30', 'No declarar daños minimos', 1),
-(32, 3, 6250, '2020-11-30', 'No declarar daños minimos', 1),
-(33, 3, 6250, '2020-11-30', 'No declarar daños minimos', 1);
+(6, 3, 6250, '2020-11-24', 'No declarar daños minimos', 0),
+(7, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(8, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(9, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(10, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(11, 3, 25000, '2020-11-25', 'No declarar daños considerables', 0),
+(12, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(13, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(14, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(15, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(16, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(17, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(18, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(19, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(20, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(21, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(22, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
+(23, 3, 6250, '2020-11-26', 'No declarar daños minimos', 0),
+(24, 3, 6250, '2020-11-26', 'No declarar daños minimos', 0),
+(25, 3, 6250, '2020-11-26', 'No declarar daños minimos', 0),
+(26, 3, 6250, '2020-11-26', 'No declarar daños minimos', 0),
+(27, 3, 6250, '2020-11-26', 'No declarar daños minimos', 0),
+(28, 1, 6250, '2020-12-02', 'No declarar daños minimos', 0);
 
 -- --------------------------------------------------------
 
@@ -300,8 +274,23 @@ INSERT INTO `puntaje` (`idPuntaje`, `idUsuarioCliente`, `puntos`, `detallePuntaj
 (5, 1, 50, 'No hay otra bicicleta disponible', '2020-11-26'),
 (6, 1, 50, 'No hay otra bicicleta disponible', '2020-11-26'),
 (7, 1, 50, 'No hay otra bicicleta disponible', '2020-11-26'),
-(8, 1, -4, 'Por no concretar el alquiler', '2020-12-08'),
-(9, 1, -4, 'Por no concretar el alquiler', '2020-12-08');
+(13, 2, 5, 'Retorno en terminos y sin incidentes', '2020-12-08'),
+(14, 2, 5, 'Retorno en terminos y sin incidentes', '2020-12-08'),
+(15, 2, 5, 'Retorno en terminos y sin incidentes', '2020-12-08'),
+(16, 2, 5, 'Retorno en terminos y sin incidentes', '2020-12-08'),
+(17, 2, -40, 'Retorno en terminos y con incidentes', '2020-12-08'),
+(18, 2, -5, 'Retorno fuera de termino y sin incidentes', '2020-12-09'),
+(19, 2, -5, 'Retorno fuera de termino y sin incidentes', '2020-12-09'),
+(20, 2, -5, 'Retorno fuera de termino y sin incidentes', '2020-12-09'),
+(21, 2, -5, 'Retorno fuera de termino y sin incidentes', '2020-12-09'),
+(22, 2, -5, 'Retorno fuera de termino y sin incidentes', '2020-12-09'),
+(23, 2, -5, 'Retorno fuera de termino y sin incidentes', '2020-12-09'),
+(24, 2, -20, 'Retorno fuera de terminos y con incidentes', '2020-12-09'),
+(25, 2, -5, 'Retorno fuera de termino y sin incidentes', '2020-12-09'),
+(28, 2, -50, 'Retorno despues de fuera de termino y sin incidentes', '2020-12-09'),
+(29, 2, -50, 'Retorno despues de fuera de termino y sin incidentes', '2020-12-09'),
+(30, 1, -50, 'Retorno despues de fuera de termino y sin incidentes', '2020-12-09'),
+(31, 1, -50, 'Retorno despues de fuera de termino y sin incidentes', '2020-12-09');
 
 -- --------------------------------------------------------
 
@@ -323,8 +312,8 @@ CREATE TABLE `puntoentregadevolucion` (
 --
 
 INSERT INTO `puntoentregadevolucion` (`idPuntoED`, `direccion`, `telefono`, `calificacionTotal`, `lat`, `lng`) VALUES
-(1, 'Av. San Martín 500', 446123456, 3, '-45.8609651', '-67.4884351'),
-(2, 'Av. Hipólito Yrigoyen 2351', 446123456, 0, '-45.8791456', '-67.5141204');
+(1, 'Av. San Martín 500', 446123456, 4, '-45.8609651', '-67.4884351'),
+(2, 'Av. Hipólito Yrigoyen 2351', 446123456, 3, '-45.8791456', '-67.5141204');
 
 -- --------------------------------------------------------
 
@@ -352,7 +341,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idUsuario`, `dni`, `nombre`, `apellido`, `correo`, `telefono`, `domicilio`, `cuil-cuit`, `fechaNacimiento`, `contraseña`, `tipo`, `deleted_at`) VALUES
-(1, 38802605, 'Esteban', 'Saavedra', 'esteban@esteban.com', '2974787869', 'Barrio Ceferino', '20388026058', '1995-12-12', 'contraseña', 'cliente', NULL),
+(1, 38802605, 'Esteban', 'Saavedra', 'esteban@esteban.com', '2974787869', 'Barrio Quirno Costa', '20388026058', '1995-12-12', 'contraseña', 'cliente', NULL),
 (2, 40872123, 'Cristian', 'Cañupan', 'caupancristian13@gmail.com', '297483647', 'Av Rivadavia 3504', '20408721238', '1998-01-29', 'asdasd', 'cliente', NULL),
 (3, 42578123, 'Carlitos', 'Perez', 'carlitosK@yahoo.com.ar', '2974836475', 'Roca 1221', '2142751236', '1978-10-15', 'lerolero123', 'cliente', NULL),
 (4, 42123456, 'Carla', 'Torrez', 'carlapocha@hotmail.com', '2975123321', 'Los claveles 123', '21421234568', '1990-06-25', 'qpwoei123', 'cliente', NULL),
@@ -360,16 +349,14 @@ INSERT INTO `usuario` (`idUsuario`, `dni`, `nombre`, `apellido`, `correo`, `tele
 (6, 36123456, 'Brenda', 'Uribe', 'brenda@brenda.com', '2974123456', 'Barrio ceferino', '20361234567', '1991-08-02', 'estebancrack', 'administrador', NULL),
 (7, 12345678, 'admin', 'admin', 'admin', 'admin', '123456789', 'a', '0000-00-00', 'admin', 'administrador', NULL),
 (8, 12345678, 'cliente', 'cliente', 'cliente', 'cliente', '123456789', 'c', '0000-00-00', 'cliente', 'cliente', NULL),
-(9, 45123456, 'tu mami', 'si ella', 'lamamadella@nose.com', '123456789', 'Ceferino', '12345123456', '1982-12-12', '12345678', 'cliente', '2020-12-04 20:23:35'),
-(10, 37123456, 'tu', 'prima', 'laprima@hotmail.com', '1231231231', 'Ceferino', '12337123456', '1994-12-12', '12345678', 'cliente', '2020-12-04 20:25:27'),
-(11, 37802605, 'luca', 'hammond', 'luca@hamon.com', '2983123132', 'walmart', '12337802605', '1993-12-12', '12345678', 'cliente', '2020-12-04 21:32:38'),
+(9, 45123456, 'tu mami', 'si ella', 'lamamadella@nose.com', '123456789', 'Ceferino', '12345123456', '1982-12-12', '12345678', 'cliente', NULL),
+(10, 37123456, 'tu', 'prima', 'laprima@hotmail.com', '1231231231', 'Ceferino', '12337123456', '1994-12-12', '12345678', 'cliente', NULL),
+(11, 37802605, 'luca', 'hammond', 'luca@hamon.com', '2983123132', 'walmart', '12337802605', '1993-12-12', '12345678', 'cliente', NULL),
 (12, 38802605, '', '', '', '', '', '', '0000-00-00', '', 'administrador', NULL),
 (13, 62626262, 'dasda', 'dada', 'esteban@brendabloqueadora.com', '123456789', 'dadasdsa', '12362626262', '1919-12-12', '12345678', 'cliente', NULL),
-(14, 12366666, 'brenda', 'la panadera', 'brenda@panadera.com', '123456789', 'kenedy por la prove', '12312366666', '1991-08-12', '12345678', 'cliente', '2020-12-05 21:30:14'),
+(14, 12366666, 'brenda', 'la panadera', 'brenda@panadera.com', '123456789', 'kenedy por la prove', '12312366666', '1991-08-12', '12345678', 'administrador', NULL),
 (15, 11112222, '3123123123', '2312312321', 'da@gmail.c32312312om', '12356789', 'lalala', '12311112222', '1885-12-12', '12345678', 'cliente', NULL),
-(16, 11334455, '34', 'urive', 'angela@sistemas.com.lala', '123456789', 'calle 510', '12311334455', '1995-12-12', '12345678', 'cliente', NULL),
-(17, 11111118, 'Claudia', 'Kruger', 'clauda@claudia.com.ar', '123456789', 'rada tilyy', '12311111118', '1960-12-12', '12345678', 'cliente', NULL),
-(18, 12345670, 'regi', 'strar', 'regi@registrar.com', '123456789', 'rada tilyy', '12312345670', '1991-12-12', '12345678', 'cliente', NULL);
+(16, 11334455, '34', 'urive', 'angela@sistemas.com.lala', '123456789', 'calle 510', '12311334455', '1995-12-12', '12345678', 'cliente', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -453,13 +440,13 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de la tabla `alquiler`
 --
 ALTER TABLE `alquiler`
-  MODIFY `idAlquiler` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `idAlquiler` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `bicicleta`
 --
 ALTER TABLE `bicicleta`
-  MODIFY `idBicicleta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idBicicleta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `calificacion`
@@ -471,19 +458,19 @@ ALTER TABLE `calificacion`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idFachada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idFachada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `multa`
 --
 ALTER TABLE `multa`
-  MODIFY `idMulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `idMulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `puntaje`
 --
 ALTER TABLE `puntaje`
-  MODIFY `idPuntaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idPuntaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `puntoentregadevolucion`
@@ -495,7 +482,7 @@ ALTER TABLE `puntoentregadevolucion`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Restricciones para tablas volcadas
