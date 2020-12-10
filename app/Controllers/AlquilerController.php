@@ -74,37 +74,83 @@ class AlquilerController extends BaseController
         if ($puntoE === '---' || empty($horaInicio) || $cantHoras === '---' || empty($puntoE) || empty($cantHoras)) {
 
             $arr = ["code" => "400", "msg" => "error"];
-        } else {
+        } 
+        else
+        {
+            $horaMax=date_create_from_format("G:i:s", '21:00:00');
+            $horaMin=date_create_from_format("G:i:s", '08:00:00');
+            $horaFin=calcularSumaHoras($horaInicio, $cantHoras);
+            if($horaInicio>$horaMax || $horaFin>$horaMax||$horaInicio<$horaMin)
+            {
+                $arr = ["code" => "400", "msg" => "fueraHorario"];
+            }
+            else
+            {
+                $sesion = session();
+                // $sesion->set($puntoYBici);
+                $idUsuario = $sesion->get('idUsuario');
+                $nombreUser = $sesion->get('nombre');
+                $apellidoUser = $sesion->get('apellido');
 
-            $sesion = session();
-            // $sesion->set($puntoYBici);
-            $idUsuario = $sesion->get('idUsuario');
-            $nombreUser = $sesion->get('nombre');
-            $apellidoUser = $sesion->get('apellido');
+                $miAlquiler = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
 
-            $miAlquiler = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
+                if ($miAlquiler == null) {
 
-            if ($miAlquiler == null) {
+                    $puntoYBici = $this->controlPED->biciDisponibles(intval($puntoE));
 
-                $puntoYBici = $this->controlPED->biciDisponibles(intval($puntoE));
+                    if ($puntoYBici != null) {
 
-                if ($puntoYBici != null) {
+                        $alquiler = [
+                            'idUsuarioCliente' => $idUsuario,
+                            'idBicicleta' => $puntoYBici['idBici'],
+                            'idPuntoE' => intval($puntoE),
+                            'fechaAlquiler' => date("Y-m-d"),
+                            'horaInicioAlquiler' => date("H:i:s", strtotime($horaInicio)),
+                            'HoraFinAlquiler' => calcularSumaHoras($horaInicio, $cantHoras),
+                            'clienteAlternativo' => intval($dniAlternativo),
+                            'estadoAlquiler' => 'Activo',
+
+                        ];
+
+                        $this->alquilerModel->crearAlquiler($alquiler);
+                        $sesion->set('activo', '1');
+                        $this->cBicicleta->cambiarEstadoBicicleta($puntoYBici['idBici'], 'EnAlquiler');
+
+                        $arr = [
+                            "code" => "200",
+                            "msg" => '¡Su reserva se realizó con éxito!',
+                            "detalle" => $alquiler,
+                            "usuario" => [
+                                "nombre" => $nombreUser,
+                                "apellido" => $apellidoUser,
+                            ],
+                            "dirPunto" => $puntoYBici['dirPunto'],
+                            "numBici" => $puntoYBici['numBici'],
+                        ];
+                    } else {
+                        $arr = ["code" => "500", "aviso" => '¡No hay bicicletas disponibles para el punto de entrega seleccionado!'];
+                    }
+                } else {
 
                     $alquiler = [
                         'idUsuarioCliente' => $idUsuario,
-                        'idBicicleta' => $puntoYBici['idBici'],
+                        'idBicicleta' => $miAlquiler['idBicicleta'],
                         'idPuntoE' => intval($puntoE),
                         'fechaAlquiler' => date("Y-m-d"),
                         'horaInicioAlquiler' => date("H:i:s", strtotime($horaInicio)),
                         'HoraFinAlquiler' => calcularSumaHoras($horaInicio, $cantHoras),
                         'clienteAlternativo' => intval($dniAlternativo),
                         'estadoAlquiler' => 'Activo',
-
+                        'daño' => $miAlquiler['daño'],
                     ];
 
-                    $this->alquilerModel->crearAlquiler($alquiler);
+                
+                    $alquilerActivo = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
+                    $this->alquilerModel->actualizarAlquiler($alquilerActivo['idAlquiler'], $alquiler);
                     $sesion->set('activo', '1');
-                    $this->cBicicleta->cambiarEstadoBicicleta($puntoYBici['idBici'], 'EnAlquiler');
+
+                    $punto = $this->controlPED->direccionDelPED($alquiler['idPuntoE']);
+                    $bici = $this->cBicicleta->mostrarNumeroDeBici($miAlquiler['idBicicleta']);
 
                     $arr = [
                         "code" => "200",
@@ -114,45 +160,10 @@ class AlquilerController extends BaseController
                             "nombre" => $nombreUser,
                             "apellido" => $apellidoUser,
                         ],
-                        "dirPunto" => $puntoYBici['dirPunto'],
-                        "numBici" => $puntoYBici['numBici'],
+                        "dirPunto" => $punto['direccion'],
+                        "numBici" => $bici['numeroBicicleta'],
                     ];
-                } else {
-                    $arr = ["code" => "500", "aviso" => '¡No hay bicicletas disponibles para el punto de entrega seleccionado!'];
                 }
-            } else {
-
-                $alquiler = [
-                    'idUsuarioCliente' => $idUsuario,
-                    'idBicicleta' => $miAlquiler['idBicicleta'],
-                    'idPuntoE' => intval($puntoE),
-                    'fechaAlquiler' => date("Y-m-d"),
-                    'horaInicioAlquiler' => date("H:i:s", strtotime($horaInicio)),
-                    'HoraFinAlquiler' => calcularSumaHoras($horaInicio, $cantHoras),
-                    'clienteAlternativo' => intval($dniAlternativo),
-                    'estadoAlquiler' => 'Activo',
-                    'daño' => $miAlquiler['daño'],
-                ];
-
-               
-                $alquilerActivo = $this->alquilerModel->buscarAlquilerActivo($idUsuario);
-                $this->alquilerModel->actualizarAlquiler($alquilerActivo['idAlquiler'], $alquiler);
-                $sesion->set('activo', '1');
-
-                $punto = $this->controlPED->direccionDelPED($alquiler['idPuntoE']);
-                $bici = $this->cBicicleta->mostrarNumeroDeBici($miAlquiler['idBicicleta']);
-
-                $arr = [
-                    "code" => "200",
-                    "msg" => '¡Su reserva se realizó con éxito!',
-                    "detalle" => $alquiler,
-                    "usuario" => [
-                        "nombre" => $nombreUser,
-                        "apellido" => $apellidoUser,
-                    ],
-                    "dirPunto" => $punto['direccion'],
-                    "numBici" => $bici['numeroBicicleta'],
-                ];
             }
         }
         echo json_encode($arr);
@@ -329,8 +340,8 @@ class AlquilerController extends BaseController
 
 
             $puntajeTotal = $this->cPuntaje->puntaje->buscarPuntos($idUsuario);
+            $this->cPuntaje->crearPuntaje($idUsuario, -4, 'Por no concretar el alquiler');
             $this->cCliente->cliente->actualizarPuntaje($idUsuario, $puntajeTotal);
-            $this->cPuntaje->puntaje->crearPuntaje($idUsuario, -4, 'Por no concretar el alquiler');
             $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Perdido');
             $idBicicleta = $alquilerActivo['idBicicleta'];
             $this->cBicicleta->bicicleta->cambiarEstado($idBicicleta, 'Disponible');
