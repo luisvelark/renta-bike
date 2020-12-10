@@ -6,7 +6,9 @@
   ?>
 
   <br>
+  <h4> Tu puntaje al día de la fecha es: <?php echo $puntaje ?> </h4> <br>
   <h4> Tu crédito actual es: <?php echo $datos['credito'] ?> </h4> <br>
+  
 
   <div class=" card shadow mb-4">
     <div class="card-header py-3">

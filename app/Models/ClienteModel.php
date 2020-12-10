@@ -75,4 +75,9 @@ public function suspendidoFechaFin($id){
     $valor = $this->where('idUsuarioFK', $id)->first();
     return $valor;
 }
+public function obtenerPuntaje($id)
+{
+    $puntaje = $this->where('idUsuarioFK', $id)->first();
+    return $puntaje['puntajeTotal'];
+}
 }

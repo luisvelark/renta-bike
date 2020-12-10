@@ -66,8 +66,13 @@ class GestionController extends BaseController
     public function creditoYMultasCliente()
     {
         /* $user_session = session(); */
+        
 
-        $datos = ['datos' => $this->cCliente->creditoMultasCliente($this->session->idUsuario)];
+        $datos = ['datos' => $this->cCliente->creditoMultasCliente($this->session->idUsuario), 
+        'puntaje'=>$this->cCliente->cliente->obtenerPuntaje($this->session->idUsuario)];
+         /* $datos = ['datos' => $this->cCliente->creditoMultasCliente($this->session->idUsuario),
+         'puntaje'=> $this->cCliente->cliente->obtenerPuntaje($this->session->idUsuario)]; */
+
         echo view('layouts/credito-multas-cliente', $datos);
     }
     public function horarioMayorDemanda()
