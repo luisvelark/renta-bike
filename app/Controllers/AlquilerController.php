@@ -273,7 +273,7 @@ class AlquilerController extends BaseController
                         $mensaje = ['msjReportar' => '¡Has reportado con éxito, se te asignó una nueva bicicleta!'];
                         echo view('index-cliente', $mensaje);
                     } else {
-                        $this->cPuntaje->puntaje->crearPuntaje($idUsuarioActual, 50, '¡No hay otra bicicleta disponible!');
+                        $this->cPuntaje->crearPuntaje($idUsuarioActual, 50, '¡No hay otra bicicleta disponible!');
                         $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'Finalizado');
                         $mensaje = ['msjReportar' => '¡No hay otra bicicleta disponible, se dará por finalizado el alquiler!'];
                         $puntajeTotal = $this->cPuntaje->puntaje->buscarPuntos($idUsuarioActual);
