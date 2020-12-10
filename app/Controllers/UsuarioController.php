@@ -5,8 +5,8 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Controllers\MultaController;
 use App\Models\AlquilerModel;
-use App\Models\UsuarioModel;
 use App\Models\ClienteModel;
+use App\Models\UsuarioModel;
 use CodeIgniter\HTTP\Request;
 
 class UsuarioController extends BaseController
@@ -101,22 +101,22 @@ class UsuarioController extends BaseController
                         </button>
                         </div>
                         <form method="POST" class="user"
-                        action="'. base_url().'/UsuarioController/reactivarCuenta">
+                        action="' . base_url() . '/UsuarioController/reactivarCuenta">
                         <div class="modal-body">
                          ¿Está seguro de que quiere reactivar su cuenta?
                         </div>
-                        
+
                         <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Confirmar</button>
                         </div>
                         </div>
-                        <input type="hidden" name="ocultoUsuario" value="'.$user['idUsuario'].'"> 
+                        <input type="hidden" name="ocultoUsuario" value="' . $user['idUsuario'] . '">
                         </form>
                         </div>
                         </div>';
                         $dato = ['modal' => $modal];
                         echo view('login', $dato);
-                        
+
                     } else {
 
                         if ($this->cliente->obtenerClienteID($user['idUsuario']) == null) {
@@ -147,7 +147,7 @@ class UsuarioController extends BaseController
                             $datosSesion['fechaFin'] = '2020-02-30'; */
                             $datosSesion['fechaInicio'] = implode($this->cliente->suspendidoFechaInicio($user['idUsuario']));
                             $datosSesion['fechaFin'] = implode($this->cliente->suspendidoFechaInicio($user['idUsuario']));
-                        } 
+                        }
 
                         $sesion = session();
                         $sesion->set($datosSesion);
@@ -186,7 +186,7 @@ class UsuarioController extends BaseController
                 'apellido' => $this->request->getPost('apellido'), 'correo' => $this->request->getPost('correo'),
                 'telefono' => $this->request->getPost('telefono'), 'domicilio' => $this->request->getPost('domicilio'),
                 'cuil-cuit' => $this->request->getPost('cuil'), 'fechaNacimiento' => $this->request->getPost('fecha'),
-                'contraseña' => $this->request->getPost('contraseña'), 'tipo' => 'cliente'
+                'contraseña' => $this->request->getPost('contraseña'), 'tipo' => 'cliente',
             ]); //'contraseña' => $hash
 
             $user = $this->usuario->buscarUsuario($this->request->getPost('correo'));
@@ -199,7 +199,6 @@ class UsuarioController extends BaseController
                 'correo' => $user['correo'],
                 'tipo' => 'cliente',
             ];
-
 
             $sesion = session();
             $sesion->set($datosSesion);
@@ -235,7 +234,7 @@ class UsuarioController extends BaseController
                     'telefono' => $this->request->getPost('telefono'),
                     'domicilio' => $this->request->getPost('domicilio'),
                     'fechaNacimiento' => $this->request->getPost('fecha'),
-                    'contraseña' => $this->request->getPost('contraseña')
+                    'contraseña' => $this->request->getPost('contraseña'),
                 ];
                 if ($this->usuario->modificarDatosUsuario($this->session->idUsuario, $datos)) {
                     $user_session->destroy();
@@ -253,7 +252,7 @@ class UsuarioController extends BaseController
                     'telefono' => $this->request->getPost('telefono'),
                     'domicilio' => $this->request->getPost('domicilio'),
                     'fechaNacimiento' => $this->request->getPost('fecha'),
-                    'contraseña' => $this->request->getPost('contraseña')
+                    'contraseña' => $this->request->getPost('contraseña'),
                 ];
                 if ($this->usuario->modificarDatosUsuario($this->session->idUsuario, $datos)) {
                     $data = ['ok' => 'ok'];
@@ -269,7 +268,7 @@ class UsuarioController extends BaseController
                 die();
             }
         } else {
-            $data = ['ok' =>  $this->validator->listErrors()];
+            $data = ['ok' => $this->validator->listErrors()];
             echo json_encode($data);
             die();
         }
@@ -302,7 +301,6 @@ class UsuarioController extends BaseController
                     die();
                 }
 
-
                 if ($alquilerEnProceso != null) {
                     $data = ['ok' => 'No se puede dar de baja. Tiene un alquiler en proceso'];
                     echo json_encode($data);
@@ -324,12 +322,34 @@ class UsuarioController extends BaseController
         }
     }
 
-    public function reactivarCuenta(){
+    public function reactivarCuenta()
+    {
         if ($this->request->getMethod() == "post") {
             $this->usuario->altaLogica($this->request->getPost('ocultoUsuario'));
             $dato = ['cuenta' => 'Cuenta reactivada con éxito'];
             echo view('login', $dato);
         }
-        
+
+    }
+
+    public function buscarClienteAlternativo()
+    {
+        if ($this->request->getMethod() == "post") {
+            $dniCliente = $this->request->getPost('dni');
+            $cliente = $this->usuario->buscarUsuarioDNI(intval($dniCliente));
+            if ($cliente != null) {
+                $datos = ['code' => '200',
+                    'cliente' => ['nombre' => $cliente['nombre'],
+                        'apellido' => $cliente['apellido']],
+                    // 'dni' => $dniCliente,
+                ];
+            } else {
+                $datos = ['code' => '500'];
+            }
+            echo json_encode($datos);
+            die();
+
+        }
+
     }
 }
