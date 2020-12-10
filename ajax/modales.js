@@ -24,15 +24,13 @@
   // Reportar daños;
   $(function () {
     $("#idReportarDaños").on("click", function () {
-      setTimeout(() => {
-        $("#idModalReportar").modal();
-      }, 5000);
+      $("#idModalReportar").modal();
     });
   });
 })();
 
 (function () {
-  // Reportar daños;
+  // Modal calificar;
   $(function () {
     $("#idBotonConfirmar").on("click", function () {
       setTimeout(() => {
@@ -45,16 +43,21 @@
 setTimeout(() => {
   const reportar = document.getElementById("msjReportar");
 
-  reportar.style.display = "none";
+  if (reportar != null) {
+    reportar.style.display = "none";
+  }
 }, 6000);
 
 setTimeout(() => {
   const anular = document.getElementById("msjAnular");
-  anular.style.display = "none";
+  if (anular != null) {
+    anular.style.display = "none";
+  }
 }, 6000);
 
 setTimeout(() => {
   const calificar = document.getElementById("msjCalificar");
-
-  calificar.style.display = "none";
+  if (calificar != null) {
+    calificar.style.display = "none";
+  }
 }, 6000);

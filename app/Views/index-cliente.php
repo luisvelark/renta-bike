@@ -152,7 +152,7 @@ $user_session = session();
               <div class="modal-body">
                 <div id="modalReportar"></div>
                 <div class="form-group">
-                  <label class="font-weight-bold">Informe el tipo de daño</label><br>
+                  <label class="font-weight-bold">Informe el tipo de daño:</label><br>
                   <select
                     class="form-control form-control-user font-weight-bold custom-select py-3 my-2 h-50 w-75 text-center"
                     name="comboDaño" id="">
@@ -385,7 +385,9 @@ $user_session = session();
                   </div>
                   <div>
                     <div class="small text-gray-500">¡Estás suspendido!</div>
-                    No vas a poder alquilar <?php echo ' desde  '.date("d/m/y", strtotime($user_session->fechaInicio)). ' hasta '.date("d/m/y", strtotime($user_session->fechaFin)) ?>. Acercate a un punto de entrega.
+                    No vas a poder alquilar
+                    <?php echo ' desde  ' . date("d/m/y", strtotime($user_session->fechaInicio)) . ' hasta ' . date("d/m/y", strtotime($user_session->fechaFin)) ?>.
+                    Acercate a un punto de entrega.
                   </div>
                 </a>
                 <?php } else {?>
@@ -417,8 +419,8 @@ $user_session = session();
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-              <?php if ($user_session->suspendido == 1) {?>
-                <a id="idModificarPerfil" class="dropdown-item" href="#" hidden >
+                <?php if ($user_session->suspendido == 1) {?>
+                <a id="idModificarPerfil" class="dropdown-item" href="#" hidden>
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Modificar perfil
                 </a>
@@ -427,11 +429,11 @@ $user_session = session();
                   Darme de baja
                 </a>
                 <?php } else {?>
-                  <a id="idModificarPerfil" class="dropdown-item" href="#"  >
+                <a id="idModificarPerfil" class="dropdown-item" href="#">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Modificar perfil
                 </a>
-                <a id="idBajaUsuario" class="dropdown-item" href="#" >
+                <a id="idBajaUsuario" class="dropdown-item" href="#">
                   <i class="fas fa-ban fa-sm fa-fw mr-2 text-gray-400"></i></i>
                   Darme de baja
                 </a>
