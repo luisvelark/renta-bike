@@ -50,9 +50,21 @@ class ClienteController extends BaseController
         $puntajes=$this->cPuntaje->puntaje->buscarPuntos($id);
         $idFachada=$this->cliente->obtenerClienteID($id);
         $this->cliente->actualizarPuntaje($idFachada['idFachada'], $puntajes);
-        if($puntajes<0 && $puntajes>-200){
+        if($puntajes<0 && $puntajes>=-200){
             $monto=100;
-            $this->cMulta->multa->altaMulta($id);
+            $this->cMulta->multa->altaMulta($id,$monto,'Asistencia a capacitación');
+        }else if($puntajes<-200 && $puntajes>=-500){
+            $cantMulta=$this->cMulta->multa->algo();
+            if($cantMulta<4){
+                $monto=500*$cantMulta;
+                $this->cMulta->multa->altaMulta($id,$monto,'Multa '+$cantMulta);
+            }else if($cantMulta=4){
+                
+            }
+            else{
+                $monto=500;
+                $this->cMulta->multa->altaMulta($id,$monto,'Multa 1');
+            }
         }
     }
 }
