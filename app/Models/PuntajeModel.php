@@ -26,6 +26,12 @@ class PuntajeModel extends Model
         $this->insert($datos);
     }
 
+    public function buscarPuntajes($id){
+        $this->where('idUsuarioCliente',$id);
+        $puntos= $this->findAll();
+        return $puntos;
+    }
+
     public function buscarPuntos($id){
         $this->select('puntos');
         $this->where('idUsuarioCliente',$id);

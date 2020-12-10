@@ -48,5 +48,6 @@ class ClienteController extends BaseController
         $puntajes=$this->cPuntaje->puntaje->buscarPuntos($id);
         $idFachada=$this->cliente->obtenerClienteID($id);
         $this->cliente->actualizarPuntaje($idFachada['idFachada'], $puntajes);
+        
     }
 }

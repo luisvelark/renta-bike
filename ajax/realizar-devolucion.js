@@ -45,15 +45,11 @@ function realizaDevolucion() {
               respuesta.style.backgroundColor = 'red';
               $texto = 'Por favor complete los campos obligatorios';
               respuesta.innerHTML = $texto;
-          } else if (data.rta === 'error') {
-            respuesta.className = 'alert alert-danger';
-            respuesta.style.backgroundColor = 'red';
-            $texto = 'Te pasaste de horas man';
           } 
           else{
             respuesta.className = 'container py-4';
             respuesta.style.backgroundColor = 'white';
-            $texto = 'Ta todo bien '+data.idCliente;
+            $texto = 'Ta todo bien';
             respuesta.innerHTML = $texto;
           }
           })
