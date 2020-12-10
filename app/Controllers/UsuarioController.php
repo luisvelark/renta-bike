@@ -146,7 +146,7 @@ class UsuarioController extends BaseController
                             /* $datosSesion['fechaInicio'] = '2020-02-23';
                             $datosSesion['fechaFin'] = '2020-02-30'; */
                             $datosSesion['fechaInicio'] = implode($this->cliente->suspendidoFechaInicio($user['idUsuario']));
-                            $datosSesion['fechaFin'] = implode($this->cliente->suspendidoFechaInicio($user['idUsuario']));
+                            $datosSesion['fechaFin'] = implode($this->cliente->suspendidoFechaFin($user['idUsuario']));
                         }
 
                         $sesion = session();

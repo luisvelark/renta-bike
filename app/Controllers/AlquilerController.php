@@ -391,8 +391,25 @@ class AlquilerController extends BaseController
             $datos = ['rta' => 'ingresoDatos'];
             echo json_encode($datos);
             die();
-        } else if ($aux['fechaAlquiler'] == $actual) {
-            if ($horaActual > $horaTope && $horaActual <= $fueraTermino) {
+        } else if ($aux['fechaAlquiler'] === $actual) {
+            if ($horaActual <= $horaTope){
+                if ($daño === 'SinDanio') {
+                    $bicicleta = ['estado' => 'Disponible',
+                        'idPuntoED' => $punto];
+                    $puntos = 5;
+                    $detalle = "Retorno en terminos y sin incidentes";
+                    $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
+                    $this->cCliente->calcularPuntajeTotal($idCliente);
+                } else {
+                    $bicicleta = ['estado' => 'NoDisponible',
+                        'daño' => $daño,
+                        'idPuntoED' => $punto];
+                    $puntos = -40;
+                    $detalle = 'Retorno en terminos y con incidentes';
+                    $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
+                    $this->cCliente->calcularPuntajeTotal($idCliente);
+                }
+            }else if($horaActual > $horaTope && $horaActual <= $fueraTermino) {
                 if ($daño === 'SinDanio') {
                     $bicicleta = ['estado' => 'Disponible',
                         'idPuntoED' => $punto];
@@ -411,9 +428,9 @@ class AlquilerController extends BaseController
                     }
                     $detalle = 'Retorno fuera de terminos y con incidentes';
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
-                    $this->cCliente->calcularPuntajeTotal($idCliente, $puntos);
+                    $this->cCliente->calcularPuntajeTotal($idCliente);
                 }
-            } else if ($horaActual > $fueraTermino) {
+            } else{
                 if ($daño === 'SinDanio') {
                     $bicicleta = ['estado' => 'Disponible',
                         'idPuntoED' => $punto];
@@ -428,24 +445,7 @@ class AlquilerController extends BaseController
                     $puntos = -90;
                     $detalle = 'Retorno despues de fuera de terminos y con incidentes';
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
-                    $this->cCliente->calcularPuntajeTotal($idCliente, $puntos);
-                }
-            } else {
-                if ($daño === 'SinDanio') {
-                    $bicicleta = ['estado' => 'Disponible',
-                        'idPuntoED' => $punto];
-                    $puntos = 5;
-                    $detalle = "Retorno en terminos y sin incidentes";
-                    $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
                     $this->cCliente->calcularPuntajeTotal($idCliente);
-                } else {
-                    $bicicleta = ['estado' => 'NoDisponible',
-                        'daño' => $daño,
-                        'idPuntoED' => $punto];
-                    $puntos = -40;
-                    $detalle = 'Retorno en terminos y con incidentes';
-                    $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
-                    $this->cCliente->calcularPuntajeTotal($idCliente, $puntos);
                 }
             }
             $alquiler = ['idPuntoD' => $punto,
@@ -456,7 +456,9 @@ class AlquilerController extends BaseController
             $this->alquilerModel->actualizarAlquiler($idAlquiler, $alquiler);
             $sesion->set('activo', '0');
             $this->cBicicleta->bicicleta->updateBicicleta($idBicicleta, $bicicleta);
-            $datos = ['rta' => 'ta bien', 'fechaActual' => $actual, 'fechaAlquiler' => $aux['fechaAlquiler']];
+            $cantM=$this->cMulta->multa->contarMultas($idCliente);
+            $fecha_actual=date("Y-m-d");
+            $datos = ['rta' => 'ta bien', 'puntaje' => $this->cCliente->cliente->suspendido($idCliente), 'cantMulta' => date("Y-m-d",strtotime($fecha_actual."+ 3 month"))];
             echo json_encode($datos);
             die();
         } else {
@@ -479,7 +481,7 @@ class AlquilerController extends BaseController
                     }
                     $detalle = 'Retorno fuera de terminos y con incidentes';
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
-                    $this->cCliente->calcularPuntajeTotal($idCliente, $puntos);
+                    $this->cCliente->calcularPuntajeTotal($idCliente);
                 }
             } else {
                 if ($daño === 'SinDanio') {
@@ -496,7 +498,7 @@ class AlquilerController extends BaseController
                     $puntos = -90;
                     $detalle = 'Retorno despues de fuera de terminos y con incidentes';
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
-                    $this->cCliente->calcularPuntajeTotal($idCliente, $puntos);
+                    $this->cCliente->calcularPuntajeTotal($idCliente);
                 }
             }
             $alquiler = ['idPuntoD' => $punto,
@@ -507,7 +509,9 @@ class AlquilerController extends BaseController
             $this->alquilerModel->actualizarAlquiler($idAlquiler, $alquiler);
             $sesion->set('activo', '0');
             $this->cBicicleta->bicicleta->updateBicicleta($idBicicleta, $bicicleta);
-            $datos = ['rta' => 'ta bien', 'fechaActual' => $actual, 'fechaAlquiler' => $aux['fechaAlquiler']];
+            $cantM=$this->cMulta->multa->contarMultas($idCliente);
+            $fecha_actual=date("Y-m-d");
+            $datos = ['rta' => 'ta bien', 'puntaje' => $this->cCliente->cliente->suspendido($idCliente), 'cantMulta' => date("Y-m-d",strtotime($fecha_actual."+ 3 month"))];
             echo json_encode($datos);
             die();
         }
