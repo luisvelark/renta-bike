@@ -43,8 +43,53 @@ function ventanaAlquiler(e) {
         },
         true
       );
+
+      const inputClienteAlt = document.getElementById("dniOptativo");
+      inputClienteAlt.addEventListener("keyup", consultarClienteAlt);
     }
   }
+}
+
+function consultarClienteAlt(e) {
+  // let existe = true;
+  const msjClienteAlt = document.getElementById("msjClienteAlt");
+  // const inpClienteAlt = document.getElementById("dniOptativo");
+  let clienteAlter = e.target.value;
+  // if (clienteAlter != "") {
+  console.log(clienteAlter);
+  let miForm = new FormData();
+  miForm.append("dni", clienteAlter);
+  let url = "http://localhost/renta-bike/cliente-alternativo";
+  console.log(url);
+  fetch(url, {
+    method: "POST",
+    body: miForm,
+  })
+    .then((res) => res.json())
+    .then((valores) => {
+      if (valores.code != 500) {
+        msjClienteAlt.style.color = "green";
+        msjClienteAlt.innerHTML = `El cliente registrado es: ${valores.cliente.nombre} ${valores.cliente.apellido}`;
+      } else {
+        // e.target.setAttribute("required");
+        if (clienteAlter === "") {
+          // e.target.removeAttribute("required");
+          msjClienteAlt.style.display = "none";
+        } else {
+          // e.target.setAttribute("required", "");
+
+          msjClienteAlt.style.display = "block";
+          msjClienteAlt.style.color = "red";
+          msjClienteAlt.innerHTML = `El cliente no esta resgistrado!`;
+
+          console.log("hola");
+        }
+      }
+      console.log(valores);
+    });
+  // } else {
+  //   msjClienteAlt.style.display = "none";
+  // }
 }
 
 function consultaAlquiler() {
@@ -150,6 +195,12 @@ function enviarAlquiler(e) {
 
           detalles.innerHTML = `<p class="p-2 small text-white text-center">NO HAY DETALLES</p>`;
         } else {
+          if (data.code == 1000) {
+            return (msj.innerHTML = `
+          <div id="noti" class="alert alert-primary w-50" role="alert">
+            verifica el dni del cliente optativo para su devolucion! 
+          </div>`);
+          }
           //su reserva se realizo con exito!
           msj.innerHTML = `
           <div id="noti" class="alert alert-primary w-50" role="alert">

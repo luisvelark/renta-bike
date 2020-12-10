@@ -52,6 +52,10 @@ $routes->get('datos-confirmar-alquiler', 'AlquilerController::cargarDatosConfirm
 $routes->get('datos-anular-alquiler', 'AlquilerController::cargarDatosConfirmarAlquiler');
 $routes->get('datos-reportar-alquiler', 'AlquilerController::cargarDatosConfirmarAlquiler');
 $routes->get('hay-alquiler-nuevo', 'AlquilerController::hayAlquiler');
+
+//*************RUTA DE USUARIO CONTROLLER******************
+$routes->post('cliente-alternativo', 'UsuarioController::buscarClienteAlternativo');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
