@@ -2,13 +2,13 @@
 
 namespace App\Controllers;
 
+use App\Controllers\AlquilerAsignadoController;
 use App\Controllers\BaseController;
 use App\Controllers\BicicletaController;
 use App\Controllers\ClienteController;
 use App\Controllers\MultaController;
 use App\Controllers\PuntajeController;
 use App\Controllers\PuntoEDController;
-use App\Controllers\AlquilerAsignadoController;
 use App\Models\AlquilerModel;
 use App\Models\UsuarioModel;
 use CodeIgniter\HTTP\Request;
@@ -22,7 +22,7 @@ class AlquilerController extends BaseController
     {
         $this->request = \Config\Services::request();
         $this->alquilerModel = new AlquilerModel();
-        $this->cAlquilerAsignado= new AlquilerAsignadoController();
+        $this->cAlquilerAsignado = new AlquilerAsignadoController();
         $this->usuarioModel = new UsuarioModel();
 
         $this->controlPED = new PuntoEDController();
@@ -78,7 +78,7 @@ class AlquilerController extends BaseController
 
             $arr = ["code" => "400", "msg" => "error"];
         } else {
-            $horaMax = '03:59:00'; //cambiar
+            $horaMax = '21:00:00'; //cambiar
             $horaMin = '08:00:00';
             $horaFin = calcularSumaHoras($horaInicio, $cantHoras);
             if ($horaInicio > $horaMax || $horaFin > $horaMax || $horaInicio < $horaMin) {
@@ -210,8 +210,7 @@ class AlquilerController extends BaseController
                     }
 
                 }
-            } 
-            else{
+            } else {
                 $arr = ["code" => "1000"];
             }
         }
@@ -324,11 +323,11 @@ class AlquilerController extends BaseController
                             $puntoYBici = $this->controlPED->biciDisponibles($alquilerActivo['idPuntoE']);
                             $idBicicletaNueva = $puntoYBici['idBici'];
 
-                            $numBicicleta=  $this->cBicicleta->bicicleta->obtenerNumeroDeBici($puntoYBici['idBici']);
+                            $numBicicleta = $this->cBicicleta->bicicleta->obtenerNumeroDeBici($puntoYBici['idBici']);
                             $this->alquilerModel->reemplazarBicicleta($alquilerActivo['idAlquiler'], $idBicicletaNueva);
                             $this->cBicicleta->bicicleta->cambiarEstado($idBicicletaNueva, 'EnAlquiler');
                             $mensaje = ['msjReportar' => '¡Has reportado con éxito, se te asignó una nueva bicicleta!
-                             La nueva bicicleta asignada es: '.implode($numBicicleta)];
+                             La nueva bicicleta asignada es: ' . implode($numBicicleta)];
                             echo view('index-cliente', $mensaje);
                         } else {
                             $this->cPuntaje->crearPuntaje($idUsuarioActual, 50, '¡No hay otra bicicleta disponible!');
@@ -413,10 +412,10 @@ class AlquilerController extends BaseController
 
             if (($actual <= $max) && ($actual >= $min)) {
 
-                $dniClienteAlt=$alquilerActivo['clienteAlternativo'];
-                if($dniClienteAlt!=0){
-                    $clienteOpt=$this->usuarioModel->buscarUsuarioDNI($dniClienteAlt);
-                    $detalle=['idAlquilerFK'=>$alquilerActivo['idAlquiler'],'idClienteFK'=>$clienteOpt['idUsuario'],'idClienteOriginal'=>$idUsuario];
+                $dniClienteAlt = $alquilerActivo['clienteAlternativo'];
+                if ($dniClienteAlt != 0) {
+                    $clienteOpt = $this->usuarioModel->buscarUsuarioDNI($dniClienteAlt);
+                    $detalle = ['idAlquilerFK' => $alquilerActivo['idAlquiler'], 'idClienteFK' => $clienteOpt['idUsuario'], 'idClienteOriginal' => $idUsuario];
                     $this->cAlquilerAsignado->alquilerAsignadoModel->crearAlquilerAsig($detalle);
                 }
                 $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'EnProceso');
