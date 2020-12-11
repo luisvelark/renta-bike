@@ -196,12 +196,19 @@ function enviarAlquiler(e) {
           detalles.innerHTML = `<p class="p-2 small text-white text-center">NO HAY DETALLES</p>`;
         } else if (data.msg === "fueraHorario") {
           msj.innerHTML = `
-  <div id="noti" class="alert alert-danger w-50" role="alert">
-     ¡El horario de alquiler es de 8am a 9pm!
-  </div>`;
+          <div id="noti" class="alert alert-danger w-50" role="alert">
+            ¡El horario de alquiler es de 8am a 9pm!
+          </div>`;  
 
           detalles.innerHTML = `<p class="p-2 small text-white text-center">Aún no hay detalles</p>`;
-        } else {
+        } else if (data.msg === 'fueraAntelacion'){
+          msj.innerHTML = `
+          <div id="noti" class="alert alert-danger w-50" role="alert">
+            ¡La hora de inicio no puede superar las 2 horas de antelación!
+          </div>`;
+
+          detalles.innerHTML = `<p class="p-2 small text-white text-center">Aún no hay detalles</p>`;
+        }else {
           if (data.code == 1000) {
             return (msj.innerHTML = `
           <div id="noti" class="alert alert-danger w-50" role="alert">

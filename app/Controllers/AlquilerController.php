@@ -81,9 +81,14 @@ class AlquilerController extends BaseController
             $horaMax = '21:00:00'; //cambiar
             $horaMin = '08:00:00';
             $horaFin = calcularSumaHoras($horaInicio, $cantHoras);
+            $horaActual=date("G:i:s");
+            $horaAntelacion=calcularSumaHoras($horaActual,'2');
             if ($horaInicio > $horaMax || $horaFin > $horaMax || $horaInicio < $horaMin) {
                 $arr = ["code" => "400", "msg" => "fueraHorario"];
-            } elseif ($this->usuarioModel->buscarUsuarioDNI(intval($dniAlternativo)) != null || $dniAlternativo == "") {
+            }elseif($horaActual>$horaAntelacion){
+                $arr = ["code" => "400", "msg" => "fueraAntelacion"];
+            } 
+            elseif ($this->usuarioModel->buscarUsuarioDNI(intval($dniAlternativo)) != null || $dniAlternativo == "") {
 
                 $sesion = session();
                 // $sesion->set($puntoYBici);
