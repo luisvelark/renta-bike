@@ -58,7 +58,7 @@ function realizaDevolucion() {
                     if (data.rta === "ingresoDatos") {
                         respuesta.className = "alert alert-danger w-50 text-center";
                         // respuesta.style.backgroundColor = "red";
-                        $texto = "Por favor complete los campos obligatorios!";
+                        $texto = "¡Por favor complete los campos obligatorios!";
                         respuesta.innerHTML = $texto;
                     } else if (data.rta === "suspendido") {
                         location.href = "http://localhost/renta-bike/?estaSuspendido=1";
@@ -66,7 +66,7 @@ function realizaDevolucion() {
                         respuesta.className = "alert alert-success w-50 text-center";
                         // respuesta.style.backgroundColor = "white";
                         $texto =
-                            "La devolución se realizo con exito...gracias por elegirnos!";
+                            "¡La devolución se realizó con éxito!...¡Gracias por elegirnos!";
                         respuesta.innerHTML = $texto;
                     }
                     setTimeout(() => {

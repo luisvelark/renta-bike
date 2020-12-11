@@ -76,7 +76,7 @@ class AlquilerController extends BaseController
 
             $arr = ["code" => "400", "msg" => "error"];
         } else {
-            $horaMax = '21:00:00';
+            $horaMax = '23:59:00'; //cambiar
             $horaMin = '08:00:00';
             $horaFin = calcularSumaHoras($horaInicio, $cantHoras);
             if ($horaInicio > $horaMax || $horaFin > $horaMax || $horaInicio < $horaMin) {
