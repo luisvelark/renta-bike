@@ -272,9 +272,12 @@ class AlquilerController extends BaseController
 
                             $puntoYBici = $this->controlPED->biciDisponibles($alquilerActivo['idPuntoE']);
                             $idBicicletaNueva = $puntoYBici['idBici'];
+
+                            $numBicicleta=  $this->cBicicleta->bicicleta->obtenerNumeroDeBici($puntoYBici['idBici']);
                             $this->alquilerModel->reemplazarBicicleta($alquilerActivo['idAlquiler'], $idBicicletaNueva);
                             $this->cBicicleta->bicicleta->cambiarEstado($idBicicletaNueva, 'EnAlquiler');
-                            $mensaje = ['msjReportar' => '¡Has reportado con éxito, se te asignó una nueva bicicleta!'];
+                            $mensaje = ['msjReportar' => '¡Has reportado con éxito, se te asignó una nueva bicicleta!
+                             La nueva bicicleta asignada es: '.implode($numBicicleta)];
                             echo view('index-cliente', $mensaje);
                         } else {
                             $this->cPuntaje->crearPuntaje($idUsuarioActual, 50, '¡No hay otra bicicleta disponible!');
