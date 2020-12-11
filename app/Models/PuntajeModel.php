@@ -32,6 +32,12 @@ class PuntajeModel extends Model
         return $puntos;
     }
 
+    public function buscarUltimoPuntaje($id){
+        $this->where('idUsuarioCliente',$id);
+        $puntos= $this->first();
+        return $puntos;
+    }
+
     public function buscarPuntos($id){
         $this->select('puntos');
         $this->where('idUsuarioCliente',$id);

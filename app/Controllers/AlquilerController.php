@@ -497,6 +497,7 @@ class AlquilerController extends BaseController
             die();
         } else if ($aux['fechaAlquiler'] === $actual) {
             if ($horaActual <= $horaTope) {
+                $dniClienteAlt = $aux['clienteAlternativo'];
                 if ($daño === 'SinDanio') {
                     $bicicleta = [
                         'estado' => 'Disponible',
@@ -505,7 +506,7 @@ class AlquilerController extends BaseController
                     $puntos = 5;
                     $detalle = "Retorno en terminos y sin incidentes";
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
-                    $this->cCliente->calcularPuntajeTotal($idCliente);
+                    $this->cCliente->calcularPuntajeTotal($idCliente, $puntos);
                 } else {
                     $bicicleta = [
                         'estado' => 'NoDisponible',
@@ -515,7 +516,7 @@ class AlquilerController extends BaseController
                     $puntos = -40;
                     $detalle = 'Retorno en terminos y con incidentes';
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
-                    $this->cCliente->calcularPuntajeTotal($idCliente);
+                    $this->cCliente->calcularPuntajeTotal($idCliente, $puntos);
                 }
             } else if ($horaActual > $horaTope && $horaActual <= $fueraTermino) {
                 if ($daño === 'SinDanio') {
@@ -526,7 +527,7 @@ class AlquilerController extends BaseController
                     $puntos = -5;
                     $detalle = "Retorno fuera de termino y sin incidentes";
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
-                    $this->cCliente->calcularPuntajeTotal($idCliente);
+                    $this->cCliente->calcularPuntajeTotal($idCliente, $puntos);
                 } else {
                     $bicicleta = [
                         'estado' => 'NoDisponible',
@@ -540,7 +541,7 @@ class AlquilerController extends BaseController
                     }
                     $detalle = 'Retorno fuera de terminos y con incidentes';
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
-                    $this->cCliente->calcularPuntajeTotal($idCliente);
+                    $this->cCliente->calcularPuntajeTotal($idCliente, $puntos);
                 }
             } else {
                 if ($daño === 'SinDanio') {
@@ -551,7 +552,7 @@ class AlquilerController extends BaseController
                     $puntos = -50;
                     $detalle = "Retorno despues de fuera de termino y sin incidentes";
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
-                    $this->cCliente->calcularPuntajeTotal($idCliente);
+                    $this->cCliente->calcularPuntajeTotal($idCliente, $puntos);
                 } else {
                     $bicicleta = [
                         'estado' => 'NoDisponible',
@@ -561,7 +562,7 @@ class AlquilerController extends BaseController
                     $puntos = -90;
                     $detalle = 'Retorno despues de fuera de terminos y con incidentes';
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
-                    $this->cCliente->calcularPuntajeTotal($idCliente);
+                    $this->cCliente->calcularPuntajeTotal($idCliente, $puntos);
                 }
             }
             $alquiler = [
@@ -576,10 +577,20 @@ class AlquilerController extends BaseController
             $this->cBicicleta->bicicleta->updateBicicleta($idBicicleta, $bicicleta);
             if ($this->cCliente->cliente->suspendido($idCliente) != 0) {
                 $datos = ['rta' => 'suspendido'];
+                if ($dniClienteAlt != 0) {
+                    $clienteOpt = $this->usuarioModel->buscarUsuarioDNI($dniClienteAlt);
+                    $alqAsig=$this->cAlquilerAsignado->alquilerAsignadoModel->buscarAlquilerAsig($clienteOpt['idUsuario']);
+                    $this->cAlquilerAsignado->alquilerAsignadoModel->cambiar($alqAsig['idAlquilerAsignado']);
+                }
                 echo json_encode($datos);
                 die();
             } else {
                 $datos = ['rta' => 'ta bien'];
+                if ($dniClienteAlt != 0) {
+                    $clienteOpt = $this->usuarioModel->buscarUsuarioDNI($dniClienteAlt);
+                    $alqAsig=$this->cAlquilerAsignado->alquilerAsignadoModel->buscarAlquilerAsig($clienteOpt['idUsuario']);
+                    $this->cAlquilerAsignado->alquilerAsignadoModel->cambiar($alqAsig['idAlquilerAsignado']);
+                }
                 echo json_encode($datos);
                 die();
             }
@@ -593,7 +604,7 @@ class AlquilerController extends BaseController
                     $puntos = -5;
                     $detalle = "Retorno fuera de termino y sin incidentes";
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
-                    $this->cCliente->calcularPuntajeTotal($idCliente);
+                    $this->cCliente->calcularPuntajeTotal($idCliente, $puntos);
                 } else {
                     $bicicleta = [
                         'estado' => 'NoDisponible',
@@ -607,7 +618,7 @@ class AlquilerController extends BaseController
                     }
                     $detalle = 'Retorno fuera de terminos y con incidentes';
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
-                    $this->cCliente->calcularPuntajeTotal($idCliente);
+                    $this->cCliente->calcularPuntajeTotal($idCliente, $puntos);
                 }
             } else {
                 if ($daño === 'SinDanio') {
@@ -618,7 +629,7 @@ class AlquilerController extends BaseController
                     $puntos = -50;
                     $detalle = "Retorno despues de fuera de termino y sin incidentes";
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
-                    $this->cCliente->calcularPuntajeTotal($idCliente);
+                    $this->cCliente->calcularPuntajeTotal($idCliente, $puntos);
                 } else {
                     $bicicleta = [
                         'estado' => 'NoDisponible',
@@ -628,7 +639,7 @@ class AlquilerController extends BaseController
                     $puntos = -90;
                     $detalle = 'Retorno despues de fuera de terminos y con incidentes';
                     $this->cPuntaje->crearPuntaje($idCliente, $puntos, $detalle);
-                    $this->cCliente->calcularPuntajeTotal($idCliente);
+                    $this->cCliente->calcularPuntajeTotal($idCliente, $puntos);
                 }
             }
             $alquiler = [
@@ -643,10 +654,20 @@ class AlquilerController extends BaseController
             $this->cBicicleta->bicicleta->updateBicicleta($idBicicleta, $bicicleta);
             if ($this->cCliente->cliente->suspendido($idCliente) != 0) {
                 $datos = ['rta' => 'suspendido'];
+                if ($dniClienteAlt != 0) {
+                    $clienteOpt = $this->usuarioModel->buscarUsuarioDNI($dniClienteAlt);
+                    $alqAsig=$this->cAlquilerAsignado->alquilerAsignadoModel->buscarAlquilerAsig($clienteOpt['idUsuario']);
+                    $this->cAlquilerAsignado->alquilerAsignadoModel->cambiar($alqAsig['idAlquilerAsignado']);
+                }
                 echo json_encode($datos);
                 die();
             } else {
                 $datos = ['rta' => 'ta bien'];
+                if ($dniClienteAlt != 0) {
+                    $clienteOpt = $this->usuarioModel->buscarUsuarioDNI($dniClienteAlt);
+                    $alqAsig=$this->cAlquilerAsignado->alquilerAsignadoModel->buscarAlquilerAsig($clienteOpt['idUsuario']);
+                    $this->cAlquilerAsignado->alquilerAsignadoModel->cambiar($alqAsig['idAlquilerAsignado']);
+                }
                 echo json_encode($datos);
                 die();
             }
