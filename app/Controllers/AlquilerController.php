@@ -55,7 +55,7 @@ class AlquilerController extends BaseController
                 "puntoBici" => $puntoYBici,
             ];
         } else {
-            $arr = ["aviso" => "¡No tiene ningun alquiler activo!"];
+            $arr = ["aviso" => "¡No tiene ningún alquiler activo!"];
         }
 
         // echo "<pre>";
@@ -76,7 +76,7 @@ class AlquilerController extends BaseController
 
             $arr = ["code" => "400", "msg" => "error"];
         } else {
-            $horaMax = '23:59:00'; //cambiar
+            $horaMax = '03:59:00'; //cambiar
             $horaMin = '08:00:00';
             $horaFin = calcularSumaHoras($horaInicio, $cantHoras);
             if ($horaInicio > $horaMax || $horaFin > $horaMax || $horaInicio < $horaMin) {

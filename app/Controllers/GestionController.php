@@ -128,4 +128,8 @@ class GestionController extends BaseController
         $datos = ['datos' => $this->Cpuntos->puntoED->obtenerPuntosEntregaDevolucion(),'alquiler'=>$this->cAlquiler->alquilerModel->buscarAlquilerEnProceso($this->session->idUsuario)];
         echo view('layouts/realizar-devolucion', $datos);
     }
+
+    public function alquilerAsignado(){
+        echo view('layouts/alquiler-asignado');
+    }
 }

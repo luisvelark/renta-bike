@@ -77,6 +77,8 @@ $user_session = session();
             <a id="idConfirmar" class="collapse-item" href="#" hidden> <i class="fas fa-check-circle"></i> Confirmar
               alquiler</a>
             <a id="idAnular" class="collapse-item" href="#" hidden> <i class="fas fa-ban"></i> Anular alquiler</a>
+
+            
             <?php } else {?>
 
             <?php if ($user_session->activo == '0') {?>
@@ -86,6 +88,8 @@ $user_session = session();
             <a id="idConfirmar" class="collapse-item" href="#" hidden> <i class="fas fa-check-circle"></i> Confirmar
               alquiler</a>
             <a id="idAnular" class="collapse-item" href="#" hidden> <i class="fas fa-ban"></i> Anular alquiler</a>
+
+            
 
             <?php } else if ($user_session->activo == '1') {
 
@@ -97,6 +101,7 @@ $user_session = session();
             <a id="idConfirmar" class="collapse-item" href="#"> <i class="fas fa-check-circle"></i> Confirmar
               alquiler</a>
             <a id="idAnular" class="collapse-item" href="#"> <i class="fas fa-ban"></i> Anular alquiler</a>
+
             <?php } else {?>
             <a id="idAlquiler" class="collapse-item" href="#" hidden> <i class="fas fa-plus-square"></i> Nuevo
               alquiler</a>
@@ -290,6 +295,23 @@ $user_session = session();
 
       <!-- ------------------------------------------------------------------------------------------------------------------------------------------------ -->
       <!--  componentes -->
+      <li class="nav-item active">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTres" aria-expanded="true"
+          aria-controls="collapseTres">
+        <!-- <a id="idAsignado" class="nav-link" href="#"> -->
+          <i class="fas fa-list-ol"></i>
+          <span>Alquiler asignado</span></a>
+          <div id="collapseTres" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+
+          <a id="idAsignado" class="collapse-item" href="#" hidden> <i class="fas fa-arrow-circle-up"></i>
+              Realizar devolución </a>
+
+              <a id="idAsignado" class="collapse-item" href="#"> <i class="fas fa-arrow-circle-up"></i>
+              Realizar devolución </a>
+
+
+      </li>
       <li class="nav-item active">
         <a id="idAlquileres" class="nav-link" href="#">
           <i class="fas fa-list-ol"></i>
@@ -564,6 +586,7 @@ if (isset($msjCalificacion)) {
   <script src="<?php echo base_url('ajax/reportar-alquiler.js') ?>"></script>
   <script src="<?php echo base_url('ajax/baja-usuario.js') ?>"></script>
   <script src="<?php echo base_url('ajax/modales.js') ?>"></script>
+  <script src="<?php echo base_url('ajax/alquiler-asignado.js') ?>"></script>
 
 </body>
 
