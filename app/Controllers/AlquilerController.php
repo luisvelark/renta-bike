@@ -8,6 +8,7 @@ use App\Controllers\ClienteController;
 use App\Controllers\MultaController;
 use App\Controllers\PuntajeController;
 use App\Controllers\PuntoEDController;
+use App\Controllers\AlquilerAsignadoController;
 use App\Models\AlquilerModel;
 use App\Models\UsuarioModel;
 use CodeIgniter\HTTP\Request;
@@ -21,6 +22,7 @@ class AlquilerController extends BaseController
     {
         $this->request = \Config\Services::request();
         $this->alquilerModel = new AlquilerModel();
+        $this->cAlquilerAsignado= new AlquilerAsignadoController();
         $this->usuarioModel = new UsuarioModel();
 
         $this->controlPED = new PuntoEDController();
@@ -160,7 +162,8 @@ class AlquilerController extends BaseController
                         "numBici" => $bici['numeroBicicleta'],
                     ];
                 }
-            } else {
+            } 
+            else{
                 $arr = ["code" => "1000"];
             }
         }
