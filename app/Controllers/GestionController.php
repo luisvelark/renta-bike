@@ -130,6 +130,7 @@ class GestionController extends BaseController
     }
 
     public function alquilerAsignado(){
-        echo view('layouts/alquiler-asignado');
+        $datos = ['datos' => $this->Cpuntos->puntoED->obtenerPuntosEntregaDevolucion(),'alquiler'=>$this->cAlquiler->alquilerModel->buscarAlquilerEnProceso($this->session->idUsuario)];
+        echo view('layouts/alquiler-asignado', $datos);
     }
 }
