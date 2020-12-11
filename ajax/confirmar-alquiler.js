@@ -28,12 +28,12 @@ function confirmarAlquiler() {
     .then((data) => {
       const miAviso = document.getElementById("avisos");
       miAviso.innerHTML = `
-      <div class="alert alert-success col-sm-12 text-center w-100" role="alert">
+      <div class="alert alert-info col-sm-12 text-center w-100" role="alert">
          ${data.msj} 
       </div>`;
       setTimeout(() => {
         // let miAviso = document.getElementById("notif");
         miAviso.style.display = "none";
-      }, 15000);
+      }, 6000);
     });
 }

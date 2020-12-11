@@ -22,40 +22,79 @@ function ventanaDevolucion(e) {
 
             let contenedor = document.getElementById("contenido");
             contenedor.innerHTML = respuesta;
+
+            let enviar = document.getElementById("btnDev");
+            let calificar = document.getElementById("idModalCalificarDevolucion");
+
             realizaDevolucion();
+            modalCalificar(enviar, calificar);
         }
     }
 }
 
 function realizaDevolucion() {
-  var formulario = document.getElementById('form-devolucion');
-  var respuesta = document.getElementById('respuesta');
-  formulario.addEventListener('submit', function(e) {
-      e.preventDefault();
-      console.log("Me diste un click");
-      var datos = new FormData(formulario);
-      console.log(datos.get('ruta'), datos.get('daño'), datos.get('punto-entrega'))
-      fetch("http://localhost/renta-bike/AlquilerController/realizarDevolucion", {
-              method: 'POST',
-              body: datos
-          })
-          .then(res => res.json())
-          .then(data => {
-            if (data.rta === 'ingresoDatos') {
-              respuesta.className = 'alert alert-danger';
-              respuesta.style.backgroundColor = 'red';
-              $texto = 'Por favor complete los campos obligatorios';
-              respuesta.innerHTML = $texto;
-          } 
-          else if (data.rta === 'suspendido') {
-            location.href = "http://localhost/renta-bike/?estaSuspendido=1";
-          }
-          else{
-            respuesta.className = 'container py-4';
-            respuesta.style.backgroundColor = 'white';
-            $texto = 'Ta todo bien';
-            respuesta.innerHTML = $texto;
-          }
-          })
-  }, true)
+    var formulario = document.getElementById("form-devolucion");
+    var respuesta = document.getElementById("respuesta");
+    formulario.addEventListener(
+        "submit",
+        function(e) {
+            e.preventDefault();
+            console.log("Me diste un click");
+            var datos = new FormData(formulario);
+            console.log(
+                datos.get("ruta"),
+                datos.get("daño"),
+                datos.get("punto-entrega")
+            );
+            fetch(
+                    "http://localhost/renta-bike/AlquilerController/realizarDevolucion", {
+                        method: "POST",
+                        body: datos,
+                    }
+                )
+                .then((res) => res.json())
+                .then((data) => {
+                    respuesta.style.display = "block";
+                    if (data.rta === "ingresoDatos") {
+                        respuesta.className = "alert alert-danger w-50 text-center";
+                        // respuesta.style.backgroundColor = "red";
+                        $texto = "¡Por favor complete los campos obligatorios!";
+                        respuesta.innerHTML = $texto;
+                    } else if (data.rta === "suspendido") {
+                        location.href = "http://localhost/renta-bike/?estaSuspendido=1";
+                    } else {
+                        respuesta.className = "alert alert-success w-50 text-center";
+                        // respuesta.style.backgroundColor = "white";
+                        $texto =
+                            "¡La devolución se realizó con éxito!...¡Gracias por elegirnos!";
+                        respuesta.innerHTML = $texto;
+                    }
+                    setTimeout(() => {
+                        respuesta.style.display = "none";
+                    }, 6000);
+                });
+        },
+        true
+    );
+}
+
+// function modalCalificar() {
+//   // Modal calificar;
+//   $(function () {
+//     $("#btnDev").on("click", function () {
+//       setTimeout(() => {
+//         $("#idModalCalificar").modal();
+//       }, 6000);
+//     });
+//   });
+// }
+function modalCalificar(ev, c) {
+    // Modal calificar;
+    $(function() {
+        ev.addEventListener("click", () => {
+            setTimeout(() => {
+                $(c).modal();
+            }, 6000);
+        });
+    });
 }
