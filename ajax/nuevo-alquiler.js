@@ -80,7 +80,7 @@ function consultarClienteAlt(e) {
 
           msjClienteAlt.style.display = "block";
           msjClienteAlt.style.color = "red";
-          msjClienteAlt.innerHTML = `El cliente no esta resgistrado!`;
+          msjClienteAlt.innerHTML = `¡El cliente no esta resgistrado!`;
 
           console.log("hola");
         }
@@ -205,7 +205,7 @@ function enviarAlquiler(e) {
           if (data.code == 1000) {
             return (msj.innerHTML = `
           <div id="noti" class="alert alert-danger w-50" role="alert">
-            verifica el dni del cliente optativo para su devolucion! 
+            ¡Verifica el dni del cliente optativo para su devolucion! 
           </div>`);
           }
           //su reserva se realizo con exito!
