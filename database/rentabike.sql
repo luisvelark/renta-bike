@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-12-2020 a las 08:02:21
+-- Tiempo de generación: 11-12-2020 a las 18:21:23
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -77,7 +77,9 @@ INSERT INTO `alquiler` (`idAlquiler`, `idUsuarioCliente`, `idBicicleta`, `idPunt
 (26, 2, 12, 1, 1, '2020-12-10', '08:54:15', '10:54:15', '11:55:14', 0, 'Finalizado', 'Recuperable', ''),
 (27, 2, 13, 1, 1, '2020-12-09', '18:56:07', '20:56:07', '11:57:05', 0, 'Finalizado', 'Recuperable', ''),
 (28, 2, 14, 1, 1, '2020-12-10', '00:00:35', '02:00:35', '15:03:48', 0, 'Finalizado', 'Recuperable', ''),
-(29, 2, 1, 1, 1, '2020-12-11', '02:20:00', '04:20:00', '04:00:09', 42578123, 'Finalizado', 'SinDanio', '');
+(29, 2, 1, 1, 1, '2020-12-11', '02:20:00', '04:20:00', '04:00:09', 42578123, 'Finalizado', 'SinDanio', ''),
+(30, 2, 1, 1, 1, '2020-12-11', '10:32:17', '12:32:17', '11:07:33', 42578123, 'Finalizado', 'SinDanio', ''),
+(33, 2, 3, 1, 1, '2020-12-11', '14:13:42', '16:13:42', '14:17:15', 42578123, 'Finalizado', 'SinDanio', '');
 
 -- --------------------------------------------------------
 
@@ -98,7 +100,7 @@ CREATE TABLE `alquiler_asignado` (
 --
 
 INSERT INTO `alquiler_asignado` (`idAlquilerAsignado`, `idAlquilerFK`, `idClienteFK`, `idClienteOriginal`, `activo`) VALUES
-(2, 29, 3, 2, 1);
+(4, 33, 3, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -122,8 +124,8 @@ CREATE TABLE `bicicleta` (
 --
 
 INSERT INTO `bicicleta` (`idBicicleta`, `numeroBicicleta`, `estado`, `daño`, `observaciones`, `idPuntoED`, `precio`, `deleted_at`) VALUES
-(1, '001', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
-(2, '002', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
+(1, '001', 'EnAlquiler', 'SinDanio', '', 1, 25000, NULL),
+(2, '002', 'EnAlquiler', 'SinDanio', '', 1, 25000, NULL),
 (3, '003', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
 (4, '004', 'Disponible', 'SinDanio', '', 2, 25000, NULL),
 (5, '005', 'Disponible', 'SinDanio', '', 2, 25000, NULL),
@@ -226,7 +228,7 @@ INSERT INTO `cliente` (`idFachada`, `idUsuarioFK`, `puntajeTotal`, `credito`, `s
 (3, 4, 0, -350, 0, NULL, NULL),
 (4, 5, 0, 0, 0, NULL, NULL),
 (5, 8, 0, 0, 0, NULL, NULL),
-(6, 2, -247, 0, 0, NULL, NULL),
+(6, 2, -242, 0, 0, NULL, NULL),
 (7, 6, 0, 0, 0, NULL, NULL),
 (8, 7, 0, 0, 0, NULL, NULL);
 
@@ -256,7 +258,8 @@ INSERT INTO `multa` (`idMulta`, `idUsuarioCliente`, `monto`, `fechaMulta`, `deta
 (35, 2, 100, '2020-12-10', 'Asistencia a capacitación', 0),
 (36, 2, 100, '2020-12-10', 'Asistencia a capacitación', 0),
 (77, 2, 500, '2020-12-11', 'Multa 1', 0),
-(78, 2, 1000, '2020-12-11', 'Multa 2', 0);
+(78, 2, 1000, '2020-12-11', 'Multa 2', 0),
+(82, 2, 1500, '2020-12-11', 'Multa 3', 0);
 
 -- --------------------------------------------------------
 
@@ -292,8 +295,9 @@ INSERT INTO `puntaje` (`idPuntaje`, `idUsuarioCliente`, `puntos`, `detallePuntaj
 (89, 2, -4, 'Por no concretar el alquiler', '2020-12-11'),
 (90, 2, -4, 'Por no concretar el alquiler', '2020-12-11'),
 (93, 2, 5, 'Retorno en terminos y sin incidentes', '2020-12-11'),
-(94, 2, 5, 'Retorno en terminos y sin incidentes', '2020-12-11'),
-(95, 2, 5, 'Retorno en terminos y sin incidentes', '2020-12-11');
+(98, 2, 5, 'Retorno en terminos y sin incidentes', '2020-12-11'),
+(99, 2, 5, 'Retorno en terminos y sin incidentes', '2020-12-11'),
+(100, 2, 5, 'Retorno en terminos y sin incidentes', '2020-12-11');
 
 -- --------------------------------------------------------
 
@@ -452,13 +456,13 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de la tabla `alquiler`
 --
 ALTER TABLE `alquiler`
-  MODIFY `idAlquiler` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `idAlquiler` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `alquiler_asignado`
 --
 ALTER TABLE `alquiler_asignado`
-  MODIFY `idAlquilerAsignado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idAlquilerAsignado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `bicicleta`
@@ -482,13 +486,13 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `multa`
 --
 ALTER TABLE `multa`
-  MODIFY `idMulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `idMulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT de la tabla `puntaje`
 --
 ALTER TABLE `puntaje`
-  MODIFY `idPuntaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `idPuntaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT de la tabla `puntoentregadevolucion`

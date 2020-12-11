@@ -286,7 +286,7 @@ $user_session = session();
       <!--  componentes -->
       <li class="nav-item active">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTres" aria-expanded="true" aria-controls="collapseTres">
-          <i class="fas fa-list-ol"></i>
+          <i class="fas fa-check-square"></i>
           <span>Alquiler asignado</span></a>
         <div id="collapseTres" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
