@@ -37,8 +37,9 @@ class AlquilerModel extends Model
         $this->insert($alquiler);
     }
 
-    public function obtenerAlquiler($idAlq){
-        $alquiler=$this->where('idAlquiler',$idAlq)->first();
+    public function obtenerAlquiler($idAlq)
+    {
+        $alquiler = $this->where('idAlquiler', $idAlq)->first();
         return $alquiler;
     }
 
