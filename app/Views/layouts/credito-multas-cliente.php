@@ -31,7 +31,7 @@
               echo '<tr>
                 <td>' . date("d/m/Y", strtotime($multas[$i]['fechaMulta'])) . '</td>' .
                 '<td>' . $multas[$i]['detalleMulta'] . '</td>' .
-                '<td>' . '$' . $multas[$i]['monto'] . '</td>';
+                '<td class="text-right">' . '$' . $multas[$i]['monto'] . '</td>';
                 
               if ($multas[$i]['pagado'] == 1) {
                 echo
