@@ -143,7 +143,7 @@ class UsuarioController extends BaseController
                         
                         if($this->cAlquilerAsignado->alquilerAsignadoModel->buscarAlquilerAsig($user['idUsuario'])!=null){
                             $aux=$this->cAlquilerAsignado->alquilerAsignadoModel->buscarAlquilerAsig($user['idUsuario']);
-                            $aux1=$this->cliente->buscarUsuarioId($aux['idClienteOriginal']);
+                            $aux1=$this->usuario->buscarUsuarioId($aux['idClienteOriginal']);
                             $datosSesion['nombreOriginal'] = $aux1['nombre'];
                             $datosSesion['apellidoOriginal'] = $aux1['apellido'];
                             $datosSesion['alternativo'] = 0;
