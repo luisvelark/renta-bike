@@ -136,10 +136,16 @@ class UsuarioController extends BaseController
                             'suspendido' => 0,
                             'fechaInicio' => '',
                             'fechaFin' => '',
+                            'nombreOriginal'=>'',
+                            'apellidoOriginal'=>'',
                             'alternativo'=>1,
                         ];
                         
                         if($this->cAlquilerAsignado->alquilerAsignadoModel->buscarAlquilerAsig($user['idUsuario'])!=null){
+                            $aux=$this->cAlquilerAsignado->alquilerAsignadoModel->buscarAlquilerAsig($user['idUsuario']);
+                            $aux1=$this->cliente->buscarUsuarioId($aux['idClienteOriginal']);
+                            $datosSesion['nombreOriginal'] = $aux1['nombre'];
+                            $datosSesion['apellidoOriginal'] = $aux1['apellido'];
                             $datosSesion['alternativo'] = 0;
                         }
                         if ($this->alquiler->buscarAlquilerActivo($user['idUsuario']) != null) {

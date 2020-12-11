@@ -370,7 +370,11 @@ $user_session = session();
                 <span class="badge badge-danger badge-counter">
                   <?php if ($user_session->suspendido == 1) {
                     echo '+1';
-                  } ?>
+                  } else if($user_session->suspendido == 1 && $user_session->alternativo==0){
+                    echo '+2';
+                  } else if($user_session->alternativo==0){
+                    echo '+1';
+                  }?>
                 </span>
               </a>
               <!-- Dropdown - Alerts -->
@@ -392,7 +396,20 @@ $user_session = session();
                       Acercate a un punto de entrega.
                     </div>
                   </a>
-                <?php } else { ?>
+                <?php } else if($user_session->alternativo==0){?>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                      <div class="icon-circle bg-warning">
+                        <i class="fas fa-exclamation-triangle text-white"></i>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="small text-gray-500">¡Te asignaron un alquiler!</div>
+                      El cliente
+                      <?php echo ' '.$user_session->nombreOriginal.' '.$user_session->apellidoOriginal.' te asigno un alquiler para su devolucion.' ?>
+                      </div>
+                  </a>
+                <?php } else{ ?>>
                   <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="mr-3">
                       <div class="icon-circle bg-warning">
