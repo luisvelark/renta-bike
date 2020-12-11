@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Controllers\MultaController;
+use App\Controllers\AlquilerAsignadoController;
 use App\Models\AlquilerModel;
 use App\Models\ClienteModel;
 use App\Models\UsuarioModel;
@@ -15,6 +16,7 @@ class UsuarioController extends BaseController
 
     public function __construct()
     {
+        $this->cAlquilerAsignado= new AlquilerAsignadoController();
         $this->alquiler = new AlquilerModel();
         $this->usuario = new UsuarioModel();
         $this->cliente = new ClienteModel();
@@ -134,7 +136,12 @@ class UsuarioController extends BaseController
                             'suspendido' => 0,
                             'fechaInicio' => '',
                             'fechaFin' => '',
+                            'alternativo'=>1,
                         ];
+                        
+                        if($this->cAlquilerAsignado->alquilerAsignadoModel->buscarAlquilerAsig($user['idUsuario'])!=null){
+                            $datosSesion['alternativo'] = 0;
+                        }
                         if ($this->alquiler->buscarAlquilerActivo($user['idUsuario']) != null) {
                             $datosSesion['activo'] = '1';
                         }

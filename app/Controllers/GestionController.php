@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\AlquilerController;
+use App\Controllers\AlquilerAsignadoController;
 use App\Controllers\BaseController;
 use App\Controllers\ClienteController;
 use App\Controllers\PuntoEDController;
@@ -17,6 +18,7 @@ class GestionController extends BaseController
         $this->Cpuntos = new PuntoEDController();
         $this->cCliente = new ClienteController();
         $this->cAlquiler = new AlquilerController();
+        $this->cAlquilerAsignado = new AlquilerAsignadoController();
         $this->cUsuario = new UsuarioController();
         $this->cBicicleta=new BicicletaController();
     }
@@ -130,7 +132,11 @@ class GestionController extends BaseController
     }
 
     public function alquilerAsignado(){
-        $datos = ['datos' => $this->Cpuntos->puntoED->obtenerPuntosEntregaDevolucion(),'alquiler'=>$this->cAlquiler->alquilerModel->buscarAlquilerEnProceso($this->session->idUsuario)];
-        echo view('layouts/alquiler-asignado', $datos);
+        if($this->cAlquilerAsignado->alquilerAsignadoModel->buscarAlquilerAsig($this->session->idUsuario)!=null){
+            $alquilerAux=$this->cAlquilerAsignado->alquilerAsignadoModel->buscarAlquilerAsig($this->session->idUsuario);
+            $alquiler=$this->cAlquiler->alquilerModel->buscarAlquilerEnProceso($alquilerAux['idClienteOriginal']);
+            $datos = ['datos' => $this->Cpuntos->puntoED->obtenerPuntosEntregaDevolucion(),'alquiler'=>$alquiler];
+            echo view('layouts/alquiler-asignado', $datos);
+        }
     }
 }

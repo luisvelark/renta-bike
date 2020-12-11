@@ -290,9 +290,11 @@ $user_session = session();
           <span>Alquiler asignado</span></a>
         <div id="collapseTres" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-
+          <?php if($user_session->alternativo==0){?>
             <a id="idAsignado" class="collapse-item" href="#"> <i class="fas fa-arrow-circle-up"></i>Realizar devolución </a>
-            
+            <?php }else{?>
+              <a id="idAsignado" class="collapse-item" href="#" hidden> <i class="fas fa-arrow-circle-up"></i>Realizar devolución </a>
+            <?php }?>
       </li>
       <li class="nav-item active">
         <a id="idAlquileres" class="nav-link" href="#">

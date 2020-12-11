@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-12-2020 a las 02:59:09
+-- Tiempo de generación: 11-12-2020 a las 08:02:21
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.10
 
@@ -66,12 +66,39 @@ CREATE TABLE `alquiler` (
 --
 
 INSERT INTO `alquiler` (`idAlquiler`, `idUsuarioCliente`, `idBicicleta`, `idPuntoE`, `idPuntoD`, `fechaAlquiler`, `horaInicioAlquiler`, `HoraFinAlquiler`, `HoraEntregaAlquiler`, `clienteAlternativo`, `estadoAlquiler`, `daño`, `ruta`) VALUES
-(8, 3, 4, 2, 2, '2020-11-23', '12:12:12', '14:12:12', '00:00:00', NULL, 'EnProceso', '', 'la ruta'),
-(10, 8, 1, 1, 2, '2020-11-29', '20:20:00', '22:20:00', '00:00:00', 0, 'Activo', '', 'la ruta'),
+(10, 8, 1, 1, 2, '2020-11-29', '20:20:00', '22:20:00', '00:00:00', 0, 'Anulado', '', 'la ruta'),
 (12, 2, 2, 1, 2, '2020-12-03', '17:10:00', '19:10:00', '00:00:00', 0, 'Finalizado', '', 'la ruta'),
 (19, 2, 11, 1, 1, '2020-12-09', '22:20:34', '00:20:34', '22:44:28', 0, 'Finalizado', 'SinDanio', ''),
-(20, 2, 11, 1, NULL, '2020-12-09', '22:55:00', '00:55:00', NULL, 0, 'Activo', NULL, NULL),
-(21, 1, 1, 1, NULL, '2020-12-09', '22:59:32', '00:59:32', NULL, 0, 'Activo', NULL, NULL);
+(20, 2, 11, 1, NULL, '2020-12-09', '22:55:00', '00:55:00', NULL, 0, 'Perdido', NULL, NULL),
+(21, 1, 1, 1, 1, '2020-12-09', '22:59:32', '00:59:32', '15:20:02', 0, 'Finalizado', 'Recuperable', ''),
+(22, 2, 2, 1, NULL, '2020-12-09', '23:42:50', '01:42:50', NULL, 0, 'Anulado', NULL, NULL),
+(23, 2, 2, 1, NULL, '2020-12-09', '08:00:00', '10:00:00', NULL, 0, 'Perdido', NULL, NULL),
+(25, 2, 11, 1, 1, '2020-12-10', '11:44:28', '13:44:28', '11:52:07', 0, 'Finalizado', 'Recuperable', ''),
+(26, 2, 12, 1, 1, '2020-12-10', '08:54:15', '10:54:15', '11:55:14', 0, 'Finalizado', 'Recuperable', ''),
+(27, 2, 13, 1, 1, '2020-12-09', '18:56:07', '20:56:07', '11:57:05', 0, 'Finalizado', 'Recuperable', ''),
+(28, 2, 14, 1, 1, '2020-12-10', '00:00:35', '02:00:35', '15:03:48', 0, 'Finalizado', 'Recuperable', ''),
+(29, 2, 1, 1, 1, '2020-12-11', '02:20:00', '04:20:00', '04:00:09', 42578123, 'Finalizado', 'SinDanio', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `alquiler_asignado`
+--
+
+CREATE TABLE `alquiler_asignado` (
+  `idAlquilerAsignado` int(11) NOT NULL,
+  `idAlquilerFK` int(11) NOT NULL,
+  `idClienteFK` int(11) NOT NULL,
+  `idClienteOriginal` int(11) NOT NULL,
+  `activo` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `alquiler_asignado`
+--
+
+INSERT INTO `alquiler_asignado` (`idAlquilerAsignado`, `idAlquilerFK`, `idClienteFK`, `idClienteOriginal`, `activo`) VALUES
+(2, 29, 3, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -95,20 +122,22 @@ CREATE TABLE `bicicleta` (
 --
 
 INSERT INTO `bicicleta` (`idBicicleta`, `numeroBicicleta`, `estado`, `daño`, `observaciones`, `idPuntoED`, `precio`, `deleted_at`) VALUES
-(1, '001', 'EnAlquiler', 'SinDanio', '', 1, 25000, NULL),
+(1, '001', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
 (2, '002', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
-(3, '003', 'EnAlquiler', 'SinDanio', '', 1, 25000, NULL),
-(4, '004', 'EnAlquiler', 'SinDanio', '', 2, 25000, NULL),
-(5, '005', 'EnAlquiler', 'SinDanio', '', 2, 25000, NULL),
-(6, '006', 'EnAlquiler', 'SinDanio', '', 2, 25000, NULL),
-(7, '015', 'EnAlquiler', 'SinDanio', '', 2, 25000, '2020-12-04 23:41:46'),
-(8, '010', 'EnAlquiler', 'SinDanio', '', 2, 25000, NULL),
-(9, '011', 'EnAlquiler', 'Recuperable', '', 1, 25000, NULL),
+(3, '003', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
+(4, '004', 'Disponible', 'SinDanio', '', 2, 25000, NULL),
+(5, '005', 'Disponible', 'SinDanio', '', 2, 25000, NULL),
+(6, '006', 'Disponible', 'SinDanio', '', 2, 25000, NULL),
+(7, '015', 'Disponible', 'SinDanio', '', 2, 25000, '2020-12-04 23:41:46'),
+(8, '010', 'Disponible', 'SinDanio', '', 2, 25000, NULL),
+(9, '011', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
 (10, '012', 'Disponible', 'SinDanio', '', 2, 25000, NULL),
-(11, '013', 'EnAlquiler', 'SinDanio', '', 1, 25000, NULL),
+(11, '013', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
 (12, '014', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
 (13, '015', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
-(14, '016', 'Disponible', 'SinDanio', '', 1, 25000, NULL);
+(14, '016', 'Disponible', 'SinDanio', '', 1, 25000, NULL),
+(15, '020', 'Disponible', 'SinDanio', '', 1, 25000, '2020-12-10 04:48:44'),
+(16, '020', 'Disponible', 'SinDanio', '', 1, 25000, NULL);
 
 -- --------------------------------------------------------
 
@@ -167,7 +196,9 @@ INSERT INTO `calificacion` (`fechaCalificacion`, `idPuntoED`, `idUsuarioCliente`
 ('2020-12-03', 1, 2, 5, ''),
 ('2020-12-03', 1, 2, 5, ''),
 ('2020-12-07', 2, 2, 3, ''),
-('2020-12-09', 1, 2, 3, '');
+('2020-12-09', 1, 2, 3, ''),
+('2020-12-09', 1, 2, 3, ''),
+('2020-12-10', 1, 8, 3, '');
 
 -- --------------------------------------------------------
 
@@ -190,12 +221,12 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`idFachada`, `idUsuarioFK`, `puntajeTotal`, `credito`, `suspendido`, `fechaInicioSuspencion`, `fechaFinSuspencion`) VALUES
-(1, 1, 250, 350, 0, '2020-11-09', '2020-11-09'),
-(2, 3, 0, 0, 0, '2020-11-09', '2020-11-09'),
-(3, 4, 0, -350, 0, '2020-11-09', '2020-11-09'),
-(4, 5, 0, 0, 0, '2020-11-09', '2020-11-09'),
-(5, 8, 0, 0, 0, '2020-11-09', '2020-11-09'),
-(6, 2, -175, 0, 0, NULL, NULL),
+(1, 1, 260, 350, 0, NULL, NULL),
+(2, 3, 0, 0, 0, NULL, NULL),
+(3, 4, 0, -350, 0, NULL, NULL),
+(4, 5, 0, 0, 0, NULL, NULL),
+(5, 8, 0, 0, 0, NULL, NULL),
+(6, 2, -247, 0, 0, NULL, NULL),
 (7, 6, 0, 0, 0, NULL, NULL),
 (8, 7, 0, 0, 0, NULL, NULL);
 
@@ -222,31 +253,10 @@ INSERT INTO `multa` (`idMulta`, `idUsuarioCliente`, `monto`, `fechaMulta`, `deta
 (1, 1, 500, '2020-12-12', 'Por llegar tarde', 1),
 (2, 1, 534, '2020-11-10', 'Por no confirmar alquiler', 1),
 (3, 4, 5000, '2020-11-13', 'Por el email', 0),
-(4, 3, 6250, '2020-11-24', 'No declarar daños minimos', 0),
-(5, 3, 6250, '2020-11-24', 'No declarar daños minimos', 0),
-(6, 3, 6250, '2020-11-24', 'No declarar daños minimos', 0),
-(7, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
-(8, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
-(9, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
-(10, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
-(11, 3, 25000, '2020-11-25', 'No declarar daños considerables', 0),
-(12, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
-(13, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
-(14, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
-(15, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
-(16, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
-(17, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
-(18, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
-(19, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
-(20, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
-(21, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
-(22, 3, 6250, '2020-11-25', 'No declarar daños minimos', 0),
-(23, 3, 6250, '2020-11-26', 'No declarar daños minimos', 0),
-(24, 3, 6250, '2020-11-26', 'No declarar daños minimos', 0),
-(25, 3, 6250, '2020-11-26', 'No declarar daños minimos', 0),
-(26, 3, 6250, '2020-11-26', 'No declarar daños minimos', 0),
-(27, 3, 6250, '2020-11-26', 'No declarar daños minimos', 0),
-(28, 1, 6250, '2020-12-02', 'No declarar daños minimos', 0);
+(35, 2, 100, '2020-12-10', 'Asistencia a capacitación', 0),
+(36, 2, 100, '2020-12-10', 'Asistencia a capacitación', 0),
+(77, 2, 500, '2020-12-11', 'Multa 1', 0),
+(78, 2, 1000, '2020-12-11', 'Multa 2', 0);
 
 -- --------------------------------------------------------
 
@@ -274,23 +284,16 @@ INSERT INTO `puntaje` (`idPuntaje`, `idUsuarioCliente`, `puntos`, `detallePuntaj
 (5, 1, 50, 'No hay otra bicicleta disponible', '2020-11-26'),
 (6, 1, 50, 'No hay otra bicicleta disponible', '2020-11-26'),
 (7, 1, 50, 'No hay otra bicicleta disponible', '2020-11-26'),
-(13, 2, 5, 'Retorno en terminos y sin incidentes', '2020-12-08'),
-(14, 2, 5, 'Retorno en terminos y sin incidentes', '2020-12-08'),
-(15, 2, 5, 'Retorno en terminos y sin incidentes', '2020-12-08'),
-(16, 2, 5, 'Retorno en terminos y sin incidentes', '2020-12-08'),
-(17, 2, -40, 'Retorno en terminos y con incidentes', '2020-12-08'),
-(18, 2, -5, 'Retorno fuera de termino y sin incidentes', '2020-12-09'),
-(19, 2, -5, 'Retorno fuera de termino y sin incidentes', '2020-12-09'),
-(20, 2, -5, 'Retorno fuera de termino y sin incidentes', '2020-12-09'),
-(21, 2, -5, 'Retorno fuera de termino y sin incidentes', '2020-12-09'),
-(22, 2, -5, 'Retorno fuera de termino y sin incidentes', '2020-12-09'),
-(23, 2, -5, 'Retorno fuera de termino y sin incidentes', '2020-12-09'),
-(24, 2, -20, 'Retorno fuera de terminos y con incidentes', '2020-12-09'),
-(25, 2, -5, 'Retorno fuera de termino y sin incidentes', '2020-12-09'),
-(28, 2, -50, 'Retorno despues de fuera de termino y sin incidentes', '2020-12-09'),
-(29, 2, -50, 'Retorno despues de fuera de termino y sin incidentes', '2020-12-09'),
-(30, 1, -50, 'Retorno despues de fuera de termino y sin incidentes', '2020-12-09'),
-(31, 1, -50, 'Retorno despues de fuera de termino y sin incidentes', '2020-12-09');
+(35, 2, -40, 'Retorno en terminos y con incidentes', '2020-12-10'),
+(36, 2, -60, 'Retorno fuera de terminos y con incidentes', '2020-12-10'),
+(37, 2, -90, 'Retorno despues de fuera de terminos y con incidentes', '2020-12-10'),
+(42, 2, -60, 'Retorno fuera de terminos y con incidentes', '2020-12-10'),
+(88, 2, -4, 'Por no concretar el alquiler', '2020-12-11'),
+(89, 2, -4, 'Por no concretar el alquiler', '2020-12-11'),
+(90, 2, -4, 'Por no concretar el alquiler', '2020-12-11'),
+(93, 2, 5, 'Retorno en terminos y sin incidentes', '2020-12-11'),
+(94, 2, 5, 'Retorno en terminos y sin incidentes', '2020-12-11'),
+(95, 2, 5, 'Retorno en terminos y sin incidentes', '2020-12-11');
 
 -- --------------------------------------------------------
 
@@ -380,6 +383,15 @@ ALTER TABLE `alquiler`
   ADD KEY `idPuntoE` (`idPuntoE`);
 
 --
+-- Indices de la tabla `alquiler_asignado`
+--
+ALTER TABLE `alquiler_asignado`
+  ADD PRIMARY KEY (`idAlquilerAsignado`),
+  ADD KEY `idAlquilerFK` (`idAlquilerFK`),
+  ADD KEY `idClienteFK` (`idClienteFK`),
+  ADD KEY `idClienteOriginal` (`idClienteOriginal`);
+
+--
 -- Indices de la tabla `bicicleta`
 --
 ALTER TABLE `bicicleta`
@@ -440,13 +452,19 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de la tabla `alquiler`
 --
 ALTER TABLE `alquiler`
-  MODIFY `idAlquiler` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `idAlquiler` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT de la tabla `alquiler_asignado`
+--
+ALTER TABLE `alquiler_asignado`
+  MODIFY `idAlquilerAsignado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `bicicleta`
 --
 ALTER TABLE `bicicleta`
-  MODIFY `idBicicleta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idBicicleta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `calificacion`
@@ -464,13 +482,13 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `multa`
 --
 ALTER TABLE `multa`
-  MODIFY `idMulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `idMulta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT de la tabla `puntaje`
 --
 ALTER TABLE `puntaje`
-  MODIFY `idPuntaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `idPuntaje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT de la tabla `puntoentregadevolucion`
@@ -502,6 +520,14 @@ ALTER TABLE `alquiler`
   ADD CONSTRAINT `alquiler_ibfk_2` FOREIGN KEY (`idUsuarioCliente`) REFERENCES `cliente` (`idUsuarioFK`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `alquiler_ibfk_3` FOREIGN KEY (`idPuntoD`) REFERENCES `puntoentregadevolucion` (`idPuntoED`),
   ADD CONSTRAINT `alquiler_ibfk_4` FOREIGN KEY (`idPuntoE`) REFERENCES `puntoentregadevolucion` (`idPuntoED`);
+
+--
+-- Filtros para la tabla `alquiler_asignado`
+--
+ALTER TABLE `alquiler_asignado`
+  ADD CONSTRAINT `alquiler_asignado_ibfk_1` FOREIGN KEY (`idAlquilerFK`) REFERENCES `alquiler` (`idAlquiler`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `alquiler_asignado_ibfk_2` FOREIGN KEY (`idClienteFK`) REFERENCES `cliente` (`idUsuarioFK`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `alquiler_asignado_ibfk_3` FOREIGN KEY (`idClienteOriginal`) REFERENCES `alquiler` (`idUsuarioCliente`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `bicicleta`

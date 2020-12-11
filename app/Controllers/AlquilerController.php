@@ -366,6 +366,12 @@ class AlquilerController extends BaseController
 
             if (($actual <= $max) && ($actual >= $min)) {
 
+                $dniClienteAlt=$alquilerActivo['clienteAlternativo'];
+                if($dniClienteAlt!=0){
+                    $clienteOpt=$this->usuarioModel->buscarUsuarioDNI($dniClienteAlt);
+                    $detalle=['idAlquilerFK'=>$alquilerActivo['idAlquiler'],'idClienteFK'=>$clienteOpt['idUsuario'],'idClienteOriginal'=>$idUsuario];
+                    $this->cAlquilerAsignado->alquilerAsignadoModel->crearAlquilerAsig($detalle);
+                }
                 $this->alquilerModel->cambiarEstado($alquilerActivo['idAlquiler'], 'EnProceso');
                 $sesion->set('activo', '2');
                 $noti = ["msj" => "¡Su alquiler ha sido confirmado correctamente!"];

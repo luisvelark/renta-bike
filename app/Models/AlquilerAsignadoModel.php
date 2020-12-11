@@ -10,7 +10,7 @@ class AlquilerAsignadoModel extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['idAlquilerFK','idClienteFK'];
+    protected $allowedFields = ['idAlquilerFK','idClienteFK','idClienteOriginal','activo'];
 
     protected $useTimestamps = false;
     protected $createdField = 'created_at';
@@ -22,9 +22,15 @@ class AlquilerAsignadoModel extends Model
     protected $skipValidation = false;
 
     public function buscarAlquilerAsig($id){
-        $alquilerAsig=$this->where('idClienteFK',$id)->first();
+        $alquilerAsig=$this->where('idClienteFK',$id)->where('activo',0)->first();
         return $alquilerAsig;
     }
+
+    public function cambiar($idAlq){
+        $cambio=['activo'=>1];
+        $this->update($idAlq,$cambio);
+    }
+
     public function crearAlquilerAsig($detalle){
         $this->insert($detalle);
     }
