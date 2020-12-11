@@ -64,7 +64,7 @@ $horaAct = new DateTime("now", new DateTimeZone('America/Argentina/Ushuaia'));
           <input type="hidden" name="horaFin" value=<?php echo $alquiler['HoraFinAlquiler'] ?>>
         </div>
 
-        <button id="btnDev" type="submit" class="btn btn-primary btn-lg m-2">Enviar</button>
+        <button id="btnDev2" type="submit" class="btn btn-primary btn-lg m-2">Enviar</button>
 
       </form>
 

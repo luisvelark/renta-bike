@@ -14,12 +14,12 @@ function mostrar(e) {
             let respuesta = xhr.responseText;
 
             contenedor.innerHTML = respuesta;
-            realizaDevolucion();
+            realizarDevolucion();
             //modalCalificar(enviar, calificar);
         }
     }
 }
-function realizaDevolucion() {
+function realizarDevolucion() {
     var formulario = document.getElementById("form-devolucion2");
     var respuesta = document.getElementById("respuesta2");
     formulario.addEventListener(
